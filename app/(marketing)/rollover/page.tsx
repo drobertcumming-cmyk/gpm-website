@@ -1,16 +1,9 @@
-import Content, { frontmatter } from '@/content/rollover/index.mdx'
-import { PreLaunchBanner } from '@/components/compliance/PreLaunchBanner'
+import Content from '@/content/rollover/index.mdx'
 
 // Phase 2 route stub for /rollover
-// Renders raw MDX with no template wrapping per Step 3 directive.
-// Pre-launch banner is conditional on frontmatter.complianceFlags per Step 4.
+// Renders raw MDX. Pre-launch banner and site chrome live in
+// app/(marketing)/layout.tsx; this stub only provides the route-to-MDX wiring.
 
 export default function Page() {
-  const flags = (frontmatter as { complianceFlags?: string[] })?.complianceFlags
-  return (
-    <>
-      <PreLaunchBanner flags={flags} />
-      <Content />
-    </>
-  )
+  return <Content />
 }

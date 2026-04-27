@@ -32,7 +32,7 @@ export function PreLaunchBanner({ flags }: { flags?: readonly string[] }) {
     <div
       role="alert"
       aria-label="Pre-launch warning"
-      className="w-full bg-state-warning text-canvas border-b-3 border-walnut"
+      className="w-full bg-state-warning text-canvas border-b-[3px] border-walnut"
     >
       <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8 py-4">
         <p className="text-eyebrow mb-1">PRE-LAUNCH</p>

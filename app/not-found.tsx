@@ -25,7 +25,7 @@ export default function NotFound() {
               </Link>
               <Link
                 href="/advisor"
-                className="inline-block border border-walnut text-walnut px-6 py-3 rounded-sm text-body no-underline hover:no-underline"
+                className="inline-block border-[1px] border-walnut text-walnut px-6 py-3 rounded-sm text-body no-underline hover:no-underline"
               >
                 Talk to an advisor
               </Link>
