@@ -1,0 +1,189 @@
+/**
+ * Grace Precious Metals — Global Styles
+ *
+ * CSS custom property layer mirroring tokens.ts. Used by component code
+ * and MDX content where Tailwind classes are not the appropriate tool.
+ * Component CSS references var(--gpm-*) instead of hardcoding hex.
+ *
+ * Reference: DESIGN_BRIEF.md Section 12.8.
+ *
+ * IMPORTANT: When tokens.ts changes, this file must be updated to match.
+ * The two files are not generated from a single source at build time;
+ * they are kept in sync manually. A mismatch is a build error.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ============================================================ */
+    /* Color tokens — primary roles                                 */
+    /* ============================================================ */
+    --gpm-canvas:        #F2EDE0;
+    --gpm-canvas-deep:   #F8F5EB;
+    --gpm-surface:       #E8E2CC;
+    --gpm-ink-body:      #1F1B16;
+    --gpm-ink-display:   #2D2620;
+    --gpm-gold-primary:  #C9A96C;
+    --gpm-gold-deep:     #B8962E;
+    --gpm-walnut:        #3B342A;
+
+    /* Color tokens — supporting */
+    --gpm-border-light:  #D5CDB6;
+
+    /* Color tokens — semantic states */
+    --gpm-state-error:   #A03A28;
+    --gpm-state-success: #5C7A3E;
+    --gpm-state-warning: #A07028;
+    --gpm-state-info:    #4A4239;
+
+    /* Color tokens — reserved data-viz (post-launch) */
+    --gpm-data-positive: var(--gpm-gold-primary);
+    --gpm-data-negative: var(--gpm-walnut);
+    --gpm-data-neutral:  var(--gpm-ink-body);
+    --gpm-data-emphasis: var(--gpm-gold-deep);
+
+    /* ============================================================ */
+    /* Spacing scale                                                */
+    /* ============================================================ */
+    --gpm-space-1:  4px;
+    --gpm-space-2:  8px;
+    --gpm-space-3:  12px;
+    --gpm-space-4:  16px;
+    --gpm-space-6:  24px;
+    --gpm-space-8:  32px;
+    --gpm-space-12: 48px;
+    --gpm-space-16: 64px;
+    --gpm-space-24: 96px;
+
+    /* ============================================================ */
+    /* Container widths                                             */
+    /* ============================================================ */
+    --gpm-container-prose:   640px;
+    --gpm-container-content: 880px;
+    --gpm-container-wide:    1200px;
+    --gpm-container-page:    1440px;
+
+    /* ============================================================ */
+    /* Motion durations                                             */
+    /* ============================================================ */
+    --gpm-motion-color:     150ms;
+    --gpm-motion-opacity:   200ms;
+    --gpm-motion-transform: 200ms;
+  }
+
+  /* ============================================================ */
+  /* Base body styles                                             */
+  /* ============================================================ */
+  html {
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Smooth scrolling for in-page anchors, but reduced-motion overrides */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--gpm-canvas);
+    color:            var(--gpm-ink-body);
+    font-family:      var(--font-sans), -apple-system, system-ui, sans-serif;
+    font-size:        16px;
+    line-height:      1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering:   optimizeLegibility;
+  }
+
+  /* ============================================================ */
+  /* Heading defaults — display ink, serif, no margin reset       */
+  /* ============================================================ */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif), Georgia, serif;
+    color:       var(--gpm-ink-display);
+  }
+
+  /* ============================================================ */
+  /* Link defaults — muted gold with underline on hover           */
+  /* ============================================================ */
+  a {
+    color:           var(--gpm-gold-deep);
+    text-decoration: none;
+    transition:      color var(--gpm-motion-color) ease-out;
+  }
+
+  a:hover {
+    text-decoration:           underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset:     3px;
+  }
+
+  /* ============================================================ */
+  /* Focus visible — 2px walnut outline, 2px offset               */
+  /* No focus ring on mouse click (uses :focus-visible)           */
+  /* ============================================================ */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline:        2px solid var(--gpm-walnut);
+    outline-offset: 2px;
+    border-radius:  2px;
+  }
+
+  /* ============================================================ */
+  /* Selection — warm cream on walnut                             */
+  /* ============================================================ */
+  ::selection {
+    background: var(--gpm-walnut);
+    color:      var(--gpm-canvas);
+  }
+}
+
+@layer components {
+  /* ============================================================ */
+  /* Tabular figures utility — pricing, currency, percentage      */
+  /* Apply to any container displaying numeric data               */
+  /* ============================================================ */
+  .tabular-nums {
+    font-feature-settings: "tnum" 1;
+    font-variant-numeric:  tabular-nums;
+  }
+
+  /* ============================================================ */
+  /* Inline pricing emphasis — used for "11.1%" inline in prose   */
+  /* See brief Section 11.1                                       */
+  /* ============================================================ */
+  .inline-pricing {
+    color:                  var(--gpm-gold-deep);
+    font-weight:            600;
+    font-feature-settings:  "tnum" 1;
+    font-variant-numeric:   tabular-nums;
+  }
+}
+
+/* ============================================================ */
+/* REDUCED MOTION — absolute, non-negotiable                    */
+/* See brief Section 15.3                                       */
+/* ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:       0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:      0.01ms !important;
+    scroll-behavior:          auto !important;
+  }
+}
+
+/* ============================================================ */
+/* Print styles — minimal, post-launch                          */
+/* ============================================================ */
+@media print {
+  body {
+    background: white;
+    color:      black;
+  }
+}
