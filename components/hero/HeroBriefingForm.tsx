@@ -40,17 +40,18 @@ function validate(field: keyof FormState, value: string): string | null {
   return null
 }
 
-// Type sizes bumped 2026-04-30 per CMO desktop-render review:
-//   eyebrow 11→12px / subtitle 14→15px / labels 11→12px / inputs 12→13px /
-//   input padding 8px 11px → 10px 12px. Panel widened from 320 to 360 in
-//   Hero.tsx so the eyebrow and subtitle don't wrap awkwardly.
+// Type sizes bumped 2026-04-30 per CMO live-render review (second pass):
+//   eyebrow 12→13px / subtitle 15→16px / labels 12→13px (alpha 0.78→0.85,
+//   mb 4→6) / inputs 13→14px (padding 10/12 → 11/14) / submit 13→14px
+//   (padding 12/0 → 14/0) / disclosure 10→12px (alpha 0.65→0.70,
+//   line-height 1.5→1.55). Panel stays at 360px max-width.
 const LABEL_STYLE: React.CSSProperties = {
   display: 'block',
   fontFamily: 'var(--font-sans)',
-  fontSize: 12,
+  fontSize: 13,
   fontWeight: 500,
-  color: 'rgba(242, 237, 224, 0.78)',
-  marginBottom: 4,
+  color: 'rgba(242, 237, 224, 0.85)',
+  marginBottom: 6,
 }
 
 const INPUT_STYLE: React.CSSProperties = {
@@ -58,9 +59,9 @@ const INPUT_STYLE: React.CSSProperties = {
   background: 'var(--gpm-cream-warm)',
   border: '0.5px solid rgba(45, 38, 32, 0.22)',
   borderRadius: 2,
-  padding: '10px 12px',
+  padding: '11px 14px',
   fontFamily: 'var(--font-sans)',
-  fontSize: 13,
+  fontSize: 14,
   color: 'var(--gpm-ink-display)',
 }
 
@@ -187,11 +188,11 @@ export function HeroBriefingForm() {
         id="hero-form-eyebrow"
         style={{
           fontFamily: 'var(--font-sans)',
-          fontSize: 12,
+          fontSize: 13,
           fontWeight: 600,
           letterSpacing: '0.10em',
           color: 'var(--gpm-gold-primary)',
-          lineHeight: 1.35,
+          lineHeight: 1.4,
         }}
       >
         GET THE SECRET GOLD BRIEFING
@@ -201,7 +202,7 @@ export function HeroBriefingForm() {
           fontFamily: 'var(--font-serif)',
           fontStyle: 'italic',
           fontWeight: 500,
-          fontSize: 15,
+          fontSize: 16,
           color: 'var(--gpm-canvas)',
           lineHeight: 1.4,
           marginTop: 8,
@@ -289,11 +290,11 @@ export function HeroBriefingForm() {
           background: 'var(--gpm-gold-deep)',
           color: '#FFFFFF',
           fontFamily: 'var(--font-sans)',
-          fontSize: 13,
+          fontSize: 14,
           fontWeight: 500,
           border: 0,
           borderRadius: 4,
-          padding: '12px 0',
+          padding: '14px 0',
           cursor: !allValid || submitting ? 'not-allowed' : 'pointer',
           opacity: !allValid || submitting ? 0.7 : 1,
           transition: 'background 150ms ease-out, opacity 150ms ease-out',
@@ -307,9 +308,9 @@ export function HeroBriefingForm() {
         style={{
           fontFamily: 'var(--font-serif)',
           fontStyle: 'italic',
-          fontSize: 10,
-          color: 'rgba(242, 237, 224, 0.65)',
-          lineHeight: 1.5,
+          fontSize: 12,
+          color: 'rgba(242, 237, 224, 0.70)',
+          lineHeight: 1.55,
           textAlign: 'center',
           marginTop: 10,
         }}

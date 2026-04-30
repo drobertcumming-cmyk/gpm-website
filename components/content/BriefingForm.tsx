@@ -222,6 +222,11 @@ export function BriefingForm() {
         <p role="alert" style={{ ...ERROR_STYLE, marginTop: 12 }}>{submitError}</p>
       ) : null}
 
+      {/*
+        Tier 2 form-submit CTA. Bumped 2026-04-30 (live-review pass) from
+        13px / 12px 0 padding to 14px / 14px 0 to match the hero form CTA
+        (verification criterion 4 — Tier 2 CTAs visually identical).
+      */}
       <button
         type="submit"
         disabled={!allValid || submitting}
@@ -231,11 +236,11 @@ export function BriefingForm() {
           background: 'var(--gpm-gold-deep)',
           color: '#FFFFFF',
           fontFamily: 'var(--font-sans)',
-          fontSize: 13,
+          fontSize: 14,
           fontWeight: 500,
           border: 0,
           borderRadius: 4,
-          padding: '12px 0',
+          padding: '14px 0',
           cursor: !allValid || submitting ? 'not-allowed' : 'pointer',
           opacity: !allValid || submitting ? 0.7 : 1,
           transition: 'background 150ms ease-out, opacity 150ms ease-out',

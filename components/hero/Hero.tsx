@@ -80,8 +80,8 @@ export function Hero() {
             <p
               style={{
                 fontFamily: 'var(--font-sans)',
-                fontSize: 12,
-                fontWeight: 500,
+                fontSize: 14,
+                fontWeight: 600,
                 letterSpacing: '0.10em',
                 color: 'var(--gpm-gold-primary)',
                 marginBottom: 24,

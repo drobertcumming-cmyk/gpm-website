@@ -60,14 +60,37 @@ The override changes the following relative to v1.1 of this brief:
   CTA size bumped from 13px / 9px 18px padding to **14px / 10px 20px**
   to match. Header inner-container vertical padding stays at the brief
   spec of 22px top and bottom.
-- **Hero form panel correction (2026-04-30).** After CMO desktop-render
-  review the form panel rendered too narrow. Panel max-width bumped from
-  the brief's 280–320px range to **360px** so the eyebrow line doesn't
-  wrap. Internal type bumped: eyebrow 11→**12px** Inter 600; subtitle
-  14→**15px** Source Serif 4 italic; field labels 11→**12px** Inter 500;
-  field inputs 12→**13px** Inter 400; input padding 8px 11px →
-  **10px 12px**. Panel position (right zone of hero) and the dark
-  gradient overlay carrying the left-zone headline are unchanged.
+- **Hero eyebrow correction (2026-04-30, live-review pass).** The
+  "PROVERBS 11:1 — A JUST WEIGHT IS HIS DELIGHT." eyebrow read crushed
+  against the 48px headline at 12px. Bumped to **14px Inter weight 600**
+  in `gold-primary` (#C9A96C) with letter-spacing 0.10em. The verse now
+  reads as a deliberate brand-narrative element, not a footnote. Margin
+  below the eyebrow stays at 24px.
+- **Hero form panel correction (2026-04-30) + live-review pass.** After
+  CMO desktop-render review the form panel rendered too narrow. Panel
+  max-width bumped from the brief's 280–320px range to **360px** so the
+  eyebrow line doesn't wrap. Live-review pass on 2026-04-30 (second
+  pass) bumped the internal typography again so the panel reads at the
+  same visual weight as the photographic backdrop and the 48px headline:
+  - Eyebrow "GET THE SECRET GOLD BRIEFING": **13px** Inter 600
+    `gold-primary`, 0.10em letter-spacing, line-height 1.4.
+  - Subtitle "What the Other IRA Companies Hide From You.": **16px**
+    Source Serif 4 italic weight 500, `canvas` (#F2EDE0), line-height 1.4.
+  - Field labels (Name / Email / Phone): **13px** Inter 500,
+    `rgba(242,237,224,0.85)`, margin-bottom 6px.
+  - Field inputs and placeholders: **14px** Inter 400, padding **11px 14px**.
+  - Form submit (Tier 2): **14px** Inter 500, padding **14px 0**.
+    The Tier 2 spec in `CTAButton.tsx` is updated to match so any future
+    callers stay aligned with the byte-identical-CTA verification rule.
+  - Disclosure: **12px** Source Serif 4 italic,
+    `rgba(242,237,224,0.70)`, line-height 1.55.
+
+  The matching Tier 2 submit on the §10 briefing-section form
+  (`BriefingForm.tsx`) was bumped in parallel so verification criterion 4
+  (hero form CTA and briefing-section form CTA visually identical) stays
+  satisfied. Panel position (right zone of hero), panel max-width
+  (360px), and the dark gradient overlay carrying the left-zone headline
+  are unchanged.
 - **No-lead-capture-first homepage rule** (was a non-negotiable in the
   earlier `CLAUDE.md`) is rescinded. The homepage carries two forms (hero
   + briefing section). Non-homepage forms still require explicit CMO

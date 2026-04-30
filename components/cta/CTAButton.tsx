@@ -59,14 +59,19 @@ const TIER_1_STYLE: React.CSSProperties = {
 }
 
 // Tier 2 — form submission. Gold-filled; white text; 4px radius; Inter
-// 500 13px; 12px 0 padding (full container width — caller supplies width).
+// 500 14px; 14px 0 padding (full container width — caller supplies width).
+// (2026-04-30 second-pass correction: bumped from 13px / 12px 0 so the
+// CTA reads as a confident button at the live form panel size. The two
+// form components — HeroBriefingForm and BriefingForm — render identical
+// inline styles per verification criterion 4 and stay in sync with this
+// spec.)
 const TIER_2_CLASS =
   'inline-block w-full bg-gold-deep text-white no-underline text-center transition-colors duration-color hover:bg-gold-hover hover:text-white hover:no-underline'
 const TIER_2_STYLE: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
-  fontSize: 13,
+  fontSize: 14,
   fontWeight: 500,
-  padding: '12px 0',
+  padding: '14px 0',
   borderRadius: 4,
   lineHeight: 1.2,
 }
