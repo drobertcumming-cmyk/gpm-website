@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import { FooterAccordion, type FooterAccordionSection } from './FooterAccordion'
 
-// Site footer per DESIGN_BRIEF.md Section 14.1 and Block 10 of the homepage
-// copy fragments. Four columns at desktop, two at tablet, single at mobile.
-// No newsletter subscription — that's refused per brand discipline (see
-// fragments Block 10 note and brief v1.1 Section 29).
+// Production-brief homepage SiteFooter (post-2026-04-29 Option A).
+// Full-bleed walnut-deep background; cream type; 4 columns at desktop; 2x2 at
+// tablet; mobile becomes a one-open-at-a-time accordion. Bottom row: single
+// line with center-dot separators per v3.6 §13.
 //
-// Pending Andrew confirmation — phone, hours, address, license states.
+// Reference: production brief §13; homepage_copy_v3_6.md §13.
 
 interface FooterLink {
   label: string
@@ -18,7 +19,7 @@ const COL_PAGES: ReadonlyArray<FooterLink> = [
   { label: 'Inherited IRA', href: '/rollover/inherited-ira' },
   { label: 'Transfer Guide', href: '/rollover/transfer' },
   { label: 'Who We Are', href: '/who-we-are' },
-  { label: "William's Story", href: '/who-we-are/williams-story' },
+  { label: "William’s Story", href: '/who-we-are/williams-story' },
   { label: 'Compliance', href: '/who-we-are/compliance' },
   { label: 'Talk To An Advisor', href: '/advisor' },
 ]
@@ -35,6 +36,7 @@ const COL_TALK: ReadonlyArray<FooterLink> = [
   { label: 'Get the Briefing', href: '/briefing' },
   { label: 'Contact', href: '/contact' },
 ]
+const COL_TALK_PENDING = 'Office hours and phone — pending confirmation.'
 
 const COL_COMPLIANCE: ReadonlyArray<FooterLink> = [
   { label: 'Privacy', href: '/legal/privacy' },
@@ -43,65 +45,104 @@ const COL_COMPLIANCE: ReadonlyArray<FooterLink> = [
   { label: 'State Licenses', href: '/legal/licenses' },
 ]
 
+const ACCORDION_SECTIONS: ReadonlyArray<FooterAccordionSection> = [
+  { heading: 'PAGES', links: COL_PAGES },
+  { heading: 'RESOURCES', links: COL_RESOURCES },
+  { heading: 'TALK TO US', links: COL_TALK, pendingNote: COL_TALK_PENDING },
+  { heading: 'COMPLIANCE', links: COL_COMPLIANCE },
+]
+
+const HEADING_STYLE: React.CSSProperties = {
+  fontFamily: 'var(--font-sans)',
+  fontSize: 12,
+  fontWeight: 600,
+  letterSpacing: '0.12em',
+  color: 'var(--gpm-gold-primary)',
+  marginBottom: 16,
+}
+
+const LINK_STYLE: React.CSSProperties = {
+  fontFamily: 'var(--font-sans)',
+  fontSize: 14,
+  fontWeight: 400,
+  lineHeight: 1.8,
+  color: 'var(--gpm-canvas)',
+}
+
 function FooterColumn({
   heading,
   links,
-  children,
+  pendingNote,
 }: {
   heading: string
-  links?: ReadonlyArray<FooterLink>
-  children?: React.ReactNode
+  links: ReadonlyArray<FooterLink>
+  pendingNote?: string
 }) {
   return (
     <div>
-      <h2 className="text-eyebrow text-gold-deep mb-4">{heading}</h2>
-      {links ? (
-        <ul className="space-y-2">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className="text-body text-ink-body no-underline hover:underline"
-                style={{
-                  textDecorationThickness: '0.5px',
-                  textUnderlineOffset: 3,
-                }}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
-          {children}
-        </ul>
-      ) : (
-        children
-      )}
+      <h2 style={HEADING_STYLE}>{heading}</h2>
+      <ul style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className="gpm-link-footer" style={LINK_STYLE}>
+              {l.label}
+            </Link>
+          </li>
+        ))}
+        {pendingNote ? (
+          <li>
+            <span
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontStyle: 'italic',
+                fontSize: 13,
+                color: 'rgba(242, 237, 224, 0.65)',
+              }}
+            >
+              {pendingNote}
+            </span>
+          </li>
+        ) : null}
+      </ul>
     </div>
   )
 }
 
 export function SiteFooter() {
   return (
-    <footer className="bg-canvas border-t-[1px] border-border-light mt-16 lg:mt-24">
-      <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <FooterColumn heading="Pages" links={COL_PAGES} />
-          <FooterColumn heading="Resources" links={COL_RESOURCES} />
-          <FooterColumn heading="Talk to us" links={COL_TALK}>
-            <li>
-              <span className="text-body text-ink-body opacity-70">
-                Office hours and phone — pending confirmation.
-              </span>
-            </li>
-          </FooterColumn>
-          <FooterColumn heading="Compliance" links={COL_COMPLIANCE} />
+    <footer style={{ background: 'var(--gpm-walnut-deep)', paddingTop: 48, paddingLeft: 32, paddingRight: 32, paddingBottom: 32 }}>
+      <div className="mx-auto" style={{ maxWidth: 1200 }}>
+        {/* Desktop / tablet — 4-col grid */}
+        <div className="hidden lg:grid grid-cols-4" style={{ gap: 32 }}>
+          <FooterColumn heading="PAGES" links={COL_PAGES} />
+          <FooterColumn heading="RESOURCES" links={COL_RESOURCES} />
+          <FooterColumn heading="TALK TO US" links={COL_TALK} pendingNote={COL_TALK_PENDING} />
+          <FooterColumn heading="COMPLIANCE" links={COL_COMPLIANCE} />
+        </div>
+        <div className="hidden md:grid lg:hidden grid-cols-2" style={{ gap: 32 }}>
+          <FooterColumn heading="PAGES" links={COL_PAGES} />
+          <FooterColumn heading="RESOURCES" links={COL_RESOURCES} />
+          <FooterColumn heading="TALK TO US" links={COL_TALK} pendingNote={COL_TALK_PENDING} />
+          <FooterColumn heading="COMPLIANCE" links={COL_COMPLIANCE} />
         </div>
 
-        <div className="mt-12 pt-8 border-t-[1px] border-border-light">
-          <p className="text-body text-ink-body opacity-80">
-            Grace Precious Metals, [address — pending confirmation].
-            &copy; 2026 Grace Precious Metals. All rights reserved.
-          </p>
+        {/* Mobile — accordion */}
+        <FooterAccordion sections={ACCORDION_SECTIONS} />
+
+        {/* Bottom row — single line, center-dot separators */}
+        <div
+          className="text-center"
+          style={{
+            marginTop: 32,
+            paddingTop: 24,
+            borderTop: '0.5px solid rgba(242, 237, 224, 0.20)',
+            fontFamily: 'var(--font-sans)',
+            fontSize: 12,
+            fontWeight: 400,
+            color: 'rgba(242, 237, 224, 0.50)',
+          }}
+        >
+          Grace Precious Metals · [address — pending confirmation] · &copy; 2026 Grace Precious Metals. All rights reserved.
         </div>
       </div>
     </footer>

@@ -1,21 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { CTAButton } from '@/components/cta'
 import { Logomark } from './Logomark'
+import { MobileMenuPanel } from './MobileMenuPanel'
 
-// Persistent header. Cream canvas, walnut text, wordmark left, four primary
-// nav links right, two-button right-side CTA pattern: "Get the Briefing"
-// (secondary outline walnut) + "Talk to an advisor" (primary walnut).
-// Mobile breakpoint: hamburger toggle reveals a full-screen takeover with
-// stacked nav and both CTAs at the bottom.
+// Production-brief homepage SiteHeader (post-2026-04-29 Option A).
+// Sticky header, full-bleed canvas, 1280px inner, hairline gold rule between
+// nav cluster and CTA cluster on desktop. Mobile: logo + Tier 1 gold-filled
+// "Talk to an advisor" + hamburger; hamburger opens an 80vw side-panel from
+// the right with focus trap.
 //
-// Reference: DESIGN_BRIEF.md Section 14.1. The four primary pillars are
-// /pricing, /rollover, /who-we-are, /advisor. /advisor appears as both a
-// primary nav link (exploration) and a primary button (conversion); the
-// redundancy is intentional. Resources lives in the footer.
+// Reference: production brief §1; homepage_copy_v3_6.md §1.
 
 const PRIMARY_NAV: ReadonlyArray<{ label: string; href: string }> = [
   { label: 'Pricing', href: '/pricing' },
@@ -27,106 +25,97 @@ const PRIMARY_NAV: ReadonlyArray<{ label: string; href: string }> = [
 export function SiteHeader() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
+  const wasOpenRef = useRef(false)
+
+  // Return focus to the hamburger when the panel closes.
+  useEffect(() => {
+    if (wasOpenRef.current && !mobileOpen) {
+      hamburgerRef.current?.focus()
+    }
+    wasOpenRef.current = mobileOpen
+  }, [mobileOpen])
 
   const isCurrent = (href: string) =>
-    pathname === href ||
-    (href !== '/' && pathname.startsWith(href + '/'))
+    pathname === href || (href !== '/' && pathname.startsWith(href + '/'))
 
   return (
-    <header className="bg-canvas border-b-[1px] border-border-light">
-      <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-8">
-          <Logomark size={44} />
+    <>
+      <header
+        className="sticky top-0 z-30 bg-canvas"
+        style={{ borderBottom: '0.5px solid rgba(184, 150, 46, 0.18)' }}
+      >
+        <div className="mx-auto" style={{ maxWidth: 1280, paddingLeft: 32, paddingRight: 32 }}>
+          <div className="flex items-center justify-between" style={{ paddingTop: 22, paddingBottom: 22 }}>
+            <Logomark size={26} />
 
-          {/* Desktop nav */}
-          <nav
-            aria-label="Primary"
-            className="hidden lg:flex items-center gap-8"
-          >
-            {PRIMARY_NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isCurrent(item.href) ? 'page' : undefined}
-                className="text-body-lg text-walnut no-underline hover:underline hover:text-walnut"
+            {/* Desktop nav cluster */}
+            <nav aria-label="Primary" className="hidden lg:flex items-center" style={{ gap: 24 }}>
+              {PRIMARY_NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                  className="gpm-link-nav"
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 14,
+                    fontWeight: 500,
+                    letterSpacing: 0,
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              {/* Hairline rule between nav and CTA cluster */}
+              <span
+                aria-hidden="true"
+                className="inline-block"
                 style={{
-                  textDecorationThickness: '0.5px',
-                  textUnderlineOffset: 3,
+                  width: '0.5px',
+                  height: 16,
+                  marginLeft: 16,
+                  marginRight: 16,
+                  background: 'rgba(45, 38, 32, 0.20)',
                 }}
+              />
+
+              <CTAButton href="/briefing" tier={3}>
+                Get the Briefing
+              </CTAButton>
+              <CTAButton href="/advisor" tier={3}>
+                Talk to an advisor
+              </CTAButton>
+            </nav>
+
+            {/* Mobile right cluster */}
+            <div className="flex lg:hidden items-center" style={{ gap: 8 }}>
+              <CTAButton
+                href="/advisor"
+                tier={1}
+                style={{ fontSize: 12, padding: '8px 16px', borderRadius: 4 }}
               >
-                {item.label}
-              </Link>
-            ))}
-            {/* Hairline separator between nav-link cluster and CTA cluster */}
-            <span
-              aria-hidden="true"
-              className="bg-walnut h-6 w-[1px] inline-block"
-            />
-            <CTAButton href="/briefing" variant="secondary">
-              Get the Briefing
-            </CTAButton>
-            <CTAButton href="/advisor" variant="primary">
-              Talk to an advisor
-            </CTAButton>
-          </nav>
-
-          {/* Mobile toggle */}
-          <button
-            type="button"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-nav"
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            onClick={() => setMobileOpen((v) => !v)}
-            className="lg:hidden inline-flex items-center justify-center h-12 w-12 text-walnut"
-            style={{ minWidth: 44, minHeight: 44 }}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            >
-              {mobileOpen ? (
-                <path d="M6 6 L18 18 M18 6 L6 18" strokeLinecap="round" />
-              ) : (
-                <>
-                  <line x1="4" y1="7" x2="20" y2="7" strokeLinecap="round" />
-                  <line x1="4" y1="12" x2="20" y2="12" strokeLinecap="round" />
-                  <line x1="4" y1="17" x2="20" y2="17" strokeLinecap="round" />
-                </>
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile takeover */}
-      {mobileOpen ? (
-        <div
-          id="mobile-nav"
-          className="lg:hidden bg-ink-display"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 50,
-            overflowY: 'auto',
-          }}
-        >
-          <div className="mx-auto max-w-page px-4 sm:px-6 py-4">
-            <div className="flex items-center justify-between">
-              <Logomark variant="reverse" size={22} />
+                Talk to an advisor
+              </CTAButton>
               <button
+                ref={hamburgerRef}
                 type="button"
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
-                className="inline-flex items-center justify-center h-12 w-12 text-canvas"
-                style={{ minWidth: 44, minHeight: 44 }}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-nav"
+                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+                onClick={() => setMobileOpen((v) => !v)}
+                className="inline-flex items-center justify-center"
+                style={{
+                  minWidth: 44,
+                  minHeight: 44,
+                  width: 44,
+                  height: 44,
+                  color: 'var(--gpm-ink-display)',
+                  background: 'transparent',
+                  border: 0,
+                  cursor: 'pointer',
+                }}
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -137,47 +126,21 @@ export function SiteHeader() {
                   stroke="currentColor"
                   strokeWidth="1.5"
                 >
-                  <path d="M6 6 L18 18 M18 6 L6 18" strokeLinecap="round" />
+                  <line x1="3" y1="9" x2="21" y2="9" strokeLinecap="round" />
+                  <line x1="3" y1="13" x2="21" y2="13" strokeLinecap="round" />
+                  <line x1="3" y1="17" x2="21" y2="17" strokeLinecap="round" />
                 </svg>
               </button>
             </div>
-
-            <nav
-              aria-label="Primary mobile"
-              className="flex flex-col gap-6 mt-12"
-            >
-              {PRIMARY_NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-h3 text-canvas no-underline hover:no-underline"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="mt-6 flex flex-col gap-4">
-                <CTAButton
-                  href="/briefing"
-                  variant="secondary"
-                  tone="inverse"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Get the Briefing
-                </CTAButton>
-                <CTAButton
-                  href="/advisor"
-                  variant="primary"
-                  tone="inverse"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Talk to an advisor
-                </CTAButton>
-              </div>
-            </nav>
           </div>
         </div>
-      ) : null}
-    </header>
+      </header>
+
+      <MobileMenuPanel
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        nav={PRIMARY_NAV}
+      />
+    </>
   )
 }

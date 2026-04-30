@@ -1,3 +1,5 @@
 export { SiteHeader } from './SiteHeader'
 export { SiteFooter } from './SiteFooter'
 export { Logomark } from './Logomark'
+export { MobileMenuPanel } from './MobileMenuPanel'
+export { FooterAccordion } from './FooterAccordion'

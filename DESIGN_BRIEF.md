@@ -45,6 +45,15 @@ The override changes the following relative to v1.1 of this brief:
   reference and remains accurate for the v3.5 implementation that shipped
   to phase-2-content-import branch on 2026-04-28; do not consult it for
   the post-2026-04-29 build.
+- **§2 Hero composition correction (2026-04-30).** The production brief
+  §2 hero specifies a cream linen surface with single-coin imagery. CMO
+  override on 2026-04-30: hero composition follows Manus's final render —
+  dark studio backdrop with stacked gold coins photography (the
+  `hero-background-gold-coins.jpg` asset in the Manus image bundle). The
+  dark gradient overlay continues to carry the headline copy on the
+  left; the form panel continues to sit on the right. The cream linen
+  surface and single-coin specification is superseded. The implementation
+  in `components/hero/Hero.tsx` reflects this override.
 - **No-lead-capture-first homepage rule** (was a non-negotiable in the
   earlier `CLAUDE.md`) is rescinded. The homepage carries two forms (hero
   + briefing section). Non-homepage forms still require explicit CMO

@@ -170,6 +170,82 @@
     font-feature-settings:  "tnum" 1;
     font-variant-numeric:   tabular-nums;
   }
+
+  /* ============================================================ */
+  /* Skip-to-main link — WCAG 2.1 AA bypass-blocks                */
+  /* Hidden by default; visible only when focused.                */
+  /* ============================================================ */
+  .gpm-skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .gpm-skip-link:focus,
+  .gpm-skip-link:focus-visible {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    padding: 8px 16px;
+    background: var(--gpm-walnut-deep);
+    color: var(--gpm-canvas);
+    z-index: 100;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  /* ============================================================ */
+  /* Tier 4 reading-flow link — inline gold with hover darken     */
+  /* Production brief CTA Tier 4: resting #9C7322, hover #7E5C10. */
+  /* Underline appears on hover only.                             */
+  /* ============================================================ */
+  .gpm-link-tier4 {
+    color: var(--gpm-gold-secondary);
+    text-decoration: none;
+    transition: color 150ms ease-out;
+  }
+  .gpm-link-tier4:hover,
+  .gpm-link-tier4:focus-visible {
+    color: #7E5C10;
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 3px;
+  }
+
+  /* ============================================================ */
+  /* Header nav link — ink-display → gold-secondary on hover       */
+  /* ============================================================ */
+  .gpm-link-nav {
+    color: var(--gpm-ink-display);
+    text-decoration: none;
+    transition: color 200ms ease-out;
+  }
+  .gpm-link-nav:hover,
+  .gpm-link-nav:focus-visible {
+    color: var(--gpm-gold-secondary);
+    text-decoration: none;
+  }
+
+  /* ============================================================ */
+  /* Footer link — canvas → gold-primary on hover                 */
+  /* ============================================================ */
+  .gpm-link-footer {
+    color: var(--gpm-canvas);
+    text-decoration: none;
+    transition: color 150ms ease-out;
+  }
+  .gpm-link-footer:hover,
+  .gpm-link-footer:focus-visible {
+    color: var(--gpm-gold-primary);
+    text-decoration: none;
+  }
 }
 
 /* ============================================================ */

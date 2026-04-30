@@ -10,29 +10,35 @@ interface LogomarkProps {
   variant?: 'default' | 'reverse'
   /** Pixel height of "Grace" wordmark line. Mark scales proportionally. */
   size?: number
+  /** Hide the "PRECIOUS METALS" tagline (used below 480px viewport per the production brief). */
+  hideTagline?: boolean
 }
 
 export function Logomark({
   variant = 'default',
-  size = 28,
+  size = 26,
+  hideTagline = false,
 }: LogomarkProps) {
-  // Variant A (default) per Section 6.4: deep gold structural elements + muted
-  // gold detail; "Grace" in muted gold; rule in deep gold; small caps in body
-  // ink. Variant B (reverse) collapses the two-tone mark into single muted gold
-  // and renders body text in cream.
+  // Default variant per the production brief homepage spec:
+  //   - scales icon: gold-secondary (#9C7322), proportional to wordmark
+  //   - wordmark "Grace": Source Serif 4 weight 500, walnut-deep (#3D2817)
+  //   - tagline "PRECIOUS METALS": Inter weight 600, gold-secondary (#9C7322),
+  //     letter-spacing 0.20em
+  // Reverse variant inverts colours for dark backgrounds (e.g. footer columns
+  // or a future dark hero) — wordmark cream, tagline gold-muted.
   const isReverse = variant === 'reverse'
-  const structural = isReverse ? '#C9A96C' : '#B8962E'
-  const detail = '#C9A96C'
-  const wordColor = '#C9A96C'
-  const ruleColor = isReverse ? '#C9A96C' : '#B8962E'
-  const subtitleColor = isReverse ? '#F2EDE0' : '#1F1B16'
+  const structural = isReverse ? '#C9A96C' : '#9C7322'
+  const detail = isReverse ? '#C9A96C' : '#9C7322'
+  const wordColor = isReverse ? '#F2EDE0' : '#3D2817'
+  const ruleColor = isReverse ? '#C9A96C' : '#9C7322'
+  const subtitleColor = isReverse ? '#C9A96C' : '#9C7322'
 
-  // Scale: at standard lockup (Grace at 38px), mark is 64px and gap is 24px.
-  // Maintain that ratio with the size prop driving the wordmark line height.
-  const markPx = Math.round(size * (64 / 38))
-  const gapPx = Math.round(size * (24 / 38))
-  const subtitlePx = Math.max(9, Math.round(size * (11 / 38)))
-  const rulePx = Math.round(size * (140 / 38))
+  // Scale: at standard lockup (Grace at 26px), mark is 36px and gap is 14px.
+  // Tagline 10px at 26px wordmark per production brief; rule width 96px.
+  const markPx = Math.round(size * (36 / 26))
+  const gapPx = Math.round(size * (14 / 26))
+  const subtitlePx = Math.max(9, Math.round(size * (10 / 26)))
+  const rulePx = Math.round(size * (96 / 26))
 
   return (
     <Link
@@ -85,30 +91,33 @@ export function Logomark({
         >
           Grace
         </span>
-        <span
-          aria-hidden="true"
-          style={{
-            display: 'block',
-            width: rulePx,
-            height: 0.5,
-            background: ruleColor,
-            marginTop: 6,
-            marginBottom: 6,
-          }}
-        />
-        <span
-          style={{
-            fontFamily: 'var(--font-sans), system-ui, sans-serif',
-            fontSize: subtitlePx,
-            fontWeight: 500,
-            letterSpacing: '0.32em',
-            textTransform: 'uppercase',
-            color: subtitleColor,
-            lineHeight: 1,
-          }}
-        >
-          Precious Metals
-        </span>
+        {hideTagline ? null : (
+          <>
+            <span
+              aria-hidden="true"
+              style={{
+                display: 'block',
+                width: rulePx,
+                height: 0.5,
+                background: ruleColor,
+                marginTop: 5,
+                marginBottom: 5,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: 'var(--font-sans), system-ui, sans-serif',
+                fontSize: subtitlePx,
+                fontWeight: 600,
+                letterSpacing: '0.20em',
+                color: subtitleColor,
+                lineHeight: 1,
+              }}
+            >
+              PRECIOUS METALS
+            </span>
+          </>
+        )}
       </span>
     </Link>
   )

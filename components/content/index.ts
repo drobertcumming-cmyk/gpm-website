@@ -1,3 +1,4 @@
+// Legacy v3.5 components (still exported for non-homepage pages).
 export { EntryCard } from './EntryCard'
 export { EntryCardGrid, type EntryCardItem } from './EntryCardGrid'
 export { ImagePlaceholder } from './ImagePlaceholder'
@@ -8,3 +9,18 @@ export { CommitmentBlock } from './CommitmentBlock'
 export { VerseAnchor } from './VerseAnchor'
 export { ThreePathsGrid } from './ThreePathsGrid'
 export { DisclaimerStack } from './DisclaimerStack'
+
+// Production-brief homepage components (post-2026-04-29 Option A).
+export { TrustStrip } from './TrustStrip'
+export { AmericasFirstBlock } from './AmericasFirstBlock'
+export { FoundationalCommitments } from './FoundationalCommitments'
+export { BullionGrid } from './BullionGrid'
+export { WilliamPullQuote } from './WilliamPullQuote'
+export { TestimonialsGrid } from './TestimonialsGrid'
+export { ComparisonBlock } from './ComparisonBlock'
+export { CoverArtwork } from './CoverArtwork'
+export { WhatsInsideList } from './WhatsInsideList'
+export { BriefingForm } from './BriefingForm'
+export { BriefingSection } from './BriefingSection'
+export { FindWhatFits } from './FindWhatFits'
+export { HomepageDisclaimer } from './HomepageDisclaimer'

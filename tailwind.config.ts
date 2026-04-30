@@ -32,6 +32,9 @@ const config: Config = {
       current:     'currentColor',
       inherit:     'inherit',
 
+      // White — Tier 1 / Tier 2 button label colour; hero copy on dark gradient (production brief)
+      white:       '#FFFFFF',
+
       // Surfaces
       canvas:        tokens.color.canvas,
       'canvas-deep': tokens.color.canvasDeep,
