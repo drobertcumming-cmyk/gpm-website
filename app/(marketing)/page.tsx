@@ -10,7 +10,7 @@ import {
   DisclaimerStack,
   type EntryCardItem,
 } from '@/components/content'
-import { PageContainer, SectionContainer } from '@/components/layout'
+import { PageContainer } from '@/components/layout'
 
 // Homepage composition. Block order matches DESIGN_BRIEF.md Section 18 and
 // homepage_copy_fragments_v3_5.md, with three v3.5 corrections applied:
@@ -19,6 +19,10 @@ import { PageContainer, SectionContainer } from '@/components/layout'
 //   (b) PullQuote first sentence: "I spent a decade inside the Gold IRA
 //       industry."
 //   (c) Card 3 replaced with Briefing card (Option B), per CMO call.
+//
+// Vertical rhythm uses explicit margin-top per block rather than uniform
+// SectionContainer padding. Hero-to-cards 80px; subsequent gaps 96px;
+// disclaimer gap proportional smaller.
 //
 // Pre-launch banner fires on this route via lib/route-meta.ts pulling flags
 // from ./homepage.meta.ts. Site chrome (banner / header / footer) lives in
@@ -30,18 +34,30 @@ const ENTRY_CARDS: ReadonlyArray<EntryCardItem> = [
     body: 'William Armour spent a decade in the Gold IRA industry as a senior sales director. He is also a pastor. What he was selling could not be reconciled with what he preached.',
     linkLabel: "Read William's story",
     linkHref: '/who-we-are/williams-story',
+    imageLabel: '[EDITORIAL IMAGE — pastoral / conviction]',
+    imageAspect: '3 / 2',
+    imageSrc: '/images/homepage/card-1-man-reading-study.jpg',
+    imageAlt: 'Older man in a study, hands on an open book — pastoral / conviction register',
   },
   {
     title: 'We published the standard. Hold us to it.',
     body: 'Five structural commitments on pricing, product, compensation, and buyback — published before you speak to anyone. Not asking you to trust us. Inviting you to measure us.',
     linkLabel: 'See the five commitments',
     linkHref: '/pricing',
+    imageLabel: '[EDITORIAL IMAGE — verification / careful work]',
+    imageAspect: '3 / 2',
+    imageSrc: '/images/homepage/card-2-hands-writing.jpg',
+    imageAlt: 'Hands writing on a document with a fountain pen — verification / careful work register',
   },
   {
     title: 'Get the whole picture before you call.',
     body: "The Just Weight Briefing — William's story, the five commitments, how we price, what we sell, and the framework for evaluating any Gold IRA company.",
     linkLabel: 'Get the Briefing',
     linkHref: '/briefing',
+    imageLabel: '[EDITORIAL IMAGE — reading / preparation]',
+    imageAspect: '3 / 2',
+    imageSrc: '/images/homepage/card-3-lamp-paper-desk.jpg',
+    imageAlt: 'A reading lamp and paper on a wooden desk — reading / preparation register',
   },
 ]
 
@@ -80,7 +96,6 @@ const COMMITMENTS = [
     body: 'The number is on the website. The worked examples on your rollover amount are on the pricing page.',
     linkLabel: 'See what it actually costs',
     linkHref: '/pricing',
-    fullWidth: true,
   },
 ]
 
@@ -91,6 +106,10 @@ const PATHS: ReadonlyArray<EntryCardItem> = [
     body: 'Start with how a rollover works. What you can roll over, how the timing works, what the tax treatment looks like.',
     linkLabel: 'How a rollover works',
     linkHref: '/rollover',
+    imageLabel: '[EDITORIAL IMAGE — Path 1]',
+    imageAspect: '3 / 2',
+    imageSrc: '/images/homepage/path-1-elderly-woman-window.jpg',
+    imageAlt: 'An older woman sitting in sunlight near a window',
   },
   {
     tag: 'Path 2',
@@ -98,6 +117,10 @@ const PATHS: ReadonlyArray<EntryCardItem> = [
     body: "Start by requesting your current provider's buyback quote. That number tells you what you actually paid on entry.",
     linkLabel: 'The transfer guide',
     linkHref: '/rollover/transfer',
+    imageLabel: '[EDITORIAL IMAGE — Path 2]',
+    imageAspect: '3 / 2',
+    imageSrc: '/images/homepage/path-2-older-man-writing.jpg',
+    imageAlt: 'An older man at a table writing — reviewing his records',
   },
   {
     tag: 'Path 3',
@@ -105,12 +128,21 @@ const PATHS: ReadonlyArray<EntryCardItem> = [
     body: 'Our published pricing, salaried-advisor model, and bullion-only catalogue exist to meet the standards your clients rely on you to apply.',
     linkLabel: 'Advisor and CPA referrals',
     linkHref: '/advisor',
+    imageLabel: '[EDITORIAL IMAGE — Path 3]',
+    imageAspect: '3 / 2',
+    imageSrc: '/images/homepage/path-3-desk-book-pen.jpg',
+    imageAlt: 'A wooden desk with an open book and fountain pen',
   },
 ]
 
-const DISCLAIMERS: ReadonlyArray<string> = [
-  'Grace Precious Metals is a precious metals dealer. Gold IRAs require an IRS-approved custodian and an IRS-approved depository. Grace Precious Metals is not a financial, tax, or legal advisor. Gold and precious metals investments carry risk, including the potential loss of principal. Past performance does not guarantee future results. Consult qualified professionals before making investment decisions. Pricing reflects CFO-reviewed published policy as of the date shown.',
-  '"A typical Gold IRA costs about a third more" compares Grace\u2019s round-trip cost (entry spread plus ongoing custodian and depository fees; buyback at spot, zero exit spread) against the midpoint of the category-typical round-trip cost range of 17%\u201333%, substantiated from published research on Gold IRA pricing and regulatory enforcement records. Substantiation files available on counsel request. No specific competitor is identified on this page.',
+const DISCLAIMERS = [
+  {
+    lead: 'Grace Precious Metals is a precious metals dealer.',
+    rest: 'Gold IRAs require an IRS-approved custodian and an IRS-approved depository. Grace Precious Metals is not a financial, tax, or legal advisor. Gold and precious metals investments carry risk, including the potential loss of principal. Past performance does not guarantee future results. Consult qualified professionals before making investment decisions. Pricing reflects CFO-reviewed published policy as of the date shown.',
+  },
+  {
+    rest: '"A typical Gold IRA costs about a third more" compares Grace\u2019s round-trip cost (entry spread plus ongoing custodian and depository fees; buyback at spot, zero exit spread) against the midpoint of the category-typical round-trip cost range of 17%\u201333%, substantiated from published research on Gold IRA pricing and regulatory enforcement records. Substantiation files available on counsel request. No specific competitor is identified on this page.',
+  },
 ]
 
 export default function HomePage() {
@@ -119,21 +151,25 @@ export default function HomePage() {
       {/* Block 1 — VerseHero (full-width, self-contained padding) */}
       <VerseHero emphasizePronoun />
 
-      {/* Block 2 — Three EntryCards */}
-      <SectionContainer>
+      {/* Block 2 — Three EntryCards (~80px from hero) */}
+      <section className="mt-12 lg:mt-20">
         <PageContainer>
           <EntryCardGrid items={ENTRY_CARDS} />
         </PageContainer>
-      </SectionContainer>
+      </section>
 
-      {/* Block 3 — William pull-quote */}
-      <SectionContainer>
+      {/* Block 3 — William pull-quote (~96px from cards) */}
+      <section className="mt-16 lg:mt-24">
         <PageContainer>
           <div className="max-w-content mx-auto">
             <PullQuote
               attribution="William Armour, Co-Founder and CEO"
               linkLabel="Read William's full story"
               linkHref="/who-we-are/williams-story"
+              emphasized
+              headshotSrc="/images/homepage/pullquote-headshot-provisional.jpg"
+              headshotAlt="Older man, contemplative expression — provisional headshot pending William's commissioned portrait"
+              headshotLabel="[WILLIAM HEADSHOT — provisional]"
             >
               I spent a decade inside the Gold IRA industry. I watched what
               the pricing looked like on the inside and what it looked like
@@ -142,20 +178,22 @@ export default function HomePage() {
             </PullQuote>
           </div>
         </PageContainer>
-      </SectionContainer>
+      </section>
 
-      {/* Block 4 — William testimony band (full-width, self-contained) */}
-      <WilliamTestimonyBand />
+      {/* Block 4 — William testimony band (full-width, self-contained, ~96px from pull-quote) */}
+      <div className="mt-16 lg:mt-24">
+        <WilliamTestimonyBand />
+      </div>
 
-      {/* Block 5 — Trust block */}
-      <SectionContainer>
+      {/* Block 5 — Trust block (~96px from testimony band) */}
+      <section className="mt-16 lg:mt-24">
         <PageContainer>
           <TrustBlock />
         </PageContainer>
-      </SectionContainer>
+      </section>
 
       {/* Block 6 — Five structural commitments */}
-      <SectionContainer>
+      <section className="mt-16 lg:mt-24">
         <PageContainer>
           <CommitmentBlock
             heading="The five structural commitments"
@@ -163,31 +201,31 @@ export default function HomePage() {
             commitments={COMMITMENTS}
           />
         </PageContainer>
-      </SectionContainer>
+      </section>
 
       {/* Block 7 — Proverbs 11:1 anchor block */}
-      <SectionContainer>
+      <section className="mt-16 lg:mt-24">
         <PageContainer>
           <VerseAnchor emphasizePronoun />
         </PageContainer>
-      </SectionContainer>
+      </section>
 
       {/* Block 8 — Three-paths block */}
-      <SectionContainer>
+      <section className="mt-16 lg:mt-24">
         <PageContainer>
           <ThreePathsGrid
             heading="Find what fits where you are"
             paths={PATHS}
           />
         </PageContainer>
-      </SectionContainer>
+      </section>
 
-      {/* Block 9 — Standing disclaimer */}
-      <SectionContainer>
+      {/* Block 9 — Standing disclaimer (proportional, smaller gap before footer) */}
+      <section className="mt-16 lg:mt-24">
         <PageContainer>
           <DisclaimerStack disclaimers={DISCLAIMERS} />
         </PageContainer>
-      </SectionContainer>
+      </section>
     </>
   )
 }

@@ -35,8 +35,8 @@ export function SiteHeader() {
   return (
     <header className="bg-canvas border-b-[1px] border-border-light">
       <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-4">
-          <Logomark size={22} />
+        <div className="flex items-center justify-between py-8">
+          <Logomark size={44} />
 
           {/* Desktop nav */}
           <nav
@@ -48,7 +48,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={isCurrent(item.href) ? 'page' : undefined}
-                className="text-body text-walnut no-underline hover:underline hover:text-walnut"
+                className="text-body-lg text-walnut no-underline hover:underline hover:text-walnut"
                 style={{
                   textDecorationThickness: '0.5px',
                   textUnderlineOffset: 3,
@@ -57,6 +57,11 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
+            {/* Hairline separator between nav-link cluster and CTA cluster */}
+            <span
+              aria-hidden="true"
+              className="bg-walnut h-6 w-[1px] inline-block"
+            />
             <CTAButton href="/briefing" variant="secondary">
               Get the Briefing
             </CTAButton>

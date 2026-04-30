@@ -61,7 +61,7 @@ function FooterColumn({
             <li key={l.href}>
               <Link
                 href={l.href}
-                className="text-body-sm text-ink-body no-underline hover:underline"
+                className="text-body text-ink-body no-underline hover:underline"
                 style={{
                   textDecorationThickness: '0.5px',
                   textUnderlineOffset: 3,
@@ -89,7 +89,7 @@ export function SiteFooter() {
           <FooterColumn heading="Resources" links={COL_RESOURCES} />
           <FooterColumn heading="Talk to us" links={COL_TALK}>
             <li>
-              <span className="text-body-sm text-ink-body opacity-70">
+              <span className="text-body text-ink-body opacity-70">
                 Office hours and phone — pending confirmation.
               </span>
             </li>
@@ -98,7 +98,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 pt-8 border-t-[1px] border-border-light">
-          <p className="text-body-sm text-ink-body opacity-80">
+          <p className="text-body text-ink-body opacity-80">
             Grace Precious Metals, [address — pending confirmation].
             &copy; 2026 Grace Precious Metals. All rights reserved.
           </p>

@@ -1,5 +1,6 @@
 export { EntryCard } from './EntryCard'
 export { EntryCardGrid, type EntryCardItem } from './EntryCardGrid'
+export { ImagePlaceholder } from './ImagePlaceholder'
 export { PullQuote } from './PullQuote'
 export { WilliamTestimonyBand } from './WilliamTestimonyBand'
 export { TrustBlock } from './TrustBlock'

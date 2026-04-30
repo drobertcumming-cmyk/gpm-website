@@ -5,6 +5,15 @@ import { LinkArrow } from '@/components/cta'
 // desktop with the fifth commitment spanning both columns; single column at
 // mobile. No card surface — commitments sit directly on canvas.
 //
+// Typographic treatment carries the architectural weight: gold-deep h3
+// numerals, walnut h3 headings, hairline rules between rows. Editorial-
+// finance register, not feature-grid. Icons were trialled and removed per
+// CMO direction — the typography is the structure.
+//
+// Body register: upright text-body-sm per brief Section 14.3 spec. Earlier
+// "italic-inflected body" phrasing in the critique-action brief was loose;
+// no italic on body. Resolved 2026-04-28.
+//
 // Reference: DESIGN_BRIEF.md Section 14.3 (CommitmentBlock).
 
 interface Commitment {
@@ -13,8 +22,6 @@ interface Commitment {
   body: string
   linkLabel?: string
   linkHref?: string
-  /** Renders the item full-width across the two-column grid. */
-  fullWidth?: boolean
 }
 
 interface CommitmentBlockProps {
@@ -35,19 +42,17 @@ export function CommitmentBlock({
         <p className="text-body text-ink-body mt-4 max-w-prose">{subhead}</p>
       ) : null}
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-0">
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-x-12 gap-y-0">
         {commitments.map((c, i) => (
           <div
             key={c.number}
             className={
-              c.fullWidth
-                ? 'lg:col-span-2 py-8 border-t-[1px] border-border-light'
-                : i < 2
+              i < 3
                 ? 'py-8 lg:border-t-[1px] lg:border-border-light first:border-t-[1px] border-border-light'
                 : 'py-8 border-t-[1px] border-border-light'
             }
           >
-            <p className="text-eyebrow text-gold-deep">{c.number}</p>
+            <p className="text-h3 text-gold-deep">{c.number}</p>
             <h3 className="text-h3 text-ink-display mt-3">{c.title}</h3>
             <p className="text-body-sm text-ink-body mt-3 max-w-prose">
               {c.body}

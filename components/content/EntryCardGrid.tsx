@@ -12,6 +12,10 @@ export interface EntryCardItem {
   linkLabel: string
   linkHref: string
   tag?: string
+  imageLabel?: string
+  imageAspect?: string
+  imageSrc?: string
+  imageAlt?: string
 }
 
 interface EntryCardGridProps {
