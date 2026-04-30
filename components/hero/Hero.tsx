@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { CTAButton } from '@/components/cta'
+import { withBase } from '@/lib/basepath'
 import { HeroBriefingForm } from './HeroBriefingForm'
 
 // Production-brief homepage Hero (post-2026-04-29 Option A) with the
@@ -38,7 +39,7 @@ export function Hero() {
         }}
       >
         <Image
-          src="/images/homepage/hero-background-gold-coins.jpg"
+          src={withBase('/images/homepage/hero-background-gold-coins.jpg')}
           alt=""
           fill
           priority

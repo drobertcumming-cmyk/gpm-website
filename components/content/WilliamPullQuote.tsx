@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { withBase } from '@/lib/basepath'
 
 // Production-brief homepage §7. Hairline rules above and below at 60% width.
 // Circular 120px portrait left + attribution beneath; quote right of portrait
@@ -43,7 +44,7 @@ export function WilliamPullQuote() {
             }}
           >
             <Image
-              src="/images/homepage/william-portrait.png"
+              src={withBase('/images/homepage/william-portrait.png')}
               alt="William Armour, Co-Founder & CEO"
               fill
               sizes="120px"

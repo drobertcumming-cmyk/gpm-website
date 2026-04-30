@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { CTAButton } from '@/components/cta'
+import { withBase } from '@/lib/basepath'
 
 // Production-brief homepage §9. Two-column 60/40 split. Left: eyebrow +
 // headline + italic provocation + 2 body paragraphs + "What you will probably
@@ -157,7 +158,7 @@ export function ComparisonBlock() {
             }}
           >
             <Image
-              src="/images/homepage/already-spoken-couple-documents.jpg"
+              src={withBase('/images/homepage/already-spoken-couple-documents.jpg')}
               alt="An older couple at a desk reviewing financial documents together"
               fill
               sizes="(min-width: 1024px) 480px, 90vw"

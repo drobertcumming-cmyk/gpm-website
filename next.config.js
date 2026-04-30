@@ -43,6 +43,15 @@ module.exports = async () => {
       assetPrefix: '/gpm-website',
       trailingSlash: true,
     }),
+    // Expose the base path to the client bundle so components can prefix
+    // public-folder image src values manually. next/image with
+    // images.unoptimized: true does NOT auto-prepend basePath — known
+    // Next.js limitation. Components import `withBase` from `lib/basepath`
+    // and wrap each Image src so the rendered HTML carries the correct
+    // /gpm-website prefix on the GitHub Pages preview.
+    env: {
+      NEXT_PUBLIC_BASE_PATH: isGitHubPages ? '/gpm-website' : '',
+    },
   }
 
   return withMDX(nextConfig)

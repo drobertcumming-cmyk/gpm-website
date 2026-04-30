@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { withBase } from '@/lib/basepath'
 
 // Production-brief homepage §10 — briefing cover artwork.
 // 320x414 desktop, 240x312 mobile. CSS 3D transform with oxblood face,
@@ -133,7 +134,7 @@ export function CoverArtwork() {
             }}
           >
             <Image
-              src="/images/homepage/briefing-cover-photo.jpg"
+              src={withBase('/images/homepage/briefing-cover-photo.jpg')}
               alt=""
               fill
               sizes="320px"

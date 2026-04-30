@@ -12,10 +12,13 @@ place as in-context reminders. They point back here for the aggregate
 view. When an item resolves, update both the entry below and the
 distributed flag.
 
-Site-wide pre-launch banner ([components/compliance/PreLaunchBanner.tsx](components/compliance/PreLaunchBanner.tsx))
-fires on any route whose `complianceFlags` contain a trigger flag —
-that mechanism is the runtime expression of the items below. Items
-here lift to a structured human-readable list.
+Compliance flags remain attached to individual pages
+(`app/(marketing)/homepage.meta.ts`, `lib/route-meta.ts`, MDX
+frontmatter) as tracking metadata for the items below, but no UI
+element renders from them — the site-wide pre-launch banner mechanism
+was removed on 2026-04-30 per CMO direction. The flag arrays still
+serve the audit purpose; the banner that previously surfaced them
+visually no longer exists.
 
 ---
 

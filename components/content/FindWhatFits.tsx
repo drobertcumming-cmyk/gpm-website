@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { withBase } from '@/lib/basepath'
 
 // Production-brief homepage §11. Eyebrow + headline above a 3-card grid.
 // Each card: lifestyle image (240px tall, top corners rounded) + content
@@ -63,7 +64,7 @@ function PathCard({ p }: { p: Path }) {
     >
       <div style={{ position: 'relative', height: 240, background: 'var(--gpm-canvas-deep)' }}>
         <Image
-          src={p.imageSrc}
+          src={withBase(p.imageSrc)}
           alt={p.imageAlt}
           fill
           sizes="(min-width: 1024px) 380px, 90vw"

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { withBase } from '@/lib/basepath'
 
 // Production-brief homepage §6. Eyebrow + headline + lead paragraph + 4-product
 // image row + closing paragraph with inline Tier 4 link.
@@ -99,7 +100,7 @@ export function BullionGrid() {
               }}
             >
               <Image
-                src={p.src}
+                src={withBase(p.src)}
                 alt={p.alt}
                 fill
                 sizes="(min-width: 1024px) 270px, (min-width: 640px) 45vw, 90vw"
