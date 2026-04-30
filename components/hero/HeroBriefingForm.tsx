@@ -40,10 +40,14 @@ function validate(field: keyof FormState, value: string): string | null {
   return null
 }
 
+// Type sizes bumped 2026-04-30 per CMO desktop-render review:
+//   eyebrow 11→12px / subtitle 14→15px / labels 11→12px / inputs 12→13px /
+//   input padding 8px 11px → 10px 12px. Panel widened from 320 to 360 in
+//   Hero.tsx so the eyebrow and subtitle don't wrap awkwardly.
 const LABEL_STYLE: React.CSSProperties = {
   display: 'block',
   fontFamily: 'var(--font-sans)',
-  fontSize: 11,
+  fontSize: 12,
   fontWeight: 500,
   color: 'rgba(242, 237, 224, 0.78)',
   marginBottom: 4,
@@ -54,9 +58,9 @@ const INPUT_STYLE: React.CSSProperties = {
   background: 'var(--gpm-cream-warm)',
   border: '0.5px solid rgba(45, 38, 32, 0.22)',
   borderRadius: 2,
-  padding: '8px 11px',
+  padding: '10px 12px',
   fontFamily: 'var(--font-sans)',
-  fontSize: 12,
+  fontSize: 13,
   color: 'var(--gpm-ink-display)',
 }
 
@@ -183,7 +187,7 @@ export function HeroBriefingForm() {
         id="hero-form-eyebrow"
         style={{
           fontFamily: 'var(--font-sans)',
-          fontSize: 11,
+          fontSize: 12,
           fontWeight: 600,
           letterSpacing: '0.10em',
           color: 'var(--gpm-gold-primary)',
@@ -197,7 +201,7 @@ export function HeroBriefingForm() {
           fontFamily: 'var(--font-serif)',
           fontStyle: 'italic',
           fontWeight: 500,
-          fontSize: 14,
+          fontSize: 15,
           color: 'var(--gpm-canvas)',
           lineHeight: 1.4,
           marginTop: 8,

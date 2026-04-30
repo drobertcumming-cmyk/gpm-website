@@ -72,15 +72,17 @@ const TIER_2_STYLE: React.CSSProperties = {
 }
 
 // Tier 3 — persistent navigation (header CTAs). Outlined walnut;
-// transparent bg; 2px radius; Inter 500 13px; 9px 18px padding. Hover
+// transparent bg; 2px radius; Inter 500 14px; 10px 20px padding. Hover
 // fills walnut, text flips to canvas.
+// (2026-04-30 correction: bumped from 13px / 9px 18px to give the header
+// chrome more visual weight per CMO desktop-render review.)
 const TIER_3_CLASS =
   'inline-block border-[1px] border-walnut text-walnut bg-transparent no-underline text-center transition-colors duration-color hover:bg-walnut hover:text-canvas hover:no-underline'
 const TIER_3_STYLE: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
-  fontSize: 13,
+  fontSize: 14,
   fontWeight: 500,
-  padding: '9px 18px',
+  padding: '10px 20px',
   borderRadius: 2,
   lineHeight: 1.2,
 }

@@ -59,7 +59,7 @@ export function SiteHeader() {
                   className="gpm-link-nav"
                   style={{
                     fontFamily: 'var(--font-sans)',
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: 500,
                     letterSpacing: 0,
                   }}

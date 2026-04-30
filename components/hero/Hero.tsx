@@ -133,8 +133,11 @@ export function Hero() {
             Right zone — single form instance. CSS Grid positions it to the
             right of the copy at lg, and stacks it below the copy at smaller
             breakpoints. One DOM instance keeps form input ids unique.
+            (2026-04-30 correction: panel widened from 320px to 360px so
+            the "GET THE SECRET GOLD BRIEFING" eyebrow doesn't wrap and the
+            fields have proper breathing room.)
           */}
-          <div className="lg:justify-self-end w-full lg:max-w-[320px]">
+          <div className="lg:justify-self-end w-full lg:max-w-[360px]">
             <HeroBriefingForm />
           </div>
         </div>

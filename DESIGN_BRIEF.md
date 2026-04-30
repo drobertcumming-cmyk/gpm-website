@@ -54,6 +54,20 @@ The override changes the following relative to v1.1 of this brief:
   left; the form panel continues to sit on the right. The cream linen
   surface and single-coin specification is superseded. The implementation
   in `components/hero/Hero.tsx` reflects this override.
+- **Header chrome correction (2026-04-30).** After CMO desktop-render
+  review the header chrome read too thin. Nav link size bumped from the
+  brief's 14px to **15px** (Inter weight 500 unchanged). Tier 3 header
+  CTA size bumped from 13px / 9px 18px padding to **14px / 10px 20px**
+  to match. Header inner-container vertical padding stays at the brief
+  spec of 22px top and bottom.
+- **Hero form panel correction (2026-04-30).** After CMO desktop-render
+  review the form panel rendered too narrow. Panel max-width bumped from
+  the brief's 280–320px range to **360px** so the eyebrow line doesn't
+  wrap. Internal type bumped: eyebrow 11→**12px** Inter 600; subtitle
+  14→**15px** Source Serif 4 italic; field labels 11→**12px** Inter 500;
+  field inputs 12→**13px** Inter 400; input padding 8px 11px →
+  **10px 12px**. Panel position (right zone of hero) and the dark
+  gradient overlay carrying the left-zone headline are unchanged.
 - **No-lead-capture-first homepage rule** (was a non-negotiable in the
   earlier `CLAUDE.md`) is rescinded. The homepage carries two forms (hero
   + briefing section). Non-homepage forms still require explicit CMO
