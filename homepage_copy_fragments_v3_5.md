@@ -1,5 +1,7 @@
 # Grace Precious Metals — Homepage Copy Fragments (v3.5)
 
+> **⚠ SUPERSEDED for the homepage by `homepage_copy_v3_6.md` on 2026-04-30.** Per CMO Option A authorisation, every block in this document has been replaced for the homepage build. Do not consult this file for homepage copy decisions; use `homepage_copy_v3_6.md` instead. This file is retained for cross-reference where v3.5 copy is referenced from non-homepage pages.
+
 **For Claude Code Phase 1 build. Use this content for the homepage shell. The rest of the v3.5 copy follows in the full MDX drop.**
 
 This document carries the verbatim, brand-cleared copy for every block in the Section 18 homepage spec. Do not rewrite, paraphrase, or invent variations. Where the design brief and the v3.5 copy disagree, the discrepancy is flagged below — surface it to the CMO; do not silently resolve.

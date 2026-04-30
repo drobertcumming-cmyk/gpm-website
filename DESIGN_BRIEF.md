@@ -10,6 +10,51 @@
 
 ---
 
+## Production-brief override note (2026-04-29 / 2026-04-30)
+
+**Scope:** the homepage only. Non-homepage pages still defer to this brief.
+
+The CMO authorised "Option A" on 2026-04-29: the production brief at
+`/Users/duncancumming/Downloads/Grace_Precious_Metals_Homepage_Production_Brief.md`
+becomes the authoritative homepage layout/visual spec, and `homepage_copy_v3_6.md`
+(in repo root) becomes the authoritative homepage copy source. Both supersede
+this file's §18 and the v3.5 fragments document for the homepage.
+
+The override changes the following relative to v1.1 of this brief:
+
+- **§7 Color system.** Seven new tokens added (`linenBase`, `linenWarm`,
+  `walnutDeep`, `goldHover`, `goldSecondary`, `oxblood`, `creamWarm`). See
+  `tokens.ts` and `app/globals.css` for live values.
+- **§8 Typography system.** Body/UI font swapped from Source Sans 3 to Inter.
+  Fluid `clamp()` typography added for body (16-17px), hero heading (28-48px),
+  America's First heading (28-36px), William's pull-quote (20-24px). New
+  size-specific tokens: `heroHeading`, `firstHeading`, `sectionLead`,
+  `bodyFluid`, `cardDescription`, `testimonial`, `whatsInsideItem`,
+  `disclaimer`, `eyebrowMd`, `pullQuote`. Eyebrow rendering convention
+  changed to "ALL CAPS via the typed copy itself, not via CSS text-transform"
+  for production-brief homepage components. Existing `text-eyebrow` retains
+  CSS uppercase for backward compatibility on non-homepage pages.
+- **§14 Component library.** Eleven new homepage-specific components
+  authorised: `Hero` (three-zone), `HeroBriefingForm`, `TrustStrip`,
+  `AmericasFirstBlock`, `BullionGrid`, `TestimonialsGrid`, `ComparisonBlock`,
+  `BriefingSection`, `CoverArtwork`, `BriefingForm`, `MobileMenuPanel`,
+  `FooterAccordion`, `WhatsInsideList`. Several existing components are
+  refactored or retired — see `SESSION_1_AUDIT.md` for the full delta.
+- **§18 Homepage.** Fully superseded by the production brief and v3.6 copy
+  for the homepage build. The §18 text below is retained as historical
+  reference and remains accurate for the v3.5 implementation that shipped
+  to phase-2-content-import branch on 2026-04-28; do not consult it for
+  the post-2026-04-29 build.
+- **No-lead-capture-first homepage rule** (was a non-negotiable in the
+  earlier `CLAUDE.md`) is rescinded. The homepage carries two forms (hero
+  + briefing section). Non-homepage forms still require explicit CMO
+  sign-off.
+- **Briefing rename.** "The Just Weight Briefing" → "The Secret Gold
+  Briefing" everywhere on the homepage and any downstream cross-references.
+- **Foundational commitments.** Reduced from five to four. Commitment 5
+  ("No phone-gate on pricing") removed. Both the homepage cards section and
+  the briefing PDF must document four operational promises.
+
 This document specifies the visual identity, design system, page-level direction, and build specification for the Grace Precious Metals launch website. It is structured in five parts and thirty-eight sections.
 
 Parts One and Two read as a brand identity specification and could survive being lifted out for use beyond the website. Parts Three, Four, and Five are the build specification proper, written for an implementer working with the rest of the brand canon as reference.
@@ -433,17 +478,23 @@ The deliberate choice not to use red for negative price movement is brand-defini
 
 The implementer must verify the following contrast ratios at build. Any deviation indicates a token mismatch and must be fixed before launch.
 
+Values below are measured against the actual canonical hex tokens (sRGB, WCAG 2.1 relative-luminance formula). Patched 2026-04-28 — the prior table overstated several pairings, most materially the deep-gold-on-cream value, which the original table reported as 3.4:1 but measures as 2.41:1.
+
 | Combination | Ratio | Standard |
 |---|---|---|
-| Body ink #1F1B16 on canvas #F2EDE0 | 15.7 : 1 | AAA body text |
-| Display ink #2D2620 on canvas #F2EDE0 | 12.4 : 1 | AAA body text |
-| Cream #F2EDE0 on walnut #3B342A | 11.7 : 1 | AAA body text |
-| Body ink #1F1B16 on surface #E8E2CC | 13.2 : 1 | AAA body text |
-| Walnut #3B342A on canvas #F2EDE0 | 11.7 : 1 | AAA body text |
-| Deep gold #B8962E on canvas #F2EDE0 (numerals only) | 3.4 : 1 | AA Large only |
-| Muted gold #C9A96C on canvas #F2EDE0 (decorative only) | 2.0 : 1 | FAILS body, fails AA Large |
+| Body ink #1F1B16 on canvas #F2EDE0 | 14.65 : 1 | AAA body text |
+| Display ink #2D2620 on canvas #F2EDE0 | 12.74 : 1 | AAA body text |
+| Cream #F2EDE0 on walnut #3B342A | 10.50 : 1 | AAA body text |
+| Body ink #1F1B16 on surface #E8E2CC | 13.19 : 1 | AAA body text |
+| Walnut #3B342A on canvas #F2EDE0 | 10.50 : 1 | AAA body text |
+| LinkArrow resting #9C7322 on canvas #F2EDE0 | 3.67 : 1 | Clears 3:1 (UI components / large text) |
+| LinkArrow hover #7E5C10 on canvas #F2EDE0 | 5.24 : 1 | AA body text |
+| Deep gold #B8962E on canvas #F2EDE0 (numerals only) | 2.41 : 1 | FAILS AA / AA Large — reserved for decorative use only |
+| Muted gold #C9A96C on canvas #F2EDE0 (decorative only) | 1.92 : 1 | FAILS body, fails AA Large |
 
 The muted gold against cream fails accessibility for any text use. This is why muted gold is reserved for decorative rules, eyebrows above sections, and the wordmark — contexts where legibility of fine detail is not load-bearing. Body copy, headings, button text, and form labels never appear in muted gold on cream.
+
+Deep gold #B8962E was previously documented as clearing AA Large at 3.4:1; the corrected measurement (2.41:1) means it does not clear AA Large either. Deep gold remains in service as the verse-band rule and eyebrow color, the wordmark hairline, and the inline-pricing pull-out for "11.1%". In those positions it is decorative or large-display rather than load-bearing body text. Where an inline gold link sits in body prose — the LinkArrow component's resting state — the brand uses #9C7322 instead, which clears 3:1 with margin.
 
 ---
 
@@ -1021,6 +1072,8 @@ The “Read more”, “Get the Briefing”, in-content arrow link. Muted gold c
 
 The standard disclaimer block per Section 6.4 of the Brand DNA document. Used in the page footer and inline on pages with pricing or product claims. Body ink color, text-body-sm, italic. Each disclaimer in its own paragraph; multiple disclaimers stack with space-2 between them.
 
+> **Resolution (2026-04-28).** Section 14.6 specifies italic for the disclaimer stack; Section 8.6 readability concern takes precedence for the 60-80 audience. Resolution: italic on lead phrase only, upright body. Where a paragraph has no natural lead-in phrase (e.g. a substantiation footnote that opens with a quoted comparative claim), the paragraph stays fully upright — asymmetric treatment is acceptable.
+
 #### ComplianceFlag
 
 Inline component for surfaces that have specific compliance gates. Used in /who-we-are/compliance and on pages with specific counsel-review requirements. Background surface color, walnut left-rule, body in text-body-sm. Per Section 22.
@@ -1207,8 +1260,10 @@ Eight templates covering the 22 pages at launch. Each template specifies layout 
 
 ## Homepage
 
+> **⚠ Superseded by the production brief and `homepage_copy_v3_6.md` for the homepage build.** See the "Production-brief override note" near the top of this file for the full delta. The historical text below describes the v3.5 homepage that shipped to `phase-2-content-import` on 2026-04-28; the post-2026-04-29 homepage is built against the production brief and v3.6, not this section. Do not consult this section for current homepage build decisions.
+
 *Applies to: / (homepage)*  
-*Copy source: v3.5 Launch Website Copy, homepage section*  
+*Copy source: v3.5 Launch Website Copy, homepage section* — **superseded by `homepage_copy_v3_6.md`**  
 *Wireframe reference: v2 wireframes consolidated, Template 1*  
 
 The homepage is the single most-viewed page on the site. It must accomplish three things in the first screenfold: state the published spread, anchor the brand in faith framing via the verse, and give the reader entry points into the site that do not depend on a phone call.

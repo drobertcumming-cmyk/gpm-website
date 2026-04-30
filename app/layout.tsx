@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
-import { Source_Serif_4, Source_Sans_3 } from 'next/font/google'
+import { Source_Serif_4, Inter } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 // Variable fonts loaded via next/font for self-hosted delivery and font-display: swap.
 // Reference: DESIGN_BRIEF.md Section 8.2 and 12.2.
+//
+// Body/UI font swapped from Source Sans 3 to Inter on 2026-04-30 per the
+// production brief (Option A). The CSS variable name --font-sans is unchanged
+// so component code does not need updating.
 const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
   variable: '--font-serif',
@@ -12,7 +16,7 @@ const sourceSerif = Source_Serif_4({
   style: ['normal', 'italic'],
 })
 
-const sourceSans = Source_Sans_3({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
@@ -53,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sourceSerif.variable} ${sourceSans.variable}`}
+      className={`${sourceSerif.variable} ${inter.variable}`}
     >
       <body>
         {children}

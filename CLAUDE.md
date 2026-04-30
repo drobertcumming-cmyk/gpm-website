@@ -18,11 +18,13 @@ This repository builds the launch website using Next.js 14+ (App Router), MDX fo
 
 When files conflict, resolve in this order:
 
-1. **`DESIGN_BRIEF.md`** — authoritative specification for the visual system, page-level direction, and build configuration. Version 1.1, 38 sections in five parts. Consult by section number.
-2. **`/content/**/*.mdx`** — launch copy from v3.5. Don't rewrite without explicit instruction; the copy is brand-cleared.
-3. **`tokens.ts`** — design tokens. Source of truth for color, typography, spacing, sizing, radius, motion.
-4. **`tailwind.config.ts`** — imports `tokens.ts`. Generates utility classes from tokens.
-5. **`app/globals.css`** — CSS custom property layer; mirrors `tokens.ts` for component code that doesn't use Tailwind.
+1. **`homepage_copy_v3_6.md`** — authoritative copy source for the **homepage only** (every block in §1–§13). Supersedes `homepage_copy_fragments_v3_5.md` for homepage content, which retains in-repo corrections (a) William quote phrasing and (d) four operational promises.
+2. **`Grace_Precious_Metals_Homepage_Production_Brief.md`** (in `/Users/duncancumming/Downloads/`) — authoritative layout, visual system, and component spec for the homepage. Per CMO Option A authorisation on 2026-04-29, this brief overrides the in-repo `DESIGN_BRIEF.md` for homepage section conflicts. The override is scoped to the homepage; non-homepage pages still defer to `DESIGN_BRIEF.md`.
+3. **`DESIGN_BRIEF.md`** — authoritative specification for the visual system, page-level direction (other than homepage), and build configuration. Version 1.1, 38 sections in five parts. Consult by section number.
+4. **`/content/**/*.mdx`** — launch copy from v3.5. Don't rewrite without explicit instruction; the copy is brand-cleared. Homepage TSX (`app/(marketing)/page.tsx`) reads from `homepage_copy_v3_6.md`, not from `/content/`.
+5. **`tokens.ts`** — design tokens. Source of truth for color, typography, spacing, sizing, radius, motion.
+6. **`tailwind.config.ts`** — imports `tokens.ts`. Generates utility classes from tokens.
+7. **`app/globals.css`** — CSS custom property layer; mirrors `tokens.ts` for component code that doesn't use Tailwind.
 
 If a file appears to conflict with the brief, the brief wins. Do not silently reconcile. Surface the conflict.
 
@@ -34,7 +36,7 @@ If the brief has gaps, ask the CMO. Do not invent brand decisions to fill them.
 
 These constraints cannot be violated under any circumstances. They are operational expressions of the brand's strategic position; breaking them undermines the foundation the brand is built on.
 
-- **No lead-capture-first homepage.** Email capture appears only on `/briefing`. The homepage does not have an email-capture form, an exit-intent modal, or any form that gates content.
+- **The homepage carries the Secret Gold Briefing capture** (hero form panel + briefing-section form), per the production brief and CMO Option A authorisation on 2026-04-29. Email-capture surfaces beyond these two on the homepage, or any new form on the rest of the site, require explicit CMO sign-off. No exit-intent modals.
 - **No celebrity endorsements at launch.** No "as seen on" badges. No celebrity photos. Marjorie Taylor Greene as ambassador is verbal-interest only; she does not appear on the launch site. The `AmbassadorBand` component is reserved but not wired up.
 - **No aspirational stock-couple photography.** Photography is documentary-editorial register. Never beach scenes, golden-hour couples, hands-holding-gold, or generic financial-services stock.
 - **No manufactured urgency.** No countdown timers, no banner alerts, no "limited time" framing, no "act now" CTAs.
@@ -45,7 +47,7 @@ These constraints cannot be violated under any circumstances. They are operation
 - **No browser storage APIs without sign-off.** localStorage, sessionStorage, IndexedDB — use only when specifically required by a feature spec and after compliance review. Cookies are jurisdiction-dependent and require counsel sign-off (see brief Section 16.9).
 - **No new components without sign-off.** The component library is specified in Section 14 of the brief. New components require explicit instruction from the CMO. Do not extend the library on implementer judgement.
 - **No dark mode at launch.** The brand is built around the cream canvas; dark-mode tokens are deliberately not in the system. Do not add them.
-- **Body text holds at 16px.** Do not reduce body text below 16px on any viewport. The audience is older readers; the 16px floor is a non-negotiable accessibility constraint.
+- **Body text holds at 16px on mobile and scales to 17px on desktop via fluid clamp().** Use `.text-body-fluid` for production-brief homepage components (clamp 16-17px). Use `.text-body` for legacy and non-homepage components (fixed 16px). Never reduce below 16px on any viewport. The 16px floor is a non-negotiable accessibility constraint.
 
 ---
 
@@ -58,6 +60,8 @@ Plain Counsel is the voice of a trusted pastor or family accountant who knows th
 Three failure modes to refuse: drifting up into sermon (faith framing as decoration); drifting sideways into reassurance (qualifying, softening, comforting); drifting down into sales (urgency, manufactured contrast, infomercial register).
 
 If a copy decision feels ambiguous, ask. Do not invent.
+
+**Voice exceptions logged on the homepage.** The Secret Gold Briefing eyebrow ("THE SECRET GOLD BRIEFING") and subtitle ("What the Other IRA Companies Hide From You.") use a curiosity-hook framing that sits adjacent to infomercial register. CMO has cleared this register specifically for the briefing artefact and the corresponding hero form panel and briefing section on the homepage. The Golden Rule test does not refuse this framing; it is the named exception. Do not flag this copy in future audits. The exception is scoped to the briefing surface; Plain Counsel still governs everywhere else.
 
 Three governing tests apply to any copy you write:
 
@@ -218,7 +222,7 @@ The following are unresolved at the time this file was written. Surface them whe
 - The italic emphasis on "His" in the verse band — pending William's call. Implementer ships with italic; flag is config-controllable.
 - State licensing list for footer — pending Andrew's confirmation.
 - Custodian and depository names — pending contract signature.
-- Briefing PDF asset — produced by ops team and hosted at static URL.
+- The Secret Gold Briefing PDF asset — produced by ops team and hosted at static URL. Renamed from "Just Weight Briefing" on 2026-04-29 per the production brief. PDF must document four operational promises (matching the homepage's four foundational commitments), not five.
 - Cookie consent banner — required jurisdictions identified by counsel.
 
 See `DESIGN_BRIEF.md` Section 38 for the canonical open-decisions log.

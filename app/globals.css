@@ -30,6 +30,15 @@
     --gpm-gold-deep:     #B8962E;
     --gpm-walnut:        #3B342A;
 
+    /* Color tokens — production-brief homepage extensions (2026-04-29 Option A) */
+    --gpm-linen-base:     #EDE5D2;  /* Hero cream surface */
+    --gpm-linen-warm:     #FFFDF5;  /* Trust strip background */
+    --gpm-walnut-deep:    #3D2817;  /* Footer background; section headlines on cream */
+    --gpm-gold-hover:     #9A7D26;  /* Tier 1 / Tier 2 button hover */
+    --gpm-gold-secondary: #9C7322;  /* Eyebrows; Tier 4 link resting; hairline accents */
+    --gpm-oxblood:        #5C2A2A;  /* Briefing cover face artwork */
+    --gpm-cream-warm:     #FAF6EC;  /* Form input backgrounds */
+
     /* Color tokens — supporting */
     --gpm-border-light:  #D5CDB6;
 

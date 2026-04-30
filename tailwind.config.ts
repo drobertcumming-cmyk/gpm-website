@@ -37,20 +37,37 @@ const config: Config = {
       'canvas-deep': tokens.color.canvasDeep,
       surface:       tokens.color.surface,
 
+      // Linen — production-brief homepage cream surfaces (Option A, 2026-04-29)
+      linen: {
+        base: tokens.color.linenBase,
+        warm: tokens.color.linenWarm,
+      },
+
+      // Cream — form input backgrounds
+      'cream-warm': tokens.color.creamWarm,
+
       // Ink (text)
       ink: {
         body:    tokens.color.inkBody,
         display: tokens.color.inkDisplay,
       },
 
-      // Gold (accent)
+      // Gold (accent) — extended on 2026-04-29 with hover + secondary
       gold: {
-        DEFAULT: tokens.color.goldPrimary,
-        deep:    tokens.color.goldDeep,
+        DEFAULT:   tokens.color.goldPrimary,
+        deep:      tokens.color.goldDeep,
+        hover:     tokens.color.goldHover,
+        secondary: tokens.color.goldSecondary,
       },
 
-      // Walnut (CTAs and structural emphasis)
-      walnut: tokens.color.walnut,
+      // Walnut — extended on 2026-04-29 with deep variant for footer + section headlines
+      walnut: {
+        DEFAULT: tokens.color.walnut,
+        deep:    tokens.color.walnutDeep,
+      },
+
+      // Oxblood — briefing cover face (single-purpose)
+      oxblood: tokens.color.oxblood,
 
       // Borders
       border: {
@@ -122,16 +139,35 @@ const config: Config = {
     // Font sizes — only what's in the type token system
     // Component code should prefer .text-display-xl, .text-h2, etc.
     // (custom plugin below) which compose family + weight + line-height + tracking
+    //
+    // Production-brief homepage additions (2026-04-29):
+    //   eyebrow-md, disclaimer, testimonial, body-fluid, card-description,
+    //   first-heading, hero-heading, pull-quote, whats-inside-item
     // ------------------------------------------------------------
     fontSize: {
-      'eyebrow':    ['11px', { lineHeight: '1', letterSpacing: '0.22em' }],
-      'body-sm':    ['14px', { lineHeight: '1.6' }],
-      'body':       ['16px', { lineHeight: '1.65' }],
-      'body-lg':    ['18px', { lineHeight: '1.6' }],
-      'h3':         ['22px', { lineHeight: '1.3' }],
-      'h2':         ['32px', { lineHeight: '1.15', letterSpacing: '-0.005em' }],
-      'display-lg': ['56px', { lineHeight: '1.1',  letterSpacing: '-0.015em' }],
-      'display-xl': ['72px', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+      // Eyebrows
+      'eyebrow':            ['11px', { lineHeight: '1', letterSpacing: '0.22em' }],
+      'eyebrow-md':         ['12px', { lineHeight: '1', letterSpacing: '0.10em' }],
+
+      // Body
+      'disclaimer':         ['13px', { lineHeight: '1.6' }],
+      'body-sm':            ['14px', { lineHeight: '1.6' }],
+      'testimonial':        ['15px', { lineHeight: '1.55' }],
+      'whats-inside-item':  ['15px', { lineHeight: '1.55' }],
+      'body':               ['16px', { lineHeight: '1.65' }],
+      'card-description':   ['16px', { lineHeight: '1.55' }],
+      'body-fluid':         ['clamp(16px, 1.4vw, 17px)', { lineHeight: '1.65' }],
+      'body-lg':            ['18px', { lineHeight: '1.6' }],
+      'section-lead':       ['18px', { lineHeight: '1.55' }],
+
+      // Headings
+      'h3':                 ['22px', { lineHeight: '1.3' }],
+      'pull-quote':         ['clamp(20px, 2vw, 24px)', { lineHeight: '1.45' }],
+      'h2':                 ['32px', { lineHeight: '1.15', letterSpacing: '-0.005em' }],
+      'first-heading':      ['clamp(28px, 4.5vw, 36px)', { lineHeight: '1.20', letterSpacing: '-0.005em' }],
+      'hero-heading':       ['clamp(28px, 5vw, 48px)',   { lineHeight: '1.18', letterSpacing: '-0.005em' }],
+      'display-lg':         ['56px', { lineHeight: '1.1',  letterSpacing: '-0.015em' }],
+      'display-xl':         ['72px', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
     },
 
     fontWeight: {
