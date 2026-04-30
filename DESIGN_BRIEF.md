@@ -66,6 +66,25 @@ The override changes the following relative to v1.1 of this brief:
   in `gold-primary` (#C9A96C) with letter-spacing 0.10em. The verse now
   reads as a deliberate brand-narrative element, not a footnote. Margin
   below the eyebrow stays at 24px.
+- **Section divider pattern (2026-04-30, second pass).** CMO live-review
+  flagged that the briefing section (§10) and William's pull-quote (§7)
+  had visible hairline rules separating them from the rest of the page,
+  but the other content sections did not — which made the page read
+  asymmetrically. Resolution: a new `<SectionDivider />` component
+  renders a 60%-width centered hairline (`0.5px solid
+  rgba(184, 150, 46, 0.50)`, matching the pull-quote rule weight) above
+  every content section that doesn't already carry its own framing
+  rules. Placement in `app/(marketing)/page.tsx`:
+  - Above §4 AmericasFirstBlock
+  - Above §5 FoundationalCommitments
+  - Above §6 BullionGrid
+  - Above §9 ComparisonBlock
+
+  §7 WilliamPullQuote and §10 BriefingSection retain their own internal
+  top + bottom rules — those wider/heavier framings intentionally mark
+  the two "feature" sections; the new SectionDivider rules are the
+  quieter editorial pause between standard content sections.
+
 - **Hero form panel correction (2026-04-30) + live-review pass.** After
   CMO desktop-render review the form panel rendered too narrow. Panel
   max-width bumped from the brief's 280–320px range to **360px** so the

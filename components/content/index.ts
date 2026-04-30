@@ -12,6 +12,7 @@ export { DisclaimerStack } from './DisclaimerStack'
 
 // Production-brief homepage components (post-2026-04-29 Option A).
 export { TrustStrip } from './TrustStrip'
+export { SectionDivider } from './SectionDivider'
 export { AmericasFirstBlock } from './AmericasFirstBlock'
 export { FoundationalCommitments } from './FoundationalCommitments'
 export { BullionGrid } from './BullionGrid'
