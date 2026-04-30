@@ -1,20 +1,20 @@
 import { LinkArrow } from '@/components/cta'
 
-// CommitmentBlock — Block 6 of the homepage. Five operational commitments,
-// numbered 01–05, with hairline rules between them. Two-column grid at
-// desktop with the fifth commitment spanning both columns; single column at
-// mobile. No card surface — commitments sit directly on canvas.
+// CommitmentBlock — legacy v3.5 commitment list component. Generic
+// commitment list with hairline rules between rows; no card surface;
+// typography carries the architectural weight (gold-deep numerals, walnut
+// headings). Renders whatever array is passed via the `commitments` prop.
 //
-// Typographic treatment carries the architectural weight: gold-deep h3
-// numerals, walnut h3 headings, hairline rules between rows. Editorial-
-// finance register, not feature-grid. Icons were trialled and removed per
-// CMO direction — the typography is the structure.
+// **Not used on the post-2026-04-29 homepage.** The production-brief homepage
+// uses `FoundationalCommitments.tsx` (four cards in a 4-col equal-height grid)
+// instead. This legacy component is retained for non-homepage pages that
+// still render the inline commitment list (none in current Phase 2 scope).
 //
-// Body register: upright text-body-sm per brief Section 14.3 spec. Earlier
-// "italic-inflected body" phrasing in the critique-action brief was loose;
-// no italic on body. Resolved 2026-04-28.
+// If you reuse this component, the site-wide standard is **four foundational
+// commitments** (post-2026-04-30) — do not pass a fifth commitment or a
+// "No phone-gate on pricing" entry. See CLAUDE.md non-negotiables.
 //
-// Reference: DESIGN_BRIEF.md Section 14.3 (CommitmentBlock).
+// Reference: DESIGN_BRIEF.md Section 14.3 (CommitmentBlock, legacy).
 
 interface Commitment {
   number: string

@@ -72,11 +72,24 @@ The override changes the following relative to v1.1 of this brief:
   earlier `CLAUDE.md`) is rescinded. The homepage carries two forms (hero
   + briefing section). Non-homepage forms still require explicit CMO
   sign-off.
-- **Briefing rename.** "The Just Weight Briefing" → "The Secret Gold
-  Briefing" everywhere on the homepage and any downstream cross-references.
-- **Foundational commitments.** Reduced from five to four. Commitment 5
-  ("No phone-gate on pricing") removed. Both the homepage cards section and
-  the briefing PDF must document four operational promises.
+- **Briefing rename (site-wide, 2026-04-30).** "The Just Weight Briefing"
+  → "The Secret Gold Briefing" everywhere — homepage hero form panel,
+  homepage briefing section, briefing cover artwork, the standalone
+  `/briefing` page (`content/briefing.mdx`), the `/advisor` page
+  (`content/advisor.mdx`), and any downstream MDX cross-references.
+  No live surface still uses "Just Weight Briefing." References in
+  historical session notes and changelog entries are intentional and
+  retained.
+- **Foundational commitments (site-wide, 2026-04-30).** Reduced from five
+  to four across every live surface. Commitment 5 ("No phone-gate on
+  pricing") removed entirely from the framework. The four foundational
+  commitments are: 01 Published spread, 11.1% all-in / 02 Buyback at spot,
+  never below / 03 Standard IRS-eligible bullion only / 04 Salaried
+  advisors, no commission. Applies to the homepage cards section, the
+  `/pricing` page (`content/pricing.mdx`), the `/who-we-are` page
+  (`content/who-we-are/index.mdx`), the `/briefing` page summary
+  (`content/briefing.mdx`), and the briefing PDF authoring workstream
+  (LB-08 — must document four operational promises, not five).
 
 This document specifies the visual identity, design system, page-level direction, and build specification for the Grace Precious Metals launch website. It is structured in five parts and thirty-eight sections.
 
@@ -1037,17 +1050,17 @@ The standard hero for content pages without the verse band. Eyebrow label, H1 in
 
 #### BriefingHero
 
-Restrained hero for /briefing. No CTA — the form below is the CTA. Eyebrow (“A briefing from Grace Precious Metals”), H1 (“The Just Weight Briefing” in text-display-lg), deck (subtitle in text-body-lg). Used once.
+Restrained hero for /briefing. No CTA — the form below is the CTA. Eyebrow (“A briefing from Grace Precious Metals”), H1 (“The Secret Gold Briefing” in text-display-lg), deck (subtitle in text-body-lg). Used once.
 
 ### 14.3 Content components
 
 #### CommitmentBlock
 
-Used on the homepage and on /pricing for the five structural commitments. Two-column grid at desktop, single column at mobile. Each commitment: number eyebrow (01 to 05), heading in text-h3, body in text-body-sm. Optional internal link. The block uses no card surface — commitments sit directly on canvas separated by hairline rules.
+Used on the homepage and on /pricing for the four foundational commitments (post-2026-04-30 site-wide standard; see override note near the top of this file). Two-column grid at desktop, single column at mobile. Each commitment: number eyebrow (01 to 04), heading in text-h3, body in text-body-sm. Optional internal link. The block uses no card surface — commitments sit directly on canvas separated by hairline rules.
 
 #### WilliamTestimonyBand
 
-The William testimonials band on the homepage, between the William pull-quote and the five commitments. Surface color #E8E2CC, padding space-8 internal. Heading (“What people say about William” in text-h3), supporting copy in text-body, two-column grid of testimonials with a left-rule (border-walnut), each testimonial in text-quote italic with attribution in text-body-sm. Closes with a “Read William’s story” link aligned right.
+The William testimonials band on the homepage, between the William pull-quote and the four foundational commitments. Surface color #E8E2CC, padding space-8 internal. Heading (“What people say about William” in text-h3), supporting copy in text-body, two-column grid of testimonials with a left-rule (border-walnut), each testimonial in text-quote italic with attribution in text-body-sm. Closes with a “Read William’s story” link aligned right.
 
 #### PullQuote
 
@@ -1317,7 +1330,7 @@ Per Section 14.3. Tinted surface band with two placeholder testimonials about Wi
 
 #### CommitmentBlock
 
-Five commitments in CommitmentBlock layout. Two-column grid at desktop, single column at mobile. Each commitment: number eyebrow (01-05), heading in text-h3, body in text-body-sm. Five commitments: 11.1% all-in spread, buyback at spot, standard IRS-eligible bullion only, salaried advisors, no phone-gate on pricing.
+Four foundational commitments in CommitmentBlock layout. Four-column grid at desktop, two-column at tablet, single column at mobile. Each commitment: numeral (01-04), heading in text-h3, body in text-body-sm. Four commitments: 11.1% all-in spread, buyback at spot, standard IRS-eligible bullion only, salaried advisors no commission. (Commitment 5 "No phone-gate on pricing" removed site-wide on 2026-04-30 — see override note near the top of this file.)
 
 #### Three-paths block
 
@@ -1405,7 +1418,7 @@ StandardHero at the top with eyebrow, H1, and subhead. Below the hero: optional 
 
 ### 20.2 The pricing pillar (/pricing)
 
-The most-visited pillar after the homepage. Layout: StandardHero, PricingBlock with the 11.1% display, the five structural commitments restated in pricing context, RefusalBlock listing what Grace does not charge for, comparative pricing table at category level (per Section 11.2), the “How We Get Paid” explainer block, FAQ-style addressing of common pricing objections with link to /faq, footer. Length approximately 2,000-3,000 words. CTAs to /briefing and /advisor at the bottom.
+The most-visited pillar after the homepage. Layout: StandardHero, PricingBlock with the 11.1% display, the four foundational commitments restated in pricing context, RefusalBlock listing what Grace does not charge for, comparative pricing table at category level (per Section 11.2), the “How We Get Paid” explainer block, FAQ-style addressing of common pricing objections with link to /faq, footer. Length approximately 2,000-3,000 words. CTAs to /briefing and /advisor at the bottom.
 
 ### 20.3 The rollover pillar (/rollover)
 
@@ -1517,7 +1530,7 @@ The /who-we-are page is the parent of the William testimony page (/who-we-are/wi
 
 VerseHero at the top with the verse band (third architectural placement). H1: “Who we are.” Subhead: a single sentence framing what the reader is about to read. Below the hero: a brief founding-narrative block in container-prose (640px), three to five paragraphs explaining why Grace exists. Below the narrative: leadership block in container-content (880px) introducing the four public-facing principals — William Armour (CEO), Andrew Armour (CFO), Duncan Cumming (CMO), and Aaron Randolph (Strategic Advisor). Each principal: small portrait, name in text-h3, role in text-eyebrow, single-paragraph bio in text-body.
 
-Below leadership: a CommitmentBlock restating the five structural commitments (also displayed on homepage). Below the CommitmentBlock: a brief block on Grace’s faith identity and the Proverbs 11:1 anchor explained — what “a just weight” means operationally, how Grace’s commitments express it. Below the faith block: links to /who-we-are/williams-story and /who-we-are/compliance as EntryCard components. Footer.
+Below leadership: a CommitmentBlock restating the four foundational commitments (also displayed on homepage). Below the CommitmentBlock: a brief block on Grace’s faith identity and the Proverbs 11:1 anchor explained — what “a just weight” means operationally, how Grace’s commitments express it. Below the faith block: links to /who-we-are/williams-story and /who-we-are/compliance as EntryCard components. Footer.
 
 ### 24.2 Leadership consolidation
 
@@ -1646,9 +1659,9 @@ The Briefing Landing is the single most-important lead-capture surface on the si
 
 ### 37.1 Layout architecture
 
-BriefingHero at the top: restrained eyebrow, H1 (“The Just Weight Briefing”), deck (“How to evaluate a Gold IRA company, and why we built ours”). No CTA in the hero — the form is the CTA, and it sits below.
+BriefingHero at the top: restrained eyebrow, H1 (“The Secret Gold Briefing”), deck (“How to evaluate a Gold IRA company, and why we built ours”). No CTA in the hero — the form is the CTA, and it sits below.
 
-Below the hero: William pull-quote justifying the ask. Below the pull-quote: “What’s inside” section with five CommitmentBlock-style entries describing each section of the Briefing. Below: BriefingForm component for capture (name, email, single-line callback disclosure, walnut CTA). Below the form: RefusalBlock listing the trust commitments (“We do not sell your email,” “We do not pass it to a salesperson without your permission,” “We do not use it to retarget you with ads,” etc.). Footer.
+Below the hero: William pull-quote justifying the ask. Below the pull-quote: “What’s inside” section with five CommitmentBlock-style entries describing each section of the Briefing (the briefing has five sections; section 2 documents the four foundational commitments). Below: BriefingForm component for capture (name, email, single-line callback disclosure, walnut CTA). Below the form: RefusalBlock listing the trust commitments (“We do not sell your email,” “We do not pass it to a salesperson without your permission,” “We do not use it to retarget you with ads,” etc.). Footer.
 
 ### 37.2 Form mechanics
 
