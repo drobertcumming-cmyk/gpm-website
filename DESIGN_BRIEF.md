@@ -66,24 +66,32 @@ The override changes the following relative to v1.1 of this brief:
   in `gold-primary` (#C9A96C) with letter-spacing 0.10em. The verse now
   reads as a deliberate brand-narrative element, not a footnote. Margin
   below the eyebrow stays at 24px.
-- **Section divider pattern (2026-04-30, second pass).** CMO live-review
-  flagged that the briefing section (§10) and William's pull-quote (§7)
-  had visible hairline rules separating them from the rest of the page,
-  but the other content sections did not — which made the page read
-  asymmetrically. Resolution: a new `<SectionDivider />` component
-  renders a 60%-width centered hairline (`0.5px solid
-  rgba(184, 150, 46, 0.50)`, matching the pull-quote rule weight) above
-  every content section that doesn't already carry its own framing
-  rules. Placement in `app/(marketing)/page.tsx`:
+- **Section divider pattern (2026-04-30, second + third pass).** CMO
+  live-review flagged that the briefing section (§10) and William's
+  pull-quote (§7) had visible hairline rules separating them from the
+  rest of the page, but the other content sections did not — which made
+  the page read asymmetrically. Resolution: a new `<SectionDivider />`
+  component renders a centered hairline (`0.5px solid
+  rgba(184, 150, 46, 0.50)`) above every content section that doesn't
+  already carry its own framing rules. Placement in
+  `app/(marketing)/page.tsx`:
   - Above §4 AmericasFirstBlock
   - Above §5 FoundationalCommitments
   - Above §6 BullionGrid
   - Above §9 ComparisonBlock
 
-  §7 WilliamPullQuote and §10 BriefingSection retain their own internal
-  top + bottom rules — those wider/heavier framings intentionally mark
-  the two "feature" sections; the new SectionDivider rules are the
-  quieter editorial pause between standard content sections.
+  **Width — site-wide standard is 70%** (matches the briefing's existing
+  framing rules). The same 70% width applies to every section divider
+  AND to the briefing's own top + bottom rules (§10). William's
+  pull-quote (§7) is the deliberate exception: its top + bottom rules
+  stay at **60% width** to mark the pull-quote as a quieter, more
+  editorial pause distinct from the regular content-section
+  transitions. Updated 2026-04-30 (third pass) — earlier the dividers
+  were at 60% which created drift between the SectionDivider
+  measurements and the briefing rules.
+
+  §7 WilliamPullQuote (60% rules) and §10 BriefingSection (70% rules)
+  retain their own internal top + bottom framings.
 
 - **Hero form panel correction (2026-04-30) + live-review pass.** After
   CMO desktop-render review the form panel rendered too narrow. Panel
