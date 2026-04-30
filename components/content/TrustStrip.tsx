@@ -5,9 +5,12 @@ import { Scale, RefreshCcw, ShieldCheck, Handshake } from 'lucide-react'
 // labels; hairline gold dividers between adjacent signals. Mobile vertical
 // stack with horizontal icon+text per signal.
 //
-// The fourth signal (custodian/depository) renders only when
-// `TRUST_STRIP_CUSTODIAN_PARTNERSHIPS_CONFIRMED=true`. Default false until
-// LB-06 partner contracts close.
+// The fourth signal (IRS-APPROVED CUSTODIAN & DEPOSITORY) is gated on
+// `TRUST_STRIP_CUSTODIAN_PARTNERSHIPS_CONFIRMED`. As of 2026-04-30 the
+// default flipped to render 4 signals; the flag remains as a kill-switch
+// (set to "false" explicitly to hide). LB-14 resolved on the same date.
+// LB-06 (specific partner naming on /who-we-are/compliance) remains
+// separate — the strip signal copy is category-level, not partner-named.
 //
 // Reference: production brief §3; homepage_copy_v3_6.md §3.
 
@@ -42,7 +45,8 @@ const SIGNAL_SALARIED: Signal = {
 }
 
 function showCustodian(): boolean {
-  return process.env.TRUST_STRIP_CUSTODIAN_PARTNERSHIPS_CONFIRMED === 'true'
+  // Default true (4 signals); explicit "false" hides the fourth signal.
+  return process.env.TRUST_STRIP_CUSTODIAN_PARTNERSHIPS_CONFIRMED !== 'false'
 }
 
 const LINE_STYLE: React.CSSProperties = {

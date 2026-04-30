@@ -261,16 +261,20 @@ here lift to a structured human-readable list.
 
 - **Owner(s):** Ops, CMO (flag flip), Andrew (CFO) (partner contracts)
 - **Date raised:** 2026-04-30 (Phase 2A foundation)
-- **Status:** open (default-false until LB-06 partner contracts close)
-- **Description.** The §3 Trust Strip renders a fourth signal
-  ("IRS-APPROVED CUSTODIAN & DEPOSITORY") only when the
-  `TRUST_STRIP_CUSTODIAN_PARTNERSHIPS_CONFIRMED` env var is `true`. Default
-  `false` until partner contracts are signed (see LB-06) and counsel
-  clears the partner naming for public surface. When LB-06 resolves, flip
-  this flag to `true` in the production environment configuration.
+- **Resolved:** 2026-04-30. CMO confirmed a custodian partnership and
+  authorised flipping the source default to render four signals.
+- **Status:** resolved
+- **Description.** The §3 Trust Strip renders four signals by default
+  (the fourth being "IRS-APPROVED CUSTODIAN & DEPOSITORY"). The
+  `TRUST_STRIP_CUSTODIAN_PARTNERSHIPS_CONFIRMED` env var remains as a
+  kill switch — set to the literal string `"false"` to hide the fourth
+  signal. The signal copy is category-level (no partner names), so it
+  reads as a category-compliant claim rather than a partner-naming
+  claim. LB-06 (specific custodian and depository partner names on
+  `/who-we-are/compliance`) remains separate and contract-dependent.
 - **References.**
   [.env.local.example](.env.local.example),
-  [components/content/TrustStrip.tsx](components/content/TrustStrip.tsx) (Phase 2C build),
+  [components/content/TrustStrip.tsx](components/content/TrustStrip.tsx),
   LB-06 (partner naming).
 
 ## Backlog (post-launch deferrals — not blockers)
