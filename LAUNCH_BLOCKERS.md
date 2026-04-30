@@ -117,17 +117,27 @@ here lift to a structured human-readable list.
   [content/who-we-are/compliance.mdx](content/who-we-are/compliance.mdx).
   Trigger flag: `partner-naming-deferred-pending-contract-close`.
 
-### LB-07 · Hosting target
+### LB-07 · Hosting target (production)
 
 - **Owner(s):** Andrew (CFO), CMO
 - **Date raised:** 2026-04-15 (Phase 1 brief, Section 38)
-- **Status:** open
-- **Description.** Vercel / Cloudflare Pages / Netlify decision. Build
-  is target-agnostic per brief Section 37.7 — no hosting-specific
-  features used (other than `@vercel/og`, which has alternatives).
-  Decision blocks DNS configuration and production environment
-  variable setup.
-- **References.** Brief Section 38.5 build decisions table.
+- **Status:** open (production hosting still pending)
+- **Description.** Vercel / Cloudflare Pages / Netlify decision for
+  production. Build is target-agnostic per brief Section 37.7 — no
+  hosting-specific features used (other than `@vercel/og`, which has
+  alternatives). Decision blocks DNS configuration and production
+  environment variable setup.
+- **Preview hosting (interim, 2026-04-30):** GitHub Pages enabled at
+  `https://drobertcumming-cmyk.github.io/gpm-website/` via
+  `.github/workflows/deploy.yml`. Auto-deploys on push to
+  `phase-2-content-import`. Build mode: static export with
+  `basePath: /gpm-website`, image optimisation off. Forms 404 on submit
+  by design (API routes incompatible with static export — the build
+  workflow removes `app/api` before building). Preview is partner-
+  shareable for visual review; real form delivery requires production
+  hosting decision (this LB) plus LB-13 Klaviyo dashboard config.
+- **References.** Brief Section 38.5 build decisions table;
+  `.github/workflows/deploy.yml`; `next.config.js` GitHub-Pages branch.
 
 ---
 

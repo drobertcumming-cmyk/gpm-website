@@ -1,0 +1,78 @@
+# GitHub Pages deploy — Grace Precious Metals website
+#
+# Triggers on push to phase-2-content-import (the active build branch) and
+# on manual workflow dispatch. Builds Next.js with GITHUB_PAGES=true so the
+# config switches to `output: 'export'` + basePath /gpm-website + image
+# optimisation off. Removes app/api before the build because route handlers
+# are incompatible with static export.
+#
+# After this workflow runs successfully for the first time, enable Pages on
+# the repo: Settings → Pages → Source: GitHub Actions. The site URL becomes
+# https://drobertcumming-cmyk.github.io/gpm-website/
+#
+# Forms (hero + briefing section) will return 404 on submit because the API
+# route is excluded from the static build — the form's catch-block surfaces
+# the "Something went wrong. Please try again or call us." message. This is
+# expected behaviour for the GitHub Pages preview. Real form delivery requires
+# Vercel / Netlify / a server-runtime host (LB-07 + LB-13).
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [phase-2-content-import]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Cancel in-progress deploys when a new push lands.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Remove API route (incompatible with static export)
+        run: rm -rf app/api
+
+      - name: Build static site
+        run: npm run build
+        env:
+          GITHUB_PAGES: 'true'
+          NEXT_PUBLIC_SITE_URL: https://drobertcumming-cmyk.github.io/gpm-website
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
