@@ -3,10 +3,15 @@ import { WhatsInsideList } from './WhatsInsideList'
 import { BriefingForm } from './BriefingForm'
 
 // Production-brief homepage §10 composition.
-// Hairline rules above and below at 70% width centered.
 // Desktop: 58/42 split — left has eyebrow + headline + WHAT'S INSIDE list;
 // right has cover artwork + page-count caption + form.
 // Mobile: stacked.
+//
+// Section transitions are handled by sibling SectionDivider components in
+// app/(marketing)/page.tsx so cream-space rhythm is uniform across the
+// homepage. The earlier 70%-width internal framing rules were retired
+// 2026-04-30 (fourth pass) per CMO direction on uniform section gaps —
+// see DESIGN_BRIEF.md production-brief override note.
 //
 // Reference: production brief §10; homepage_copy_v3_6.md §10.
 
@@ -17,17 +22,6 @@ export function BriefingSection() {
       className="mx-auto"
       style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32, paddingTop: 96, paddingBottom: 96 }}
     >
-      {/* Hairline rule above */}
-      <div
-        aria-hidden="true"
-        style={{
-          width: '70%',
-          height: 0.5,
-          margin: '0 auto 60px',
-          background: 'rgba(184, 150, 46, 0.50)',
-        }}
-      />
-
       <div className="grid grid-cols-1 lg:grid-cols-[58fr_42fr]" style={{ gap: 80, alignItems: 'start' }}>
         <div>
           <p
@@ -93,17 +87,6 @@ export function BriefingSection() {
           </div>
         </div>
       </div>
-
-      {/* Hairline rule below */}
-      <div
-        aria-hidden="true"
-        style={{
-          width: '70%',
-          height: 0.5,
-          margin: '60px auto 0',
-          background: 'rgba(184, 150, 46, 0.50)',
-        }}
-      />
     </section>
   )
 }

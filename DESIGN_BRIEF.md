@@ -66,32 +66,38 @@ The override changes the following relative to v1.1 of this brief:
   in `gold-primary` (#C9A96C) with letter-spacing 0.10em. The verse now
   reads as a deliberate brand-narrative element, not a footnote. Margin
   below the eyebrow stays at 24px.
-- **Section divider pattern (2026-04-30, second + third pass).** CMO
-  live-review flagged that the briefing section (§10) and William's
-  pull-quote (§7) had visible hairline rules separating them from the
-  rest of the page, but the other content sections did not — which made
-  the page read asymmetrically. Resolution: a new `<SectionDivider />`
-  component renders a centered hairline (`0.5px solid
-  rgba(184, 150, 46, 0.50)`) above every content section that doesn't
-  already carry its own framing rules. Placement in
-  `app/(marketing)/page.tsx`:
-  - Above §4 AmericasFirstBlock
-  - Above §5 FoundationalCommitments
-  - Above §6 BullionGrid
-  - Above §9 ComparisonBlock
+- **Section divider pattern (2026-04-30, fourth pass — uniform-gap
+  revision).** CMO live-review on 2026-04-30 flagged that the gap
+  between sections was not visually uniform: Pullquote (§7) and
+  Briefing (§10) carried internal top + bottom hairlines positioned
+  with `margin: '0 auto 60px'`, which produced 192px of cream above
+  each rule and only 60px below it before content. Every other
+  transition used a sibling `<SectionDivider />` that produced a
+  symmetric 96px cream / rule / 96px cream rhythm. The asymmetry was
+  visible to the eye and contradicted the brief's own rhythm goal.
 
-  **Width — site-wide standard is 70%** (matches the briefing's existing
-  framing rules). The same 70% width applies to every section divider
-  AND to the briefing's own top + bottom rules (§10). William's
-  pull-quote (§7) is the deliberate exception: its top + bottom rules
-  stay at **60% width** to mark the pull-quote as a quieter, more
-  editorial pause distinct from the regular content-section
-  transitions. Updated 2026-04-30 (third pass) — earlier the dividers
-  were at 60% which created drift between the SectionDivider
-  measurements and the briefing rules.
+  Resolution: the internal hairlines on §7 and §10 are retired. Every
+  pair of padded content sections is now separated by a sibling
+  `<SectionDivider />` (70% width, `0.5px solid rgba(184, 150, 46,
+  0.50)`, centered, wrapped in the same 1200px container as the
+  sections). Total of nine SectionDividers on the homepage:
+  - TrustStrip→AmericasFirst
+  - AmericasFirst→Foundational
+  - Foundational→Bullion
+  - Bullion→Pullquote
+  - Pullquote→Testimonials
+  - Testimonials→Comparison
+  - Comparison→Briefing
+  - Briefing→FindWhatFits
+  - FindWhatFits→Disclaimer
 
-  §7 WilliamPullQuote (60% rules) and §10 BriefingSection (70% rules)
-  retain their own internal top + bottom framings.
+  **Width — uniform 70% site-wide.** The earlier "deliberate 60%
+  Pullquote exception" is rescinded; the uniform-gap goal takes
+  precedence over the quieter-pause framing.
+
+  Hero→TrustStrip is the only intra-page transition without a divider:
+  both are full-bleed bands with their own internal padding and they
+  touch by design.
 
 - **Hero form panel correction (2026-04-30) + live-review pass.** After
   CMO desktop-render review the form panel rendered too narrow. Panel

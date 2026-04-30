@@ -2,10 +2,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { withBase } from '@/lib/basepath'
 
-// Production-brief homepage §7. Hairline rules above and below at 60% width.
-// Circular 120px portrait left + attribution beneath; quote right of portrait
-// with curly quote glyphs in gold-secondary; Tier 4 link below.
-// Mobile stacks: portrait → attribution → quote → link.
+// Production-brief homepage §7. Circular 120px portrait left + attribution
+// beneath; quote right of portrait with curly quote glyphs in gold-secondary;
+// Tier 4 link below. Mobile stacks: portrait → attribution → quote → link.
+//
+// Section transitions are handled by sibling SectionDivider components in
+// app/(marketing)/page.tsx so cream-space rhythm is uniform across the
+// homepage. The earlier 60%-width internal framing rules were retired
+// 2026-04-30 (fourth pass) per CMO direction on uniform section gaps —
+// see DESIGN_BRIEF.md production-brief override note.
 //
 // Reference: production brief §7; homepage_copy_v3_6.md §7 (with in-repo
 // correction (a) — phrasing kept at "the Gold IRA industry").
@@ -18,17 +23,6 @@ export function WilliamPullQuote() {
       style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32, paddingTop: 96, paddingBottom: 96 }}
     >
       <h2 id="william-quote-heading" className="sr-only">A word from William Armour</h2>
-
-      {/* Hairline rule above — 60% width centered */}
-      <div
-        aria-hidden="true"
-        style={{
-          width: '60%',
-          height: 0.5,
-          margin: '0 auto 60px',
-          background: 'rgba(184, 150, 46, 0.50)',
-        }}
-      />
 
       <div className="grid grid-cols-1 lg:grid-cols-[160px_1fr]" style={{ gap: 48, alignItems: 'start' }}>
         <div className="flex flex-col items-center" style={{ minWidth: 0 }}>
@@ -110,17 +104,6 @@ export function WilliamPullQuote() {
           </p>
         </div>
       </div>
-
-      {/* Hairline rule below — 60% width centered */}
-      <div
-        aria-hidden="true"
-        style={{
-          width: '60%',
-          height: 0.5,
-          margin: '60px auto 0',
-          background: 'rgba(184, 150, 46, 0.50)',
-        }}
-      />
     </section>
   )
 }
