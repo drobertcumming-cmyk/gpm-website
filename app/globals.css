@@ -264,6 +264,19 @@
 }
 
 /* ============================================================ */
+/* /pricing FAQ — native <details>/<summary> styling             */
+/* ============================================================ */
+.gpm-pricing-faq-item summary {
+  list-style: none;
+}
+.gpm-pricing-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.gpm-pricing-faq-item[open] .gpm-pricing-faq-chevron {
+  transform: rotate(90deg);
+}
+
+/* ============================================================ */
 /* Print styles — minimal, post-launch                          */
 /* ============================================================ */
 @media print {
