@@ -26,9 +26,8 @@ import {
   WhatWeDoNotChargeSection,
   WorkedExamplesGrid,
   PricingFAQ,
-  DisclaimerStack,
 } from '@/components/pricing'
-import { SectionDivider } from '@/components/content'
+import { SectionDivider, PreFooterDisclaimer, preFooterDisclaimerParagraphStyle } from '@/components/content'
 
 {/*
   /pricing page composition (v3.5.1).
@@ -58,7 +57,27 @@ import { SectionDivider } from '@/components/content'
 <WorkedExamplesGrid />
 <SectionDivider />
 <PricingFAQ />
-<DisclaimerStack />
+<PreFooterDisclaimer>
+  <p style={preFooterDisclaimerParagraphStyle}>
+    <em>Pricing reflects CFO-reviewed published policy as of the date shown</em> and is
+    subject to change by CFO-signed-off update. Custodian and depository fees quoted are
+    representative sample figures from Grace&rsquo;s partner schedules; your specific
+    fees will be disclosed by your custodian and depository directly.
+  </p>
+  <p style={preFooterDisclaimerParagraphStyle}>
+    Grace Precious Metals is a precious metals dealer. Gold IRAs require an IRS-approved
+    custodian and an IRS-approved depository. Grace Precious Metals is not a financial,
+    tax, or legal advisor. Gold and precious metals investments carry risk, including the
+    potential loss of principal. Past performance does not guarantee future results.
+    Consult qualified professionals before making investment decisions.
+  </p>
+  <p style={preFooterDisclaimerParagraphStyle}>
+    Category-level pricing comparison references are substantiated from independent
+    research on Gold IRA industry pricing practices and from published CFTC and state
+    regulatory enforcement records. Substantiation files are maintained and available on
+    counsel request. No specific competitor is identified on this page.
+  </p>
+</PreFooterDisclaimer>
 
 {/*
   v3.5.1 copy reference (verbatim, for grep-ability and counsel review):

@@ -7,4 +7,7 @@ export { TwoCostsCallout } from './TwoCostsCallout'
 export { WorkedExamplesGrid } from './WorkedExamplesGrid'
 export { CategoryComparison } from './CategoryComparison'
 export { PricingFAQ } from './PricingFAQ'
-export { DisclaimerStack } from './DisclaimerStack'
+// DisclaimerStack retired 2026-05-07 — replaced by site-wide
+// PreFooterDisclaimer in components/content/. The pricing-specific
+// disclaimer body now lives inside <PreFooterDisclaimer> in
+// content/pricing/page.mdx.
