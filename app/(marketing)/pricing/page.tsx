@@ -10,30 +10,30 @@ import {
 } from '@/components/pricing'
 import { SectionDivider } from '@/components/content'
 
-// /pricing page composition (post-2026-05-01).
-// Section order matches v3.5 copy with two CMO overrides applied:
-//   1. Render four foundational commitments, not five (Commitment 5 "No
-//      phone-gate on pricing" is dropped — the page itself is the proof).
-//   2. Section sequence per v3.5 — worked examples remain after "What we
-//      don't charge", NOT directly after the hero. Math-forward reorder
-//      option is closed.
+// /pricing page composition (v3.5.1 — post-2026-05-01).
+// Section order matches v3.5.1 copy with seven CMO-confirmed deltas
+// from the v3.5 baseline (see GPM_Pricing_ClaudeCode_Brief_v2):
+//   1. Four foundational commitments, not five.
+//   2. Hero is two-zone with documentary couple photograph.
+//   3. Worked-examples math model is Grace-only with bullion-delivered line.
+//   4. Section H2s tightened in two places.
+//   5. FAQ section on `surface` tinted band (not canvas-deep).
+//   6. CategoryComparison adds Grace's like-for-like 12–13% figure.
+//   7. Hero compliance footnote removed.
 //
 //   §1 SiteHeader     (rendered by app/(marketing)/layout.tsx)
-//   §2 PricingHero
-//   §3 WhyTheNumberSection
+//   §2 PricingHero          ← no SectionDivider above (abuts header)
+//   §3 WhyTheNumberSection  ← no SectionDivider above (hero is full-bleed band)
 //   §4 CommitmentList (4)
 //   §5 HowWeGetPaidSection
-//   §6 WhatWeDoNotChargeSection
+//   §6 WhatWeDoNotChargeSection (with TwoCostsCallout panel inside)
 //   §7 WorkedExamplesGrid (3 panels + CategoryComparison child)
-//   §8 PricingFAQ
-//   §9 PricingDisclaimerStack
-//   §10 SiteFooter    (rendered by app/(marketing)/layout.tsx)
+//   §8 PricingFAQ           ← `surface` band (Delta #5)
+//   §9 PricingDisclaimerStack ← no SectionDivider (band-to-band transition)
+//   §10 SiteFooter   (rendered by app/(marketing)/layout.tsx)
 //
-// SectionDivider rhythm matches the homepage's uniform pattern: one
-// 70%-width centered hairline at every transition between padded
-// content sections. Seven dividers total. PricingFAQ→PricingDisclaimerStack
-// has no divider — the FAQ band ends and the dark walnut disclaimer band
-// begins, which reads as a band-to-band transition that doesn't need a rule.
+// Six SectionDivider instances. Two intentional outliers: hero abuts
+// header (no top divider); FAQ→Disclaimer is band-to-band (no divider).
 
 export const metadata = {
   title: 'Our Pricing — Grace Precious Metals',
@@ -45,7 +45,6 @@ export default function PricingPage() {
   return (
     <>
       <PricingHero />
-      <SectionDivider />
       <WhyTheNumberSection />
       <SectionDivider />
       <CommitmentList />

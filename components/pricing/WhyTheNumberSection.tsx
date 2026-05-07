@@ -43,7 +43,7 @@ export function WhyTheNumberSection() {
             marginBottom: 28,
           }}
         >
-          A retirement account should not be negotiated from incomplete information.
+          The number is on this page for a reason.
         </h2>
 
         <p style={bodyParagraphStyle}>

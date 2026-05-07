@@ -91,7 +91,7 @@ export function PricingFAQ() {
     <section
       aria-labelledby="faq-heading"
       style={{
-        background: 'var(--gpm-canvas-deep)',
+        background: 'var(--gpm-surface)',
       }}
     >
       <div
@@ -129,7 +129,7 @@ export function PricingFAQ() {
               marginBottom: 48,
             }}
           >
-            Common questions about our pricing.
+            About our pricing.
           </h2>
 
           <div
@@ -144,13 +144,31 @@ export function PricingFAQ() {
 
           {/* Closing FAQ link */}
           <div style={{ marginTop: 32 }}>
-            <LinkArrow href="/faq">Frequently Asked Questions</LinkArrow>
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: 1.6,
+                color: 'var(--gpm-ink-body)',
+                margin: 0,
+                marginBottom: 8,
+              }}
+            >
+              For rollover mechanics, custodian choice, and tax treatment, see{' '}
+              <LinkArrow href="/faq">Frequently Asked Questions</LinkArrow>
+            </p>
           </div>
 
-          {/* Dual closing CTAs (Tier 1 + Tier 3) */}
+          {/* Dual closing CTAs (Tier 1 + Tier 3), separated by a 22px top hairline */}
           <div
             className="flex flex-wrap items-center"
-            style={{ gap: 16, marginTop: 32 }}
+            style={{
+              gap: 16,
+              marginTop: 24,
+              paddingTop: 22,
+              borderTop: '0.5px solid var(--gpm-border-light)',
+            }}
           >
             <CTAButton href="/advisor" tier={1}>
               Talk to a salaried advisor

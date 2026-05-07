@@ -1,9 +1,11 @@
-// /pricing §5 — What we don't charge.
-// Prose section with a linen-warm callout panel for the two costs that
-// are not Grace's (custodian fee + depository fee).
+import { TwoCostsCallout } from './TwoCostsCallout'
+
+// /pricing §5 — What we don't charge (v3.5.1).
+// Prose section enumerating the fees that don't exist, then the
+// TwoCostsCallout panel describing the two third-party costs that are
+// not Grace's.
 //
-// Reference: v3.5 Section 1 "What we don't charge". Custodian/depository
-// sample fees are CFO-substantiation pending — flag in PR description.
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "What we don't charge".
 
 export function WhatWeDoNotChargeSection() {
   return (
@@ -24,7 +26,7 @@ export function WhatWeDoNotChargeSection() {
             fontFamily: 'var(--font-sans)',
             fontSize: 12,
             fontWeight: 600,
-            letterSpacing: '0.10em',
+            letterSpacing: '0.12em',
             color: 'var(--gpm-gold-secondary)',
             marginBottom: 16,
           }}
@@ -43,7 +45,7 @@ export function WhatWeDoNotChargeSection() {
             marginBottom: 28,
           }}
         >
-          Listed plainly, because they don&rsquo;t exist.
+          No admin fee. No setup fee. No buyback markdown.
         </h2>
 
         <p style={paragraphStyle}>
@@ -60,49 +62,7 @@ export function WhatWeDoNotChargeSection() {
           rollover and to the last.
         </p>
 
-        {/* Custodian / depository callout — linen-warm panel, gold-primary left rule */}
-        <aside
-          style={{
-            marginTop: 32,
-            background: 'var(--gpm-linen-warm)',
-            borderLeft: '2px solid var(--gpm-gold-primary)',
-            padding: '24px 28px',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: 12,
-              fontWeight: 600,
-              letterSpacing: '0.10em',
-              color: 'var(--gpm-gold-secondary)',
-              marginBottom: 12,
-            }}
-          >
-            TWO COSTS THAT ARE NOT OURS
-          </p>
-          <p
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: 'clamp(15px, 1.3vw, 16px)',
-              fontWeight: 400,
-              lineHeight: 1.65,
-              color: 'var(--gpm-ink-body)',
-              margin: 0,
-            }}
-          >
-            Every Gold IRA customer pays two costs that are not Grace&rsquo;s, regardless
-            of which company they use: the IRS-approved custodian&rsquo;s annual fee
-            (typically <span style={tnumStyle}>$80&ndash;$225</span> depending on the
-            custodian, disclosed in your custodian&rsquo;s fee schedule) and the
-            IRS-approved depository&rsquo;s annual storage fee (typically{' '}
-            <span style={tnumStyle}>0.5%&ndash;1.0%</span> of holdings, depending on the
-            depository and whether storage is segregated or non-segregated). These go to
-            the custodian and the depository, not to Grace. We do not mark them up. We do
-            not receive a rebate on them. They are what they are, and your custodian and
-            depository will show you the figures directly.
-          </p>
-        </aside>
+        <TwoCostsCallout />
       </div>
     </section>
   )
@@ -116,5 +76,3 @@ const paragraphStyle: React.CSSProperties = {
   color: 'var(--gpm-ink-body)',
   margin: '0 0 22px',
 }
-
-const tnumStyle: React.CSSProperties = { fontFeatureSettings: '"tnum"' }

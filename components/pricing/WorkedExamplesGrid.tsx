@@ -1,56 +1,36 @@
 import { CategoryComparison } from './CategoryComparison'
 
-// /pricing §6 — Worked examples on three rollover amounts.
-// Three-column grid at lg, single column below. Hairline column dividers
-// at desktop. Each panel: header ($X), line items (dashed bottom borders),
-// total row (solid top border), exit-cost callout in linen-warm with 2px
-// gold-primary left rule.
+// /pricing §6 — Worked examples (v3.5.1, Delta #3).
+// Three-panel grid. Each panel shows Grace-only entry math: the rollover
+// amount, the 11.1% spread, the bullion delivered to the vault, and the
+// zero-fee rows (admin / setup / annual) which render at reduced alpha
+// but remain semantically present and accessible. The total is Grace's
+// spread only — third-party custodian and depository fees live in the
+// TwoCostsCallout panel above and the footnote below the grid.
 //
-// CategoryComparison renders inside this section (not a sibling), per
-// brief.
+// CategoryComparison renders inside this section (not a sibling).
 //
-// Reference: v3.5 Section 1 "What the numbers look like on a real
-// rollover" + "The comparison, at category level". Custodian/depository
-// sample fees are CFO-substantiation pending; flag in PR description.
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "Worked examples".
+
+interface Row {
+  label: string
+  /** Render at reduced alpha to visually quiet zero-fee rows while
+   *  keeping them semantically present and accessible (≥ 4.5:1). */
+  zero?: boolean
+}
 
 interface WorkedExample {
   amountLabel: string
   rollover: string
-  entryLabel: string
-  entry: string
-  custodian: string
-  depository: string
+  graceSpread: string
+  bullion: string
   total: string
 }
 
 const EXAMPLES: WorkedExample[] = [
-  {
-    amountLabel: '$75,000',
-    rollover: '$75,000',
-    entryLabel: '11.1% of $75,000',
-    entry: '$8,325',
-    custodian: '$175',
-    depository: '$500',
-    total: '$9,000',
-  },
-  {
-    amountLabel: '$150,000',
-    rollover: '$150,000',
-    entryLabel: '11.1% of $150,000',
-    entry: '$16,650',
-    custodian: '$175',
-    depository: '$1,000',
-    total: '$17,825',
-  },
-  {
-    amountLabel: '$250,000',
-    rollover: '$250,000',
-    entryLabel: '11.1% of $250,000',
-    entry: '$27,750',
-    custodian: '$175',
-    depository: '$1,700',
-    total: '$29,625',
-  },
+  { amountLabel: '$75,000',  rollover: '$75,000',  graceSpread: '$8,325',  bullion: '$66,675',  total: '$8,325' },
+  { amountLabel: '$150,000', rollover: '$150,000', graceSpread: '$16,650', bullion: '$133,350', total: '$16,650' },
+  { amountLabel: '$250,000', rollover: '$250,000', graceSpread: '$27,750', bullion: '$222,250', total: '$27,750' },
 ]
 
 export function WorkedExamplesGrid() {
@@ -77,7 +57,7 @@ export function WorkedExamplesGrid() {
             marginBottom: 16,
           }}
         >
-          WORKED EXAMPLES
+          WHAT THE NUMBERS LOOK LIKE
         </p>
         <h2
           id="worked-examples-heading"
@@ -91,7 +71,7 @@ export function WorkedExamplesGrid() {
             marginBottom: 16,
           }}
         >
-          What the numbers look like on a real rollover.
+          On a real rollover.
         </h2>
         <p
           style={{
@@ -105,10 +85,10 @@ export function WorkedExamplesGrid() {
             maxWidth: 640,
           }}
         >
-          For readers who want to see the math on their own situation, here are three
-          worked examples. These use the 11.1% spread and sample custodian/depository
-          figures. Your specific custodian fee, depository fee, and timing may produce a
-          different total &mdash; the figures below are representative, not a quote.
+          For readers who want to see the math on their own situation. These use the
+          11.1% spread and the partner sample figures from the panel above. Your specific
+          custodian fee, depository fee, and timing may produce a different total
+          &mdash; the figures below are representative, not a quote.
         </p>
 
         {/* Grid wrapper — top + bottom hairlines bracket the panels */}
@@ -125,6 +105,25 @@ export function WorkedExamplesGrid() {
           </div>
         </div>
 
+        {/* Footnote beneath the grid */}
+        <p
+          style={{
+            fontFamily: 'var(--font-serif)',
+            fontStyle: 'italic',
+            fontSize: 11.5,
+            fontWeight: 400,
+            lineHeight: 1.6,
+            color: 'rgba(45, 38, 32, 0.70)',
+            margin: '24px 0 0',
+            maxWidth: 540,
+          }}
+        >
+          Custodian and depository fees are not included in the entry cost above
+          &mdash; they are billed by those parties directly. Sample figures: custodian
+          ~$175/year, depository ~0.75% of holdings/year. Your specific custodian and
+          depository will quote their own.
+        </p>
+
         <CategoryComparison />
       </div>
     </section>
@@ -134,19 +133,13 @@ export function WorkedExamplesGrid() {
 function ExamplePanel({ example, isFirst }: { example: WorkedExample; isFirst: boolean }) {
   return (
     <div
-      style={{
-        padding: 24,
-        // Vertical hairlines between columns at lg only — apply via inline
-        // border because Tailwind's lg:border-l would interfere with the
-        // wrapper's top/bottom rules.
-        borderLeft: isFirst ? 'none' : undefined,
-      }}
+      style={{ padding: 24 }}
       className={isFirst ? '' : 'lg:border-l lg:border-[color:var(--gpm-border-light)]/50'}
     >
       <h3
         style={{
           fontFamily: 'var(--font-sans)',
-          fontSize: 11,
+          fontSize: 10,
           fontWeight: 600,
           letterSpacing: '0.14em',
           color: 'var(--gpm-gold-secondary)',
@@ -171,16 +164,13 @@ function ExamplePanel({ example, isFirst }: { example: WorkedExample; isFirst: b
       </p>
 
       <dl style={{ margin: 0, padding: 0 }}>
-        <LineItem label={`Grace entry cost (${example.entryLabel})`} value={example.entry} />
-        <LineItem
-          label="Custodian setup and year-one annual fee (sample)"
-          value={example.custodian}
-        />
-        <LineItem
-          label="Depository year-one storage fee (sample, 0.75% of holdings)"
-          value={example.depository}
-        />
-        <TotalRow label="Year-one total cost to you" value={example.total} />
+        <LineItem label="Rollover amount" value={example.rollover} />
+        <LineItem label="Grace spread (11.1%)" value={example.graceSpread} />
+        <LineItem label="Bullion delivered to vault" value={example.bullion} />
+        <LineItem label="Admin fee" value="$0" zero />
+        <LineItem label="Setup fee" value="$0" zero />
+        <LineItem label="Annual fee (to Grace)" value="$0" zero />
+        <TotalRow label="Total entry cost (to Grace)" value={example.total} />
       </dl>
 
       {/* Exit cost callout — linen-warm, gold-primary left rule */}
@@ -189,31 +179,32 @@ function ExamplePanel({ example, isFirst }: { example: WorkedExample; isFirst: b
           marginTop: 20,
           background: 'var(--gpm-linen-warm)',
           borderLeft: '2px solid var(--gpm-gold-primary)',
-          padding: '14px 16px',
+          padding: '12px 14px',
         }}
       >
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 11.5,
+            fontSize: 11,
             fontWeight: 400,
             lineHeight: 1.55,
             color: 'var(--gpm-ink-body)',
             margin: 0,
           }}
         >
-          <span style={{ fontWeight: 500, color: 'var(--gpm-gold-deep)' }}>
-            $0 markup.
-          </span>{' '}
-          Exit cost at Grace when you sell back: you receive the spot price on the metals
-          on the day of the buyback.
+          <span style={{ fontWeight: 500, color: 'var(--gpm-gold-deep)' }}>$0 markup.</span>{' '}
+          Buyback at spot on the day of sale.
         </p>
       </div>
     </div>
   )
 }
 
-function LineItem({ label, value }: { label: string; value: string }) {
+function LineItem({ label, value, zero = false }: Row & { value: string }) {
+  // Zero-fee rows render at reduced alpha — semantically present, visually
+  // quiet. Both label and value drop in alpha together to maintain ≥ 4.5:1
+  // against canvas (cream).
+  const alpha = zero ? 0.55 : 1
   return (
     <div
       style={{
@@ -221,9 +212,10 @@ function LineItem({ label, value }: { label: string; value: string }) {
         justifyContent: 'space-between',
         alignItems: 'baseline',
         gap: 12,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: 9,
+        paddingBottom: 9,
         borderBottom: '1px dashed var(--gpm-border-light)',
+        opacity: alpha,
       }}
     >
       <dt
@@ -265,9 +257,9 @@ function TotalRow({ label, value }: { label: string; value: string }) {
         alignItems: 'baseline',
         gap: 12,
         marginTop: 4,
-        paddingTop: 14,
+        paddingTop: 12,
         paddingBottom: 4,
-        borderTop: '1px solid var(--gpm-ink-display)',
+        borderTop: '1px solid var(--gpm-border-light)',
       }}
     >
       <dt

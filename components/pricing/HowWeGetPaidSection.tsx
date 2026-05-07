@@ -43,7 +43,7 @@ export function HowWeGetPaidSection() {
             marginBottom: 28,
           }}
         >
-          The whole revenue model, written down.
+          The whole revenue model.
         </h2>
 
         <p style={paragraphStyle}>

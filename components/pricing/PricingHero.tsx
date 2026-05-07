@@ -1,54 +1,56 @@
+import Image from 'next/image'
 import { CTAButton } from '@/components/cta'
+import { withBase } from '@/lib/basepath'
 
-// /pricing §1 hero — Option A is default (PricingBlock-led on cream).
-// Option B (two-zone with image right) is switchable via the `variant`
-// prop so the CMO can toggle without code change once Manus selects the
-// hero specimen image.
+// /pricing §1 hero — two-zone composition (v3.5.1, Delta #2).
+// Left zone: cream canvas with eyebrow / oversized 11.1% figure /
+// sentence H1 / italic subline / body paragraph / dual CTA cluster.
+// Right zone: documentary couple photograph (placeholder slot until
+// Manus delivers final asset). Cream extends full-bleed across both
+// zones; only the right zone overlays the photograph.
 //
-// Page H1 is the sentence "Our spread on gold is 11.1%, all-in." per
-// v3.5. The oversized 11.1% PricingBlock figure sits above the H1 as an
-// aria-hidden visual anchor with the same numeric value — screen readers
-// get the H1 sentence; sighted readers get the figure as the dominant
-// visual.
+// Mobile (< md): right zone hides via `hidden md:flex`. Left-zone
+// content stacks at full width. If Manus mobile shows photo stacked
+// below content, removing `hidden md:flex` reflows naturally.
 //
-// Reference: GPM_Pricing_ClaudeCode_Brief_v1; v3.5 Section 1 Hero block.
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 Hero block.
 
-interface PricingHeroProps {
-  variant?: 'A' | 'B'
-}
-
-export function PricingHero({ variant = 'A' }: PricingHeroProps) {
+export function PricingHero() {
   return (
     <section
       aria-labelledby="pricing-h1"
-      className="mx-auto"
-      style={{
-        maxWidth: 1200,
-        paddingLeft: 32,
-        paddingRight: 32,
-        paddingTop: 96,
-        paddingBottom: 96,
-        background: 'var(--gpm-canvas)',
-      }}
+      style={{ background: 'var(--gpm-canvas)' }}
     >
-      {variant === 'B' ? (
+      <div
+        className="mx-auto"
+        style={{
+          maxWidth: 1200,
+          paddingLeft: 32,
+          paddingRight: 32,
+        }}
+      >
         <div
-          className="grid grid-cols-1 lg:grid-cols-[3fr_2fr]"
-          style={{ gap: 64, alignItems: 'center' }}
+          className="grid grid-cols-1 lg:grid-cols-2"
+          style={{ alignItems: 'center', gap: 0 }}
         >
           <HeroCopyZone />
           <HeroSpecimenZone />
         </div>
-      ) : (
-        <HeroCopyZone />
-      )}
+      </div>
     </section>
   )
 }
 
 function HeroCopyZone() {
   return (
-    <div>
+    <div
+      style={{
+        paddingTop: 64,
+        paddingBottom: 64,
+        paddingRight: 36,
+        maxWidth: 460,
+      }}
+    >
       <p
         style={{
           fontFamily: 'var(--font-sans)',
@@ -73,7 +75,7 @@ function HeroCopyZone() {
           letterSpacing: '-0.02em',
           color: 'var(--gpm-gold-deep)',
           fontFeatureSettings: '"tnum"',
-          marginBottom: 24,
+          marginBottom: 18,
         }}
       >
         11.1%
@@ -84,13 +86,13 @@ function HeroCopyZone() {
         style={{
           fontFamily: 'var(--font-serif)',
           fontWeight: 500,
-          fontSize: 'clamp(28px, 3vw, 36px)',
-          lineHeight: 1.2,
+          fontSize: 'clamp(26px, 3vw, 32px)',
+          lineHeight: 1.18,
           letterSpacing: '-0.005em',
           color: 'var(--gpm-ink-display)',
           margin: 0,
-          marginBottom: 18,
-          maxWidth: 720,
+          marginBottom: 16,
+          maxWidth: 420,
         }}
       >
         Our spread on gold is{' '}
@@ -105,12 +107,12 @@ function HeroCopyZone() {
           fontFamily: 'var(--font-serif)',
           fontStyle: 'italic',
           fontWeight: 500,
-          fontSize: 18,
+          fontSize: 17,
           lineHeight: 1.4,
           color: 'var(--gpm-walnut-deep)',
           margin: 0,
-          marginBottom: 24,
-          maxWidth: 540,
+          marginBottom: 18,
+          maxWidth: 420,
         }}
       >
         No admin fee. No setup fee. When you sell back to us, we buy at spot. Never below.
@@ -124,8 +126,8 @@ function HeroCopyZone() {
           lineHeight: 1.65,
           color: 'var(--gpm-ink-body)',
           margin: 0,
-          marginBottom: 32,
-          maxWidth: 540,
+          marginBottom: 28,
+          maxWidth: 420,
         }}
       >
         This is the whole price. Nothing is added to it on a phone call, and nothing is
@@ -134,7 +136,7 @@ function HeroCopyZone() {
         whether to speak to us.
       </p>
 
-      <div className="flex flex-wrap items-center" style={{ gap: 16 }}>
+      <div className="flex flex-wrap items-center" style={{ gap: 12 }}>
         <CTAButton href="/advisor" tier={1}>
           Talk to a salaried advisor
         </CTAButton>
@@ -147,19 +149,29 @@ function HeroCopyZone() {
 }
 
 function HeroSpecimenZone() {
-  // Option B placeholder — single specimen image. Wire a real image once
-  // Manus delivers public/images/pricing/specimen-eagle.webp. The
-  // aria-hidden empty container preserves the 60/40 layout in dev.
+  // Right zone — documentary couple photograph (placeholder).
+  // Final asset swap separate; brief allows placeholder accepted in this PR.
+  // Hidden < md so the left-zone content stacks cleanly on mobile.
   return (
     <div
-      aria-hidden="true"
+      className="hidden md:flex"
       style={{
-        background: 'var(--gpm-canvas-deep)',
-        border: '0.5px solid var(--gpm-border-light)',
-        borderRadius: 6,
-        aspectRatio: '4 / 5',
+        position: 'relative',
         width: '100%',
+        aspectRatio: '4 / 5',
+        background: 'var(--gpm-canvas-deep)',
       }}
-    />
+    >
+      {/* Placeholder accepted in this PR per brief; final asset slot is
+          /images/pricing/hero-couple.webp once Manus delivers. */}
+      <Image
+        src={withBase('/images/pricing/hero-couple-placeholder.jpg')}
+        alt="An older couple seated together in a sunlit interior, looking at the camera with relaxed expressions."
+        fill
+        priority
+        sizes="(min-width: 1024px) 600px, 100vw"
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
+      />
+    </div>
   )
 }
