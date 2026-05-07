@@ -10,9 +10,8 @@ export function WhyTheNumberSection() {
   return (
     <section
       aria-labelledby="why-heading"
-      className="mx-auto py-16 md:py-24"
+      className="w-full py-16 md:py-24"
       style={{
-        maxWidth: 1200,
         paddingLeft: 32,
         paddingRight: 32,
       }}
