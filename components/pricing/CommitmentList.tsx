@@ -1,17 +1,20 @@
-// /pricing §3 — The four foundational commitments.
-// Sequential stacked list (NOT a 4-card grid like the homepage's
-// FoundationalCommitments). Each entry: numeral with a hairline rule
-// extending right + headline + body. Per brief typography spec:
-//   - numeral: Source Serif 4 500 14px gold-secondary
-//   - headline: Source Serif 4 500 22px ink-display
-//   - body: Inter 400 14px ink-body
+import { ContentContainer } from '@/components/layout'
+
+// /pricing §3 — The four foundational commitments (v3.5.1).
+// 2×2 CSS grid at lg:; one column below. Each card carries a numeric
+// eyebrow row (number + extending hairline rule), headline, body. All
+// four equal-weight (no spanning, no featured commitment).
 //
-// CMO override: render four (Commitment 5 from v3.5 — "No phone-gate on
-// pricing" — is dropped because the page itself is the proof of no
+// CMO override: render four (Commitment 5 from v3.5 — "No phone-gate
+// on pricing" — is dropped because the page itself is the proof of no
 // phone-gate).
 //
-// Reference: v3.5 Section 1 "The five structural commitments" with CMO
-// override applied; HOMEPAGE_DESIGN_REFERENCE.md §1 commitments framework.
+// Built parallel to the homepage's FoundationalCommitments rather than
+// reusing it: that component is hardcoded for the homepage's specific
+// 4-card grid layout and not a reusable primitive.
+//
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "The four
+// foundational commitments" + CommitmentList layout spec (2×2 grid).
 
 interface Commitment {
   number: string
@@ -86,7 +89,7 @@ export function CommitmentList() {
         paddingBottom: 96,
       }}
     >
-      <div className="mx-auto" style={{ maxWidth: 880 }}>
+      <ContentContainer>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -129,17 +132,19 @@ export function CommitmentList() {
           each one operational and verifiable.
         </p>
 
-        <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-          {COMMITMENTS.map((c, i) => (
-            <li
-              key={c.number}
-              style={{
-                paddingTop: i === 0 ? 0 : 32,
-                paddingBottom: 32,
-                borderBottom:
-                  i === COMMITMENTS.length - 1 ? 'none' : '0.5px solid var(--gpm-border-light)',
-              }}
-            >
+        {/* 2×2 grid at lg: (1024px+); one column below */}
+        <ul
+          className="grid grid-cols-1 lg:grid-cols-2"
+          style={{
+            listStyle: 'none',
+            margin: 0,
+            padding: 0,
+            columnGap: 40,
+            rowGap: 36,
+          }}
+        >
+          {COMMITMENTS.map((c) => (
+            <li key={c.number}>
               <div className="flex items-center" style={{ gap: 16, marginBottom: 14 }}>
                 <span
                   style={{
@@ -159,8 +164,7 @@ export function CommitmentList() {
                   style={{
                     flex: 1,
                     height: 0.5,
-                    background: 'var(--gpm-gold-primary)',
-                    opacity: 0.5,
+                    background: 'var(--gpm-border-light)',
                   }}
                 />
               </div>
@@ -185,7 +189,6 @@ export function CommitmentList() {
                   lineHeight: 1.65,
                   color: 'var(--gpm-ink-body)',
                   margin: 0,
-                  maxWidth: 640,
                 }}
               >
                 {c.body}
@@ -193,7 +196,7 @@ export function CommitmentList() {
             </li>
           ))}
         </ul>
-      </div>
+      </ContentContainer>
     </section>
   )
 }

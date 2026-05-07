@@ -1,15 +1,21 @@
 import { CTAButton, LinkArrow } from '@/components/cta'
+import { ProseContainer } from '@/components/layout'
 
-// /pricing §7 — Common questions about our pricing.
+// /pricing §7 — Common questions about our pricing (v3.5.1, Delta #5).
 // Native <details>/<summary> — no JS accordion library, no Headless UI
 // Disclosure, no client component. Six Q&A pairs, all closed by default.
 // Hairline divider between pairs. Closing Tier 4 link to /faq, then dual
 // closing CTAs (Tier 1 + Tier 3).
 //
-// Section background uses canvas-deep band to distinguish from
-// surrounding prose sections.
+// Section background uses `surface` (#E8E2CC) — distinct from the
+// CategoryComparison panel's canvas-deep (#F8F5EB).
 //
-// Reference: v3.5 Section 1 "Common questions about our pricing".
+// Inner content uses ProseContainer (640px) per brief.
+//
+// Chevron rotation handled via CSS pseudo-element on summary in
+// app/globals.css (`.gpm-pricing-faq-item summary::after`); no JS state.
+//
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 PricingFAQ spec.
 
 interface QA {
   q: string
@@ -104,7 +110,7 @@ export function PricingFAQ() {
           paddingBottom: 96,
         }}
       >
-        <div className="mx-auto" style={{ maxWidth: 880 }}>
+        <ProseContainer>
           <p
             style={{
               fontFamily: 'var(--font-sans)',
@@ -177,7 +183,7 @@ export function PricingFAQ() {
               Get the Briefing
             </CTAButton>
           </div>
-        </div>
+        </ProseContainer>
       </div>
     </section>
   )
@@ -193,8 +199,6 @@ function FAQItem({ qa }: { qa: QA }) {
     >
       <summary
         style={{
-          listStyle: 'none',
-          cursor: 'pointer',
           paddingTop: 20,
           paddingBottom: 20,
           fontFamily: 'var(--font-serif)',
@@ -202,28 +206,9 @@ function FAQItem({ qa }: { qa: QA }) {
           fontSize: 17,
           lineHeight: 1.4,
           color: 'var(--gpm-ink-display)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'baseline',
-          gap: 16,
         }}
       >
-        <span>{qa.q}</span>
-        <span
-          aria-hidden="true"
-          className="gpm-pricing-faq-chevron"
-          style={{
-            flexShrink: 0,
-            fontFamily: 'var(--font-sans)',
-            fontWeight: 400,
-            fontSize: 18,
-            color: 'var(--gpm-gold-secondary)',
-            transition: 'transform 200ms ease-out',
-            display: 'inline-block',
-          }}
-        >
-          ›
-        </span>
+        {qa.q}
       </summary>
       <div
         style={{

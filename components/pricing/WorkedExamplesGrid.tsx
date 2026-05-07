@@ -1,3 +1,4 @@
+import { ContentContainer } from '@/components/layout'
 import { CategoryComparison } from './CategoryComparison'
 
 // /pricing §6 — Worked examples (v3.5.1, Delta #3).
@@ -46,7 +47,7 @@ export function WorkedExamplesGrid() {
         paddingBottom: 96,
       }}
     >
-      <div className="mx-auto" style={{ maxWidth: 880 }}>
+      <ContentContainer>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -125,7 +126,7 @@ export function WorkedExamplesGrid() {
         </p>
 
         <CategoryComparison />
-      </div>
+      </ContentContainer>
     </section>
   )
 }

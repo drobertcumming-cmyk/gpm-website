@@ -1,0 +1,141 @@
+---
+title: "Our Pricing"
+slug: "pricing"
+description: "Our spread on gold is 11.1%, all-in. No admin fee. No setup fee. Buyback at spot, never below. Published before you call."
+template: "pillar-hub"
+eyebrow: "Our Pricing"
+author: "Grace Precious Metals"
+date: "2026-05-01"
+counselReviewDate: "2026-04-27"
+complianceFlags:
+  - "cfo-signoff-required-on-publication"
+  - "comparative-claim-substantiation-file-applies"
+  - "external-counsel-review-required"
+  - "andrew-cfo-confirms-math-on-worked-examples"
+  - "partner-naming-deferred-pending-contract-close"
+  - "category-range-counsel-review-required"
+  - "like-for-like-12-13-percent-claim-counsel-review"
+ogImage: "/og/pricing.png"
+---
+
+import {
+  PricingHero,
+  WhyTheNumberSection,
+  CommitmentList,
+  HowWeGetPaidSection,
+  WhatWeDoNotChargeSection,
+  WorkedExamplesGrid,
+  PricingFAQ,
+  DisclaimerStack,
+} from '@/components/pricing'
+import { SectionDivider } from '@/components/content'
+
+{/*
+  /pricing page composition (v3.5.1).
+  Section components carry the v3.5.1 copy verbatim. This MDX file is the
+  page-level composition manifest and the canonical document for Section 1
+  copy strings; component sources mirror them verbatim.
+
+  Seven CMO-confirmed deltas from v3.5 Draft 2:
+    1. Four foundational commitments, not five.
+    2. Hero is two-zone with documentary couple photograph.
+    3. Worked-examples math model is Grace-only with bullion-delivered line.
+    4. Section H2s tightened in two places.
+    5. FAQ section on `surface` tinted band (not canvas-deep).
+    6. CategoryComparison adds Grace's like-for-like 12-13% figure.
+    7. Hero compliance footnote removed.
+*/}
+
+<PricingHero />
+<WhyTheNumberSection />
+<SectionDivider />
+<CommitmentList />
+<SectionDivider />
+<HowWeGetPaidSection />
+<SectionDivider />
+<WhatWeDoNotChargeSection />
+<SectionDivider />
+<WorkedExamplesGrid />
+<SectionDivider />
+<PricingFAQ />
+<DisclaimerStack />
+
+{/*
+  v3.5.1 copy reference (verbatim, for grep-ability and counsel review):
+
+  Hero
+    Eyebrow:  OUR PRICING
+    Figure:   11.1% (aria-hidden visual anchor)
+    H1:       Our spread on gold is 11.1%, all-in.
+    Subline:  No admin fee. No setup fee. When you sell back to us, we buy
+              at spot. Never below.
+    Body:     This is the whole price. Nothing is added to it on a phone
+              call, and nothing is negotiated away from it. The spread that
+              applies to the first customer who walked through our door
+              applies to the thousandth. You can read it here before you
+              decide whether to speak to us.
+    CTAs:     Talk to a salaried advisor → /advisor
+              Get the Briefing → /briefing
+
+  Why the number is on this page
+    Eyebrow:  WHY THE NUMBER IS ON THIS PAGE
+    H2:       The number is on this page for a reason.
+    Body 1:   Most of the industry will not show you a number until you are
+              on a call with a commissioned salesperson. We think that is
+              the wrong order. A retirement account is not something you
+              should have to negotiate from a position of incomplete
+              information, against a person paid more when you buy more.
+    Body 2:   Proverbs 11:1 says *a false balance is an abomination to the
+              Lord, but a just weight is his delight.* The weight is what
+              you are charged. Ours is visible, accurate, and constant.
+              Visible, because the number is on this page. Accurate,
+              because what is published is what is charged. Constant,
+              because it does not move between customers. That is what we
+              mean when we say we publish the number.
+
+  Four foundational commitments
+    Eyebrow:  OUR FOUNDATIONAL COMMITMENTS
+    H2:       The four foundational commitments.
+    Lede:     Our pricing posture is not a promotion. It is four
+              foundational commitments, each one operational and verifiable.
+    01:       Published spread: 11.1%, all-in.
+    02:       Buyback at spot, never below.
+    03:       Standard IRS-eligible bullion only.
+    04:       Salaried advisors. No commission.
+    (Commitment 5 from v3.5 — "No phone-gate on pricing" — dropped.)
+
+  How we get paid
+    Eyebrow:  HOW WE GET PAID
+    H2:       The whole revenue model.
+
+  What we don't charge
+    Eyebrow:  WHAT WE DON'T CHARGE
+    H2:       No admin fee. No setup fee. No buyback markdown.
+
+  TwoCostsCallout (inside WhatWeDoNotChargeSection)
+    Eyebrow:  TWO COSTS THAT ARE NOT OURS
+    Row 1:    Custodian annual fee — typically $80–$225 per year.
+    Row 2:    Depository storage fee — typically 0.5%–1.0% of holdings/year.
+
+  Worked examples
+    Eyebrow:  WHAT THE NUMBERS LOOK LIKE
+    H2:       On a real rollover.
+    Rows:     Rollover amount / Grace spread (11.1%) / Bullion delivered
+              to vault / Admin fee $0 / Setup fee $0 / Annual fee (to Grace)
+              $0 / Total entry cost (to Grace).
+
+  CategoryComparison
+    Eyebrow:  THE COMPARISON, AT CATEGORY LEVEL
+    Figure:   17–33% (real en-dash, gold-deep)
+    Like-for-like: Grace's all-in entry cost typically lands between 12%
+              and 13% on a representative rollover.
+
+  FAQ
+    Eyebrow:  COMMON QUESTIONS
+    H2:       About our pricing.
+    6 Q&As, all closed by default in <details>/<summary>.
+
+  Disclaimer stack
+    Eyebrow:  DISCLAIMERS
+    Three counsel-cleared paragraphs.
+*/}

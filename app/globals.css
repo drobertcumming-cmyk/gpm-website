@@ -268,11 +268,26 @@
 /* ============================================================ */
 .gpm-pricing-faq-item summary {
   list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
 }
 .gpm-pricing-faq-item summary::-webkit-details-marker {
   display: none;
 }
-.gpm-pricing-faq-item[open] .gpm-pricing-faq-chevron {
+.gpm-pricing-faq-item summary::after {
+  content: '\203A'; /* › single right-pointing angle quotation mark */
+  flex-shrink: 0;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--gpm-gold-secondary);
+  transition: transform 200ms ease-out;
+  display: inline-block;
+}
+.gpm-pricing-faq-item[open] summary::after {
   transform: rotate(90deg);
 }
 

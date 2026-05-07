@@ -1,9 +1,11 @@
-// /pricing §4 — How we get paid.
-// Prose section, ProseContainer line length. Three paragraphs. Counsel-
-// gated copy ("If the economics require raising the spread") renders as
+import { ProseContainer } from '@/components/layout'
+
+// /pricing §4 — How we get paid (v3.5.1).
+// Prose section using ProseContainer (640px). Counsel-gated copy
+// ("If the economics require raising the spread") renders as v3.5.1
 // written; flagged in PR description.
 //
-// Reference: v3.5 Section 1 "How we get paid".
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "How we get paid".
 
 export function HowWeGetPaidSection() {
   return (
@@ -18,7 +20,7 @@ export function HowWeGetPaidSection() {
         paddingBottom: 96,
       }}
     >
-      <div className="mx-auto" style={{ maxWidth: 640 }}>
+      <ProseContainer>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -74,7 +76,7 @@ export function HowWeGetPaidSection() {
         <p style={paragraphStyle}>
           That is the whole revenue model. We thought you deserved to see it.
         </p>
-      </div>
+      </ProseContainer>
     </section>
   )
 }

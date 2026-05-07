@@ -1,9 +1,12 @@
-// /pricing §2 — Why the number is on this page.
+import { ProseContainer } from '@/components/layout'
+
+// /pricing §2 — Why the number is on this page (v3.5.1).
 // Prose section using ProseContainer (640px) line length. Inline italic
-// Proverbs reference styled with optional 2px gold-primary left rule per
-// brief typography spec.
+// Proverbs reference styled with 2px gold-primary left rule per brief
+// typography spec.
 //
-// Reference: v3.5 Section 1 "Why the number is on this page".
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "Why the number is
+// on this page".
 
 export function WhyTheNumberSection() {
   return (
@@ -18,7 +21,7 @@ export function WhyTheNumberSection() {
         paddingBottom: 96,
       }}
     >
-      <div className="mx-auto" style={{ maxWidth: 640 }}>
+      <ProseContainer>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -72,7 +75,7 @@ export function WhyTheNumberSection() {
           because what is published is what is charged. Constant, because it does not move
           between customers. That is what we mean when we say we publish the number.
         </blockquote>
-      </div>
+      </ProseContainer>
     </section>
   )
 }

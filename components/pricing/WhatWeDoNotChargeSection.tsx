@@ -1,9 +1,10 @@
+import { ProseContainer } from '@/components/layout'
 import { TwoCostsCallout } from './TwoCostsCallout'
 
 // /pricing §5 — What we don't charge (v3.5.1).
 // Prose section enumerating the fees that don't exist, then the
 // TwoCostsCallout panel describing the two third-party costs that are
-// not Grace's.
+// not Grace's. Inner container is ProseContainer (640px) per brief.
 //
 // Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "What we don't charge".
 
@@ -20,7 +21,7 @@ export function WhatWeDoNotChargeSection() {
         paddingBottom: 96,
       }}
     >
-      <div className="mx-auto" style={{ maxWidth: 640 }}>
+      <ProseContainer>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -63,7 +64,7 @@ export function WhatWeDoNotChargeSection() {
         </p>
 
         <TwoCostsCallout />
-      </div>
+      </ProseContainer>
     </section>
   )
 }

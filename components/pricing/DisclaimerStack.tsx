@@ -1,4 +1,6 @@
-// /pricing §8 — Disclaimer stack.
+import { WideContainer } from '@/components/layout'
+
+// /pricing §8 — Disclaimer stack (v3.5.1).
 // Full-bleed walnut-deep band. Three italic paragraphs in Source Serif 4
 // at 11.5–12px. Body text reads against the dark background at a faded
 // alpha that clears WCAG AA at body size.
@@ -6,9 +8,11 @@
 // Tighter padding than other padded sections (64/64), per brief, so it
 // abuts the footer without an extra divider.
 //
-// Reference: v3.5 Section 1 "Disclaimer stack" (counsel-cleared verbatim).
+// Inner container is WideContainer (1200px) per brief.
+//
+// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "Disclaimer stack".
 
-export function PricingDisclaimerStack() {
+export function DisclaimerStack() {
   return (
     <aside
       aria-label="Pricing disclaimer"
@@ -17,15 +21,14 @@ export function PricingDisclaimerStack() {
       }}
     >
       <div
-        className="mx-auto"
         style={{
-          maxWidth: 1200,
           paddingLeft: 32,
           paddingRight: 32,
           paddingTop: 64,
           paddingBottom: 64,
         }}
       >
+        <WideContainer>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -69,6 +72,7 @@ export function PricingDisclaimerStack() {
             competitor is identified on this page.
           </em>
         </p>
+        </WideContainer>
       </div>
     </aside>
   )
