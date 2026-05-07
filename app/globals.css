@@ -246,6 +246,45 @@
     color: var(--gpm-gold-primary);
     text-decoration: none;
   }
+
+  /* ============================================================ */
+  /* /who-we-are — leadership profile row                          */
+  /* Mobile: centered column, 100px portrait. Desktop (md+): row,  */
+  /* 120px portrait pinned left, content right.                    */
+  /* ============================================================ */
+  .gpm-profile-row {
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+    gap:            20px;
+    text-align:     center;
+  }
+  .gpm-profile-row > div:last-child {
+    text-align: center;
+  }
+  .gpm-profile-portrait,
+  .gpm-profile-portrait-wrap > .gpm-profile-portrait {
+    width:       100px;
+    height:      100px;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .gpm-profile-row {
+      flex-direction: row;
+      align-items:    flex-start;
+      gap:            32px;
+      text-align:     left;
+    }
+    .gpm-profile-row > div:last-child {
+      text-align: left;
+    }
+    .gpm-profile-portrait,
+    .gpm-profile-portrait-wrap > .gpm-profile-portrait {
+      width:  120px;
+      height: 120px;
+    }
+  }
 }
 
 /* ============================================================ */
