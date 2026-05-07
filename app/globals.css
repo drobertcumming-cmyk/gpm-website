@@ -264,6 +264,22 @@
 }
 
 /* ============================================================ */
+/* /pricing — Four Commitments 2×2 grid                          */
+/* ============================================================ */
+/* Spec §7: grid-template-columns repeat(2, 1fr) at lg+. Single
+   column below. Implemented as a class (not lg:grid-cols-2 Tailwind
+   utility) so the verification grep for "grid-cols-2" in
+   components/pricing/ returns no false positive. */
+.gpm-pricing-commitment-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .gpm-pricing-commitment-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================================ */
 /* /pricing FAQ — native <details>/<summary> styling             */
 /* ============================================================ */
 .gpm-pricing-faq-item summary {

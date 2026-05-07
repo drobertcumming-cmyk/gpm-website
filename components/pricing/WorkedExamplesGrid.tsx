@@ -1,4 +1,4 @@
-import { WideContainer } from '@/components/layout'
+import { ContentContainer } from '@/components/layout'
 import { CategoryComparison } from './CategoryComparison'
 
 // /pricing §6 — Worked examples (v3.5.1, Delta #3).
@@ -29,14 +29,13 @@ export function WorkedExamplesGrid() {
   return (
     <section
       aria-labelledby="worked-examples-heading"
-      className="mx-auto py-16 md:py-24"
+      className="w-full py-16 md:py-24"
       style={{
-        maxWidth: 1200,
         paddingLeft: 32,
         paddingRight: 32,
       }}
     >
-      <WideContainer>
+      <ContentContainer>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -79,7 +78,7 @@ export function WorkedExamplesGrid() {
         </div>
 
         <CategoryComparison />
-      </WideContainer>
+      </ContentContainer>
     </section>
   )
 }

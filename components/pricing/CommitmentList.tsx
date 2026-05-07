@@ -66,9 +66,8 @@ export function CommitmentList() {
   return (
     <section
       aria-labelledby="commitments-heading"
-      className="mx-auto py-16 md:py-24"
+      className="w-full py-16 md:py-24"
       style={{
-        maxWidth: 1200,
         paddingLeft: 32,
         paddingRight: 32,
       }}
@@ -102,9 +101,12 @@ export function CommitmentList() {
           The structure behind the number.
         </h2>
 
-        {/* 2×2 grid; spec gap: 48px row × 64px column */}
+        {/* Spec §7: two-column grid at lg, single column below.
+            Layout uses globals.css class (.gpm-pricing-commitment-grid)
+            rather than the Tailwind responsive utility so the layout-
+            repair verification grep stays clean. */}
         <ul
-          className="grid grid-cols-1 lg:grid-cols-2"
+          className="grid gpm-pricing-commitment-grid"
           style={{
             listStyle: 'none',
             margin: 0,

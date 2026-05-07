@@ -19,7 +19,7 @@ const PRIMARY_NAV: ReadonlyArray<{ label: string; href: string }> = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'Rollover', href: '/rollover' },
   { label: 'Who We Are', href: '/who-we-are' },
-  { label: 'Advisor', href: '/advisor' },
+  { label: 'Resources', href: '/resources' },
 ]
 
 export function SiteHeader() {
@@ -53,47 +53,46 @@ export function SiteHeader() {
             anchors to viewport edges, content centers. */}
         <div style={{ paddingLeft: 'clamp(32px, 5vw, 96px)', paddingRight: 'clamp(32px, 5vw, 96px)' }}>
           <div className="flex items-center justify-between" style={{ paddingTop: 22, paddingBottom: 22 }}>
-            <Logomark size={26} />
+            {/* Left group — logo + 4 primary nav links. Logo and nav sit
+                close together (gap-10 between groups, gap-7 between nav
+                links) so the nav reads as anchored to the brand mark
+                rather than isolated on the right edge. */}
+            <div className="flex items-center" style={{ gap: 40 }}>
+              <Logomark size={26} />
+              <nav
+                aria-label="Primary"
+                className="hidden lg:flex items-center"
+                style={{ gap: 28 }}
+              >
+                {PRIMARY_NAV.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={isCurrent(item.href) ? 'page' : undefined}
+                    className="gpm-link-nav"
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: 15,
+                      fontWeight: 500,
+                      letterSpacing: 0,
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
 
-            {/* Desktop nav cluster */}
-            <nav aria-label="Primary" className="hidden lg:flex items-center" style={{ gap: 24 }}>
-              {PRIMARY_NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={isCurrent(item.href) ? 'page' : undefined}
-                  className="gpm-link-nav"
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: 15,
-                    fontWeight: 500,
-                    letterSpacing: 0,
-                  }}
-                >
-                  {item.label}
-                </Link>
-              ))}
-
-              {/* Hairline rule between nav and CTA cluster */}
-              <span
-                aria-hidden="true"
-                className="inline-block"
-                style={{
-                  width: '0.5px',
-                  height: 16,
-                  marginLeft: 16,
-                  marginRight: 16,
-                  background: 'rgba(45, 38, 32, 0.20)',
-                }}
-              />
-
+            {/* Right group — desktop CTA cluster: Tier 3 outlined "Get
+                the Briefing" + Tier 1 gold-filled "Talk to an Advisor". */}
+            <div className="hidden lg:flex items-center" style={{ gap: 12 }}>
               <CTAButton href="/briefing" tier={3}>
                 Get the Briefing
               </CTAButton>
-              <CTAButton href="/advisor" tier={3}>
-                Talk to an advisor
+              <CTAButton href="/advisor" tier={1}>
+                Talk to an Advisor
               </CTAButton>
-            </nav>
+            </div>
 
             {/* Mobile right cluster */}
             <div className="flex lg:hidden items-center" style={{ gap: 8 }}>
