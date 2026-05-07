@@ -41,51 +41,50 @@ export function SiteHeader() {
 
   return (
     <>
+      {/* Header is full-viewport-width band (w-full). The cream bg-canvas
+          extends edge-to-edge regardless of viewport. Content centering
+          is handled by the single inner container with max-width 1440 +
+          px-8. Header is rendered as a direct child of the page root,
+          NOT nested inside any hero or content wrapper. */}
+      {/* Header full-bleed band; inner container shared with PricingHero
+          (max-w-[1440px] mx-auto px-8) so logo and hero content share
+          the same left edge at any viewport. */}
       <header
-        className="sticky top-0 z-30 bg-canvas"
+        className="w-full sticky top-0 z-30 bg-canvas"
         style={{ borderBottom: '0.5px solid rgba(184, 150, 46, 0.18)' }}
       >
-        {/* Header chrome: viewport-edge-anchored with clamp-scaled padding.
-            Logo anchors to viewport-left at clamp(32px, 5vw, 96px); CTA
-            cluster anchors to viewport-right with the same clamp. Content
-            sections below still use centered max-width containers for
-            line-length readability. This is the standard pattern: header
-            anchors to viewport edges, content centers. */}
-        <div style={{ paddingLeft: 'clamp(32px, 5vw, 96px)', paddingRight: 'clamp(32px, 5vw, 96px)' }}>
-          <div className="flex items-center justify-between" style={{ paddingTop: 22, paddingBottom: 22 }}>
-            {/* Left group — logo + 4 primary nav links. Logo and nav sit
-                close together (gap-10 between groups, gap-7 between nav
-                links) so the nav reads as anchored to the brand mark
-                rather than isolated on the right edge. */}
-            <div className="flex items-center" style={{ gap: 40 }}>
-              <Logomark size={26} />
-              <nav
-                aria-label="Primary"
-                className="hidden lg:flex items-center"
-                style={{ gap: 28 }}
-              >
-                {PRIMARY_NAV.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    aria-current={isCurrent(item.href) ? 'page' : undefined}
-                    className="gpm-link-nav"
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: 15,
-                      fontWeight: 500,
-                      letterSpacing: 0,
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
+        <div className="mx-auto max-w-[1440px] px-8 flex justify-between items-center h-16">
+          {/* LEFT — Logo pinned to far left */}
+          <Logomark size={26} />
 
-            {/* Right group — desktop CTA cluster: Tier 3 outlined "Get
-                the Briefing" + Tier 1 gold-filled "Talk to an Advisor". */}
-            <div className="hidden lg:flex items-center" style={{ gap: 12 }}>
+          {/* RIGHT — Nav links grouped immediately left of the CTA pair.
+              Nav rhythm: 2rem (32px) between items per spec. CTA pair
+              uses 12px gap and sits at the far right edge. The 32px
+              gap between nav and CTA group separates the two clusters. */}
+          <div className="hidden lg:flex items-center" style={{ gap: 32 }}>
+            <nav
+              aria-label="Primary"
+              className="flex items-center"
+              style={{ gap: 32 }}
+            >
+              {PRIMARY_NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                  className="gpm-link-nav"
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 15,
+                    fontWeight: 500,
+                    letterSpacing: 0,
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <div className="flex items-center" style={{ gap: 12 }}>
               <CTAButton href="/briefing" tier={3}>
                 Get the Briefing
               </CTAButton>
@@ -93,50 +92,50 @@ export function SiteHeader() {
                 Talk to an Advisor
               </CTAButton>
             </div>
+          </div>
 
-            {/* Mobile right cluster */}
-            <div className="flex lg:hidden items-center" style={{ gap: 8 }}>
-              <CTAButton
-                href="/advisor"
-                tier={1}
-                style={{ fontSize: 12, padding: '8px 16px', borderRadius: 4 }}
+          {/* Mobile right cluster */}
+          <div className="flex lg:hidden items-center" style={{ gap: 8 }}>
+            <CTAButton
+              href="/advisor"
+              tier={1}
+              style={{ fontSize: 12, padding: '8px 16px', borderRadius: 4 }}
+            >
+              Talk to an advisor
+            </CTAButton>
+            <button
+              ref={hamburgerRef}
+              type="button"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              onClick={() => setMobileOpen((v) => !v)}
+              className="inline-flex items-center justify-center"
+              style={{
+                minWidth: 44,
+                minHeight: 44,
+                width: 44,
+                height: 44,
+                color: 'var(--gpm-ink-display)',
+                background: 'transparent',
+                border: 0,
+                cursor: 'pointer',
+              }}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
               >
-                Talk to an advisor
-              </CTAButton>
-              <button
-                ref={hamburgerRef}
-                type="button"
-                aria-expanded={mobileOpen}
-                aria-controls="mobile-nav"
-                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-                onClick={() => setMobileOpen((v) => !v)}
-                className="inline-flex items-center justify-center"
-                style={{
-                  minWidth: 44,
-                  minHeight: 44,
-                  width: 44,
-                  height: 44,
-                  color: 'var(--gpm-ink-display)',
-                  background: 'transparent',
-                  border: 0,
-                  cursor: 'pointer',
-                }}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                >
-                  <line x1="3" y1="9" x2="21" y2="9" strokeLinecap="round" />
-                  <line x1="3" y1="13" x2="21" y2="13" strokeLinecap="round" />
-                  <line x1="3" y1="17" x2="21" y2="17" strokeLinecap="round" />
-                </svg>
-              </button>
-            </div>
+                <line x1="3" y1="9" x2="21" y2="9" strokeLinecap="round" />
+                <line x1="3" y1="13" x2="21" y2="13" strokeLinecap="round" />
+                <line x1="3" y1="17" x2="21" y2="17" strokeLinecap="round" />
+              </svg>
+            </button>
           </div>
         </div>
       </header>
