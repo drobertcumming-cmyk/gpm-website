@@ -1,10 +1,26 @@
-// Lockup placeholder per DESIGN_BRIEF.md Section 6 — direction only.
-// Production artwork is an open decision (Section 38). This SVG approximates
-// the geometry described in 6.1 (86×86 unit grid, 50u beam, 22u pans, 18u base,
-// finial circle on top of central upright) and pairs it with the Source Serif
-// "Grace" + small-caps "PRECIOUS METALS" wordmark separated by a hairline rule.
-
 import Link from 'next/link'
+
+// Logomark — refactored 2026-05-01 to match Manus reference and the
+// GPM_Pricing_ClaudeCode_Brief_v2 lockup spec.
+//
+// Lockup geometry:
+//   - Small line-drawn balance/scale icon left, ~28–32px square at default
+//     wordmark size (26px). Icon strokes/fills use currentColor so the
+//     mark inherits walnut-deep in header context (default variant) and
+//     cream in footer/reverse context.
+//   - Wordmark "Grace" — Source Serif 4 weight 500, walnut-deep (inherits
+//     via currentColor from the wrapping Link). Reverse swaps to cream.
+//   - Tagline "PRECIOUS METALS" stacked directly below the wordmark in
+//     Inter all-caps, ~10px at default scale, letter-spaced 0.18em, in
+//     gold-secondary (#9C7322). Reverse swaps to gold-muted (#C9A96C) for
+//     legibility against walnut-deep.
+//
+// The decorative hairline rule between wordmark and tagline (carried in
+// the v1 lockup) is retired — the brief specifies a clean two-line stack.
+// Total header lockup height ~40px at default scale.
+//
+// All colors reference CSS custom properties (var(--gpm-*)). Zero
+// hardcoded hex.
 
 interface LogomarkProps {
   variant?: 'default' | 'reverse'
@@ -19,33 +35,24 @@ export function Logomark({
   size = 26,
   hideTagline = false,
 }: LogomarkProps) {
-  // Default variant per the production brief homepage spec:
-  //   - scales icon: gold-secondary (#9C7322), proportional to wordmark
-  //   - wordmark "Grace": Source Serif 4 weight 500, walnut-deep (#3D2817)
-  //   - tagline "PRECIOUS METALS": Inter weight 600, gold-secondary (#9C7322),
-  //     letter-spacing 0.20em
-  // Reverse variant inverts colours for dark backgrounds (e.g. footer columns
-  // or a future dark hero) — wordmark cream, tagline gold-muted.
   const isReverse = variant === 'reverse'
-  const structural = isReverse ? '#C9A96C' : '#9C7322'
-  const detail = isReverse ? '#C9A96C' : '#9C7322'
-  const wordColor = isReverse ? '#F2EDE0' : '#3D2817'
-  const ruleColor = isReverse ? '#C9A96C' : '#9C7322'
-  const subtitleColor = isReverse ? '#C9A96C' : '#9C7322'
+  // The Link's `color` drives the wordmark and the SVG mark via currentColor.
+  // Tagline gets an explicit color override (gold accent) below.
+  const lockupColor = isReverse ? 'var(--gpm-canvas)' : 'var(--gpm-walnut-deep)'
+  const taglineColor = isReverse ? 'var(--gpm-gold-primary)' : 'var(--gpm-gold-secondary)'
 
-  // Scale: at standard lockup (Grace at 26px), mark is 36px and gap is 14px.
-  // Tagline 10px at 26px wordmark per production brief; rule width 96px.
-  const markPx = Math.round(size * (36 / 26))
-  const gapPx = Math.round(size * (14 / 26))
-  const subtitlePx = Math.max(9, Math.round(size * (10 / 26)))
-  const rulePx = Math.round(size * (96 / 26))
+  // Mark scale: ~1.18× the wordmark line-height. At default size 26 the
+  // mark renders at 31px (within the brief's 28–32px range).
+  const markPx = Math.round(size * 1.18)
+  const gapPx = Math.round(size * (12 / 26))
+  const taglinePx = Math.max(9, Math.round(size * (10 / 26)))
 
   return (
     <Link
       href="/"
       aria-label="Grace Precious Metals — home"
       className="inline-flex items-center no-underline hover:no-underline"
-      style={{ color: wordColor }}
+      style={{ color: lockupColor }}
     >
       <svg
         viewBox="0 0 86 86"
@@ -53,22 +60,27 @@ export function Logomark({
         height={markPx}
         aria-hidden="true"
         style={{ flexShrink: 0 }}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         {/* Central upright */}
-        <rect x="42" y="14" width="2" height="56" fill={structural} />
+        <line x1="43" y1="14" x2="43" y2="70" />
         {/* Finial */}
-        <circle cx="43" cy="13" r="3" fill={structural} />
+        <circle cx="43" cy="11" r="2.5" fill="currentColor" stroke="none" />
         {/* Beam */}
-        <rect x="18" y="20" width="50" height="2" fill={structural} />
+        <line x1="18" y1="22" x2="68" y2="22" />
         {/* Suspension lines */}
-        <line x1="22" y1="22" x2="22" y2="38" stroke={detail} strokeWidth="1" />
-        <line x1="64" y1="22" x2="64" y2="38" stroke={detail} strokeWidth="1" />
+        <line x1="22" y1="22" x2="22" y2="38" strokeWidth="1.25" />
+        <line x1="64" y1="22" x2="64" y2="38" strokeWidth="1.25" />
         {/* Left pan (triangular) */}
-        <polygon points="11,38 33,38 22,46" fill={detail} />
+        <polygon points="11,38 33,38 22,46" fill="currentColor" stroke="none" />
         {/* Right pan (triangular) */}
-        <polygon points="53,38 75,38 64,46" fill={detail} />
+        <polygon points="53,38 75,38 64,46" fill="currentColor" stroke="none" />
         {/* Base */}
-        <rect x="34" y="68" width="18" height="2" fill={structural} />
+        <line x1="34" y1="70" x2="52" y2="70" />
       </svg>
 
       <span
@@ -77,6 +89,7 @@ export function Logomark({
           display: 'inline-flex',
           flexDirection: 'column',
           lineHeight: 1,
+          gap: 3,
         }}
       >
         <span
@@ -85,38 +98,24 @@ export function Logomark({
             fontSize: size,
             fontWeight: 500,
             letterSpacing: '0.02em',
-            color: wordColor,
-            lineHeight: 1.05,
+            lineHeight: 1.0,
           }}
         >
           Grace
         </span>
         {hideTagline ? null : (
-          <>
-            <span
-              aria-hidden="true"
-              style={{
-                display: 'block',
-                width: rulePx,
-                height: 0.5,
-                background: ruleColor,
-                marginTop: 5,
-                marginBottom: 5,
-              }}
-            />
-            <span
-              style={{
-                fontFamily: 'var(--font-sans), system-ui, sans-serif',
-                fontSize: subtitlePx,
-                fontWeight: 600,
-                letterSpacing: '0.20em',
-                color: subtitleColor,
-                lineHeight: 1,
-              }}
-            >
-              PRECIOUS METALS
-            </span>
-          </>
+          <span
+            style={{
+              fontFamily: 'var(--font-sans), system-ui, sans-serif',
+              fontSize: taglinePx,
+              fontWeight: 600,
+              letterSpacing: '0.18em',
+              color: taglineColor,
+              lineHeight: 1.0,
+            }}
+          >
+            PRECIOUS METALS
+          </span>
         )}
       </span>
     </Link>
