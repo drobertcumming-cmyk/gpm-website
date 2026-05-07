@@ -74,23 +74,22 @@ export function PricingHero() {
         }}
       />
 
-      {/* Inner content — centered 1200px container per design system. The
-          58fr/42fr grid sits inside it; text in the left column, right
-          column empty/decorative. */}
+      {/* Inner content — left-anchored to viewport with clamp-scaled
+          padding (matches SiteHeader's pattern). Content sits at
+          clamp(32, 5vw, 96)px from viewport-left at any viewport width
+          rather than being centered within a 1200px container, which
+          at >1440 viewports created an unacceptable cream gap to the
+          left of the content. */}
       <div
-        className="mx-auto"
         style={{
-          maxWidth: 1200,
-          paddingLeft: 32,
-          paddingRight: 32,
+          paddingLeft: 'clamp(32px, 5vw, 96px)',
+          paddingRight: 'clamp(32px, 5vw, 96px)',
           position: 'relative',
           zIndex: 2,
         }}
       >
         <div
-          className="grid grid-cols-1"
           style={{
-            gridTemplateColumns: 'minmax(0, 58fr) minmax(0, 42fr)',
             paddingTop: 96,
             paddingBottom: 80,
           }}
@@ -195,7 +194,6 @@ export function PricingHero() {
               subject to periodic review.
             </p>
           </div>
-          <div aria-hidden="true" />
         </div>
       </div>
     </section>
