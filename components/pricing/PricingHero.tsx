@@ -74,16 +74,15 @@ export function PricingHero() {
         }}
       />
 
-      {/* Inner content — left-anchored to viewport with clamp-scaled
-          padding (matches SiteHeader's pattern). Content sits at
-          clamp(32, 5vw, 96)px from viewport-left at any viewport width
-          rather than being centered within a 1200px container, which
-          at >1440 viewports created an unacceptable cream gap to the
-          left of the content. */}
+      {/* Inner container — shared with SiteHeader (max-w-[1440px]
+          mx-auto px-8). Hero text content sits at the SAME left edge
+          as the logo at any viewport width — at 1440 viewport both
+          start at 32px from viewport-left; at wider viewports both
+          start at (viewport - 1440)/2 + 32. This creates a strong
+          vertical anchor line between the brand mark and the H1. */}
       <div
+        className="mx-auto max-w-[1440px] px-8"
         style={{
-          paddingLeft: 'clamp(32px, 5vw, 96px)',
-          paddingRight: 'clamp(32px, 5vw, 96px)',
           position: 'relative',
           zIndex: 2,
         }}
