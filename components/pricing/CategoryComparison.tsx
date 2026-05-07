@@ -59,9 +59,9 @@ export function CategoryComparison() {
         Grace&rsquo;s like-for-like all-in entry cost &mdash; the{' '}
         <span style={tnum}>11.1%</span> spread plus the third-party custodian and
         depository fees described above &mdash; typically lands between{' '}
-        <span style={tnum}>12% and 13%</span> on a representative rollover. The{' '}
-        <span style={tnum}>11.1%</span> you see on this page is what Grace bills. The
-        custodian and depository numbers are billed by those parties directly and
+        <span style={tnum}>12% and 13%</span> on a representative year-one rollover.
+        The <span style={tnum}>11.1%</span> you see on this page is what Grace bills.
+        The custodian and depository numbers are billed by those parties directly and
         disclosed by them.
       </p>
 
