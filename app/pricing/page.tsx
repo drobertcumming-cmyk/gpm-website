@@ -10,8 +10,11 @@ import Content from '@/content/pricing/page.mdx'
 // (marketing) layout would have provided; this page sits outside the
 // route group per brief.
 
+// Title intentionally bare — root layout adds the " — Grace Precious
+// Metals" suffix via its title template; including the suffix here
+// would render it twice in the document <title>.
 export const metadata = {
-  title: 'Our Pricing — Grace Precious Metals',
+  title: 'Our Pricing',
   description:
     'Our spread on gold is 11.1%, all-in. No admin fee. No setup fee. Buyback at spot, never below. Published before you call.',
 }
