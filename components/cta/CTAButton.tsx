@@ -45,10 +45,12 @@ const LEGACY_VARIANT_INVERSE: Record<Variant, string> = {
 
 // ---- Production-brief tier classes ----------------------------------
 
-// Tier 1 — page-primary action. Gold-filled; white text; 6px radius; Inter
-// 500 14px; 14px 32px padding. Hover: gold-hover (#9A7D26).
+// Tier 1 — page-primary action. Gold-filled; walnut-deep text (per
+// accessibility-review 2026-05-07: white-on-gold-deep is 2.82:1, fails
+// WCAG AA. Walnut-deep on gold-deep is 4.91:1, passes AA at body size).
+// 6px radius; Inter 500 14px; 14px 32px padding. Hover: gold-hover.
 const TIER_1_CLASS =
-  'inline-block bg-gold-deep text-white no-underline text-center transition-colors duration-color hover:bg-gold-hover hover:text-white hover:no-underline'
+  'inline-block bg-gold-deep text-walnut-deep no-underline text-center transition-colors duration-color hover:bg-gold-hover hover:text-walnut-deep hover:no-underline'
 const TIER_1_STYLE: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
   fontSize: 14,
@@ -66,7 +68,7 @@ const TIER_1_STYLE: React.CSSProperties = {
 // inline styles per verification criterion 4 and stay in sync with this
 // spec.)
 const TIER_2_CLASS =
-  'inline-block w-full bg-gold-deep text-white no-underline text-center transition-colors duration-color hover:bg-gold-hover hover:text-white hover:no-underline'
+  'inline-block w-full bg-gold-deep text-walnut-deep no-underline text-center transition-colors duration-color hover:bg-gold-hover hover:text-walnut-deep hover:no-underline'
 const TIER_2_STYLE: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
   fontSize: 14,

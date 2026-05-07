@@ -45,7 +45,13 @@ export function SiteHeader() {
         className="sticky top-0 z-30 bg-canvas"
         style={{ borderBottom: '0.5px solid rgba(184, 150, 46, 0.18)' }}
       >
-        <div className="mx-auto" style={{ maxWidth: 1280, paddingLeft: 32, paddingRight: 32 }}>
+        {/* Header chrome: viewport-edge-anchored with clamp-scaled padding.
+            Logo anchors to viewport-left at clamp(32px, 5vw, 96px); CTA
+            cluster anchors to viewport-right with the same clamp. Content
+            sections below still use centered max-width containers for
+            line-length readability. This is the standard pattern: header
+            anchors to viewport edges, content centers. */}
+        <div style={{ paddingLeft: 'clamp(32px, 5vw, 96px)', paddingRight: 'clamp(32px, 5vw, 96px)' }}>
           <div className="flex items-center justify-between" style={{ paddingTop: 22, paddingBottom: 22 }}>
             <Logomark size={26} />
 

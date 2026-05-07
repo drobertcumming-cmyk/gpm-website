@@ -165,9 +165,11 @@ interface LineItemProps {
 
 function LineItem({ label, value, zero = false }: LineItemProps) {
   // Zero-fee rows render at reduced alpha — semantically present, visually
-  // quiet. Both label and value drop in alpha together to maintain ≥ 4.5:1
-  // against canvas (cream).
-  const alpha = zero ? 0.55 : 1
+  // quiet. 0.75 alpha keeps the visual hierarchy ("zero rows quieter than
+  // real values") while clearing WCAG AA at 6.86:1 against canvas. Earlier
+  // 0.55 dropped to 3.70:1 — failed AA — fixed 2026-05-07 per accessibility
+  // review.
+  const alpha = zero ? 0.75 : 1
   return (
     <div
       style={{
