@@ -1,12 +1,10 @@
 import { ProseContainer } from '@/components/layout'
 
-// /pricing §2 — Why the number is on this page (v3.5.1).
-// Prose section using ProseContainer (640px) line length. Inline italic
-// Proverbs reference styled with 2px gold-primary left rule per brief
-// typography spec.
+// /pricing §6 — Why this number is on this page.
+// Prose section using ProseContainer (640px). All copy verbatim from
+// the Pricing Page Design Specification §16.
 //
-// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "Why the number is
-// on this page".
+// Reference: Grace Precious Metals — Pricing Page Design Specification.
 
 export function WhyTheNumberSection() {
   return (
@@ -23,14 +21,15 @@ export function WhyTheNumberSection() {
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: 600,
-            letterSpacing: '0.10em',
+            letterSpacing: '0.14em',
             color: 'var(--gpm-gold-secondary)',
+            margin: 0,
             marginBottom: 16,
           }}
         >
-          WHY THE NUMBER IS ON THIS PAGE
+          WHY THIS NUMBER IS ON THIS PAGE
         </p>
         <h2
           id="why-heading"
@@ -38,51 +37,44 @@ export function WhyTheNumberSection() {
             fontFamily: 'var(--font-serif)',
             fontWeight: 500,
             fontSize: 'clamp(28px, 3vw, 36px)',
-            lineHeight: 1.25,
+            lineHeight: 1.2,
             color: 'var(--gpm-walnut-deep)',
             margin: 0,
-            marginBottom: 28,
+            marginBottom: 24,
           }}
         >
-          The number is on this page for a reason.
+          Because a just weight is His delight.
         </h2>
 
-        <p style={bodyParagraphStyle}>
-          Most of the industry will not show you a number until you are on a call with a
-          commissioned salesperson. We think that is the wrong order. A retirement account
-          is not something you should have to negotiate from a position of incomplete
-          information, against a person paid more when you buy more.
+        <p style={paragraphStyle}>
+          Most Gold IRA companies do not publish their spread. They quote it on the phone,
+          after they have your attention and your time. We believe that is backwards. If you
+          are considering entrusting your retirement savings to a company, you deserve to
+          know the cost before you speak to anyone.
         </p>
 
-        <blockquote
-          style={{
-            margin: '32px 0 0',
-            paddingLeft: 18,
-            borderLeft: '2px solid var(--gpm-gold-primary)',
-            fontFamily: 'var(--font-serif)',
-            fontStyle: 'italic',
-            fontWeight: 400,
-            fontSize: 19,
-            lineHeight: 1.55,
-            color: 'var(--gpm-walnut-deep)',
-          }}
-        >
-          Proverbs 11:1 says <em>a false balance is an abomination to the Lord, but a just
-          weight is his delight.</em> The weight is what you are charged. Ours is visible,
-          accurate, and constant. Visible, because the number is on this page. Accurate,
-          because what is published is what is charged. Constant, because it does not move
-          between customers. That is what we mean when we say we publish the number.
-        </blockquote>
+        <p style={paragraphStyle}>
+          Proverbs 11:1 says, &ldquo;A false balance is an abomination to the Lord, but a
+          just weight is His delight.&rdquo; That verse is not decoration on our wall
+          &mdash; it is the reason this number is published here, on a public page, before
+          you have given us your name or your phone number.
+        </p>
+
+        <p style={{ ...paragraphStyle, marginBottom: 0 }}>
+          The pricing below is what every saver pays. There is no tiered pricing, no volume
+          discount for larger rollovers, and no hidden schedule for smaller ones. The spread
+          is the spread.
+        </p>
       </ProseContainer>
     </section>
   )
 }
 
-const bodyParagraphStyle: React.CSSProperties = {
+const paragraphStyle: React.CSSProperties = {
   fontFamily: 'var(--font-sans)',
   fontSize: 'clamp(16px, 1.4vw, 17px)',
   fontWeight: 400,
   lineHeight: 1.65,
   color: 'var(--gpm-ink-body)',
-  margin: 0,
+  margin: '0 0 20px',
 }

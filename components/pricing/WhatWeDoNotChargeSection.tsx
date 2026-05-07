@@ -1,12 +1,11 @@
 import { ProseContainer } from '@/components/layout'
 import { TwoCostsCallout } from './TwoCostsCallout'
 
-// /pricing §5 — What we don't charge (v3.5.1).
-// Prose section enumerating the fees that don't exist, then the
-// TwoCostsCallout panel describing the two third-party costs that are
-// not Grace's. Inner container is ProseContainer (640px) per brief.
+// /pricing §8 — What we don't charge.
+// All copy verbatim from Pricing Page Design Specification §16. The
+// TwoCostsCallout component renders the two third-party charge rows.
 //
-// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "What we don't charge".
+// Reference: Grace Precious Metals — Pricing Page Design Specification.
 
 export function WhatWeDoNotChargeSection() {
   return (
@@ -23,10 +22,11 @@ export function WhatWeDoNotChargeSection() {
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: 600,
-            letterSpacing: '0.12em',
+            letterSpacing: '0.14em',
             color: 'var(--gpm-gold-secondary)',
+            margin: 0,
             marginBottom: 16,
           }}
         >
@@ -38,27 +38,25 @@ export function WhatWeDoNotChargeSection() {
             fontFamily: 'var(--font-serif)',
             fontWeight: 500,
             fontSize: 'clamp(28px, 3vw, 36px)',
-            lineHeight: 1.25,
+            lineHeight: 1.2,
             color: 'var(--gpm-walnut-deep)',
             margin: 0,
-            marginBottom: 28,
+            marginBottom: 24,
           }}
         >
-          No admin fee. No setup fee. No buyback markdown.
+          No admin fee. No setup fee. No exit fee.
         </h2>
 
         <p style={paragraphStyle}>
-          The category&rsquo;s pricing complexity hides in fees that sit above or beside
-          the spread. Ours don&rsquo;t exist, so we can list them plainly.
+          Many Gold IRA companies layer fees on top of their spread: account setup fees,
+          annual administration fees, wire transfer fees, and liquidation fees. Grace
+          charges none of these. The 11.1% spread is the complete cost of doing business
+          with us.
         </p>
 
-        <p style={paragraphStyle}>
-          There is no administration fee. There is no setup fee. There is no
-          account-opening fee payable to Grace. There is no annual fee payable to Grace.
-          There is no buyback-markup &mdash; we buy at spot, never below. There is no
-          &ldquo;liquidation fee.&rdquo; There is no minimum purchase required to access
-          the published spread &mdash; the 11.1% applies to the first dollar of your
-          rollover and to the last.
+        <p style={{ ...paragraphStyle, marginBottom: 0 }}>
+          Your IRA will carry two third-party charges that are not set by Grace and are
+          billed directly by the custodian and depository:
         </p>
 
         <TwoCostsCallout />
@@ -73,5 +71,5 @@ const paragraphStyle: React.CSSProperties = {
   fontWeight: 400,
   lineHeight: 1.65,
   color: 'var(--gpm-ink-body)',
-  margin: '0 0 22px',
+  margin: '0 0 20px',
 }

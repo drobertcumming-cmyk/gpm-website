@@ -1,21 +1,16 @@
 import { CTAButton, LinkArrow } from '@/components/cta'
 import { ProseContainer } from '@/components/layout'
 
-// /pricing §7 — Common questions about our pricing (v3.5.1, Delta #5).
-// Native <details>/<summary> — no JS accordion library, no Headless UI
-// Disclosure, no client component. Six Q&A pairs, all closed by default.
-// Hairline divider between pairs. Closing Tier 4 link to /faq, then dual
-// closing CTAs (Tier 1 + Tier 3).
+// /pricing §10 — FAQ.
+// Native <details>/<summary>. Six questions verbatim from the Pricing
+// Page Design Specification §16. Answer copy is in-brand prose
+// extending the spec's positioning ("Full answer copy available in the
+// HTML source" — answers below carry the spec's tone).
 //
-// Section background uses `surface` (#E8E2CC) — distinct from the
-// CategoryComparison panel's canvas-deep (#F8F5EB).
+// Toggle icon (+/−) is rendered via CSS pseudo-element on summary in
+// app/globals.css.
 //
-// Inner content uses ProseContainer (640px) per brief.
-//
-// Chevron rotation handled via CSS pseudo-element on summary in
-// app/globals.css (`.gpm-pricing-faq-item summary::after`); no JS state.
-//
-// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 PricingFAQ spec.
+// Reference: Grace Precious Metals — Pricing Page Design Specification.
 
 interface QA {
   q: string
@@ -24,69 +19,70 @@ interface QA {
 
 const FAQ: QA[] = [
   {
-    q: 'Is the 11.1% negotiable?',
+    q: 'Why is your spread higher than the spot premium on a single coin?',
     a: (
       <>
-        No. The spread is constant. Your salaried advisor has no authority to discount
-        it, and no commission to protect by holding it. The first customer pays 11.1%.
-        The thousandth customer pays 11.1%.
+        The 11.1% spread is the complete cost of doing business with Grace &mdash; no
+        other fees layered on top. A single coin&rsquo;s spot premium does not include
+        the cost of running an IRS-compliant Gold IRA business: licensed advisors,
+        compliance, custodian relationships, depository logistics, and operational
+        overhead. Other companies separate these into ongoing fees, setup fees, and exit
+        charges; we don&rsquo;t. The spread is everything.
       </>
     ),
   },
   {
-    q: 'Is there a minimum rollover to access the published spread?',
+    q: 'Does the 11.1% apply to every product you sell?',
     a: (
       <>
-        No. The 11.1% applies to the first dollar and to the last. We do not gate
-        published pricing behind a minimum purchase.
+        Yes. Grace sells only standard IRS-eligible bullion &mdash; American Gold Eagles,
+        Canadian Gold Maple Leafs, and LBMA-approved bars &mdash; and the 11.1% spread
+        applies uniformly to every product. We do not sell numismatic coins,
+        &ldquo;rare&rdquo; coins, or any product that carries a different markup.
       </>
     ),
   },
   {
-    q: 'What do I actually pay on exit?',
+    q: 'What happens when I want to sell my gold?',
     a: (
       <>
-        Nothing to Grace beyond the buyback transaction itself, which is executed at
-        spot. If you sell a hundred ounces back to us on a day when spot is{' '}
-        <span style={{ fontFeatureSettings: '"tnum"' }}>$2,600</span> per ounce, you
-        receive <span style={{ fontFeatureSettings: '"tnum"' }}>$260,000</span>. There is
-        no percentage markdown. There is no &ldquo;liquidation fee.&rdquo; The depository
-        may charge a final-year storage fee and the custodian may charge a closing fee
-        &mdash; both go to those parties, not to Grace, and both are disclosed by them.
+        Grace buys your bullion back at the live spot price on the day of sale. There is
+        no exit spread, no liquidation fee, and no markdown. The depository will release
+        your metal directly to us, and the proceeds are wired to your IRA without any
+        deduction by Grace.
       </>
     ),
   },
   {
-    q: 'What if the spread changes in future?',
+    q: 'Are there any ongoing fees from Grace?',
     a: (
       <>
-        Any change to the published spread would be a published policy change,
-        CFO-signed-off, reflected on this page with the new figure and the effective
-        date. Existing customer accounts are governed by the terms in place at the time
-        of their purchase. We would not apply a new spread retroactively.
+        No. Grace earns revenue only from the entry spread. We do not charge an annual
+        account fee, a monthly fee, or any ongoing maintenance charge. The custodian and
+        depository each charge their own annual fees &mdash; billed directly to your IRA
+        &mdash; and Grace does not receive any portion of those.
       </>
     ),
   },
   {
-    q: 'How do I verify the 11.1% is actually what I will be charged?',
+    q: 'How does 11.1% compare to what other companies charge?',
     a: (
       <>
-        Three ways. First, the spread is on this page, CFO-signed-off, with
-        change-management logged. Second, when your purchase confirmation arrives, the
-        math is shown line-by-line &mdash; the spot price used, the 11.1% spread applied,
-        the total. Third, you can compare our per-ounce price to the spot price on any
-        independent spot source you prefer.
+        Published research and regulatory enforcement records place the typical Gold IRA
+        round-trip cost between 17% and 33%, combining entry spread, ongoing fees, and
+        exit charges. Grace&rsquo;s round-trip cost is the entry spread of 11.1%, because
+        we charge nothing on the way out. The full comparison is on the pricing page
+        above.
       </>
     ),
   },
   {
-    q: 'Can you give me a quote without my contact information?',
+    q: 'Can the spread change in the future?',
     a: (
       <>
-        Yes. The worked examples above are the quote structure. If you want a rollover
-        number calculated against your specific amount and timing, the advisor call is
-        available &mdash; and the call does not require a commitment or a minimum to
-        proceed.
+        If the economics of the business ever require raising the spread, the new figure
+        will be published on this page before it takes effect. No such change is planned,
+        and the current 11.1% is what you are quoted.
       </>
     ),
   },
@@ -97,7 +93,7 @@ export function PricingFAQ() {
     <section
       aria-labelledby="faq-heading"
       style={{
-        background: 'var(--gpm-surface)',
+        background: 'var(--gpm-canvas-deep)',
       }}
     >
       <div
@@ -112,10 +108,11 @@ export function PricingFAQ() {
           <p
             style={{
               fontFamily: 'var(--font-sans)',
-              fontSize: 12,
+              fontSize: 11,
               fontWeight: 600,
-              letterSpacing: '0.12em',
+              letterSpacing: '0.14em',
               color: 'var(--gpm-gold-secondary)',
+              margin: 0,
               marginBottom: 16,
             }}
           >
@@ -127,7 +124,7 @@ export function PricingFAQ() {
               fontFamily: 'var(--font-serif)',
               fontWeight: 500,
               fontSize: 'clamp(28px, 3vw, 36px)',
-              lineHeight: 1.25,
+              lineHeight: 1.2,
               color: 'var(--gpm-walnut-deep)',
               margin: 0,
               marginBottom: 48,
@@ -138,7 +135,7 @@ export function PricingFAQ() {
 
           <div
             style={{
-              borderTop: '0.5px solid var(--gpm-border-light)',
+              borderTop: '0.5px solid rgba(184, 150, 46, 0.35)',
             }}
           >
             {FAQ.map((qa) => (
@@ -146,32 +143,39 @@ export function PricingFAQ() {
             ))}
           </div>
 
-          {/* Closing FAQ link — Tier 4 LinkArrow per brief; routes to
-              /faq. Brief copy: "For rollover mechanics, custodian
-              choice, and tax treatment → Frequently Asked Questions". */}
-          <div style={{ marginTop: 32 }}>
-            <LinkArrow href="/faq">
-              For rollover mechanics, custodian choice, and tax treatment{' '}
-              <span aria-hidden="true">→</span> Frequently Asked Questions
-            </LinkArrow>
-          </div>
-
-          {/* Dual closing CTAs (Tier 1 + Tier 3), separated by a 22px top hairline */}
+          {/* Closing cluster — centered. Tier 4 link first; Tier 1 + Tier 3 below. */}
           <div
-            className="flex flex-wrap items-center"
             style={{
-              gap: 16,
-              marginTop: 24,
-              paddingTop: 22,
-              borderTop: '0.5px solid var(--gpm-border-light)',
+              marginTop: 48,
+              textAlign: 'center',
             }}
           >
-            <CTAButton href="/advisor" tier={1}>
-              Talk to a salaried advisor
-            </CTAButton>
-            <CTAButton href="/briefing" tier={3}>
-              Get the Briefing
-            </CTAButton>
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: 1.6,
+                color: 'var(--gpm-ink-body)',
+                margin: 0,
+                marginBottom: 24,
+              }}
+            >
+              For rollover mechanics, custodian choice, and tax treatment{' '}
+              <LinkArrow href="/faq">Frequently Asked Questions</LinkArrow>
+            </p>
+
+            <div
+              className="flex flex-wrap items-center justify-center"
+              style={{ gap: 16 }}
+            >
+              <CTAButton href="/advisor" tier={1}>
+                Talk to a salaried advisor
+              </CTAButton>
+              <CTAButton href="/briefing" tier={3}>
+                Get the Briefing
+              </CTAButton>
+            </div>
           </div>
         </ProseContainer>
       </div>
@@ -184,7 +188,7 @@ function FAQItem({ qa }: { qa: QA }) {
     <details
       className="gpm-pricing-faq-item"
       style={{
-        borderBottom: '0.5px solid var(--gpm-border-light)',
+        borderBottom: '0.5px solid rgba(184, 150, 46, 0.35)',
       }}
     >
       <summary
@@ -202,8 +206,8 @@ function FAQItem({ qa }: { qa: QA }) {
       </summary>
       <div
         style={{
-          paddingBottom: 24,
-          paddingRight: 32,
+          paddingBottom: 20,
+          maxWidth: 580,
         }}
       >
         <p

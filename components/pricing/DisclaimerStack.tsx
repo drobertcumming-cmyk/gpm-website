@@ -86,7 +86,7 @@ const paragraphStyle: React.CSSProperties = {
   fontWeight: 400,
   fontSize: 12,
   lineHeight: 1.65,
-  color: 'rgba(242, 237, 224, 0.78)',
-  margin: '0 0 18px',
+  color: 'rgba(242, 237, 224, 0.65)',
+  margin: '0 0 16px',
   maxWidth: 880,
 }

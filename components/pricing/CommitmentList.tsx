@@ -1,20 +1,12 @@
 import { ContentContainer } from '@/components/layout'
 
-// /pricing §3 — The four foundational commitments (v3.5.1).
-// 2×2 CSS grid at lg:; one column below. Each card carries a numeric
-// eyebrow row (number + extending hairline rule), headline, body. All
-// four equal-weight (no spanning, no featured commitment).
+// /pricing §7 — Four commitments grid (2×2).
+// Container ContentContainer (880px); grid-template-columns repeat(2, 1fr)
+// with gap 48px row × 64px column at desktop. Each commitment block:
+// number with extending hairline rule, headline, body. All copy
+// verbatim from Pricing Page Design Specification §16.
 //
-// CMO override: render four (Commitment 5 from v3.5 — "No phone-gate
-// on pricing" — is dropped because the page itself is the proof of no
-// phone-gate).
-//
-// Built parallel to the homepage's FoundationalCommitments rather than
-// reusing it: that component is hardcoded for the homepage's specific
-// 4-card grid layout and not a reusable primitive.
-//
-// Reference: GPM_Pricing_ClaudeCode_Brief_v2; v3.5.1 "The four
-// foundational commitments" + CommitmentList layout spec (2×2 grid).
+// Reference: Grace Precious Metals — Pricing Page Design Specification.
 
 interface Commitment {
   number: string
@@ -25,39 +17,35 @@ interface Commitment {
 const COMMITMENTS: Commitment[] = [
   {
     number: '01',
-    headline: 'Published spread: 11.1%, all-in.',
+    headline: 'Published spread, 11.1% all-in',
     body: (
       <>
-        The markup over spot is 11.1%. That is the whole markup. No second layer labelled
-        &ldquo;administration,&rdquo; no third layer labelled &ldquo;setup.&rdquo; The
-        number you see is the number you pay.
+        Our spread is published on this page, not quoted on the phone. It includes every
+        cost of entry. No admin fee, no setup fee, no annual account fee. The number you
+        see is the number you pay.
       </>
     ),
   },
   {
     number: '02',
-    headline: 'Buyback at spot, never below.',
+    headline: 'Buyback at spot, never below',
     body: (
       <>
-        When you sell your metals back to us, we pay the spot price on the day. We do not
-        mark the buyback down to create a second margin on exit. The exit number is the
-        market number.
+        When you decide to sell, Grace buys back your bullion at the live spot price.
+        There is no exit spread, no liquidation fee, and no markdown. Your gold is worth
+        what the market says it is worth.
       </>
     ),
   },
   {
     number: '03',
-    headline: 'Standard IRS-eligible bullion only.',
+    headline: 'Standard IRS-eligible bullion only',
     body: (
       <>
-        We sell American Eagles, Canadian Maple Leafs, LBMA-approved bars, and other
-        standard IRS-eligible bullion. We do not sell numismatic, &ldquo;exclusive,&rdquo;
-        &ldquo;rare,&rdquo; &ldquo;premium,&rdquo; or &ldquo;proof&rdquo; coins in any
-        form. This is a published, permanent policy. It is also the single most important
-        piece of consumer protection in this category &mdash; category-level enforcement
-        records document hundreds of millions of dollars in consumer losses tied to
-        numismatic coin pricing. None of it happens here, because none of it is on the
-        catalogue.
+        We sell only standard-issue, IRS-eligible bullion: American Gold Eagles, Canadian
+        Gold Maple Leafs, and LBMA-approved bars. No numismatic coins, no
+        &ldquo;exclusive&rdquo; products, no inflated premiums on rare or collectible
+        items.
       </>
     ),
   },
@@ -66,11 +54,9 @@ const COMMITMENTS: Commitment[] = [
     headline: 'Salaried advisors. No commission.',
     body: (
       <>
-        The advisor you speak to is paid the same whether you open an account or not.
-        There are no commissions, no referral fees, no volume bonuses paid to the person
-        on the call. What that means, practically, is that the person helping you has no
-        financial interest in talking you into a larger transaction, a faster decision,
-        or a product with a higher margin. The incentive and the counsel are aligned.
+        Our advisors are salaried employees. They do not earn commission on your
+        purchase. Their job is to answer your questions and help you understand the
+        process &mdash; not to close a sale.
       </>
     ),
   },
@@ -91,14 +77,15 @@ export function CommitmentList() {
         <p
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: 600,
-            letterSpacing: '0.12em',
+            letterSpacing: '0.14em',
             color: 'var(--gpm-gold-secondary)',
+            margin: 0,
             marginBottom: 16,
           }}
         >
-          OUR FOUNDATIONAL COMMITMENTS
+          MAIN COMMITMENTS
         </p>
         <h2
           id="commitments-heading"
@@ -106,50 +93,35 @@ export function CommitmentList() {
             fontFamily: 'var(--font-serif)',
             fontWeight: 500,
             fontSize: 'clamp(28px, 3vw, 36px)',
-            lineHeight: 1.25,
+            lineHeight: 1.2,
             color: 'var(--gpm-walnut-deep)',
             margin: 0,
-            marginBottom: 16,
-          }}
-        >
-          The four foundational commitments.
-        </h2>
-        <p
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: 'clamp(16px, 1.4vw, 17px)',
-            fontWeight: 400,
-            lineHeight: 1.65,
-            color: 'var(--gpm-ink-body)',
-            margin: 0,
             marginBottom: 56,
-            maxWidth: 640,
           }}
         >
-          Our pricing posture is not a promotion. It is four foundational commitments,
-          each one operational and verifiable.
-        </p>
+          The structure behind the number.
+        </h2>
 
-        {/* 2×2 grid at lg: (1024px+); one column below */}
-        {/* Brief: gap 36px row, 40px column at desktop; 32px row at mobile */}
+        {/* 2×2 grid; spec gap: 48px row × 64px column */}
         <ul
-          className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-y-9 lg:gap-x-10"
+          className="grid grid-cols-1 lg:grid-cols-2"
           style={{
             listStyle: 'none',
             margin: 0,
             padding: 0,
+            rowGap: 48,
+            columnGap: 64,
           }}
         >
           {COMMITMENTS.map((c) => (
             <li key={c.number}>
-              <div className="flex items-center" style={{ gap: 16, marginBottom: 14 }}>
+              <div className="flex items-center" style={{ gap: 16, marginBottom: 16 }}>
                 <span
                   style={{
                     fontFamily: 'var(--font-serif)',
                     fontWeight: 500,
                     fontSize: 14,
                     color: 'var(--gpm-gold-secondary)',
-                    letterSpacing: '0.05em',
                     fontFeatureSettings: '"tnum"',
                     flexShrink: 0,
                   }}
@@ -161,7 +133,7 @@ export function CommitmentList() {
                   style={{
                     flex: 1,
                     height: 0.5,
-                    background: 'var(--gpm-border-light)',
+                    background: 'rgba(184, 150, 46, 0.35)',
                   }}
                 />
               </div>
@@ -183,7 +155,7 @@ export function CommitmentList() {
                   fontFamily: 'var(--font-sans)',
                   fontWeight: 400,
                   fontSize: 14,
-                  lineHeight: 1.65,
+                  lineHeight: 1.6,
                   color: 'var(--gpm-ink-body)',
                   margin: 0,
                 }}

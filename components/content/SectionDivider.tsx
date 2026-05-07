@@ -37,6 +37,7 @@ export function SectionDivider() {
         className="mx-auto"
         style={{
           width: '70%',
+          maxWidth: 840,
           height: 0.5,
           background: 'rgba(184, 150, 46, 0.50)',
         }}
