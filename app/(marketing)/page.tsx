@@ -10,7 +10,8 @@ import {
   ComparisonBlock,
   BriefingSection,
   FindWhatFits,
-  HomepageDisclaimer,
+  PreFooterDisclaimer,
+  preFooterDisclaimerParagraphStyle,
 } from '@/components/content'
 
 // Production-brief homepage composition (post-2026-04-29 Option A).
@@ -60,8 +61,24 @@ export default function HomePage() {
       <BriefingSection />
       <SectionDivider />
       <FindWhatFits />
-      <SectionDivider />
-      <HomepageDisclaimer />
+      <PreFooterDisclaimer>
+        <p style={preFooterDisclaimerParagraphStyle}>
+          <em>Grace Precious Metals is a precious metals dealer.</em> Gold IRAs require an
+          IRS-approved custodian and an IRS-approved depository. Grace Precious Metals is not a
+          financial, tax, or legal advisor. Gold and precious metals investments carry risk,
+          including the potential loss of principal. Past performance does not guarantee future
+          results. Consult qualified professionals before making investment decisions. Pricing
+          reflects CFO-reviewed published policy as of the date shown.
+        </p>
+        <p style={preFooterDisclaimerParagraphStyle}>
+          &ldquo;A typical Gold IRA costs about a third more&rdquo; compares Grace&rsquo;s
+          round-trip cost (entry spread plus ongoing custodian and depository fees; buyback at
+          spot, zero exit spread) against the midpoint of the category-typical round-trip cost
+          range of 17%&ndash;33%, substantiated from published research on Gold IRA pricing and
+          regulatory enforcement records. Substantiation files available on counsel request. No
+          specific competitor is identified on this page.
+        </p>
+      </PreFooterDisclaimer>
     </>
   )
 }
