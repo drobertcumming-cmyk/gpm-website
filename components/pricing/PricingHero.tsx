@@ -4,18 +4,18 @@ import { withBase } from '@/lib/basepath'
 // /pricing §4 Hero — Option B (lifestyle couple) per the
 // "Grace Precious Metals — Pricing Page Design Specification.md".
 //
-// The couple lifestyle photograph is composited via a CSS background
-// stack on the section: a 9-stop linear gradient layered above the
-// hero-couple-landscape image positioned at 68% center / cover. The
-// gradient renders solid linen-base (#EDE5D2) across the left 40% and
-// fades through six intermediate alpha stops to fully transparent at
-// 70%, so both people in the photograph remain fully visible in the
-// right half.
+// Layout per spec §4:
+//   - Full-width section, min-height 640px
+//   - Hero Inner Padding: 96px 32px 80px (NOT inside the 1200px centered
+//     container; content is left-anchored at 32px from the section edge
+//     so the cream gradient + content + photo composite reads correctly
+//     at any viewport width)
+//   - Inner grid 58fr 42fr — text in the left column; right column empty
 //
-// A second ::after vignette (top + bottom) softens the band's vertical
-// edges into the surrounding cream rhythm.
-//
-// All hero copy is verbatim from spec §16 (hero block).
+// Background per spec:
+//   - 9-stop gradient over couple photograph at 68% center / cover
+//   - Solid linen-base 0–40% fading to fully transparent at 70%
+//   - Warm vignette top + bottom
 
 export function PricingHero() {
   return (
@@ -29,7 +29,13 @@ export function PricingHero() {
         minHeight: 640,
       }}
     >
-      {/* 9-stop gradient + couple photograph composite background */}
+      {/* Gradient + couple photograph composite background.
+          Gradient stops use calc() so cream solid extends just past the
+          right edge of the centered 1200 container's left grid column
+          (viewport center + ~90px). This keeps the cream area locked to
+          the content area at any viewport width — at wider viewports the
+          photo gets MORE visible on the right rather than being pushed
+          off-screen by a viewport-percentage gradient. */}
       <div
         aria-hidden="true"
         style={{
@@ -39,12 +45,11 @@ export function PricingHero() {
           backgroundColor: 'var(--gpm-canvas)',
           backgroundImage: `linear-gradient(to right,
             #EDE5D2 0%,
-            #EDE5D2 40%,
-            rgba(237, 229, 210, 0.92) 46%,
-            rgba(237, 229, 210, 0.70) 52%,
-            rgba(237, 229, 210, 0.35) 58%,
-            rgba(237, 229, 210, 0.08) 64%,
-            rgba(237, 229, 210, 0.00) 70%
+            #EDE5D2 calc(50% + 90px),
+            rgba(237, 229, 210, 0.85) calc(50% + 160px),
+            rgba(237, 229, 210, 0.55) calc(50% + 230px),
+            rgba(237, 229, 210, 0.20) calc(50% + 310px),
+            rgba(237, 229, 210, 0.00) calc(50% + 400px)
           ), url('${withBase('/images/pricing/hero-couple.webp')}')`,
           backgroundPosition: 'left center, 68% center',
           backgroundSize: 'auto, cover',
@@ -69,7 +74,9 @@ export function PricingHero() {
         }}
       />
 
-      {/* Inner grid — 58fr 42fr; text occupies the left column. */}
+      {/* Inner content — centered 1200px container per design system. The
+          58fr/42fr grid sits inside it; text in the left column, right
+          column empty/decorative. */}
       <div
         className="mx-auto"
         style={{
@@ -83,9 +90,9 @@ export function PricingHero() {
         <div
           className="grid grid-cols-1"
           style={{
+            gridTemplateColumns: 'minmax(0, 58fr) minmax(0, 42fr)',
             paddingTop: 96,
             paddingBottom: 80,
-            gridTemplateColumns: 'minmax(0, 58fr) minmax(0, 42fr)',
           }}
         >
           <div style={{ maxWidth: 560 }}>
@@ -170,7 +177,6 @@ export function PricingHero() {
               </CTAButton>
             </div>
 
-            {/* Compliance text per spec */}
             <p
               style={{
                 fontFamily: 'var(--font-serif)',
@@ -189,8 +195,6 @@ export function PricingHero() {
               subject to periodic review.
             </p>
           </div>
-          {/* Right column intentionally empty — photographic content is the
-              background image; no overlaid content needed. */}
           <div aria-hidden="true" />
         </div>
       </div>
