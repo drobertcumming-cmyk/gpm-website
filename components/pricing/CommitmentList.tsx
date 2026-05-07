@@ -80,13 +80,11 @@ export function CommitmentList() {
   return (
     <section
       aria-labelledby="commitments-heading"
-      className="mx-auto"
+      className="mx-auto py-16 md:py-24"
       style={{
         maxWidth: 1200,
         paddingLeft: 32,
         paddingRight: 32,
-        paddingTop: 96,
-        paddingBottom: 96,
       }}
     >
       <ContentContainer>
@@ -133,14 +131,13 @@ export function CommitmentList() {
         </p>
 
         {/* 2×2 grid at lg: (1024px+); one column below */}
+        {/* Brief: gap 36px row, 40px column at desktop; 32px row at mobile */}
         <ul
-          className="grid grid-cols-1 lg:grid-cols-2"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-y-9 lg:gap-x-10"
           style={{
             listStyle: 'none',
             margin: 0,
             padding: 0,
-            columnGap: 40,
-            rowGap: 36,
           }}
         >
           {COMMITMENTS.map((c) => (

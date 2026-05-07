@@ -38,13 +38,11 @@ export function WorkedExamplesGrid() {
   return (
     <section
       aria-labelledby="worked-examples-heading"
-      className="mx-auto"
+      className="mx-auto py-16 md:py-24"
       style={{
         maxWidth: 1200,
         paddingLeft: 32,
         paddingRight: 32,
-        paddingTop: 96,
-        paddingBottom: 96,
       }}
     >
       <ContentContainer>

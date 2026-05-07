@@ -101,13 +101,11 @@ export function PricingFAQ() {
       }}
     >
       <div
-        className="mx-auto"
+        className="mx-auto py-16 md:py-24"
         style={{
           maxWidth: 1200,
           paddingLeft: 32,
           paddingRight: 32,
-          paddingTop: 96,
-          paddingBottom: 96,
         }}
       >
         <ProseContainer>
@@ -148,22 +146,14 @@ export function PricingFAQ() {
             ))}
           </div>
 
-          {/* Closing FAQ link */}
+          {/* Closing FAQ link — Tier 4 LinkArrow per brief; routes to
+              /faq. Brief copy: "For rollover mechanics, custodian
+              choice, and tax treatment → Frequently Asked Questions". */}
           <div style={{ marginTop: 32 }}>
-            <p
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 14,
-                fontWeight: 400,
-                lineHeight: 1.6,
-                color: 'var(--gpm-ink-body)',
-                margin: 0,
-                marginBottom: 8,
-              }}
-            >
-              For rollover mechanics, custodian choice, and tax treatment, see{' '}
-              <LinkArrow href="/faq">Frequently Asked Questions</LinkArrow>
-            </p>
+            <LinkArrow href="/faq">
+              For rollover mechanics, custodian choice, and tax treatment{' '}
+              <span aria-hidden="true">→</span> Frequently Asked Questions
+            </LinkArrow>
           </div>
 
           {/* Dual closing CTAs (Tier 1 + Tier 3), separated by a 22px top hairline */}

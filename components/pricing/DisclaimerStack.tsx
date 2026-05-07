@@ -21,11 +21,10 @@ export function DisclaimerStack() {
       }}
     >
       <div
+        className="py-12 md:py-16"
         style={{
           paddingLeft: 32,
           paddingRight: 32,
-          paddingTop: 64,
-          paddingBottom: 64,
         }}
       >
         <WideContainer>

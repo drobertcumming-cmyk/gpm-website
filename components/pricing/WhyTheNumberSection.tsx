@@ -12,13 +12,11 @@ export function WhyTheNumberSection() {
   return (
     <section
       aria-labelledby="why-heading"
-      className="mx-auto"
+      className="mx-auto py-16 md:py-24"
       style={{
         maxWidth: 1200,
         paddingLeft: 32,
         paddingRight: 32,
-        paddingTop: 96,
-        paddingBottom: 96,
       }}
     >
       <ProseContainer>

@@ -27,7 +27,7 @@ export function PricingHero() {
     >
       <WideContainer>
         <div
-          className="grid grid-cols-1 md:grid-cols-2"
+          className="grid grid-cols-1 lg:grid-cols-2"
           style={{ alignItems: 'center', gap: 0 }}
         >
           <HeroCopyZone />
@@ -156,7 +156,7 @@ function HeroSpecimenZone() {
       }}
     >
       <Image
-        src={withBase('/images/pricing/hero-couple.png')}
+        src={withBase('/images/pricing/hero-couple.webp')}
         alt="An older couple seated together in a sunlit interior, looking at the camera with relaxed expressions."
         width={HERO_IMAGE_WIDTH}
         height={HERO_IMAGE_HEIGHT}
