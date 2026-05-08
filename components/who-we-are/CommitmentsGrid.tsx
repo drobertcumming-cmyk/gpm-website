@@ -1,6 +1,12 @@
 import Link from 'next/link'
 
-// /who-we-are — Four Commitments grid (2-col desktop, 1-col mobile).
+// /who-we-are — Four Commitments grid.
+//
+// Layout shift 2026-05-08: 2×2 cluster → 4-up horizontal ribbon at
+// lg+ (lg:grid-cols-4), 2 cols at md, 1 col mobile. Spans the full
+// 1200 rail. Per the brief: "turns a block into a ribbon of
+// commitments that spans the screen."
+//
 // Linen-warm bg, border-light, 4px radius. Each card: 01/02/03/04
 // numeric eyebrow + serif headline + serif body + tier-4 link.
 //
@@ -45,7 +51,7 @@ const COMMITMENTS: Commitment[] = [
 export function CommitmentsGrid() {
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-2"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
       style={{ gap: 32, marginTop: 40 }}
     >
       {COMMITMENTS.map((c) => (
