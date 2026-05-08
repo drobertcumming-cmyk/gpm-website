@@ -1,11 +1,15 @@
 // /pricing/numismatic-coins — Definitional Triad.
-// Three-card grid laid out at lg+ (1fr 1fr 1fr); stacks single-column
+// Three-card grid laid out at md+ (1fr 1fr 1fr); stacks single-column
 // at mobile. Each card: tier label + range figure + title + body +
 // optional note (Grace's catalogue marker on Tier 1).
 //
 // Tier 3 range "50–100%+" renders in state-error #A03A28 (rust) per
 // spec to signal the documented pattern of harm. Tier 1 in gold-deep,
 // Tier 2 in walnut.
+//
+// Layout shift 2026-05-08: from 880 max → 1200 max so the three
+// tier cards span the full content rail (the page's primary "dead
+// space killer" per the brief).
 
 interface TriadCard {
   tier: string
@@ -72,10 +76,10 @@ export function DefinitionalTriad() {
   return (
     <div
       className="mx-auto"
-      style={{ maxWidth: 880, marginTop: 48 }}
+      style={{ maxWidth: 1200, marginTop: 48 }}
     >
       <div
-        className="grid grid-cols-1 lg:grid-cols-3"
+        className="grid grid-cols-1 md:grid-cols-3"
         style={{ gap: 32 }}
       >
         {CARDS.map((card) => (
