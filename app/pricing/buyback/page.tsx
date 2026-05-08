@@ -44,45 +44,110 @@ export default function BuybackPage() {
       <main id="main" tabIndex={-1}>
         <BuybackBreadcrumb />
 
-        {/* HERO — editorial deck, 10 cols centered */}
+        {/* HERO — 8/4 split inside the 1200 rail.
+            Left 8: eyebrow + H1 + intro paragraph, left-anchored so its
+              left edge aligns with the prose in every section below
+              (visual axis at the 1200 rail's left edge).
+            Right 4: GRACE'S POSTURE Key Stat callout summarising the
+              page takeaway — 11.1% / 0% / 11.1%. Kills the dead space
+              the centered hero used to leave on the right. */}
         <section className="w-full" style={{ paddingTop: 80, paddingBottom: 72 }}>
           <div
             className="mx-auto"
             style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
-            <div style={{ maxWidth: 960, marginLeft: 'auto', marginRight: 'auto' }}>
-              <span style={eyebrowStyle}>BUYBACK MECHANICS</span>
-              <h1
+            <div
+              className="grid grid-cols-1 lg:grid-cols-12"
+              style={{ rowGap: 40, columnGap: 64, alignItems: 'center' }}
+            >
+              <div className="lg:col-span-8">
+                <span style={eyebrowStyle}>BUYBACK MECHANICS</span>
+                <h1
+                  style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: 'clamp(32px, 3.6vw, 48px)',
+                    fontWeight: 500,
+                    color: 'var(--gpm-ink-display)',
+                    lineHeight: 1.2,
+                    margin: 0,
+                    marginBottom: 28,
+                  }}
+                >
+                  How buyback works &mdash; and why the exit number matters
+                  more than the entry number.
+                </h1>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: 18,
+                    fontWeight: 400,
+                    color: 'var(--gpm-ink-body)',
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  Most Gold IRA customers focus, at the point of purchase, on
+                  the entry price. The exit price &mdash; what you receive
+                  when you sell back &mdash; is typically not part of the
+                  buying decision at all. It is also, for most customers, the
+                  more financially consequential of the two.
+                </p>
+              </div>
+
+              {/* Right 4 cols — GRACE'S POSTURE Key Stat callout */}
+              <aside
+                className="lg:col-span-4"
+                aria-label="Page summary"
                 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(32px, 3.6vw, 48px)',
-                  fontWeight: 500,
-                  color: 'var(--gpm-ink-display)',
-                  lineHeight: 1.2,
-                  margin: 0,
-                  marginBottom: 28,
+                  background: 'var(--gpm-surface)',
+                  borderLeft: '4px solid var(--gpm-gold-deep)',
+                  borderRadius: 2,
+                  padding: '32px 36px',
+                  alignSelf: 'center',
                 }}
               >
-                How buyback works &mdash; and why the exit number matters more than the
-                entry number.
-              </h1>
-              <p
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 18,
-                  fontWeight: 400,
-                  color: 'var(--gpm-ink-body)',
-                  lineHeight: 1.6,
-                  margin: 0,
-                  maxWidth: 800,
-                }}
-              >
-                Most Gold IRA customers focus, at the point of purchase, on the entry
-                price. The exit price &mdash; what you receive when you sell back
-                &mdash; is typically not part of the buying decision at all. It is
-                also, for most customers, the more financially consequential of the
-                two.
-              </p>
+                <span
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 11,
+                    fontWeight: 600,
+                    color: 'var(--gpm-gold-secondary)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.14em',
+                    marginBottom: 18,
+                  }}
+                >
+                  GRACE&rsquo;S POSTURE
+                </span>
+                <ul
+                  style={{
+                    listStyle: 'none',
+                    margin: 0,
+                    padding: 0,
+                    marginBottom: 18,
+                  }}
+                >
+                  <HeroStatRow label="Entry spread" value="11.1%" />
+                  <HeroStatRow label="Exit markdown" value="0%" emphasis />
+                  <HeroStatRow label="Round-trip" value="11.1%" emphasis last />
+                </ul>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontStyle: 'italic',
+                    fontSize: 14,
+                    fontWeight: 400,
+                    color: 'var(--gpm-walnut-deep)',
+                    lineHeight: 1.5,
+                    margin: 0,
+                    paddingTop: 16,
+                    borderTop: '1px solid rgba(184, 150, 46, 0.30)',
+                  }}
+                >
+                  The number on /pricing is the number on the way out, too.
+                </p>
+              </aside>
             </div>
           </div>
         </section>
@@ -510,6 +575,57 @@ export default function BuybackPage() {
 // Inline callout patterns (no new component-library entries —
 // these are layout-level helpers for the buyback page only).
 // ============================================================
+
+// HeroStatRow — small two-column row used inside the hero's
+// GRACE'S POSTURE Key Stat callout. Label left, tabular-nums value
+// right. Last row drops the dashed-hairline separator.
+function HeroStatRow({
+  label,
+  value,
+  emphasis = false,
+  last = false,
+}: {
+  label: string
+  value: string
+  emphasis?: boolean
+  last?: boolean
+}) {
+  return (
+    <li
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
+        padding: '10px 0',
+        borderBottom: last ? 'none' : '1px dashed rgba(213, 205, 182, 0.6)',
+      }}
+    >
+      <span
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: 13,
+          fontWeight: 400,
+          color: 'var(--gpm-ink-body)',
+          lineHeight: 1.4,
+        }}
+      >
+        {label}
+      </span>
+      <span
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: emphasis ? 22 : 16,
+          fontWeight: emphasis ? 600 : 500,
+          color: emphasis ? 'var(--gpm-gold-deep)' : 'var(--gpm-walnut-deep)',
+          fontFeatureSettings: '"tnum"',
+          lineHeight: 1.0,
+        }}
+      >
+        {value}
+      </span>
+    </li>
+  )
+}
 
 function Callout({
   className,
