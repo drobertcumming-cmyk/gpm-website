@@ -71,10 +71,17 @@ export function WorkedExampleComparison() {
             style={{
               background: col.cardBg,
               border: col.totalIsGrace
-                ? '1px solid var(--gpm-gold-deep)'
+                ? '1px solid rgba(184, 150, 46, 0.45)'
                 : '1px solid var(--gpm-border-light)',
               borderRadius: 4,
               padding: '36px 36px 32px',
+              // Subtle definition for the wider cards per the
+              // 2026-05-08 brief — soft cream-toned shadow rather
+              // than a hard drop, so the cards read as "raised"
+              // against the canvas without losing the editorial feel.
+              boxShadow: col.totalIsGrace
+                ? '0 1px 0 rgba(184, 150, 46, 0.06), 0 8px 24px -16px rgba(61, 40, 23, 0.18)'
+                : '0 1px 0 rgba(184, 150, 46, 0.04), 0 6px 18px -14px rgba(61, 40, 23, 0.14)',
               ...(col.totalIsGrace
                 ? { borderLeft: '4px solid var(--gpm-gold-deep)' }
                 : {}),

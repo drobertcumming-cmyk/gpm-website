@@ -41,42 +41,49 @@ export default function BuybackPage() {
       <main id="main" tabIndex={-1}>
         <BuybackBreadcrumb />
 
-        {/* HERO — editorial deck (no photograph) */}
+        {/* HERO — editorial deck (no photograph).
+            Inner block centered at 10 cols (~960) inside the 1200 rail
+            per the 2026-05-08 brief: "occupy 10 columns (centered)" —
+            no narrow center-strip, no left-anchored dead space. */}
         <section className="w-full" style={{ paddingTop: 80, paddingBottom: 72 }}>
           <div
             className="mx-auto"
-            style={{ maxWidth: 720, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
-            <span style={eyebrowStyle}>BUYBACK MECHANICS</span>
-            <h1
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(32px, 3.6vw, 48px)',
-                fontWeight: 500,
-                color: 'var(--gpm-ink-display)',
-                lineHeight: 1.2,
-                margin: 0,
-                marginBottom: 28,
-              }}
-            >
-              How buyback works &mdash; and why the exit number matters more than the
-              entry number.
-            </h1>
-            <p
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 18,
-                fontWeight: 400,
-                color: 'var(--gpm-ink-body)',
-                lineHeight: 1.6,
-                margin: 0,
-              }}
-            >
-              Most Gold IRA customers focus, at the point of purchase, on the entry
-              price. The exit price &mdash; what you receive when you sell back &mdash;
-              is typically not part of the buying decision at all. It is also, for most
-              customers, the more financially consequential of the two.
-            </p>
+            <div style={{ maxWidth: 960, marginLeft: 'auto', marginRight: 'auto' }}>
+              <span style={eyebrowStyle}>BUYBACK MECHANICS</span>
+              <h1
+                style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: 'clamp(32px, 3.6vw, 48px)',
+                  fontWeight: 500,
+                  color: 'var(--gpm-ink-display)',
+                  lineHeight: 1.2,
+                  margin: 0,
+                  marginBottom: 28,
+                }}
+              >
+                How buyback works &mdash; and why the exit number matters more than the
+                entry number.
+              </h1>
+              <p
+                style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: 18,
+                  fontWeight: 400,
+                  color: 'var(--gpm-ink-body)',
+                  lineHeight: 1.6,
+                  margin: 0,
+                  maxWidth: 800,
+                }}
+              >
+                Most Gold IRA customers focus, at the point of purchase, on the entry
+                price. The exit price &mdash; what you receive when you sell back
+                &mdash; is typically not part of the buying decision at all. It is
+                also, for most customers, the more financially consequential of the
+                two.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -402,20 +409,19 @@ const sectionHeadlineStyle: React.CSSProperties = {
   lineHeight: 1.25,
   margin: 0,
   marginBottom: 32,
-  // H2 sits inside the 1200 rail but caps at 880 so headlines don't
-  // run unreadably wide on big viewports.
-  maxWidth: 880,
+  // H2 fills 10/12 cols of the 1200 rail (~1000) per the
+  // 2026-05-08 fill-the-rail brief — no narrow center-strip.
+  maxWidth: 1000,
 }
 
-// Prose blocks live inside the 1200 12-col rail. Cap at 720 so paragraphs
-// stay readable (~70 characters per line) while H2/eyebrow span wider
-// for editorial weight and section components (cards, grids) get the
-// full 1200.
+// Prose blocks live inside the 1200 12-col rail and fill 8/12 cols
+// (~800) — wider than a narrow reading column but still capped so
+// individual paragraph lines don't run past ~95 chars.
 const proseGroupStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   gap: 20,
-  maxWidth: 720,
+  maxWidth: 800,
 }
 
 const proseStyle: React.CSSProperties = {
@@ -423,6 +429,9 @@ const proseStyle: React.CSSProperties = {
   fontSize: 17,
   fontWeight: 400,
   color: 'var(--gpm-ink-body)',
-  lineHeight: 1.65,
+  // 1.6 line-height for the wider 8-col text blocks per the brief
+  // ("use a 1.6 line-height for the wider text blocks to maintain
+  // readability").
+  lineHeight: 1.6,
   margin: 0,
 }
