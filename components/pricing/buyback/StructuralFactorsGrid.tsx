@@ -1,5 +1,13 @@
-// /pricing/buyback — Structural Factors Grid (3 columns at lg).
-// Each card: numeric eyebrow (01/02/03) + serif headline + serif body.
+// /pricing/buyback — Structural Factors Grid (3 columns at md+).
+// 12-col / 1200 max container; three pillar cards in a md:grid-cols-3
+// row. Each card uses the numeric eyebrow as a large low-opacity
+// background flair behind the content for visual flair (per the
+// 2026-05-08 layout brief), with a small foreground numeric eyebrow
+// retained for legibility and screen-reader order.
+//
+// Layout shift 2026-05-08: from 880 max → 1200 max with bordered cards
+// and numeric background flair, using the full content rail rather
+// than a centered narrow column.
 
 interface Factor {
   num: string
@@ -54,16 +62,52 @@ export function StructuralFactorsGrid() {
   return (
     <div
       className="mx-auto"
-      style={{ maxWidth: 880, marginTop: 48 }}
+      style={{ maxWidth: 1200, marginTop: 48 }}
     >
       <div
-        className="grid grid-cols-1 lg:grid-cols-3"
-        style={{ gap: 48 }}
+        className="grid grid-cols-1 md:grid-cols-3"
+        style={{ gap: 24 }}
       >
         {FACTORS.map((f) => (
-          <div key={f.num} className="flex flex-col">
+          <article
+            key={f.num}
+            aria-labelledby={`factor-${f.num}-title`}
+            style={{
+              position: 'relative',
+              overflow: 'hidden',
+              background: 'var(--gpm-linen-warm)',
+              border: '1px solid var(--gpm-border-light)',
+              borderRadius: 4,
+              padding: '40px 32px 36px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {/* Decorative oversized numeral — low-opacity background flair.
+                aria-hidden so SR users don't hear "01 01" — the small
+                foreground eyebrow below carries the semantics. */}
+            <span
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                top: -18,
+                right: 4,
+                fontFamily: 'var(--font-serif)',
+                fontWeight: 500,
+                fontSize: 'clamp(110px, 14vw, 160px)',
+                lineHeight: 1.0,
+                color: 'rgba(184, 150, 46, 0.10)',
+                fontFeatureSettings: '"tnum"',
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
+            >
+              {f.num}
+            </span>
+
             <span
               style={{
+                position: 'relative',
                 fontFamily: 'var(--font-sans)',
                 fontSize: 13,
                 fontWeight: 600,
@@ -75,7 +119,9 @@ export function StructuralFactorsGrid() {
               {f.num}
             </span>
             <h3
+              id={`factor-${f.num}-title`}
               style={{
+                position: 'relative',
                 fontFamily: 'var(--font-serif)',
                 fontSize: 20,
                 fontWeight: 500,
@@ -89,6 +135,7 @@ export function StructuralFactorsGrid() {
             </h3>
             <p
               style={{
+                position: 'relative',
                 fontFamily: 'var(--font-serif)',
                 fontSize: 16,
                 fontWeight: 400,
@@ -99,7 +146,7 @@ export function StructuralFactorsGrid() {
             >
               {f.body}
             </p>
-          </div>
+          </article>
         ))}
       </div>
     </div>
