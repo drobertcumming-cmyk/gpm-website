@@ -1,12 +1,17 @@
-import { ContentContainer } from '@/components/layout'
 import { CategoryComparison } from './CategoryComparison'
 
 // /pricing §6 — Worked examples (v3.5.1, Delta #3).
-// Three-panel grid laid out across the WideContainer (1200px). Each
-// panel: EXAMPLE 0n eyebrow + dollar-figure header + line-item rows
-// (Rollover amount / Grace spread / Bullion delivered to vault / Admin
-// fee / Setup fee / Annual account fee) + Total entry cost row + exit
-// cost callout.
+// Three-panel CSS grid (3 cols at lg, 1 col below) inside a 1200 max
+// container. Each panel: EXAMPLE 0n eyebrow + dollar-figure header +
+// line-item rows (Rollover amount / Grace spread / Bullion delivered
+// to vault / Admin fee / Setup fee / Annual account fee) + Total
+// entry cost row + exit cost callout.
+//
+// Layout shift 2026-05-08: widened from 880 ContentContainer to 1200
+// so each panel gets ~360px instead of ~270px, reducing line breaks
+// inside the line-item labels and giving the dollar figures the
+// horizontal weight the brief asked for ("eliminate horizontal dead
+// space").
 //
 // Reference: example reference image + GPM_Pricing_ClaudeCode_Brief_v2.
 
@@ -35,7 +40,7 @@ export function WorkedExamplesGrid() {
         paddingRight: 32,
       }}
     >
-      <ContentContainer>
+      <div className="mx-auto" style={{ maxWidth: 1200 }}>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -78,7 +83,7 @@ export function WorkedExamplesGrid() {
         </div>
 
         <CategoryComparison />
-      </ContentContainer>
+      </div>
     </section>
   )
 }
