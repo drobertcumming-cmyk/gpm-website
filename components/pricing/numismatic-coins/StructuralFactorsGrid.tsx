@@ -1,5 +1,10 @@
-// /pricing/numismatic-coins — Structural Factors Grid (3 columns at lg).
-// Each card: numeric eyebrow (01/02/03) + serif headline + serif body.
+// /pricing/numismatic-coins — Structural Factors Grid (3 columns at md+).
+// 12-col / 1200 max container; three pillar cards in a md:grid-cols-3
+// row. Each card uses the numeric eyebrow as a large display numeral
+// next to the headline (visual flair per the 2026-05-08 brief: "Use
+// the extra horizontal space to let the text breathe without stacking
+// it vertically").
+//
 // Content explains why the documented pattern persists in the channel.
 
 interface Factor {
@@ -54,27 +59,46 @@ export function StructuralFactorsGrid() {
   return (
     <div
       className="mx-auto"
-      style={{ maxWidth: 880, marginTop: 48 }}
+      style={{ maxWidth: 1200, marginTop: 48 }}
     >
       <div
-        className="grid grid-cols-1 lg:grid-cols-3"
+        className="grid grid-cols-1 md:grid-cols-3"
         style={{ gap: 48 }}
       >
         {FACTORS.map((f) => (
-          <div key={f.num} className="flex flex-col">
-            <span
+          <article
+            key={f.num}
+            aria-labelledby={`numfactor-${f.num}-title`}
+            className="flex flex-col"
+          >
+            {/* Large display numeral above the headline as a distinct
+                visual marker per the brief. Decorative serif numeral
+                in gold-deep with a hairline rule under it. */}
+            <div
               style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 13,
-                fontWeight: 600,
-                color: 'var(--gpm-gold-secondary)',
-                letterSpacing: '0.08em',
-                marginBottom: 12,
+                paddingBottom: 20,
+                marginBottom: 20,
+                borderBottom: '1px solid var(--gpm-border-light)',
               }}
             >
-              {f.num}
-            </span>
+              <span
+                aria-hidden="true"
+                style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontWeight: 500,
+                  fontSize: 56,
+                  lineHeight: 1.0,
+                  color: 'var(--gpm-gold-deep)',
+                  fontFeatureSettings: '"tnum"',
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                {f.num}
+              </span>
+              <span className="sr-only">Factor {f.num}: </span>
+            </div>
             <h3
+              id={`numfactor-${f.num}-title`}
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 20,
@@ -99,7 +123,7 @@ export function StructuralFactorsGrid() {
             >
               {f.body}
             </p>
-          </div>
+          </article>
         ))}
       </div>
     </div>

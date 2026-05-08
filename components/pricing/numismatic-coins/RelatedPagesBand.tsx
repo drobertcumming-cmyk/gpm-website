@@ -37,7 +37,7 @@ export function RelatedPagesBand() {
       <div
         className="mx-auto py-16 md:py-24"
         style={{
-          maxWidth: 880,
+          maxWidth: 1200,
           paddingLeft: 32,
           paddingRight: 32,
         }}
