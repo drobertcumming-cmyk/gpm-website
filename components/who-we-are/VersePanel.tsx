@@ -1,6 +1,10 @@
 // /who-we-are — Proverbs 11:1 anchor verse panel.
 // Tinted callout: surface bg #E8E2CC + 4px gold-deep left border per spec.
 // Italic verse text in Source Serif 4. Reference eyebrow above.
+//
+// 2026-05-08: marginBottom dropped — the verse panel now lives in
+// the left column of a 7/5 anchor grid alongside its prose, so the
+// parent grid owns spacing rather than the panel itself.
 
 export function VersePanel() {
   return (
@@ -11,7 +15,6 @@ export function VersePanel() {
         borderLeft: '4px solid var(--gpm-gold-deep)',
         borderRadius: 2,
         padding: '32px 36px',
-        marginBottom: 40,
       }}
     >
       <span

@@ -33,45 +33,47 @@ export const metadata = {
 export default function WhoWeArePage() {
   return (
     <>
-      {/* HERO — editorial deck, 10-col centered inside the 1200 rail */}
+      {/* HERO — 10 cols LEFT-aligned inside the 1200 rail.
+          The H1's left edge sits at the same grid line as the Proverbs
+          verse panel below it (both anchored at 0 of the 1200 rail).
+          This creates a strong vertical axis through the page. */}
       <section className="w-full" style={{ paddingTop: 80, paddingBottom: 72 }}>
         <div
           className="mx-auto"
           style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
         >
-          <div style={{ maxWidth: 960, marginLeft: 'auto', marginRight: 'auto' }}>
-            <span style={eyebrowStyle}>WHO WE ARE</span>
-            <h1
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(32px, 3.6vw, 48px)',
-                fontWeight: 500,
-                color: 'var(--gpm-ink-display)',
-                lineHeight: 1.2,
-                margin: 0,
-                marginBottom: 28,
-              }}
-            >
-              Built by a pastor, an accountant, and a marketing executive
-              &mdash; for people the industry stopped serving honestly.
-            </h1>
-            <p
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 18,
-                fontWeight: 400,
-                color: 'var(--gpm-ink-body)',
-                lineHeight: 1.6,
-                margin: 0,
-                maxWidth: 800,
-              }}
-            >
-              Grace Precious Metals exists because three people independently
-              reached the same conclusion about an industry they were each, in
-              their own way, working inside. The page below tells you who we
-              are, what we built, and why we built it the way we did.
-            </p>
-          </div>
+          <span style={eyebrowStyle}>WHO WE ARE</span>
+          <h1
+            style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(32px, 3.6vw, 48px)',
+              fontWeight: 500,
+              color: 'var(--gpm-ink-display)',
+              lineHeight: 1.2,
+              margin: 0,
+              marginBottom: 28,
+              maxWidth: 1000,
+            }}
+          >
+            Built by a pastor, an accountant, and a marketing executive
+            &mdash; for people the industry stopped serving honestly.
+          </h1>
+          <p
+            style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 18,
+              fontWeight: 400,
+              color: 'var(--gpm-ink-body)',
+              lineHeight: 1.6,
+              margin: 0,
+              maxWidth: 800,
+            }}
+          >
+            Grace Precious Metals exists because three people independently
+            reached the same conclusion about an industry they were each, in
+            their own way, working inside. The page below tells you who we
+            are, what we built, and why we built it the way we did.
+          </p>
         </div>
       </section>
 
@@ -91,7 +93,7 @@ export default function WhoWeArePage() {
           <span style={eyebrowStyle}>THE ANCHOR</span>
           <div
             className="grid grid-cols-1 lg:grid-cols-12"
-            style={{ rowGap: 32, columnGap: 48, alignItems: 'start' }}
+            style={{ rowGap: 32, columnGap: 64, alignItems: 'center' }}
           >
             <div className="lg:col-span-7">
               <VersePanel />
