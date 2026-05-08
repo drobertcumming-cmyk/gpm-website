@@ -1,19 +1,37 @@
 // /pricing — TwoCostsCallout panel.
-// Linen-warm panel inside WhatWeDoNotChargeSection describing the two
-// third-party charges (custodian + depository) that aren't Grace's.
-// All copy verbatim from Pricing Page Design Specification §16.
+// Linen-warm panel describing the two third-party charges (custodian +
+// depository) that aren't Grace's. All copy verbatim from Pricing Page
+// Design Specification §16.
+//
+// 2026-05-08: now lives in the WhatWeDoNotChargeSection sidebar (4-col
+// at lg+), so the inline 28px top margin is dropped — the parent grid
+// owns spacing.
 
 export function TwoCostsCallout() {
   return (
     <aside
       aria-label="Two third-party charges"
       style={{
-        marginTop: 28,
         background: 'var(--gpm-linen-warm)',
-        borderRadius: 2,
-        padding: 24,
+        border: '1px solid var(--gpm-border-light)',
+        borderRadius: 4,
+        padding: 28,
       }}
     >
+      <span
+        style={{
+          display: 'block',
+          fontFamily: 'var(--font-sans)',
+          fontSize: 11,
+          fontWeight: 600,
+          letterSpacing: '0.14em',
+          color: 'var(--gpm-gold-secondary)',
+          textTransform: 'uppercase',
+          marginBottom: 14,
+        }}
+      >
+        TWO COSTS THAT ARE NOT OURS
+      </span>
       <p style={rowStyle}>
         <strong style={labelStyle}>Custodian annual fee:</strong> approximately $175 per
         year (varies by custodian; billed directly to your IRA).

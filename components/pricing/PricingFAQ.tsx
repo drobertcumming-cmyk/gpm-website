@@ -1,14 +1,16 @@
 import { CTAButton, LinkArrow } from '@/components/cta'
-import { ProseContainer } from '@/components/layout'
 
 // /pricing §10 — FAQ.
 // Native <details>/<summary>. Six questions verbatim from the Pricing
 // Page Design Specification §16. Answer copy is in-brand prose
-// extending the spec's positioning ("Full answer copy available in the
-// HTML source" — answers below carry the spec's tone).
+// extending the spec's positioning.
 //
 // Toggle icon (+/−) is rendered via CSS pseudo-element on summary in
 // app/globals.css.
+//
+// Layout shift 2026-05-08: widened from 640 ProseContainer to 1000
+// so question summary lines no longer break awkwardly mid-thought.
+// Answer column kept narrower (640) for reading comfort.
 //
 // Reference: Grace Precious Metals — Pricing Page Design Specification.
 
@@ -103,7 +105,7 @@ export function PricingFAQ() {
           paddingRight: 32,
         }}
       >
-        <ProseContainer>
+        <div className="mx-auto" style={{ maxWidth: 1000 }}>
           <p
             style={{
               fontFamily: 'var(--font-sans)',
@@ -176,7 +178,7 @@ export function PricingFAQ() {
               </CTAButton>
             </div>
           </div>
-        </ProseContainer>
+        </div>
       </div>
     </section>
   )

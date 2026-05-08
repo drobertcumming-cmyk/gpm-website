@@ -1,10 +1,12 @@
-import { ContentContainer } from '@/components/layout'
-
 // /pricing §7 — Four commitments grid (2×2).
-// Container ContentContainer (880px); grid-template-columns repeat(2, 1fr)
-// with gap 48px row × 64px column at desktop. Each commitment block:
-// number with extending hairline rule, headline, body. All copy
-// verbatim from Pricing Page Design Specification §16.
+// Container 1200 max with px-32; grid-template-columns repeat(2, 1fr)
+// at lg+, single column below. Each commitment block: number with
+// extending hairline rule, headline, body. All copy verbatim from
+// Pricing Page Design Specification §16.
+//
+// Layout shift 2026-05-08: widened from 880 ContentContainer to 1200
+// to give the four-up grid more horizontal breathing room and reduce
+// the centered-narrow-column dead space.
 //
 // Reference: Grace Precious Metals — Pricing Page Design Specification.
 
@@ -72,7 +74,7 @@ export function CommitmentList() {
         paddingRight: 32,
       }}
     >
-      <ContentContainer>
+      <div className="mx-auto" style={{ maxWidth: 1200 }}>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -167,7 +169,7 @@ export function CommitmentList() {
             </li>
           ))}
         </ul>
-      </ContentContainer>
+      </div>
     </section>
   )
 }
