@@ -1,7 +1,18 @@
 // /pricing/buyback — Evaluation Checklist.
-// Four numbered questions with answers. Each item: numeric eyebrow
-// (01/02/03/04) on the left + question + answer on the right.
-// border-light hairlines between items, top border on first.
+// Four numbered questions in a 2×2 grid at md+, single column on
+// mobile. 1200 max container shared with sibling sections. Each cell
+// is a self-contained card: numbered eyebrow + h4 question (Source
+// Serif 4) + answer prose.
+//
+// Layout shift 2026-05-08: from a single 4-row vertical list (full
+// width, hairline-separated rows) → 2×2 card grid using the section's
+// 12-col container. Eliminates the long vertical scroll and gives the
+// section a "checklist" rhythm rather than "deck of equally-weighted
+// rows."
+//
+// Hierarchy: parent section uses h2; structural-factor cards use h3;
+// these question cards use h4 to maintain the deeper hierarchy the
+// brief asked for.
 
 interface Item {
   num: string
@@ -59,33 +70,45 @@ const ITEMS: Item[] = [
 
 export function EvaluationChecklist() {
   return (
-    <div style={{ marginTop: 36 }}>
-      {ITEMS.map((it, i) => (
-        <div
-          key={it.num}
-          style={{
-            display: 'flex',
-            gap: 20,
-            padding: '24px 0',
-            borderBottom: '1px solid var(--gpm-border-light)',
-            ...(i === 0 ? { borderTop: '1px solid var(--gpm-border-light)' } : {}),
-          }}
-        >
-          <span
+    <div
+      className="mx-auto"
+      style={{ maxWidth: 1200, marginTop: 36 }}
+    >
+      <ul
+        className="grid grid-cols-1 md:grid-cols-2"
+        style={{
+          gap: 24,
+          listStyle: 'none',
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        {ITEMS.map((it) => (
+          <li
+            key={it.num}
             style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: 13,
-              fontWeight: 600,
-              color: 'var(--gpm-gold-secondary)',
-              letterSpacing: '0.08em',
-              flexShrink: 0,
-              paddingTop: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 12,
+              padding: '32px 32px 28px',
+              background: 'var(--gpm-linen-warm)',
+              border: '1px solid var(--gpm-border-light)',
+              borderRadius: 4,
             }}
           >
-            {it.num}
-          </span>
-          <div style={{ flex: 1 }}>
-            <h3
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 13,
+                fontWeight: 600,
+                color: 'var(--gpm-gold-secondary)',
+                letterSpacing: '0.08em',
+                margin: 0,
+              }}
+            >
+              {it.num}
+            </span>
+            <h4
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 18,
@@ -93,26 +116,26 @@ export function EvaluationChecklist() {
                 color: 'var(--gpm-ink-display)',
                 lineHeight: 1.35,
                 margin: 0,
-                marginBottom: 8,
+                marginBottom: 4,
               }}
             >
               {it.question}
-            </h3>
+            </h4>
             <p
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 16,
                 fontWeight: 400,
                 color: 'var(--gpm-ink-body)',
-                lineHeight: 1.55,
+                lineHeight: 1.6,
                 margin: 0,
               }}
             >
               {it.answer}
             </p>
-          </div>
-        </div>
-      ))}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

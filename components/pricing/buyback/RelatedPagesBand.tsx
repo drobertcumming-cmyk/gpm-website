@@ -1,7 +1,11 @@
 import Link from 'next/link'
 
 // /pricing/buyback — Related Pages band on canvas-deep tinted band.
-// Two cards: numismatic-coins + /pricing.
+// Two cards (numismatic-coins + /pricing) sitting at 6 columns each
+// in a 12-col / 1200 max container. Stacks at <768px.
+//
+// Layout shift 2026-05-08: from 880 max container → 1200 max so the
+// cards fill the full content rail rather than centered-narrow.
 
 interface Card {
   tag: string
@@ -37,7 +41,7 @@ export function RelatedPagesBand() {
       <div
         className="mx-auto py-16 md:py-24"
         style={{
-          maxWidth: 880,
+          maxWidth: 1200,
           paddingLeft: 32,
           paddingRight: 32,
         }}

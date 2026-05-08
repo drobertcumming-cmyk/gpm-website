@@ -86,7 +86,7 @@ export default function BuybackPage() {
         <section className="w-full py-16 md:py-24">
           <div
             className="mx-auto"
-            style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <span style={eyebrowStyle}>THE TWO NUMBERS</span>
             <h2 style={sectionHeadlineStyle}>
@@ -141,7 +141,7 @@ export default function BuybackPage() {
         <section className="w-full py-16 md:py-24">
           <div
             className="mx-auto"
-            style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <span style={eyebrowStyle}>DEFINITIONS</span>
             <h2 style={sectionHeadlineStyle}>
@@ -181,7 +181,7 @@ export default function BuybackPage() {
         >
           <div
             className="mx-auto"
-            style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <span style={eyebrowStyle}>THE INDUSTRY PATTERN</span>
             <h2 style={sectionHeadlineStyle}>
@@ -223,7 +223,7 @@ export default function BuybackPage() {
         <section className="w-full py-16 md:py-24">
           <div
             className="mx-auto"
-            style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <span style={eyebrowStyle}>WHY IT&rsquo;S STRUCTURED THIS WAY</span>
             <h2 style={sectionHeadlineStyle}>
@@ -261,7 +261,7 @@ export default function BuybackPage() {
         <section className="w-full py-16 md:py-24">
           <div
             className="mx-auto"
-            style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <span style={eyebrowStyle}>GRACE&rsquo;S RESPONSE</span>
             <h2 style={sectionHeadlineStyle}>Buyback at spot, never below.</h2>
@@ -297,7 +297,7 @@ export default function BuybackPage() {
         <section className="w-full py-16 md:py-24">
           <div
             className="mx-auto"
-            style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <span style={eyebrowStyle}>WHAT TO ASK</span>
             <h2 style={sectionHeadlineStyle}>
@@ -322,7 +322,7 @@ export default function BuybackPage() {
         <section className="w-full py-16 md:py-24">
           <div
             className="mx-auto"
-            style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}
+            style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <h2 style={sectionHeadlineStyle}>
               The two pages, together, are the round-trip.
@@ -402,12 +402,20 @@ const sectionHeadlineStyle: React.CSSProperties = {
   lineHeight: 1.25,
   margin: 0,
   marginBottom: 32,
+  // H2 sits inside the 1200 rail but caps at 880 so headlines don't
+  // run unreadably wide on big viewports.
+  maxWidth: 880,
 }
 
+// Prose blocks live inside the 1200 12-col rail. Cap at 720 so paragraphs
+// stay readable (~70 characters per line) while H2/eyebrow span wider
+// for editorial weight and section components (cards, grids) get the
+// full 1200.
 const proseGroupStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   gap: 20,
+  maxWidth: 720,
 }
 
 const proseStyle: React.CSSProperties = {
