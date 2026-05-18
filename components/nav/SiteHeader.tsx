@@ -71,25 +71,30 @@ const PRIMARY_NAV: ReadonlyArray<NavItem> = [
     footer: { label: 'See full pricing page', href: '/pricing' },
   },
   {
+    // Gold IRA pillar dropdown — per CMO direction (2026-05-18), the three
+    // child links route to the standalone production-template HTML at
+    // /preview/ rather than the canonical TSX routes. The TSX routes
+    // (/rollover, /why-invest, /faq) remain reachable via direct URL but
+    // are not linked from this nav surface.
     label: 'Gold IRA',
-    href: '/rollover',
+    href: '/preview/rollover.html',
     eyebrow: 'GOLD IRA',
     children: [
       {
         label: 'How it works',
-        href: '/rollover',
+        href: '/preview/rollover.html',
         description:
           'What a Gold IRA is, how you fund it, what you can hold, and how long it takes to set up.',
       },
       {
         label: 'Why invest',
-        href: '/why-invest',
+        href: '/preview/why-invest.html',
         description:
           'The reasons people hold gold in a retirement portfolio, and what gold does and does not do.',
       },
       {
         label: 'FAQs',
-        href: '/faq',
+        href: '/preview/faq.html',
         description: 'Twelve questions we get most often, answered in plain language.',
       },
     ],
