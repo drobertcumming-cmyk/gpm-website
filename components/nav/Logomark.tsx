@@ -1,46 +1,32 @@
 import Link from 'next/link'
 
-// Logomark — refactored 2026-05-01 to match Manus reference and the
-// GPM_Pricing_ClaudeCode_Brief_v2 lockup spec.
+// Logomark — refactored 2026-05-18 to align with the canonical lockup at
+// public/brand/grace-logo-canonical.svg (CMO sitewide logo audit v1).
 //
-// Lockup geometry:
-//   - Small line-drawn balance/scale icon left, ~28–32px square at default
-//     wordmark size (26px). Icon strokes/fills use currentColor so the
-//     mark inherits walnut-deep in header context (default variant) and
-//     cream in footer/reverse context.
-//   - Wordmark "Grace" — Source Serif 4 weight 500, walnut-deep (inherits
-//     via currentColor from the wrapping Link). Reverse swaps to cream.
-//   - Tagline "PRECIOUS METALS" stacked directly below the wordmark in
-//     Inter all-caps, ~10px at default scale, letter-spaced 0.18em, in
-//     gold-secondary (#9C7322). Reverse swaps to gold-muted (#C9A96C) for
-//     legibility against walnut-deep.
+// Lockup geometry — locked, single canonical source:
+//   - Icon: balance scales in gold-secondary (#9C7322) with a filled top
+//     knob, solid vertical post, filled base foot, filled crossbar, two
+//     suspension links, and two open Q-curve pans. ViewBox 0 0 64 66.
+//   - Wordmark "Grace" — Source Serif 4 weight 500, walnut-deep (#3D2817).
+//   - Tagline "PRECIOUS METALS" — Inter weight 600, gold-secondary
+//     (#9C7322), letter-spaced 0.18em, hidden below 480px via hideTagline.
 //
-// The decorative hairline rule between wordmark and tagline (carried in
-// the v1 lockup) is retired — the brief specifies a clean two-line stack.
-// Total header lockup height ~40px at default scale.
+// Brand canonical SVG (file copy): public/brand/grace-logo-canonical.svg.
+// The icon paths below are kept in lockstep with that file. If the
+// canonical asset changes, update both this component and the favicon.
 //
-// All colors reference CSS custom properties (var(--gpm-*)). Zero
-// hardcoded hex.
+// Color variants (variant='reverse') retired per CMO audit v1: the
+// canonical lockup is the only version. Footer / dark-context contrast
+// is flagged for CMO review, not solved by a recolored variant.
 
 interface LogomarkProps {
-  variant?: 'default' | 'reverse'
   /** Pixel height of "Grace" wordmark line. Mark scales proportionally. */
   size?: number
-  /** Hide the "PRECIOUS METALS" tagline (used below 480px viewport per the production brief). */
+  /** Hide the "PRECIOUS METALS" tagline (used below 480px per the production brief). */
   hideTagline?: boolean
 }
 
-export function Logomark({
-  variant = 'default',
-  size = 26,
-  hideTagline = false,
-}: LogomarkProps) {
-  const isReverse = variant === 'reverse'
-  // The Link's `color` drives the wordmark and the SVG mark via currentColor.
-  // Tagline gets an explicit color override (gold accent) below.
-  const lockupColor = isReverse ? 'var(--gpm-canvas)' : 'var(--gpm-walnut-deep)'
-  const taglineColor = isReverse ? 'var(--gpm-gold-primary)' : 'var(--gpm-gold-secondary)'
-
+export function Logomark({ size = 26, hideTagline = false }: LogomarkProps) {
   // Mark scale: ~1.18× the wordmark line-height. At default size 26 the
   // mark renders at 31px (within the brief's 28–32px range).
   const markPx = Math.round(size * 1.18)
@@ -52,35 +38,41 @@ export function Logomark({
       href="/"
       aria-label="Grace Precious Metals — home"
       className="inline-flex items-center no-underline hover:no-underline"
-      style={{ color: lockupColor }}
+      style={{ color: 'var(--gpm-walnut-deep)' }}
     >
+      {/* Icon — canonical balance scales (mirrors public/favicon.svg and
+          the icon group in public/brand/grace-logo-canonical.svg). */}
       <svg
-        viewBox="0 0 86 86"
+        viewBox="0 0 64 66"
         width={markPx}
         height={markPx}
         aria-hidden="true"
         style={{ flexShrink: 0 }}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
       >
-        {/* Central upright */}
-        <line x1="43" y1="14" x2="43" y2="70" />
-        {/* Finial */}
-        <circle cx="43" cy="11" r="2.5" fill="currentColor" stroke="none" />
-        {/* Beam */}
-        <line x1="18" y1="22" x2="68" y2="22" />
-        {/* Suspension lines */}
-        <line x1="22" y1="22" x2="22" y2="38" strokeWidth="1.25" />
-        <line x1="64" y1="22" x2="64" y2="38" strokeWidth="1.25" />
-        {/* Left pan (triangular) */}
-        <polygon points="11,38 33,38 22,46" fill="currentColor" stroke="none" />
-        {/* Right pan (triangular) */}
-        <polygon points="53,38 75,38 64,46" fill="currentColor" stroke="none" />
-        {/* Base */}
-        <line x1="34" y1="70" x2="52" y2="70" />
+        <g fill="#9C7322" stroke="#9C7322">
+          <circle cx="32" cy="6" r="5" />
+          <rect x="30" y="11" width="4" height="50" />
+          <rect x="18" y="61" width="28" height="3.5" rx="0.5" />
+          <rect x="0" y="20" width="64" height="3" rx="0.5" />
+          <rect x="6" y="23" width="2" height="6" />
+          <rect x="56" y="23" width="2" height="6" />
+        </g>
+        <path
+          d="M 1 29 Q 7 39 13 29"
+          fill="none"
+          stroke="#9C7322"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M 51 29 Q 57 39 63 29"
+          fill="none"
+          stroke="#9C7322"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
 
       <span
@@ -110,7 +102,7 @@ export function Logomark({
               fontSize: taglinePx,
               fontWeight: 600,
               letterSpacing: '0.18em',
-              color: taglineColor,
+              color: 'var(--gpm-gold-secondary)',
               lineHeight: 1.0,
             }}
           >
