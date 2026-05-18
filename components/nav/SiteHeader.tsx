@@ -125,6 +125,7 @@ const PRIMARY_NAV: ReadonlyArray<NavItem> = [
 export function SiteHeader() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null)
   const hamburgerRef = useRef<HTMLButtonElement>(null)
   const wasOpenRef = useRef(false)
 
@@ -132,6 +133,12 @@ export function SiteHeader() {
     if (wasOpenRef.current && !mobileOpen) hamburgerRef.current?.focus()
     wasOpenRef.current = mobileOpen
   }, [mobileOpen])
+
+  // Close the active dropdown on route change. Without this, navigating
+  // via a child link leaves the panel open under the new page.
+  useEffect(() => {
+    setOpenDropdownId(null)
+  }, [pathname])
 
   const isCurrent = (item: NavItem) => {
     if (pathname === item.href) return true
@@ -169,6 +176,11 @@ export function SiteHeader() {
                     item={item}
                     isCurrent={isCurrent(item)}
                     isChildCurrent={isChildCurrent}
+                    isOpen={openDropdownId === item.href}
+                    onRequestOpen={() => setOpenDropdownId(item.href)}
+                    onRequestClose={() =>
+                      setOpenDropdownId((current) => (current === item.href ? null : current))
+                    }
                   />
                 ) : (
                   <Link
@@ -254,21 +266,35 @@ export function SiteHeader() {
 }
 
 // ===== NavDropdownPanel =====
-// Rich dropdown panel. Opens on hover (150ms debounced), click-toggle, or
-// keyboard focus. Closes 80ms after mouseleave, immediately on outside
-// click or Escape. Arrow keys navigate within the panel.
+// Rich dropdown panel — CONTROLLED by SiteHeader's openDropdownId state.
+// Only one panel can be open at any moment by construction (a single
+// source of truth at the parent level), which eliminates the
+// hover-between-triggers overlap bug.
+//
+// Open on hover (150ms debounced), click-toggle, or keyboard focus.
+// Close 80ms after mouseleave, immediately on outside click or Escape.
+// Arrow keys navigate within the panel.
 
 interface NavDropdownPanelProps {
   item: NavItem
   isCurrent: boolean
   isChildCurrent: (c: NavChild) => boolean
+  isOpen: boolean
+  onRequestOpen: () => void
+  onRequestClose: () => void
 }
 
 const OPEN_DELAY_MS = 150
 const CLOSE_DELAY_MS = 80
 
-function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelProps) {
-  const [open, setOpen] = useState(false)
+function NavDropdownPanel({
+  item,
+  isCurrent,
+  isChildCurrent,
+  isOpen,
+  onRequestOpen,
+  onRequestClose,
+}: NavDropdownPanelProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLAnchorElement>(null)
   const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -286,38 +312,40 @@ function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelP
     }
   }, [])
 
-  const requestOpen = useCallback(() => {
+  // Cancel any pending close, then schedule open after the 150ms debounce.
+  const scheduleOpen = useCallback(() => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current)
       closeTimerRef.current = null
     }
-    if (open || openTimerRef.current) return
+    if (isOpen || openTimerRef.current) return
     openTimerRef.current = setTimeout(() => {
-      setOpen(true)
+      onRequestOpen()
       openTimerRef.current = null
     }, OPEN_DELAY_MS)
-  }, [open])
+  }, [isOpen, onRequestOpen])
 
-  const requestClose = useCallback(() => {
+  // Cancel any pending open, then schedule close after the 80ms grace.
+  const scheduleClose = useCallback(() => {
     if (openTimerRef.current) {
       clearTimeout(openTimerRef.current)
       openTimerRef.current = null
     }
-    if (!open) return
+    if (!isOpen) return
     closeTimerRef.current = setTimeout(() => {
-      setOpen(false)
+      onRequestClose()
       closeTimerRef.current = null
     }, CLOSE_DELAY_MS)
-  }, [open])
+  }, [isOpen, onRequestClose])
 
   const closeImmediate = useCallback(() => {
     clearTimers()
-    setOpen(false)
-  }, [clearTimers])
+    onRequestClose()
+  }, [clearTimers, onRequestClose])
 
   // Outside click + Escape
   useEffect(() => {
-    if (!open) return
+    if (!isOpen) return
     function handlePointer(e: PointerEvent) {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
         closeImmediate()
@@ -335,7 +363,7 @@ function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelP
       document.removeEventListener('pointerdown', handlePointer)
       document.removeEventListener('keydown', handleKey)
     }
-  }, [open, closeImmediate])
+  }, [isOpen, closeImmediate])
 
   // Cleanup timers on unmount
   useEffect(() => () => clearTimers(), [clearTimers])
@@ -364,9 +392,9 @@ function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelP
   const handleTriggerKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      if (!open) {
+      if (!isOpen) {
         clearTimers()
-        setOpen(true)
+        onRequestOpen()
         // focus first item next tick
         setTimeout(() => {
           rootRef.current?.querySelector<HTMLAnchorElement>('a.dropdown-item')?.focus()
@@ -381,11 +409,11 @@ function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelP
     <div
       ref={rootRef}
       className="relative"
-      onMouseEnter={requestOpen}
-      onMouseLeave={requestClose}
+      onMouseEnter={scheduleOpen}
+      onMouseLeave={scheduleClose}
       onFocus={() => {
         clearTimers()
-        setOpen(true)
+        if (!isOpen) onRequestOpen()
       }}
       onBlur={(e) => {
         if (!rootRef.current?.contains(e.relatedTarget as Node)) {
@@ -398,7 +426,7 @@ function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelP
         href={item.href}
         aria-current={isCurrent ? 'page' : undefined}
         aria-haspopup="menu"
-        aria-expanded={open}
+        aria-expanded={isOpen}
         aria-controls={menuId}
         className="gpm-link-nav inline-flex items-center"
         onKeyDown={handleTriggerKeyDown}
@@ -422,7 +450,7 @@ function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelP
             borderLeft: '3.5px solid transparent',
             borderRight: '3.5px solid transparent',
             borderTop: '3.5px solid currentColor',
-            transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
             transition: 'transform 180ms ease',
           }}
         />
@@ -443,11 +471,11 @@ function NavDropdownPanel({ item, isCurrent, isChildCurrent }: NavDropdownPanelP
           border: '0.5px solid rgba(61, 40, 23, 0.18)',
           boxShadow: '0 12px 32px rgba(61, 40, 23, 0.10)',
           padding: '32px 36px',
-          opacity: open ? 1 : 0,
-          visibility: open ? 'visible' : 'hidden',
-          pointerEvents: open ? 'auto' : 'none',
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? 'visible' : 'hidden',
+          pointerEvents: isOpen ? 'auto' : 'none',
           transition:
-            'opacity 120ms ease, visibility 0s linear ' + (open ? '0s' : '120ms'),
+            'opacity 120ms ease, visibility 0s linear ' + (isOpen ? '0s' : '120ms'),
           zIndex: 200,
         }}
       >
