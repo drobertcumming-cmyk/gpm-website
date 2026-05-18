@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequently Asked Questions — Grace Precious Metals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap">
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+img { display: block; max-width: 100%; height: auto; }
+a { text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --cream: #F5F0E1;
+  --canvas-deep: #F0E9D6;
+  --canvas-deeper: #EFE7D0;
+  --walnut-deep: #3D2817;
+  --walnut-mid: #5C4632;
+  --walnut-footer: #2A1B0E;
+  --gold-secondary: #9C7322;
+  --gold-deep: #B8962E;
+  --gold-hover: #7E5C10;
+  --border-gold: rgba(156, 115, 34, 0.25);
+  --border-gold-strong: rgba(156, 115, 34, 0.45);
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--walnut-deep);
+  line-height: 1.6;
+  background: var(--cream);
+}
+
+/* ===== SKIP LINK ===== */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--walnut-deep);
+  color: var(--cream);
+  padding: 12px 16px;
+  z-index: 999;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+}
+.skip-link:focus { left: 16px; top: 16px; }
+
+/* ===== LAYOUT WRAPPER ===== */
+.wrap {
+  max-width: 1200px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+/* ===== 12-COLUMN GRID ===== */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 32px;
+  row-gap: 32px;
+  align-items: start;
+}
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-12 { grid-column: 1 / -1; }
+
+/* ===== SITE HEADER ===== */
+.site-header {
+  background: var(--cream);
+  border-bottom: 0.5px solid rgba(156, 115, 34, 0.18);
+  position: relative;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1280px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 22px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.header-logo-text { display: flex; flex-direction: column; gap: 2px; }
+.header-wordmark {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--walnut-deep);
+  line-height: 1;
+}
+.header-tagline {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gold-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+  line-height: 1;
+}
+.header-nav-primary {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-left: auto;
+}
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #2D2620;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 6px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link:hover,
+.nav-link.active,
+.nav-link[aria-current="page"] { color: var(--gold-secondary); }
+.nav-link[aria-current="page"] { border-bottom: 1.5px solid var(--gold-secondary); }
+.nav-caret {
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  display: inline-block;
+}
+.nav-item-dropdown { position: relative; }
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: -12px;
+  min-width: 200px;
+  background: var(--cream);
+  border: 0.5px solid var(--border-gold-strong);
+  border-radius: 4px;
+  padding: 8px 0;
+  box-shadow: 0 8px 24px rgba(61, 40, 23, 0.10);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+  z-index: 200;
+}
+.nav-item-dropdown:hover .nav-dropdown,
+.nav-item-dropdown:focus-within .nav-dropdown,
+.nav-item-dropdown .nav-link[aria-expanded="true"] + .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.nav-dropdown a {
+  display: block;
+  padding: 10px 18px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav-dropdown a:hover,
+.nav-dropdown a:focus-visible { background: var(--canvas-deep); color: var(--gold-secondary); }
+.header-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.cta-outline {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #2D2620;
+  background: transparent;
+  border: 0.5px solid #2D2620;
+  border-radius: 2px;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+.cta-outline:hover { background: #2D2620; color: var(--cream); }
+.cta-solid {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: var(--gold-deep);
+  border: none;
+  border-radius: 2px;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  display: inline-block;
+}
+.cta-solid:hover { background: var(--gold-hover); }
+.menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+.menu-toggle span,
+.menu-toggle span::before,
+.menu-toggle span::after {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--walnut-deep);
+  position: relative;
+}
+.menu-toggle span::before { content: ''; position: absolute; top: -7px; left: 0; }
+.menu-toggle span::after  { content: ''; position: absolute; top: 7px;  left: 0; }
+
+/* ===== PAGE HERO ===== */
+.page-hero { padding: 64px 0 0; }
+.page-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-secondary);
+  letter-spacing: 0.18em;
+  line-height: 1;
+  margin-bottom: 14px;
+  display: block;
+  text-transform: uppercase;
+}
+.page-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 4.2vw, 46px);
+  font-weight: 500;
+  color: var(--walnut-deep);
+  line-height: 1.12;
+  margin-bottom: 24px;
+  letter-spacing: -0.005em;
+}
+.page-lede {
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1.2vw, 17px);
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.65;
+}
+
+/* Hero sidebar */
+.hero-rail {
+  border-left: 1px solid var(--border-gold);
+  padding-left: 24px;
+  padding-top: 6px;
+}
+.rail-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gold-secondary);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: block;
+}
+.rail-meta {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.rail-meta strong {
+  color: var(--walnut-deep);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 2px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.rail-anchors {
+  border-top: 1px solid var(--border-gold);
+  padding-top: 16px;
+  margin-top: 4px;
+  counter-reset: rail-anchor;
+}
+.rail-anchors li { margin-bottom: 8px; counter-increment: rail-anchor; }
+.rail-anchors a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.rail-anchors a::before {
+  content: counter(rail-anchor, decimal-leading-zero);
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--gold-secondary);
+  font-weight: 500;
+}
+.rail-anchors a:hover { color: var(--gold-secondary); }
+
+/* ===== BANNER ===== */
+.page-banner { margin: 56px 0 0; }
+.page-banner-img {
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--canvas-deep);
+}
+
+/* ===== FAQ GROUPS (3/9 split with sticky left rail) ===== */
+.faq-group {
+  padding: 56px 0;
+  border-top: 1px solid var(--border-gold);
+}
+.faq-group:first-of-type { margin-top: 48px; }
+
+.faq-rail {
+  position: sticky;
+  top: 24px;
+  padding-right: 8px;
+}
+.faq-rail-number {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold-secondary);
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+  display: block;
+}
+.faq-rail-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-secondary);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+.faq-rail-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 2.2vw, 26px);
+  font-weight: 500;
+  color: var(--walnut-deep);
+  line-height: 1.25;
+  letter-spacing: -0.003em;
+}
+.faq-rail-meta {
+  margin-top: 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.55;
+  border-top: 1px solid var(--border-gold);
+  padding-top: 14px;
+}
+
+/* Q&A list (right 9 cols) */
+.qa-list { display: flex; flex-direction: column; }
+.qa-item {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  column-gap: 16px;
+  padding: 26px 0;
+  border-top: 1px solid var(--border-gold);
+}
+.qa-item:first-child { border-top: none; padding-top: 0; }
+.qa-number {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gold-secondary);
+  line-height: 1.5;
+  padding-top: 2px;
+  letter-spacing: 0.02em;
+}
+.qa-content { min-width: 0; }
+.qa-question {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  line-height: 1.35;
+  margin-bottom: 14px;
+  letter-spacing: -0.002em;
+}
+.qa-answer {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.7;
+}
+.qa-answer em { font-style: italic; color: var(--walnut-deep); }
+.qa-answer a {
+  color: var(--gold-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+.qa-answer a:hover { color: var(--gold-hover); }
+.qa-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.qa-link:hover { color: var(--gold-hover); }
+.qa-link-row {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+.qa-link-row .qa-link { margin-top: 0; }
+.qa-link-row .qa-link + .qa-link::before {
+  content: '· ';
+  color: var(--border-gold-strong);
+  margin-right: 16px;
+}
+
+/* ===== TRUST SIGNALS PLACEHOLDER ===== */
+.trust-band {
+  background: var(--canvas-deep);
+  padding: 36px 0;
+  margin-top: 56px;
+  border-top: 1px solid var(--border-gold);
+  border-bottom: 1px solid var(--border-gold);
+}
+.trust-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-secondary);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+.trust-text {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--walnut-mid);
+  line-height: 1.5;
+}
+
+/* ===== CLOSING CTAs ===== */
+.closing-band { padding: 56px 0 64px; }
+.closing-ctas { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.cta-tier3 {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  border: 1.5px solid var(--walnut-deep);
+  border-radius: 4px;
+  padding: 14px 28px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cta-tier3:hover { background: var(--walnut-deep); color: var(--cream); }
+.cta-tier4 {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cta-tier4:hover { color: var(--gold-hover); }
+
+/* ===== DISCLAIMER ===== */
+.disclaimer-band {
+  background: var(--cream);
+  padding: 40px 0;
+  border-top: 1px solid var(--border-gold);
+}
+.disclaimer-text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(61, 40, 23, 0.78);
+  line-height: 1.65;
+}
+
+/* ===== FOOTER ===== */
+.footer { background: var(--walnut-footer); padding: 56px 0 0; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.footer-col-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 18px;
+}
+.footer-col ul { list-style: none; padding: 0; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: #F2EDE0;
+  text-decoration: none;
+  line-height: 1.8;
+  transition: color 0.2s ease;
+}
+.footer-col ul li a:hover { color: #FFFFFF; }
+.footer-col .muted-note {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: #8A7E70;
+  line-height: 1.55;
+  margin-top: 4px;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(156, 115, 34, 0.20);
+  margin-top: 40px;
+  padding: 20px 0;
+}
+.footer-bottom p {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: #8A7E70;
+  line-height: 1.55;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .header-nav-primary { gap: 22px; }
+  .header-wordmark { font-size: 22px; }
+  .nav-link { font-size: 13px; }
+  .grid-12 { column-gap: 24px; }
+  .faq-rail { padding-right: 0; }
+}
+@media (max-width: 768px) {
+  .header-nav-primary,
+  .header-cta-group .cta-outline { display: none; }
+  .menu-toggle { display: inline-flex; }
+  .header-inner { padding: 18px 0; gap: 12px; }
+  .header-wordmark { font-size: 20px; }
+  .header-tagline { font-size: 9px; }
+  .page-hero { padding: 40px 0 0; }
+  .page-h1 { font-size: 28px; margin-bottom: 18px; }
+  .page-lede { font-size: 16px; }
+  .grid-12 { column-gap: 0; row-gap: 20px; }
+  .col-3, .col-4, .col-8, .col-9, .col-12 { grid-column: 1 / -1; }
+  .hero-rail {
+    border-left: none;
+    border-top: 1px solid var(--border-gold);
+    padding-left: 0;
+    padding-top: 24px;
+    margin-top: 8px;
+  }
+  .page-banner { margin: 36px 0 0; }
+  .page-banner-img { aspect-ratio: 4 / 3; max-height: 280px; }
+  .faq-group { padding: 40px 0; }
+  .faq-group:first-of-type { margin-top: 32px; }
+  .faq-rail {
+    position: static;
+    padding-right: 0;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-gold);
+  }
+  .faq-rail-title { font-size: 22px; }
+  .qa-item { grid-template-columns: 36px 1fr; column-gap: 12px; padding: 22px 0; }
+  .qa-number { font-size: 14px; }
+  .qa-question { font-size: 18px; margin-bottom: 12px; }
+  .qa-answer { font-size: 16px; }
+  .trust-band { padding: 28px 0; margin-top: 40px; }
+  .closing-ctas { flex-direction: column; align-items: stretch; gap: 16px; }
+  .cta-tier3 { text-align: center; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .closing-band { padding: 40px 0 48px; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ===== SITE HEADER ===== -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a href="/gpm-website/" class="header-logo" aria-label="Grace Precious Metals — home">
+      <svg aria-hidden="true" width="44" height="44" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="18" y1="4" x2="18" y2="32" stroke="#9C7322" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="12" y1="32" x2="24" y2="32" stroke="#9C7322" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="6" y1="11" x2="30" y2="13" stroke="#9C7322" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M6 13 L3 21 Q6 25 9 21 Z" stroke="#9C7322" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+        <path d="M30 15 L27 23 Q30 27 33 23 Z" stroke="#9C7322" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+        <circle cx="18" cy="4" r="2" stroke="#9C7322" stroke-width="2.2" fill="none"/>
+      </svg>
+      <span class="header-logo-text">
+        <span class="header-wordmark">Grace</span>
+        <span class="header-tagline">Precious Metals</span>
+      </span>
+    </a>
+
+    <nav class="header-nav-primary" aria-label="Primary">
+      <a href="/gpm-website/pricing" class="nav-link">Pricing</a>
+      <div class="nav-item-dropdown">
+        <a href="/gpm-website/preview/rollover.html" class="nav-link active" aria-current="page" aria-haspopup="true" aria-expanded="false">
+          Gold IRA <span class="nav-caret" aria-hidden="true"></span>
+        </a>
+        <div class="nav-dropdown" role="menu" aria-label="Gold IRA submenu">
+          <a href="/gpm-website/preview/rollover.html" role="menuitem">How It Works</a>
+          <a href="/gpm-website/preview/why-invest.html" role="menuitem">Why Invest</a>
+          <a href="/gpm-website/preview/faq.html" role="menuitem" aria-current="page">FAQs</a>
+        </div>
+      </div>
+      <a href="/gpm-website/who-we-are" class="nav-link">Who We Are</a>
+      <a href="/gpm-website/resources" class="nav-link">Resources</a>
+    </nav>
+
+    <div class="header-cta-group">
+      <a href="/gpm-website/briefing" class="cta-outline">Get the Briefing</a>
+      <a href="/gpm-website/advisor" class="cta-solid">Talk to an Advisor</a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- ===== PAGE HERO (8/4) ===== -->
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">
+    <div class="grid-12">
+      <div class="col-8">
+        <span class="page-eyebrow">Gold IRA · FAQs</span>
+        <h1 id="page-title" class="page-h1">Frequently asked questions</h1>
+        <p class="page-lede">The short version of the questions we get most often. Every answer here has a longer treatment elsewhere on the site, linked where useful.</p>
+      </div>
+      <aside class="col-4 hero-rail" aria-label="Page metadata">
+        <span class="rail-eyebrow">Jump to a group</span>
+        <p class="rail-meta"><strong>Last reviewed</strong>April 2026 · counsel-cleared</p>
+        <ul class="rail-anchors">
+          <li><a href="#g-account">About the account</a></li>
+          <li><a href="#g-metal">About the metal</a></li>
+          <li><a href="#g-money">About the money</a></li>
+          <li><a href="#g-later">About later</a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BANNER ===== -->
+<div class="page-banner">
+  <div class="wrap">
+    <img class="page-banner-img" src="banner-faq.jpg" alt="Woman writing notes at a home desk with warm natural light">
+  </div>
+</div>
+
+<!-- ===== GROUP 1: About the account ===== -->
+<section class="faq-group" id="g-account" aria-labelledby="g1-title">
+  <div class="wrap">
+    <div class="grid-12">
+      <aside class="col-3 faq-rail">
+        <span class="faq-rail-number">Group 01</span>
+        <span class="faq-rail-eyebrow">About the account</span>
+        <h2 id="g1-title" class="faq-rail-title">What it is and how it works</h2>
+        <p class="faq-rail-meta">Foundational questions on structure, eligibility, and rollover mechanics.</p>
+      </aside>
+      <div class="col-9">
+        <ol class="qa-list">
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">01</span>
+            <div class="qa-content">
+              <h3 class="qa-question">What is a Gold IRA?</h3>
+              <p class="qa-answer">A Gold IRA is a self-directed individual retirement account that holds physical gold, silver, platinum, or palladium instead of, or alongside, traditional assets. It follows the same IRS rules as any other IRA &mdash; same contribution limits, same tax treatment, same required minimum distributions. The difference is what it holds.</p>
+              <a href="/gpm-website/preview/rollover.html" class="qa-link">&rarr; How it works</a>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">02</span>
+            <div class="qa-content">
+              <h3 class="qa-question">Can I roll over my 401(k) into a Gold IRA?</h3>
+              <p class="qa-answer">Yes, in most cases. A 401(k) at your current employer is sometimes restricted while you are still employed; a 401(k) from a former employer, a traditional IRA, a Roth IRA, or a SEP IRA can be rolled into a Gold IRA without tax consequence, provided the rollover is done as a direct custodian-to-custodian transfer. We handle the paperwork.</p>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">03</span>
+            <div class="qa-content">
+              <h3 class="qa-question">Will I pay a penalty or taxes on the rollover?</h3>
+              <p class="qa-answer">No, not if it is done correctly. The funds move directly from your existing account to your new Gold IRA&rsquo;s custodian. You never receive the money. The IRS does not treat a direct rollover as a distribution. There is no tax event. There is no penalty.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GROUP 2: About the metal ===== -->
+<section class="faq-group" id="g-metal" aria-labelledby="g2-title">
+  <div class="wrap">
+    <div class="grid-12">
+      <aside class="col-3 faq-rail">
+        <span class="faq-rail-number">Group 02</span>
+        <span class="faq-rail-eyebrow">About the metal</span>
+        <h2 id="g2-title" class="faq-rail-title">What you can hold, where it goes</h2>
+        <p class="faq-rail-meta">Eligibility, custody, and who is allowed to touch the metal.</p>
+      </aside>
+      <div class="col-9">
+        <ol class="qa-list" start="4">
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">04</span>
+            <div class="qa-content">
+              <h3 class="qa-question">What kinds of gold can I buy in a Gold IRA?</h3>
+              <p class="qa-answer">Standard IRS-eligible bullion. Gold must be 99.5% pure or higher; coins must be produced by a government mint or an accredited refiner. American Eagles, Canadian Maples, Austrian Philharmonics, accredited gold bars. We do not sell numismatic, proof, or rare coins &mdash; most are not IRA-eligible, and all carry markups that the buyer rarely sees.</p>
+              <a href="/gpm-website/resources/numismatic-coins" class="qa-link">&rarr; Why we do not sell numismatics</a>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">05</span>
+            <div class="qa-content">
+              <h3 class="qa-question">Can I hold the gold at home?</h3>
+              <p class="qa-answer">No. The IRS requires gold held in an IRA to be stored at an approved depository, separate from your personal possession. &ldquo;Home storage Gold IRA&rdquo; advertisements are misleading &mdash; the structure they describe is not IRS-compliant, and has been the subject of court rulings against the people who set them up. Grace works only with IRS-approved depositories.</p>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">06</span>
+            <div class="qa-content">
+              <h3 class="qa-question">Who holds my gold? Who holds my IRA?</h3>
+              <p class="qa-answer">Two different parties, both independent of Grace. Your IRA is administered by <em>[IRA custodian &mdash; TBC]</em>, an IRS-approved IRA custodian. Your metal is held at <em>[depository &mdash; TBC]</em>, an IRS-approved depository. You can call either of them directly to verify your account or your holdings, at any time.</p>
+              <a href="/gpm-website/who-we-are/how-we-operate" class="qa-link">&rarr; How we operate</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GROUP 3: About the money ===== -->
+<section class="faq-group" id="g-money" aria-labelledby="g3-title">
+  <div class="wrap">
+    <div class="grid-12">
+      <aside class="col-3 faq-rail">
+        <span class="faq-rail-number">Group 03</span>
+        <span class="faq-rail-eyebrow">About the money</span>
+        <h2 id="g3-title" class="faq-rail-title">Costs, selling, distributions</h2>
+        <p class="faq-rail-meta">What it costs to enter, what it costs to exit, and what the tax treatment looks like.</p>
+      </aside>
+      <div class="col-9">
+        <ol class="qa-list" start="7">
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">07</span>
+            <div class="qa-content">
+              <h3 class="qa-question">How much does it cost?</h3>
+              <p class="qa-answer">Our spread is 11.1%, all-in, on every transaction. There is no separate setup fee, no administrative fee charged by Grace, and no commission paid to your advisor. The custodian and depository charge their own fees for account administration and storage, paid directly to them, not marked up by Grace.</p>
+              <a href="/gpm-website/pricing" class="qa-link">&rarr; Pricing</a>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">08</span>
+            <div class="qa-content">
+              <h3 class="qa-question">What happens when I want to sell?</h3>
+              <p class="qa-answer">We buy back at the spot price of gold, with no markup and never below spot. The figure is published. There is no negotiated discount, no buyback spread, no minimum holding period. You sell when you want to. We pay you in cash, deposited back into your IRA or distributed to you, depending on what you tell the custodian.</p>
+              <a href="/gpm-website/resources/buyback" class="qa-link">&rarr; Buyback at spot</a>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">09</span>
+            <div class="qa-content">
+              <h3 class="qa-question">What happens when I take a distribution?</h3>
+              <p class="qa-answer">A distribution from a Gold IRA works the same way as a distribution from any traditional IRA. You can take it in cash &mdash; we buy the gold back, the custodian sends you the proceeds &mdash; or in kind, where the depository ships the physical gold to you. In-kind distributions are taxed at the spot price on the day of distribution. Required minimum distributions begin at age 73.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GROUP 4: About later ===== -->
+<section class="faq-group" id="g-later" aria-labelledby="g4-title">
+  <div class="wrap">
+    <div class="grid-12">
+      <aside class="col-3 faq-rail">
+        <span class="faq-rail-number">Group 04</span>
+        <span class="faq-rail-eyebrow">About later</span>
+        <h2 id="g4-title" class="faq-rail-title">Inheritance, growth, trust</h2>
+        <p class="faq-rail-meta">What happens at end of life, additions, and how trust is earned over time.</p>
+      </aside>
+      <div class="col-9">
+        <ol class="qa-list" start="10">
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">10</span>
+            <div class="qa-content">
+              <h3 class="qa-question">What happens to my Gold IRA when I die?</h3>
+              <p class="qa-answer">It passes to your designated beneficiary, the same way any IRA does. The beneficiary can keep the IRA intact, subject to the SECURE Act&rsquo;s distribution rules for inherited IRAs, liquidate it, or take an in-kind distribution. We handle the transition with the custodian and your beneficiary.</p>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">11</span>
+            <div class="qa-content">
+              <h3 class="qa-question">Can I add more gold to my Gold IRA later?</h3>
+              <p class="qa-answer">Yes. You can make additional contributions up to the annual IRA contribution limit (<em>[current limit &mdash; TBC]</em>) or roll over additional funds from other retirement accounts at any time. There is no minimum re-purchase amount with Grace.</p>
+            </div>
+          </li>
+          <li class="qa-item">
+            <span class="qa-number" aria-hidden="true">12</span>
+            <div class="qa-content">
+              <h3 class="qa-question">Why should I trust Grace?</h3>
+              <p class="qa-answer">You shouldn&rsquo;t, until we have earned it. We publish our spread because we believe the published number is the only number that should exist between you and us. We buy back at spot because the round-trip cost is what tells you whether a Gold IRA is worth holding. We pay our advisors a salary because commissioned advisors stop being advisors at the moment their pay diverges from your interest. Read William&rsquo;s story, read our pricing, read how we operate, and decide for yourself.</p>
+              <div class="qa-link-row">
+                <a href="/williams-story" class="qa-link">&rarr; William&rsquo;s story</a>
+                <a href="/gpm-website/pricing" class="qa-link">Pricing</a>
+                <a href="/gpm-website/who-we-are/how-we-operate" class="qa-link">How we operate</a>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST SIGNALS PLACEHOLDER ===== -->
+<aside class="trust-band" aria-label="Trust signals placeholder">
+  <div class="wrap">
+    <div class="grid-12">
+      <div class="col-9">
+        <span class="trust-eyebrow">Trust signals</span>
+        <p class="trust-text">Placeholder &mdash; not populated until BBB rating, review counts, and partner accreditation are earned.</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== CLOSING CTAs ===== -->
+<div class="closing-band">
+  <div class="wrap">
+    <div class="closing-ctas">
+      <a href="/gpm-website/pricing" class="cta-tier3">See our pricing</a>
+      <a href="/gpm-website/advisor" class="cta-tier4">Talk to an advisor &rarr;</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ===== DISCLAIMER ===== -->
+<section class="disclaimer-band" aria-label="Legal disclaimer">
+  <div class="wrap">
+    <div class="grid-12">
+      <p class="disclaimer-text col-9"><strong>Grace Precious Metals is a precious metals dealer.</strong> Gold IRAs require an IRS-approved custodian and an IRS-approved depository. Grace Precious Metals is not a financial, tax, or legal advisor. Gold and precious metals investments carry risk, including the potential loss of principal. Past performance does not guarantee future results. Consult qualified professionals before making investment decisions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="footer-col-title">Pages</span>
+        <ul>
+          <li><a href="/gpm-website/pricing">Our Pricing</a></li>
+          <li><a href="/gpm-website/preview/rollover.html">How It Works</a></li>
+          <li><a href="/gpm-website/preview/why-invest.html">Why Invest</a></li>
+          <li><a href="/gpm-website/preview/faq.html">FAQs</a></li>
+          <li><a href="/gpm-website/who-we-are">Who We Are</a></li>
+          <li><a href="/williams-story">William&rsquo;s Story</a></li>
+          <li><a href="/gpm-website/advisor">Talk to an Advisor</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Resources</span>
+        <ul>
+          <li><a href="/gpm-website/resources">Resources Library</a></li>
+          <li><a href="/gpm-website/resources/buyback">Buyback</a></li>
+          <li><a href="/gpm-website/resources/round-trip-cost">Round-trip Cost</a></li>
+          <li><a href="/gpm-website/resources/numismatic-coins">Numismatic Coins</a></li>
+          <li><a href="/gpm-website/rollover/inherited-ira">Inherited IRA</a></li>
+          <li><a href="/gpm-website/rollover/transfer">Transfer Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Talk to Us</span>
+        <ul>
+          <li><a href="/gpm-website/briefing">Get the Briefing</a></li>
+          <li><a href="/gpm-website/contact">Contact</a></li>
+        </ul>
+        <p class="muted-note">Office hours and phone &mdash; pending confirmation.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Compliance</span>
+        <ul>
+          <li><a href="/gpm-website/legal/privacy">Privacy</a></li>
+          <li><a href="/gpm-website/legal/terms">Terms</a></li>
+          <li><a href="/gpm-website/legal/disclosures">Disclosures</a></li>
+          <li><a href="/gpm-website/legal/licenses">State Licenses</a></li>
+          <li><a href="/gpm-website/who-we-are/compliance">How We Operate</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Grace Precious Metals, [address &mdash; pending confirmation]. &copy; 2026 Grace Precious Metals. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var triggers = document.querySelectorAll('.nav-item-dropdown > .nav-link');
+    triggers.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var open = t.getAttribute('aria-expanded') === 'true';
+        t.setAttribute('aria-expanded', String(!open));
+      });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { t.setAttribute('aria-expanded', 'false'); t.blur(); }
+      });
+    });
+  }());
+</script>
+
+</body>
+</html>
