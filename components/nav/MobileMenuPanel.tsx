@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { CTAButton } from '@/components/cta'
 import { Logomark } from './Logomark'
 
@@ -12,10 +13,19 @@ import { Logomark } from './Logomark'
 // Focus management: on open, focus moves to the first nav link. Tab cycles
 // within the panel. On close, focus returns to the hamburger trigger — that's
 // handled in SiteHeader (it owns the trigger ref).
+//
+// Items with `children` render as an inset group: parent link first, then
+// nested children indented under it. No collapse — the panel has the height
+// for the full structure.
 
+interface NavChild {
+  label: string
+  href: string
+}
 interface NavItem {
   label: string
   href: string
+  children?: ReadonlyArray<NavChild>
 }
 
 interface MobileMenuPanelProps {
@@ -26,6 +36,10 @@ interface MobileMenuPanelProps {
 
 export function MobileMenuPanel({ open, onClose, nav }: MobileMenuPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
+
+  const isCurrent = (href: string) =>
+    pathname === href || (href !== '/' && pathname.startsWith(href + '/'))
 
   // Focus first nav link on open
   useEffect(() => {
@@ -126,22 +140,73 @@ export function MobileMenuPanel({ open, onClose, nav }: MobileMenuPanelProps) {
         </div>
 
         <nav aria-label="Primary mobile" className="flex flex-col" style={{ gap: 20 }}>
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={onClose}
-              className="no-underline transition-colors duration-color hover:no-underline"
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 16,
-                fontWeight: 500,
-                color: 'var(--gpm-walnut)',
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {nav.map((item) =>
+            item.children ? (
+              <div key={item.href} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <Link
+                  href={item.href}
+                  onClick={onClose}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 16,
+                    fontWeight: 500,
+                    color: 'var(--gpm-walnut)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {item.label}
+                </Link>
+                <ul
+                  style={{
+                    listStyle: 'none',
+                    padding: 0,
+                    margin: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                    paddingLeft: 14,
+                    borderLeft: '1px solid rgba(184, 150, 46, 0.25)',
+                  }}
+                >
+                  {item.children.map((c) => (
+                    <li key={c.href}>
+                      <Link
+                        href={c.href}
+                        onClick={onClose}
+                        aria-current={isCurrent(c.href) ? 'page' : undefined}
+                        style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: 14,
+                          fontWeight: 500,
+                          color: 'var(--gpm-ink-body)',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        {c.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onClose}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                className="no-underline transition-colors duration-color hover:no-underline"
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 16,
+                  fontWeight: 500,
+                  color: 'var(--gpm-walnut)',
+                }}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div
