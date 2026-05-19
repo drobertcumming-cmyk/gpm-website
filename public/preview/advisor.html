@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talk to an Advisor — Grace Precious Metals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap">
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img { display: block; max-width: 100%; height: auto; }
+a { text-decoration: none; }
+ul { list-style: none; }
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --cream-canvas: #F5F0E1;
+  --canvas-deep: #F0E9D6;
+  --canvas-card: #F5F0E1;
+  --walnut-deep: #3D2817;
+  --walnut-mid: #5C4632;
+  --walnut-footer: #2A1B0E;
+  --gold-secondary: #9C7322;
+  --gold-deep: #B8962E;
+  --gold-hover: #9A7D26;
+  --border: #E8E0D4;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--walnut-deep);
+  line-height: 1.6;
+  background: var(--cream-canvas);
+}
+
+/* ===== SITE HEADER / NAV ===== */
+.site-header {
+  background: var(--cream-canvas);
+  border-bottom: 0.5px solid rgba(184, 150, 46, 0.18);
+  position: relative;
+  z-index: 100;
+}
+.site-header .header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.site-header .header-logo-icon {
+  flex-shrink: 0;
+}
+.site-header .header-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.site-header .header-wordmark {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #3D2817;
+  line-height: 1;
+}
+.site-header .header-tagline {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  color: #9C7322;
+  text-transform: uppercase;
+  letter-spacing: 0.20em;
+  line-height: 1;
+}
+.site-header .header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.site-header .header-nav a {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #2D2620;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.site-header .header-nav a:hover {
+  color: #9C7322;
+}
+.site-header .header-nav-divider {
+  width: 0.5px;
+  height: 16px;
+  background: rgba(45, 38, 32, 0.20);
+  margin: 0;
+}
+.site-header .header-cta-outline {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #2D2620;
+  background: transparent;
+  border: 0.5px solid #2D2620;
+  border-radius: 2px;
+  padding: 9px 18px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.site-header .header-cta-outline:hover {
+  background: #2D2620;
+  color: #F2EDE0;
+}
+.site-header .header-cta-solid {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: var(--gold-deep);
+  border: none;
+  border-radius: 2px;
+  padding: 9px 18px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.site-header .header-cta-solid:hover {
+  background: var(--gold-hover);
+}
+
+/* ===== MAIN TWO-COLUMN LAYOUT ===== */
+main.advisor-main,
+.advisor-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  display: grid !important;
+  grid-template-columns: 1fr 400px !important;
+  gap: 80px;
+  align-items: start !important; /* CRITICAL BUG FIX: Snaps layouts to independent content heights */
+}
+
+/* Left column — trust content */
+.advisor-trust {
+  max-width: 620px;
+}
+.advisor-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold-secondary);
+  letter-spacing: 0.24em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.advisor-h1 {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.advisor-lede {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.65;
+  margin-bottom: 48px;
+}
+.advisor-section {
+  padding-top: 40px;
+  border-top: 1px solid rgba(184, 150, 46, 0.25);
+}
+.advisor-section + .advisor-section {
+  margin-top: 40px;
+}
+.advisor-section h2 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.advisor-section p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--walnut-deep);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.advisor-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Right column — sticky form card */
+.advisor-form-wrapper {
+  position: sticky !important;
+  top: 40px !important;
+  height: auto !important;
+  align-self: start !important; /* CRITICAL BUG FIX: Unlinks track from left rail height inheritance */
+}
+.advisor-form-card {
+  background: var(--canvas-deep) !important;
+  border-radius: 6px;
+  padding: 36px 32px !important;
+  box-shadow: 0 1px 4px rgba(61, 40, 23, 0.06);
+  height: auto !important;
+  max-height: max-content !important; /* CRITICAL BUG FIX: Shrinks background bounding container tight around components. (Note: source spec had `max-content: max-content` which is not a valid CSS property; corrected to `max-height`.) */
+  display: flex !important;
+  flex-direction: column !important;
+}
+.form-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold-secondary);
+  letter-spacing: 0.24em;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.form-heading {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.form-subhead {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.advisor-form label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--walnut-deep);
+  margin-bottom: 5px;
+}
+.advisor-form label .optional-modifier {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--walnut-mid);
+}
+.advisor-form input[type="text"],
+.advisor-form input[type="email"],
+.advisor-form input[type="tel"],
+.advisor-form textarea {
+  display: block;
+  width: 100%;
+  background: var(--canvas-card);
+  border: 0.5px solid rgba(61, 40, 23, 0.18);
+  border-radius: 3px;
+  padding: 11px 14px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--walnut-deep);
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.advisor-form input::placeholder,
+.advisor-form textarea::placeholder {
+  color: rgba(61, 40, 23, 0.45);
+}
+.advisor-form input:focus,
+.advisor-form textarea:focus {
+  border-color: rgba(61, 40, 23, 0.50);
+}
+.advisor-form textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+.advisor-form .form-submit {
+  display: block;
+  width: 100%;
+  background: var(--gold-deep);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  padding: 14px 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s ease;
+}
+.advisor-form .form-submit:hover {
+  background: var(--gold-hover);
+}
+.advisor-form .form-submit.sending {
+  background: rgba(184, 150, 46, 0.6);
+  color: var(--canvas-card);
+  cursor: not-allowed;
+}
+.form-privacy {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.5;
+  text-align: center;
+  margin-top: 14px;
+}
+.form-error {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--walnut-deep);
+  background: rgba(61, 40, 23, 0.06);
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ===== DISCLOSURE BAND ===== */
+.disclosure-band {
+  background: var(--canvas-deep);
+  padding: 64px 0;
+}
+.disclosure-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  max-width: 780px;
+}
+.disclosure-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold-secondary);
+  letter-spacing: 0.24em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.disclosure-body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--walnut-mid);
+  line-height: 1.7;
+}
+
+/* ===== DISCLAIMER BAND ===== */
+.section-disclaimer {
+  padding: 48px 0;
+  background: var(--cream-canvas);
+}
+.section-disclaimer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.disclaimer-text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(61, 40, 23, 0.75);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.disclaimer-text:last-of-type {
+  margin-bottom: 0;
+}
+.disclaimer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(184, 150, 46, 0.25);
+  margin-top: 24px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--walnut-footer);
+  padding: 48px 0 0;
+}
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.footer-col-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold-deep);
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 16px;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+.footer-col ul li a {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: #F2EDE0;
+  text-decoration: none;
+  line-height: 1.8;
+  transition: color 0.2s ease;
+}
+.footer-col ul li a:hover {
+  color: #FFFDF5;
+}
+.footer-col .muted-note {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: #6B6156;
+  line-height: 1.55;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(184, 150, 46, 0.20);
+  margin-top: 32px;
+  padding: 20px 0;
+}
+.footer-bottom p {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: #6B6156;
+  line-height: 1.55;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .site-header .header-inner {
+    padding: 18px 24px;
+  }
+  .site-header .header-wordmark {
+    font-size: 22px;
+  }
+  .site-header .header-tagline {
+    font-size: 9px;
+  }
+  .site-header .header-nav a {
+    font-size: 13px;
+  }
+  .site-header .header-cta-outline,
+  .site-header .header-cta-solid {
+    font-size: 12px;
+  }
+  .advisor-main {
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    padding: 64px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .header-inner {
+    padding: 16px 24px;
+  }
+  .site-header .header-nav {
+    display: none;
+  }
+  .site-header .header-wordmark {
+    font-size: 20px;
+  }
+  .site-header .header-tagline {
+    font-size: 9px;
+  }
+  .advisor-main {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 48px 24px;
+  }
+  .advisor-trust {
+    max-width: 100%;
+  }
+  .advisor-h1 {
+    font-size: 30px;
+  }
+  .advisor-form-wrapper {
+    position: static !important;
+  }
+  .advisor-form-card {
+    padding: 32px 24px;
+  }
+  .advisor-form label {
+    font-size: 14px;
+  }
+  .advisor-form input[type="text"],
+  .advisor-form input[type="email"],
+  .advisor-form input[type="tel"],
+  .advisor-form textarea {
+    font-size: 16px;
+    padding: 13px 14px;
+  }
+  .advisor-form .form-submit {
+    padding: 16px 0;
+    font-size: 15px;
+    min-height: 44px;
+  }
+  .advisor-section p {
+    font-size: 16px;
+  }
+  .disclosure-inner {
+    padding: 0 24px;
+  }
+  .section-disclaimer .container {
+    padding: 0 24px;
+  }
+  .footer .container {
+    padding: 0 24px;
+  }
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/gpm-website/" class="header-logo">
+      <svg class="header-logo-icon" aria-hidden="true" width="44" height="44" viewBox="0 0 64 66" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#9C7322" stroke="#9C7322">
+          <circle cx="32" cy="6" r="5"/>
+          <rect x="30" y="11" width="4" height="50"/>
+          <rect x="18" y="61" width="28" height="3.5" rx="0.5"/>
+          <rect x="0" y="20" width="64" height="3" rx="0.5"/>
+          <rect x="6" y="23" width="2" height="6"/>
+          <rect x="56" y="23" width="2" height="6"/>
+        </g>
+        <path d="M 1 29 Q 7 39 13 29" fill="none" stroke="#9C7322" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 51 29 Q 57 39 63 29" fill="none" stroke="#9C7322" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="header-logo-text">
+        <span class="header-wordmark">Grace</span>
+        <span class="header-tagline">Precious Metals</span>
+      </div>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <a href="/gpm-website/pricing">Pricing</a>
+      <a href="/gpm-website/rollover">Gold IRA</a>
+      <a href="/gpm-website/who-we-are">Who we are</a>
+      <a href="/gpm-website/resources">Resources</a>
+      <div class="header-nav-divider" aria-hidden="true"></div>
+      <a href="/gpm-website/briefing" class="header-cta-outline">Get the briefing</a>
+      <a href="/gpm-website/advisor" class="header-cta-solid">Talk to an advisor</a>
+    </nav>
+  </div>
+</header>
+
+<main class="advisor-main">
+  <div class="advisor-trust">
+    <span class="advisor-eyebrow">TALK TO AN ADVISOR</span>
+    <h1 class="advisor-h1">An honest conversation, when you're ready.</h1>
+    <p class="advisor-lede">Tell us how to reach you. A Grace advisor will follow up to set a time. The call is free. You are not obligated to do anything as a result of it.</p>
+
+    <div class="advisor-section">
+      <h2>Who you will be talking to</h2>
+      <p>You will be talking to a Grace advisor. The advisor is salaried, not commissioned. Their pay does not change based on what you buy, when you buy, or whether you buy at all. They are not earning a commission on the call you are about to have, and they are not earning a commission on any decision you make afterwards.</p>
+      <p>That distinction is structural. An advisor whose pay depends on your decision is not your advisor; he is your salesperson. We settled that at the company level so the person on the call does not have to settle it call by call.</p>
+    </div>
+
+    <div class="advisor-section">
+      <h2>What the call is</h2>
+      <p>It is a conversation about whether a Gold IRA fits your situation, and if it does, what the next step would look like. We will answer questions about how it works, what it costs, what we sell, and what we do not. We will tell you the truth about the parts that are inconvenient, including the ones that might lead you to decide a Gold IRA is not right for you.</p>
+      <p>The call typically takes thirty minutes. If you need longer, we will book longer. If ten minutes is enough, we will end at ten.</p>
+    </div>
+
+    <div class="advisor-section">
+      <h2>What the call is not</h2>
+      <p>It is not a sales script. There is no quota the advisor is working toward, no special offer that expires at the end of the call, no urgency that requires you to decide today. If anyone you talk to at Grace tells you a price is only available right now, or that you need to act before a window closes, please write to us. We will want to know.</p>
+      <p>It is also not financial advice. Our advisors can explain Gold IRA mechanics, pricing, and process. They cannot tell you whether a Gold IRA belongs in your retirement portfolio. That conversation belongs between you and a fiduciary advisor who knows your full picture.</p>
+    </div>
+
+    <div class="advisor-section">
+      <h2>What happens after you submit this form</h2>
+      <p>A Grace advisor will email you within two business days to confirm receipt and offer a few times to talk. You pick the one that works. The call happens. You decide what to do next, on your own timeline.</p>
+      <p>If two business days is too long, you can also call us directly. The number is in the footer.</p>
+    </div>
+  </div>
+
+  <div class="advisor-form-wrapper">
+    <div class="advisor-form-card">
+      <span class="form-eyebrow">START THE CONVERSATION</span>
+      <h2 class="form-heading">Tell us how to reach you</h2>
+      <p class="form-subhead">A Grace advisor will follow up within two business days.</p>
+      <form class="advisor-form" action="#" method="post" novalidate>
+        <label for="advisor-name">Name</label>
+        <input type="text" id="advisor-name" name="name" placeholder="Your name" required>
+
+        <label for="advisor-email">Email</label>
+        <input type="email" id="advisor-email" name="email" placeholder="Your email" required>
+
+        <label for="advisor-phone">Phone</label>
+        <input type="tel" id="advisor-phone" name="phone" placeholder="Your phone number" required>
+
+        <label for="advisor-message">What's on your mind? <span class="optional-modifier">optional</span></label>
+        <textarea id="advisor-message" name="message" placeholder="A sentence or two helps the advisor prepare. Skip it if you'd rather just talk." rows="3"></textarea>
+
+        <button type="submit" class="form-submit">Send</button>
+      </form>
+      <p class="form-privacy">We do not sell or share your details.</p>
+      <div class="form-error" id="form-error"></div>
+    </div>
+  </div>
+</main>
+
+<section class="disclosure-band">
+  <div class="disclosure-inner">
+    <span class="disclosure-eyebrow">WHAT TO EXPECT</span>
+    <p class="disclosure-body">Grace advisors are salaried, never commissioned. The call is free and you can end it at any time. We do not record calls without telling you. We do not share your details with third parties. If something on the call does not match what we have published, please raise it with the advisor or write to us directly.</p>
+  </div>
+</section>
+
+<section class="section-disclaimer">
+  <div class="container">
+    <p class="disclaimer-text"><strong>Grace Precious Metals is a precious metals dealer.</strong> Gold IRAs require an IRS-approved custodian and an IRS-approved depository. Grace Precious Metals is not a financial, tax, or legal advisor. Gold and precious metals investments carry risk, including the potential loss of principal. Past performance does not guarantee future results. Consult qualified professionals before making investment decisions. Pricing reflects CFO-reviewed published policy as of the date shown.</p>
+    <div class="disclaimer-divider"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="footer-col-title">PAGES</span>
+        <ul>
+          <li><a href="/gpm-website/pricing">Our Pricing</a></li>
+          <li><a href="/gpm-website/rollover">How A Rollover Works</a></li>
+          <li><a href="/gpm-website/who-we-are">Who We Are</a></li>
+          <li><a href="/gpm-website/resources">Resources</a></li>
+          <li><a href="/gpm-website/advisor">Talk To An Advisor</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">RESOURCES</span>
+        <ul>
+          <li><a href="/gpm-website/resources">Resources Library</a></li>
+          <li><a href="/gpm-website/pricing/buyback">Buyback</a></li>
+          <li><a href="/gpm-website/pricing/numismatic-coins">Numismatic Coins</a></li>
+          <li><a href="/gpm-website/faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">TALK TO US</span>
+        <ul>
+          <li><a href="/gpm-website/briefing">Get the Briefing</a></li>
+          <li><a href="/gpm-website/advisor">Talk to an Advisor</a></li>
+        </ul>
+        <p class="muted-note" style="margin-top: 4px;">Office hours and phone — pending confirmation.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">COMPLIANCE</span>
+        <ul>
+          <li><a href="/gpm-website/legal/privacy">Privacy</a></li>
+          <li><a href="/gpm-website/legal/terms">Terms</a></li>
+          <li><a href="/gpm-website/legal/disclosures">Disclosures</a></li>
+          <li><a href="/gpm-website/legal/licenses">State Licenses</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Grace Precious Metals, [address — pending confirmation]. &copy; 2026 Grace Precious Metals. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var form = document.querySelector('.advisor-form');
+  var submitBtn = form.querySelector('.form-submit');
+  var errorDiv = document.getElementById('form-error');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    errorDiv.style.display = 'none';
+
+    var name = form.querySelector('#advisor-name').value.trim();
+    var email = form.querySelector('#advisor-email').value.trim();
+    var phone = form.querySelector('#advisor-phone').value.trim();
+
+    if (!name || !email || !phone) {
+      errorDiv.textContent = 'Please fill in all required fields.';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorDiv.textContent = 'Please enter a valid email address.';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    submitBtn.textContent = 'Sending…';
+    submitBtn.classList.add('sending');
+    submitBtn.disabled = true;
+
+    setTimeout(function() {
+      submitBtn.textContent = 'Send';
+      submitBtn.classList.remove('sending');
+      submitBtn.disabled = false;
+    }, 2000);
+  });
+})();
+</script>
+
+</body>
+</html>
