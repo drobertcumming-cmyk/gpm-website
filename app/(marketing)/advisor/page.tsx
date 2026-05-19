@@ -52,20 +52,34 @@ const PAGE_CSS = `
   width: 95%;
   margin: 0 auto;
 }
+/* CMO emergency-fix block (2026-05-19): force a 1fr 400px grid with
+   align-items: start so the right column track never stretches to the
+   left column's height. Three children explicitly placed — trust hero
+   row 1 / trust sections row 2 / form wrapper col 2 spanning both rows. */
+.gpm-advisor-page main.advisor-main,
 .gpm-advisor-page .advisor-main {
-  padding: 80px 0;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: 32px;
+  display: grid !important;
+  grid-template-columns: 1fr 400px !important;
+  column-gap: 48px;
   row-gap: 48px;
-  align-items: start;
+  align-items: start !important;
+  padding: 80px 0;
 }
-.gpm-advisor-page .advisor-trust { grid-column: span 7; }
+.gpm-advisor-page .advisor-trust-hero {
+  grid-column: 1;
+  grid-row: 1;
+}
+.gpm-advisor-page .advisor-sections-mobile-anchor {
+  grid-column: 1;
+  grid-row: 2;
+}
 .gpm-advisor-page .advisor-form-wrapper {
-  grid-column: span 5;
-  position: sticky;
-  top: 40px; /* Anchors the card at the top of the viewport during scroll */
-  height: auto;
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  position: sticky !important;
+  top: 40px !important;
+  height: auto !important;
+  align-self: start !important;
 }
 
 /* Left column — trust */
@@ -123,16 +137,17 @@ const PAGE_CSS = `
 
 /* Right column — intake console */
 .gpm-advisor-page .advisor-form-card {
-  background: var(--canvas-deep);
+  /* CMO emergency-fix block: lock the card to its content height with
+     max-content + flex-column so the dark-cream background ends a few
+     pixels below the privacy line. Padding 36/32. */
+  background: var(--canvas-deep) !important;
+  padding: 36px 32px !important;
+  height: auto !important;
+  max-height: max-content !important;
+  display: flex !important;
+  flex-direction: column !important;
   border-radius: 4px;
-  padding: 40px 32px;
   box-shadow: 0 1px 4px rgba(61, 40, 23, 0.06);
-  /* Snap the card to its content height — prevents stretch when the
-     parent wrapper happens to receive a computed height from the
-     sticky/grid context. */
-  height: auto;
-  display: flex;
-  flex-direction: column;
 }
 .gpm-advisor-page .form-eyebrow {
   display: block;
@@ -317,21 +332,24 @@ const PAGE_CSS = `
   }
 }
 @media (max-width: 768px) {
+  /* Mobile must beat the desktop !important rules. */
+  .gpm-advisor-page main.advisor-main,
   .gpm-advisor-page .advisor-main {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     column-gap: 0;
     row-gap: 32px;
     padding: 48px 0;
   }
-  .gpm-advisor-page .advisor-trust,
-  .gpm-advisor-page .advisor-form-wrapper { grid-column: 1 / -1; }
-  /* Mobile ordering: hero block first, then form, then trust sections.
-     Achieved by splitting the trust block into two regions and
-     promoting the form via the CSS order property. The hero (eyebrow +
-     H1 + lede) remains at the top; the four trust sections render
-     after the form. */
+  .gpm-advisor-page .advisor-trust-hero,
+  .gpm-advisor-page .advisor-sections-mobile-anchor,
   .gpm-advisor-page .advisor-form-wrapper {
-    position: static;
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+  /* Mobile ordering via flex/grid order: hero → form → trust sections.
+     Promotes the conversion surface above the supporting prose. */
+  .gpm-advisor-page .advisor-form-wrapper {
+    position: static !important;
     order: 2;
   }
   .gpm-advisor-page .advisor-sections-mobile-anchor { order: 3; }
