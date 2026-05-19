@@ -218,7 +218,7 @@ body {
   gap: 12px;
   flex-shrink: 0;
 }
-.header-cta-outline {
+.cta-outline {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
@@ -231,8 +231,8 @@ body {
   transition: background 0.2s ease, color 0.2s ease;
   display: inline-block;
 }
-.header-cta-outline:hover { background: #2D2620; color: var(--cream); }
-.header-cta-solid {
+.cta-outline:hover { background: #2D2620; color: var(--cream); }
+.cta-solid {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
@@ -245,7 +245,7 @@ body {
   transition: background 0.2s ease;
   display: inline-block;
 }
-.header-cta-solid:hover { background: var(--gold-hover); }
+.cta-solid:hover { background: var(--gold-hover); }
 
 /* Mobile menu toggle */
 .menu-toggle {
@@ -708,7 +708,7 @@ body {
 }
 @media (max-width: 768px) {
   .header-nav-primary,
-  .header-cta-group .header-cta-outline { display: none; }
+  .header-cta-group .cta-outline { display: none; }
   .menu-toggle { display: inline-flex; }
   .header-inner { padding: 18px 0; gap: 12px; }
   .header-wordmark { font-size: 20px; }
@@ -740,60 +740,17 @@ body {
   .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
   .closing-band { padding: 40px 0 48px; }
 }
-
-/* ====================================================================
-   CMO HEADER LOCKDOWN (2026-05-19, paths B+D authorized).
-   !important block to force pixel-perfect consistency across all four
-   standalone preview surfaces (advisor.html, faq.html, rollover.html,
-   why-invest.html). Logo SVG uses the canonical balance scales
-   (viewBox 0 0 64 66, gold-secondary, mixed filled/stroked) per
-   GPM_CC_Logo_Audit_Instruction_v1 and commit 3b5eaf1. All `main`
-   resets are scoped to body.gpm-preview-page so they cannot leak
-   into the TSX (marketing) layout if this CSS is ever copy-pasted.
-   ==================================================================== */
-body.gpm-preview-page header.site-header,
-body.gpm-preview-page .site-header {
-  position: relative !important;
-  width: 100% !important;
-  background: #F5F0E1 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border-bottom: 0.5px solid rgba(184, 150, 46, 0.18) !important;
-  z-index: 1000 !important;
-}
-body.gpm-preview-page .header-inner {
-  max-width: 1280px !important;
-  width: 100% !important;
-  margin: 0 auto !important;
-  padding: 22px 32px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  box-sizing: border-box !important;
-}
-body.gpm-preview-page .header-logo-icon {
-  width: 48px !important;
-  height: 48px !important;
-  flex-shrink: 0 !important;
-}
-body.gpm-preview-page main,
-body.gpm-preview-page .briefing-main,
-body.gpm-preview-page .advisor-main,
-body.gpm-preview-page .page-header,
-body.gpm-preview-page .hero-editorial {
-  margin-top: 0 !important;
-}
 </style>
 </head>
-<body class="gpm-preview-page">
+<body>
 
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- ===== SITE HEADER ===== -->
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="header-inner">
-    <a href="/gpm-website/" class="header-logo">
-      <svg class="header-logo-icon" aria-hidden="true" width="48" height="48" viewBox="0 0 64 66" xmlns="http://www.w3.org/2000/svg">
+    <a href="/gpm-website/" class="header-logo" aria-label="Grace Precious Metals — home">
+      <svg aria-hidden="true" width="44" height="44" viewBox="0 0 64 66" xmlns="http://www.w3.org/2000/svg">
         <g fill="#9C7322" stroke="#9C7322">
           <circle cx="32" cy="6" r="5"/>
           <rect x="30" y="11" width="4" height="50"/>
@@ -805,20 +762,33 @@ body.gpm-preview-page .hero-editorial {
         <path d="M 1 29 Q 7 39 13 29" fill="none" stroke="#9C7322" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M 51 29 Q 57 39 63 29" fill="none" stroke="#9C7322" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <div class="header-logo-text">
+      <span class="header-logo-text">
         <span class="header-wordmark">Grace</span>
         <span class="header-tagline">Precious Metals</span>
-      </div>
+      </span>
     </a>
-    <nav class="header-nav" aria-label="Main navigation">
-      <a href="/gpm-website/pricing">Pricing</a>
-      <a href="/gpm-website/preview/rollover.html">Gold IRA</a>
-      <a href="/gpm-website/who-we-are">Who we are</a>
-      <a href="/gpm-website/resources">Resources</a>
-      <div class="header-nav-divider" aria-hidden="true"></div>
-      <a href="/gpm-website/briefing" class="header-cta-outline">Get the Briefing</a>
-      <a href="/gpm-website/preview/advisor.html" class="header-cta-solid">Talk to an advisor</a>
+
+    <nav class="header-nav-primary" aria-label="Primary">
+      <a href="/gpm-website/pricing" class="nav-link">Pricing</a>
+      <div class="nav-item-dropdown">
+        <a href="/gpm-website/preview/rollover.html" class="nav-link active" aria-current="page" aria-haspopup="true" aria-expanded="false">
+          Gold IRA <span class="nav-caret" aria-hidden="true"></span>
+        </a>
+        <div class="nav-dropdown" role="menu" aria-label="Gold IRA submenu">
+          <a href="/gpm-website/preview/rollover.html" role="menuitem" aria-current="page">How It Works</a>
+          <a href="/gpm-website/preview/why-invest.html" role="menuitem">Why Invest</a>
+          <a href="/gpm-website/preview/faq.html" role="menuitem">FAQs</a>
+        </div>
+      </div>
+      <a href="/gpm-website/who-we-are" class="nav-link">Who We Are</a>
+      <a href="/gpm-website/resources" class="nav-link">Resources</a>
     </nav>
+
+    <div class="header-cta-group">
+      <a href="/gpm-website/briefing" class="cta-outline">Get the Briefing</a>
+      <a href="/gpm-website/advisor" class="cta-solid">Talk to an Advisor</a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    </div>
   </div>
 </header>
 
