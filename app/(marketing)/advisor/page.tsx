@@ -54,7 +54,8 @@ const PAGE_CSS = `
 }
 /* CMO Vertical Track Protocol (2026-05-19): force 1fr/400px grid,
    align-items: start, and a 32px top-padding cushion below the
-   header beam. Replaces the prior 80px padding shorthand. */
+   header beam. Now also contained in a centered 1200px rail to
+   match the rest of the site (was bleeding to viewport edges). */
 .gpm-advisor-page main.advisor-main,
 .gpm-advisor-page .advisor-main {
   display: grid !important;
@@ -62,8 +63,13 @@ const PAGE_CSS = `
   gap: 80px !important;
   align-items: start !important;
   margin-top: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 1200px !important;
   padding-top: 32px !important;
   padding-bottom: 80px;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
   box-sizing: border-box !important;
 }
 
@@ -86,7 +92,12 @@ const PAGE_CSS = `
   gap: 80px !important;
   align-items: start !important;
   margin-top: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 1200px !important;
   padding-top: 32px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
   box-sizing: border-box !important;
 }
 
@@ -328,6 +339,16 @@ header svg[viewBox="0 0 64 66"] {
 }
 
 /* Disclosure band */
+/* Shared 1200px content rail used by .section-disclaimer and any
+   other section needing a centered constraint — matches the rest
+   of the site. */
+.gpm-advisor-page .wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
 .gpm-advisor-page .disclosure-band {
   background: var(--canvas-deep);
   padding: 64px 0;
