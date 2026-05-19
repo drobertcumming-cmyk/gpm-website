@@ -626,43 +626,59 @@ body {
 }
 
 /* ====================================================================
-   CMO HEADER ALIGNMENT LOCKDOWN (2026-05-19 revised) — CSS-ONLY.
-   Header DOM and nav markup NOT touched. Pure style overrides via
-   !important to normalize logo size, vertical alignment, horizontal
-   positioning, and the protective cushion below the header band.
-   Revised from 51d7e17:
-     - Block 3 adds min-width / min-height to prevent SVG shrink-grow.
-     - Block 4 adds padding-top: 48px and drops .body-section.
+   CMO HEADER ALIGNMENT LOCKDOWN (2026-05-19 v2) — CSS-ONLY.
+   Vertical track protocol — fixed 92px header on a flex-column body.
+   Header DOM and nav markup NOT touched. Canonical brand SVG (from
+   commit 3b5eaf1 audit, viewBox 0 0 64 66, gold-secondary, mixed
+   filled/stroked) preserved in place; CSS only locks its display
+   dimensions to 48x48.
+   Scoping: this CSS lives in each standalone HTML file's inline
+   <style> block. It can NOT reach the TSX (marketing) <body> from
+   app/layout.tsx because that body is in a different document. If
+   anyone lifts this CSS into a shared stylesheet later, the `body`
+   and `main` rules need to be scoped under a class first.
    ==================================================================== */
 
-/* 1. Global Header Reset */
+/* Force the body to act as a strict vertical layout stack container */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100vh !important;
+}
+
+/* Hard-lock structural dimensions of the global header container banner */
 header.site-header,
 .site-header {
   position: relative !important;
+  display: block !important;
   width: 100% !important;
+  height: 92px !important; /* Fixed vertical plane footprint */
   background: #F5F0E1 !important;
   margin: 0 !important;
   padding: 0 !important;
   border-bottom: 0.5px solid rgba(184, 150, 46, 0.18) !important;
   z-index: 1000 !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
 }
 
-/* 2. Global Header Inner Flex Bounds */
+/* Force inner elements to align horizontally without page shifts */
 .header-inner {
   max-width: 1280px !important;
   width: 100% !important;
+  height: 100% !important;
   margin: 0 auto !important;
-  padding: 22px 32px !important;
+  padding: 0 32px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   box-sizing: border-box !important;
 }
 
-/* 3. Global Hard-Lock on Logo Canvas Proportions */
-.header-logo-icon,
-.header-logo svg,
-.header-logo img {
+/* Hard-lock brand logo proportions */
+.header-logo-icon {
   width: 48px !important;
   height: 48px !important;
   min-width: 48px !important;
@@ -670,14 +686,14 @@ header.site-header,
   flex-shrink: 0 !important;
 }
 
-/* 4. Global Content Offset Shield (Fixes Header Overlap & Jumping) */
+/* Zero out generic padding modifications that trigger content shifting */
 main,
 .briefing-main,
 .advisor-main,
 .page-header,
 .hero-editorial {
   margin-top: 0 !important;
-  padding-top: 48px !important; /* Uniform protective cushion below the header */
+  padding-top: 0 !important;
 }
 </style>
 </head>
