@@ -67,28 +67,55 @@ const PAGE_CSS = `
   box-sizing: border-box !important;
 }
 
-/* CMO header-on-advisor consistency lock (2026-05-19). These rules
-   are inside the advisor page's <style> block and therefore only
-   apply when /advisor is being rendered. They beat any inline
-   SiteHeader styles via !important to align /advisor's header with
-   the other live views. */
-header.site-header {
-  height: 92px !important;
-  flex-shrink: 0 !important;
+/* CMO Vertical Track Protocol v4 (2026-05-19) — selectors corrected
+   to match the React-rendered DOM. Prior header.site-header etc.
+   were dead targets (the React SiteHeader uses Tailwind utilities,
+   not the standalone-HTML class names). These rules live inside the
+   advisor page's <style> block so they only apply when /advisor is
+   rendered. */
+
+/* 1. Defensive form-card and form-wrapper rules. The class-prefix
+   attribute selectors are redundant against the literal class names
+   in the React DOM (no hash), but match defensively if anything
+   ever changes. */
+.gpm-advisor-page main,
+.gpm-advisor-page .advisor-main,
+.gpm-advisor-page [class*="advisor-main"] {
+  display: grid !important;
+  grid-template-columns: 1fr 400px !important;
+  gap: 80px !important;
+  align-items: start !important;
+  margin-top: 0 !important;
+  padding-top: 32px !important;
+  box-sizing: border-box !important;
 }
-.header-logo-icon,
-.header-logo svg {
+
+.gpm-advisor-page .advisor-form-card,
+.gpm-advisor-page [class*="form-card"],
+.gpm-advisor-page [class*="form-wrapper"] {
+  height: auto !important;
+  max-height: max-content !important;
+  align-self: start !important;
+}
+
+/* 2. Header utility-class selectors. The React SiteHeader renders as
+   <header class="w-full sticky top-0 z-30 bg-canvas">. The prior
+   header.site-header selector did NOT match this — these do. */
+header.w-full.sticky,
+header[class*="bg-canvas"] {
+  height: 92px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 3. Canonical logo lock via viewBox attribute selector. Matches the
+   inline SVG the Logomark renders without needing a class on the SVG. */
+header svg[viewBox="0 0 64 66"] {
   width: 48px !important;
   height: 48px !important;
   min-width: 48px !important;
   min-height: 48px !important;
   flex-shrink: 0 !important;
-}
-.header-nav {
-  display: flex !important;
-  align-items: center !important;
-  gap: 24px !important;
-  margin-left: auto !important;
 }
 .gpm-advisor-page .advisor-trust-hero {
   grid-column: 1;
