@@ -209,7 +209,7 @@ export function SiteHeader() {
               <CTAButton href="/briefing" tier={3}>
                 Get the Briefing
               </CTAButton>
-              <CTAButton href="/advisor" tier={1}>
+              <CTAButton href="/preview/advisor.html" tier={1}>
                 Talk to an Advisor
               </CTAButton>
             </div>
@@ -218,7 +218,7 @@ export function SiteHeader() {
           {/* Mobile right cluster */}
           <div className="flex lg:hidden items-center" style={{ gap: 8 }}>
             <CTAButton
-              href="/advisor"
+              href="/preview/advisor.html"
               tier={1}
               style={{ fontSize: 12, padding: '8px 16px', borderRadius: 4 }}
             >
