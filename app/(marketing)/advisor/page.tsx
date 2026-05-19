@@ -64,7 +64,8 @@ const PAGE_CSS = `
 .gpm-advisor-page .advisor-form-wrapper {
   grid-column: span 5;
   position: sticky;
-  top: 32px;
+  top: 40px; /* Anchors the card at the top of the viewport during scroll */
+  height: auto;
 }
 
 /* Left column — trust */
