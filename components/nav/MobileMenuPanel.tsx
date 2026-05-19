@@ -234,7 +234,7 @@ export function MobileMenuPanel({ open, onClose, nav }: MobileMenuPanelProps) {
             gap: 12,
           }}
         >
-          <CTAButton href="/preview/advisor.html" tier={1} onClick={onClose} className="w-full block">
+          <CTAButton href="/advisor" tier={1} onClick={onClose} className="w-full block">
             Talk to an Advisor
           </CTAButton>
           <CTAButton href="/briefing" tier={3} onClick={onClose} className="w-full block">

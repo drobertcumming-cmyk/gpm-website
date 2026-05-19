@@ -52,10 +52,9 @@ const PAGE_CSS = `
   width: 95%;
   margin: 0 auto;
 }
-/* CMO emergency-fix block (2026-05-19): force a 1fr 400px grid with
-   align-items: start so the right column track never stretches to the
-   left column's height. Three children explicitly placed — trust hero
-   row 1 / trust sections row 2 / form wrapper col 2 spanning both rows. */
+/* CMO Vertical Track Protocol (2026-05-19): force 1fr/400px grid,
+   align-items: start, and a 32px top-padding cushion below the
+   header beam. Replaces the prior 80px padding shorthand. */
 .gpm-advisor-page main.advisor-main,
 .gpm-advisor-page .advisor-main {
   display: grid !important;
@@ -63,7 +62,34 @@ const PAGE_CSS = `
   column-gap: 48px;
   row-gap: 48px;
   align-items: start !important;
-  padding: 80px 0;
+  margin-top: 0 !important;
+  padding-top: 32px !important;
+  padding-bottom: 80px;
+  box-sizing: border-box !important;
+}
+
+/* CMO header-on-advisor consistency lock (2026-05-19). These rules
+   are inside the advisor page's <style> block and therefore only
+   apply when /advisor is being rendered. They beat any inline
+   SiteHeader styles via !important to align /advisor's header with
+   the other live views. */
+header.site-header {
+  height: 92px !important;
+  flex-shrink: 0 !important;
+}
+.header-logo-icon,
+.header-logo svg {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  flex-shrink: 0 !important;
+}
+.header-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  margin-left: auto !important;
 }
 .gpm-advisor-page .advisor-trust-hero {
   grid-column: 1;

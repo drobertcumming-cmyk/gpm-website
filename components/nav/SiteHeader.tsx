@@ -71,30 +71,29 @@ const PRIMARY_NAV: ReadonlyArray<NavItem> = [
     footer: { label: 'See full pricing page', href: '/pricing' },
   },
   {
-    // Gold IRA pillar dropdown — per CMO direction (2026-05-18), the three
-    // child links route to the standalone production-template HTML at
-    // /preview/ rather than the canonical TSX routes. The TSX routes
-    // (/rollover, /why-invest, /faq) remain reachable via direct URL but
-    // are not linked from this nav surface.
+    // Gold IRA pillar dropdown — per CMO direction (2026-05-19),
+    // reverted to canonical TSX routes (/rollover, /why-invest, /faq)
+    // from the previous /preview/*.html routing (f1626f3). Next.js
+    // basePath auto-prepends "/gpm-website" at deploy.
     label: 'Gold IRA',
-    href: '/preview/rollover.html',
+    href: '/rollover',
     eyebrow: 'GOLD IRA',
     children: [
       {
         label: 'How it works',
-        href: '/preview/rollover.html',
+        href: '/rollover',
         description:
           'What a Gold IRA is, how you fund it, what you can hold, and how long it takes to set up.',
       },
       {
         label: 'Why invest',
-        href: '/preview/why-invest.html',
+        href: '/why-invest',
         description:
           'The reasons people hold gold in a retirement portfolio, and what gold does and does not do.',
       },
       {
         label: 'FAQs',
-        href: '/preview/faq.html',
+        href: '/faq',
         description: 'Twelve questions we get most often, answered in plain language.',
       },
     ],
@@ -209,7 +208,7 @@ export function SiteHeader() {
               <CTAButton href="/briefing" tier={3}>
                 Get the Briefing
               </CTAButton>
-              <CTAButton href="/preview/advisor.html" tier={1}>
+              <CTAButton href="/advisor" tier={1}>
                 Talk to an Advisor
               </CTAButton>
             </div>
@@ -218,7 +217,7 @@ export function SiteHeader() {
           {/* Mobile right cluster */}
           <div className="flex lg:hidden items-center" style={{ gap: 8 }}>
             <CTAButton
-              href="/preview/advisor.html"
+              href="/advisor"
               tier={1}
               style={{ fontSize: 12, padding: '8px 16px', borderRadius: 4 }}
             >
