@@ -127,6 +127,12 @@ const PAGE_CSS = `
   border-radius: 4px;
   padding: 40px 32px;
   box-shadow: 0 1px 4px rgba(61, 40, 23, 0.06);
+  /* Snap the card to its content height — prevents stretch when the
+     parent wrapper happens to receive a computed height from the
+     sticky/grid context. */
+  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 .gpm-advisor-page .form-eyebrow {
   display: block;
