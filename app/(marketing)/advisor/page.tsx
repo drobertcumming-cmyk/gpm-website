@@ -109,25 +109,19 @@ const PAGE_CSS = `
   align-self: start !important;
 }
 
-/* 2. Header utility-class selectors. The React SiteHeader renders as
-   <header class="w-full sticky top-0 z-30 bg-canvas">. The prior
-   header.site-header selector did NOT match this — these do. */
-header.w-full.sticky,
-header[class*="bg-canvas"] {
-  height: 92px !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-/* 3. Canonical logo lock via viewBox attribute selector. Matches the
-   inline SVG the Logomark renders without needing a class on the SVG. */
-header svg[viewBox="0 0 64 66"] {
-  width: 48px !important;
-  height: 48px !important;
-  min-width: 48px !important;
-  min-height: 48px !important;
-  flex-shrink: 0 !important;
-}
+/* REMOVED 2026-05-19: prior header.w-full.sticky lockdown that set
+   display: flex !important on the outer <header>. That made the
+   inner <div class="mx-auto max-w-[1440px] ...">  a flex item, which
+   collapsed its width to content size (logo+nav) instead of filling
+   to max-w 1440px. The mx-auto then centered that narrow cluster,
+   placing the logo in the middle of the viewport instead of flush
+   left in the 1440 rail. The SiteHeader component styles itself
+   correctly on every other route — advisor was overriding it. The
+   override is now removed; the header on /advisor matches the rest
+   of the site (logo at left edge of the 1440 container, nav cluster
+   at right edge via flex justify-between). The canonical-SVG lock
+   is also removed; the Logomark component already renders the
+   inline SVG at 26-31px via its own size prop. */
 .gpm-advisor-page .advisor-trust-hero {
   grid-column: 1;
   grid-row: 1;
