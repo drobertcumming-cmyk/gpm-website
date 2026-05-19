@@ -553,13 +553,16 @@ main.advisor-main,
 }
 
 /* ====================================================================
-   CMO HEADER ALIGNMENT LOCKDOWN (2026-05-19) — CSS-ONLY.
-   Header DOM and nav markup are NOT touched in this block. Pure style
-   overrides via !important to normalize logo size, vertical alignment,
-   and horizontal positioning across all four standalone preview files.
+   CMO HEADER ALIGNMENT LOCKDOWN (2026-05-19 revised) — CSS-ONLY.
+   Header DOM and nav markup NOT touched. Pure style overrides via
+   !important to normalize logo size, vertical alignment, horizontal
+   positioning, and the protective cushion below the header band.
+   Revised from 51d7e17:
+     - Block 3 adds min-width / min-height to prevent SVG shrink-grow.
+     - Block 4 adds padding-top: 48px and drops .body-section.
    ==================================================================== */
 
-/* 1. Normalize the parent header container spacing globally */
+/* 1. Global Header Reset */
 header.site-header,
 .site-header {
   position: relative !important;
@@ -571,7 +574,7 @@ header.site-header,
   z-index: 1000 !important;
 }
 
-/* 2. Standardize the inner constraints to stop shifting between pages */
+/* 2. Global Header Inner Flex Bounds */
 .header-inner {
   max-width: 1280px !important;
   width: 100% !important;
@@ -583,23 +586,25 @@ header.site-header,
   box-sizing: border-box !important;
 }
 
-/* 3. Hard-lock the brand icon proportions to stop it from resizing */
+/* 3. Global Hard-Lock on Logo Canvas Proportions */
 .header-logo-icon,
 .header-logo svg,
 .header-logo img {
   width: 48px !important;
   height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
   flex-shrink: 0 !important;
 }
 
-/* 4. Fix margin collapse to eliminate vertical header jumping */
+/* 4. Global Content Offset Shield (Fixes Header Overlap & Jumping) */
 main,
 .briefing-main,
 .advisor-main,
 .page-header,
-.hero-editorial,
-.body-section {
+.hero-editorial {
   margin-top: 0 !important;
+  padding-top: 48px !important; /* Uniform protective cushion below the header */
 }
 </style>
 </head>
