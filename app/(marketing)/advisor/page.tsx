@@ -59,8 +59,7 @@ const PAGE_CSS = `
 .gpm-advisor-page .advisor-main {
   display: grid !important;
   grid-template-columns: 1fr 400px !important;
-  column-gap: 48px;
-  row-gap: 48px;
+  gap: 80px !important;
   align-items: start !important;
   margin-top: 0 !important;
   padding-top: 32px !important;
@@ -172,7 +171,7 @@ header.site-header {
   max-height: max-content !important;
   display: flex !important;
   flex-direction: column !important;
-  border-radius: 4px;
+  border-radius: 6px !important;
   box-shadow: 0 1px 4px rgba(61, 40, 23, 0.06);
 }
 .gpm-advisor-page .form-eyebrow {
