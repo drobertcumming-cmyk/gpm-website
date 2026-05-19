@@ -667,35 +667,41 @@ body {
 }
 
 /* ====================================================================
-   CMO HEADER ALIGNMENT LOCKDOWN (2026-05-19 v2) — CSS-ONLY.
-   Vertical track protocol — fixed 92px header on a flex-column body.
-   Header DOM and nav markup NOT touched. Canonical brand SVG (from
-   commit 3b5eaf1 audit, viewBox 0 0 64 66, gold-secondary, mixed
-   filled/stroked) preserved in place; CSS only locks its display
-   dimensions to 48x48.
+   CMO HEADER ALIGNMENT LOCKDOWN (2026-05-19 v3) — CSS-ONLY.
+   Root-document freeze on html+body, fixed-height header beam, full
+   nav anchor. Header DOM and nav markup NOT touched. Canonical brand
+   SVG (audit 3b5eaf1, viewBox 0 0 64 66, gold-secondary, mixed
+   filled/stroked) preserved in place — only display dimensions locked.
    Scoping: this CSS lives in each standalone HTML file's inline
-   <style> block. It can NOT reach the TSX (marketing) <body> from
-   app/layout.tsx because that body is in a different document. If
-   anyone lifts this CSS into a shared stylesheet later, the `body`
-   and `main` rules need to be scoped under a class first.
+   <style> block. The html/body rules can NOT reach the TSX root
+   document because that body is in a different document. If anyone
+   lifts this CSS into a shared stylesheet later, scope the html/body
+   and main rules under a class first.
    ==================================================================== */
 
-/* Force the body to act as a strict vertical layout stack container */
-body {
+/* 1. Root document freeze — both html and body become a strict vertical
+   flex-column stack. width: 100% + overflow-x: hidden block any
+   horizontal scroll regressions from content overflow. */
+html, body {
   margin: 0 !important;
   padding: 0 !important;
   display: flex !important;
   flex-direction: column !important;
   min-height: 100vh !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
 }
 
-/* Hard-lock structural dimensions of the global header container banner */
+/* 2. Header beam — fixed 92px vertical footprint. The header itself
+   becomes a flex container with align-items: center, so any layout
+   pressure from sibling content can't compress it. */
 header.site-header,
 .site-header {
   position: relative !important;
-  display: block !important;
+  display: flex !important;
+  align-items: center !important;
   width: 100% !important;
-  height: 92px !important; /* Fixed vertical plane footprint */
+  height: 92px !important; /* Uniform vertical height footprint */
   background: #F5F0E1 !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -705,7 +711,8 @@ header.site-header,
   flex-shrink: 0 !important;
 }
 
-/* Force inner elements to align horizontally without page shifts */
+/* 3. Header inner — 1280px max, flex space-between, fills 100% of the
+   92px beam so vertical centering works at the inner level too. */
 .header-inner {
   max-width: 1280px !important;
   width: 100% !important;
@@ -718,8 +725,12 @@ header.site-header,
   box-sizing: border-box !important;
 }
 
-/* Hard-lock brand logo proportions */
-.header-logo-icon {
+/* 4. Logo lock — 48x48 with min-width/min-height + flex-shrink: 0
+   prevents nav menu pressure from collapsing the SVG. The
+   .header-logo svg fallback selector covers any markup where the
+   inline SVG doesn't carry the .header-logo-icon class. */
+.header-logo-icon,
+.header-logo svg {
   width: 48px !important;
   height: 48px !important;
   min-width: 48px !important;
@@ -727,7 +738,17 @@ header.site-header,
   flex-shrink: 0 !important;
 }
 
-/* Zero out generic padding modifications that trigger content shifting */
+/* 5. Nav anchor — pushes the nav cluster to the far right of the
+   .header-inner via margin-left: auto. */
+.header-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  margin-left: auto !important;
+}
+
+/* 6. Content offset shield — zero top margin/padding on every primary
+   content track so it conforms exactly to the 92px header beam. */
 main,
 .briefing-main,
 .advisor-main,
