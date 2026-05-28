@@ -583,6 +583,13 @@ export default function Page() {
             What the promoter is actually selling is an LLC formation package, a consumer-grade safe, and a custodian arrangement that places the metals in the account owner&rsquo;s physical possession through the LLC intermediary. The LLC does not change the fundamental analysis: the account owner has unfettered access to and control over the metals. The IRS and the Tax Court have looked through the LLC structure and found that the account owner has received a distribution.
           </p>
 
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={withBase(`${IMG_BASE}/home-safe-domestic.jpg`)}
+            alt="Consumer-grade home safe sitting on closet floor next to shoes and storage boxes in a residential setting"
+            className="article-img"
+          />
+
           {/* SECTION 3 */}
           <h2 id="section-3">Financial consequences of tax court violations</h2>
           <h3>What happens when the IRS determines home storage is a distribution?</h3>
