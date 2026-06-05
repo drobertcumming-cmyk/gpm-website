@@ -5,6 +5,7 @@ import {
   AmericasFirstBlock,
   FoundationalCommitments,
   BullionGrid,
+  AmbassadorBand,
   WilliamPullQuote,
   TestimonialsGrid,
   ComparisonBlock,
@@ -51,6 +52,8 @@ export default function HomePage() {
       <FoundationalCommitments />
       <SectionDivider />
       <BullionGrid />
+      <SectionDivider />
+      <AmbassadorBand />
       <SectionDivider />
       <WilliamPullQuote />
       <SectionDivider />
