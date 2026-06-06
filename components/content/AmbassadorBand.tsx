@@ -23,8 +23,8 @@ import { withBase } from '@/lib/basepath'
 //     production-ready. The quote block is omitted until the cleared
 //     text arrives; wire it in then.
 //   - CTA link target: "See why Marjorie partnered with Grace" links to
-//     /briefing as a placeholder destination. If a dedicated ambassador
-//     landing page is planned, the href should swap to that route.
+//     /who-we-are/brand-ambassador, the dedicated ambassador landing
+//     page (wired in commit following this component's initial ship).
 
 const SECTION_PAD_X = 32
 const SECTION_PAD_Y = 96
@@ -145,7 +145,7 @@ export function AmbassadorBand() {
           </p>
 
           <Link
-            href="/briefing"
+            href="/who-we-are/brand-ambassador"
             style={ctaStyle}
           >
             See why Marjorie partnered with Grace
