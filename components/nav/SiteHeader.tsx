@@ -121,6 +121,12 @@ const PRIMARY_NAV: ReadonlyArray<NavItem> = [
         description:
           'Licensing, custody, advisor pay, pricing governance, complaints, and what we do with your data.',
       },
+      {
+        label: 'Our Brand Ambassador',
+        href: '/who-we-are/brand-ambassador',
+        description:
+          'Marjorie Taylor Greene on why she stands with Grace, and the shared ground that made the partnership.',
+      },
     ],
   },
   { label: 'Resources', href: '/resources' },
