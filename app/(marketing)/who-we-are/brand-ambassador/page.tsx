@@ -54,9 +54,14 @@ const PAGE_CSS = `
   line-height: 1.7;
 }
 
-/* ===== READING COLUMN ===== */
+/* ===== READING COLUMN =====
+   2026-06-07 widescreen pass: container widened 880 → 1200px so the
+   editorial sections breathe on desktop. Localized max-widths inside
+   each section keep paragraphs readable (~60-65ch) within the wider
+   shell. Mobile (<1024px) collapses asymmetric grids back to a
+   single column. */
 .gpm-brand-ambassador .reading-column {
-  max-width: 880px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 56px;
 }
@@ -84,14 +89,18 @@ const PAGE_CSS = `
   margin-top: 20px;
 }
 
-/* ===== HERO BLOCK ===== */
-.gpm-brand-ambassador .hero-band { padding: 56px 0 64px; }
+/* ===== HERO BLOCK =====
+   Asymmetric 7/5 grid (text left, portrait right). Portrait scales
+   up to 420px on desktop so it carries its weight against the
+   widened container; collapses to 1-col stack on mobile. */
+.gpm-brand-ambassador .hero-band { padding: 64px 0 72px; }
 .gpm-brand-ambassador .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 48px;
-  align-items: start;
+  grid-template-columns: 7fr 5fr;
+  gap: 64px;
+  align-items: center;
 }
+.gpm-brand-ambassador .hero-text { max-width: 640px; }
 .gpm-brand-ambassador .hero-eyebrow {
   display: block;
   font-family: var(--font-sans);
@@ -104,32 +113,34 @@ const PAGE_CSS = `
 }
 .gpm-brand-ambassador .hero-h1 {
   font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(34px, 4.4vw, 48px);
+  font-size: clamp(36px, 4.6vw, 56px);
   font-weight: 500;
   color: var(--walnut-deep);
   line-height: 1.12;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   letter-spacing: -0.005em;
 }
 .gpm-brand-ambassador .hero-lede {
   font-family: var(--font-serif), Georgia, serif;
   font-style: italic;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 400;
   color: var(--walnut-mid);
   line-height: 1.65;
   border-left: 3px solid var(--gold-secondary);
   padding-left: 20px;
-  max-width: 480px;
+  max-width: 540px;
 }
 .gpm-brand-ambassador .hero-portrait {
-  width: 280px;
-  height: 280px;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
   position: relative;
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid rgba(184, 150, 46, 0.35);
   background: var(--canvas-deep);
+  justify-self: end;
 }
 
 .gpm-brand-ambassador .section-rule {
@@ -138,11 +149,15 @@ const PAGE_CSS = `
   background: var(--line-soft);
 }
 
-/* ===== SHARED GROUND SECTION ===== */
-.gpm-brand-ambassador .shared-band { padding: 64px 0; }
+/* ===== SHARED GROUND SECTION =====
+   Asymmetric 7/5 grid — editorial copy left at constrained inner
+   width for readability, pillars restructured as a vertical sidebar
+   stack on canvas-deep right. Was: centered body + horizontal
+   3-pillar band below. */
+.gpm-brand-ambassador .shared-band { padding: 80px 0; }
 .gpm-brand-ambassador .section-h2 {
   font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(26px, 3vw, 32px);
+  font-size: clamp(26px, 3vw, 34px);
   font-weight: 500;
   color: var(--walnut-deep);
   line-height: 1.25;
@@ -150,12 +165,18 @@ const PAGE_CSS = `
   letter-spacing: -0.003em;
   text-align: center;
 }
-.gpm-brand-ambassador .section-h2.left-align { text-align: left; }
-.gpm-brand-ambassador .body-prose {
-  max-width: 720px;
-  margin: 0 auto;
+.gpm-brand-ambassador .section-h2.left-align {
+  text-align: left;
+  margin-bottom: 24px;
 }
-.gpm-brand-ambassador .body-prose p {
+.gpm-brand-ambassador .shared-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 80px;
+  align-items: start;
+}
+.gpm-brand-ambassador .shared-editorial { max-width: 640px; }
+.gpm-brand-ambassador .shared-editorial p {
   font-family: var(--font-sans);
   font-size: 17px;
   font-weight: 400;
@@ -163,46 +184,47 @@ const PAGE_CSS = `
   line-height: 1.7;
   margin-bottom: 20px;
 }
-
-/* ===== PILLARS GRID ===== */
-.gpm-brand-ambassador .pillars-band {
+.gpm-brand-ambassador .shared-pillars {
   background: var(--canvas-deep);
-  padding: 28px 32px;
-  margin: 40px auto 0;
-  max-width: 880px;
-}
-.gpm-brand-ambassador .pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: sticky;
+  top: 32px;
 }
 .gpm-brand-ambassador .pillar-title {
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--walnut-deep);
-  margin-bottom: 8px;
+  color: var(--gold-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
 }
 .gpm-brand-ambassador .pillar-body {
   font-family: var(--font-sans);
-  font-size: 13.5px;
+  font-size: 14.5px;
   font-weight: 400;
-  color: var(--walnut-mid);
-  line-height: 1.55;
+  color: var(--walnut-deep);
+  line-height: 1.6;
 }
 
-/* ===== TWO STORIES SECTION ===== */
-.gpm-brand-ambassador .stories-band { padding: 64px 0; }
+/* ===== TWO STORIES SECTION =====
+   Kept symmetric 6/6 — both cards carry equal editorial weight
+   (her story, his story). Widened to match the 1200px container
+   with generous gutters so the cards breathe. */
+.gpm-brand-ambassador .stories-band { padding: 80px 0; }
 .gpm-brand-ambassador .stories-grid {
-  max-width: 920px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 32px;
 }
 .gpm-brand-ambassador .story-card {
   border-radius: 4px;
-  padding: 36px 32px;
+  padding: 48px 44px;
 }
 .gpm-brand-ambassador .story-card.her {
   background: var(--canvas-deep);
@@ -241,10 +263,14 @@ const PAGE_CSS = `
 .gpm-brand-ambassador .story-card.her .story-body { color: var(--walnut-deep); }
 .gpm-brand-ambassador .story-card.his .story-body { color: rgba(245, 240, 225, 0.92); }
 
-/* ===== ENDORSEMENT QUOTE SECTION ===== */
-.gpm-brand-ambassador .endorsement-band { padding: 64px 0; }
+/* ===== ENDORSEMENT QUOTE SECTION =====
+   Kept centered — the verbatim quote is the focal editorial moment
+   of the page, and asymmetric framing would diminish it. Quote
+   block constrained to 760px so the italic-serif line length stays
+   readable inside the widened 1200px container. */
+.gpm-brand-ambassador .endorsement-band { padding: 80px 0; }
 .gpm-brand-ambassador .endorsement-quote-wrap {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto;
 }
 .gpm-brand-ambassador .endorsement-quote {
@@ -276,7 +302,7 @@ const PAGE_CSS = `
   font-weight: 400;
   color: var(--walnut-mid);
   margin-top: 20px;
-  max-width: 720px;
+  max-width: 760px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.55;
@@ -353,38 +379,47 @@ const PAGE_CSS = `
   line-height: 1.6;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE =====
+   At <1024px the asymmetric grids collapse to single-column stacks.
+   The pillars sidebar drops out of position:sticky and sits below
+   the editorial copy. */
 @media (max-width: 1024px) {
   .gpm-brand-ambassador .reading-column { padding: 0 32px; }
-  .gpm-brand-ambassador .pillars-band,
   .gpm-brand-ambassador .prefooter-disclaimer p { padding-left: 32px; padding-right: 32px; }
+  .gpm-brand-ambassador .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .gpm-brand-ambassador .hero-portrait {
+    max-width: 360px;
+    justify-self: start;
+  }
+  .gpm-brand-ambassador .shared-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .gpm-brand-ambassador .shared-editorial { max-width: 720px; }
+  .gpm-brand-ambassador .shared-pillars { position: static; }
 }
 @media (max-width: 768px) {
   .gpm-brand-ambassador .reading-column { padding: 0 24px; }
   .gpm-brand-ambassador { font-size: 16px; }
-  .gpm-brand-ambassador .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .gpm-brand-ambassador .hero-portrait {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-  }
+  .gpm-brand-ambassador .hero-band { padding: 40px 0 48px; }
+  .gpm-brand-ambassador .hero-grid { gap: 32px; }
+  .gpm-brand-ambassador .hero-portrait { max-width: 100%; }
   .gpm-brand-ambassador .hero-h1 { font-size: 32px; }
   .gpm-brand-ambassador .hero-lede { font-size: 16px; padding-left: 16px; }
-  .gpm-brand-ambassador .pillars-band,
-  .gpm-brand-ambassador .prefooter-disclaimer p { padding-left: 24px; padding-right: 24px; }
-  .gpm-brand-ambassador .pillars-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+  .gpm-brand-ambassador .shared-band { padding: 56px 0; }
+  .gpm-brand-ambassador .shared-pillars { padding: 28px 24px; }
+  .gpm-brand-ambassador .stories-band { padding: 56px 0; }
   .gpm-brand-ambassador .stories-grid {
     grid-template-columns: 1fr;
     gap: 16px;
     padding: 0 24px;
   }
-  .gpm-brand-ambassador .story-card { padding: 28px 24px; }
+  .gpm-brand-ambassador .story-card { padding: 32px 28px; }
+  .gpm-brand-ambassador .endorsement-band { padding: 56px 0; }
   .gpm-brand-ambassador .endorsement-quote { padding: 28px 24px; }
   .gpm-brand-ambassador .endorsement-quote p { font-size: 16px; }
   .gpm-brand-ambassador .endcta-buttons { flex-direction: column; gap: 12px; width: 100%; padding: 0 24px; }
@@ -394,6 +429,7 @@ const PAGE_CSS = `
     text-align: center;
     display: block;
   }
+  .gpm-brand-ambassador .prefooter-disclaimer p { padding-left: 24px; padding-right: 24px; }
 }
 `
 
@@ -418,7 +454,7 @@ export default function Page() {
       <div className="reading-column">
         <div className="hero-band">
           <div className="hero-grid">
-            <div>
+            <div className="hero-text">
               <span className="hero-eyebrow">Our Brand Ambassador</span>
               <h1 className="hero-h1">Marjorie Taylor Greene stands with Grace</h1>
               <p className="hero-lede">
@@ -430,7 +466,7 @@ export default function Page() {
                 src={withBase('/images/homepage/mtg-portrait.jpg')}
                 alt="Marjorie Taylor Greene"
                 fill
-                sizes="(max-width: 768px) 100vw, 280px"
+                sizes="(max-width: 1024px) 360px, 420px"
                 style={{ objectFit: 'cover' }}
               />
             </div>
@@ -442,18 +478,17 @@ export default function Page() {
       {/* SHARED GROUND */}
       <div className="reading-column">
         <div className="shared-band">
-          <h2 className="section-h2">Shared ground, not a celebrity endorsement</h2>
-          <div className="body-prose">
-            <p>
-              Most gold companies that bring on a familiar face do it for the face. Grace did it for the alignment. Marjorie Taylor Greene has spent her career arguing that American families deserve to be treated straight and to keep what they&rsquo;ve worked for. Grace was built on the same conviction, expressed in the plainest way a precious-metals company can: we publish our price before the first phone call. An 11.1% all-in spread. No admin fee. A buyback at spot that never falls below it. Standard, IRS-eligible bullion — never a rare-coin upsell. When a company and an advocate believe the same thing about how families ought to be treated, the partnership reads as true because it is.
-            </p>
-            <p>
-              She also reaches families the established gold industry has too often talked down to — people who want a straight answer and a fair price, not a sales script. Those are exactly the families Grace was built to serve.
-            </p>
-          </div>
-
-          <div className="pillars-band">
-            <div className="pillars-grid">
+          <div className="shared-grid">
+            <div className="shared-editorial">
+              <h2 className="section-h2 left-align">Shared ground, not a celebrity endorsement</h2>
+              <p>
+                Most gold companies that bring on a familiar face do it for the face. Grace did it for the alignment. Marjorie Taylor Greene has spent her career arguing that American families deserve to be treated straight and to keep what they&rsquo;ve worked for. Grace was built on the same conviction, expressed in the plainest way a precious-metals company can: we publish our price before the first phone call. An 11.1% all-in spread. No admin fee. A buyback at spot that never falls below it. Standard, IRS-eligible bullion — never a rare-coin upsell. When a company and an advocate believe the same thing about how families ought to be treated, the partnership reads as true because it is.
+              </p>
+              <p>
+                She also reaches families the established gold industry has too often talked down to — people who want a straight answer and a fair price, not a sales script. Those are exactly the families Grace was built to serve.
+              </p>
+            </div>
+            <aside className="shared-pillars" aria-label="Shared values">
               <div>
                 <p className="pillar-title">Faith and family</p>
                 <p className="pillar-body">A business that answers to more than the next quarter.</p>
@@ -466,7 +501,7 @@ export default function Page() {
                 <p className="pillar-title">Treated straight</p>
                 <p className="pillar-body">The price is on the page. You never have to call to find out what something costs.</p>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
         <div className="section-rule" />
