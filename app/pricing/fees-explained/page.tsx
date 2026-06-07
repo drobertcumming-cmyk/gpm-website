@@ -34,9 +34,14 @@ const PAGE_CSS = `
   line-height: 1.7;
 }
 
-/* ===== READING COLUMN ===== */
+/* ===== READING COLUMN =====
+   2026-06-07 widescreen pass: container widened 880 → 1200px so the
+   TOC can live as a sticky 3-col sidebar alongside the 9-col article
+   main track. Localized max-widths inside the body (~65ch on
+   paragraphs and h3) keep prose legible inside the wider shell.
+   Mobile (<1024px) collapses to single column. */
 .gpm-article-page .reading-column {
-  max-width: 880px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 56px;
 }
@@ -84,6 +89,7 @@ const PAGE_CSS = `
   line-height: 1.12;
   margin-bottom: 28px;
   letter-spacing: -0.005em;
+  max-width: 900px;
 }
 .gpm-article-page .article-lede {
   font-family: var(--font-serif), Georgia, serif;
@@ -94,15 +100,40 @@ const PAGE_CSS = `
   line-height: 1.65;
   border-left: 3px solid var(--gold-secondary);
   padding-left: 20px;
+  max-width: 720px;
 }
 
-/* ===== INLINE TOC ===== */
+/* ===== ARTICLE LAYOUT (sidebar + main) =====
+   Asymmetric 3/9 grid: sticky TOC sidebar left, article main track
+   right. Kicks in at >1024px; collapses to single-column below. */
+.gpm-article-page .article-layout {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: 48px;
+  align-items: start;
+  padding-top: 8px;
+}
+.gpm-article-page .article-sidebar {
+  position: sticky;
+  top: 32px;
+  min-width: 0;
+}
+.gpm-article-page .article-main { min-width: 0; }
+
+/* ===== INLINE TOC =====
+   Default styling (sidebar context). The wider canvas-deep band
+   used pre-refactor is recovered when the layout collapses below
+   1024px (see responsive overrides). */
 .gpm-article-page .inline-toc {
   background: var(--canvas-deep);
   border-top: 0.5px solid var(--line-soft);
   border-bottom: 0.5px solid var(--line-soft);
-  padding: 28px 32px;
-  margin-bottom: 48px;
+  padding: 24px 24px;
+  margin-bottom: 0;
+}
+.gpm-article-page .article-sidebar .toc-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 .gpm-article-page .toc-eyebrow {
   display: block;
@@ -186,7 +217,9 @@ const PAGE_CSS = `
   color: var(--walnut-deep);
   line-height: 1.7;
   margin-bottom: 20px;
+  max-width: 65ch;
 }
+.gpm-article-page .article-body h3 { max-width: 65ch; }
 .gpm-article-page .article-body strong { font-weight: 600; }
 .gpm-article-page .article-body em { font-style: italic; }
 .gpm-article-page .article-body .article-img {
@@ -444,9 +477,25 @@ const PAGE_CSS = `
   margin-top: 24px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE =====
+   Below 1024px the 3/9 article-layout collapses to single column,
+   TOC sidebar drops position:sticky and inflates back to the original
+   wide canvas-deep TOC band styling for compactness. */
 @media (max-width: 1024px) {
   .gpm-article-page .reading-column { padding: 0 32px; }
+  .gpm-article-page .article-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .gpm-article-page .article-sidebar { position: static; }
+  .gpm-article-page .article-sidebar .inline-toc {
+    padding: 28px 32px;
+    margin-bottom: 0;
+  }
+  .gpm-article-page .article-sidebar .toc-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 40px;
+  }
 }
 @media (max-width: 768px) {
   .gpm-article-page .reading-column { padding: 0 24px; }
@@ -523,26 +572,9 @@ export default function Page() {
             </div>
           </div>
 
-          {/* INLINE TOC */}
-          <div className="reading-column">
-            <div className="inline-toc">
-              <span className="toc-eyebrow">On this page</span>
-              <div className="toc-meta">
-                <span className="toc-meta-label">Read time:</span> 9 min read
-              </div>
-              <div className="toc-rule" />
-              <div className="toc-grid">
-                {TOC.map((item) => (
-                  <div key={item.id} className="toc-item">
-                    <span className="toc-number">{item.n}</span>
-                    <a href={`#${item.id}`}>{item.label}</a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* HERO IMAGE */}
+          {/* HERO IMAGE — moved above the article-layout grid so it
+              spans the full 1200px container as a full-bleed editorial
+              anchor before the asymmetric reading layout begins. */}
           <div className="reading-column">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -552,9 +584,29 @@ export default function Page() {
             />
           </div>
 
-          {/* ARTICLE BODY */}
+          {/* ARTICLE LAYOUT: 3/9 grid with sticky TOC sidebar + 9-col main */}
           <div className="reading-column">
-            <div className="article-body">
+            <div className="article-layout">
+              <aside className="article-sidebar" aria-label="On this page">
+                <div className="inline-toc">
+                  <span className="toc-eyebrow">On this page</span>
+                  <div className="toc-meta">
+                    <span className="toc-meta-label">Read time:</span> 9 min read
+                  </div>
+                  <div className="toc-rule" />
+                  <div className="toc-grid">
+                    {TOC.map((item) => (
+                      <div key={item.id} className="toc-item">
+                        <span className="toc-number">{item.n}</span>
+                        <a href={`#${item.id}`}>{item.label}</a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </aside>
+
+              <div className="article-main">
+                <div className="article-body">
 
               {/* SECTION 1 */}
               <h2 id="section-1">The fee categories you should expect to see</h2>
@@ -766,7 +818,9 @@ export default function Page() {
                 The honest answer to &ldquo;what does Grace charge&rdquo; is: the published 11.1% all-in spread, the third-party custodian and depository fees at cost, and nothing else. The total is lower than most competitors not because Grace has found a way to eliminate costs, but because Grace has chosen a margin structure that prioritizes retention over extraction.
               </p>
 
-            </div>{/* end article-body */}
+                </div>{/* end article-body */}
+              </div>{/* end article-main */}
+            </div>{/* end article-layout */}
           </div>{/* end article reading-column */}
 
           {/* END-OF-ARTICLE SECTIONS */}
