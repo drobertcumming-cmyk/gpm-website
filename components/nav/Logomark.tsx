@@ -5,8 +5,10 @@ import Link from 'next/link'
 //
 // Lockup geometry — locked, single canonical source:
 //   - Icon: balance scales in gold-secondary (#9C7322) with a filled top
-//     knob, solid vertical post, filled base foot, filled crossbar, two
-//     suspension links, and two open Q-curve pans. ViewBox 0 0 64 66.
+//     knob, solid vertical post, a filled crossbar beam, two triangular
+//     suspension hangers off each beam-end, two open Q-curve pans, and a
+//     two-tier pedestal foot. ViewBox 0 0 64 66. (Icon re-cut 2026-06-07
+//     from the designer reference image — geometry approved by CMO.)
 //   - Wordmark "Grace" — Source Serif 4 weight 500, walnut-deep (#3D2817).
 //   - Tagline "PRECIOUS METALS" — Inter weight 600, gold-secondary
 //     (#9C7322), letter-spaced 0.18em, hidden below 480px via hideTagline.
@@ -50,15 +52,28 @@ export function Logomark({ size = 26, hideTagline = false }: LogomarkProps) {
         style={{ flexShrink: 0 }}
       >
         <g fill="#9C7322" stroke="#9C7322">
-          <circle cx="32" cy="6" r="5" />
-          <rect x="30" y="11" width="4" height="50" />
-          <rect x="18" y="61" width="28" height="3.5" rx="0.5" />
-          <rect x="0" y="20" width="64" height="3" rx="0.5" />
-          <rect x="6" y="23" width="2" height="6" />
-          <rect x="56" y="23" width="2" height="6" />
+          <circle cx="32" cy="4.5" r="4.5" />
+          <rect x="30.5" y="9" width="3" height="50" />
+          <rect x="5" y="18.5" width="54" height="3" rx="1" />
+          <rect x="26" y="59" width="12" height="2.5" rx="0.5" />
+          <rect x="19" y="61.5" width="26" height="3" rx="0.5" />
         </g>
         <path
-          d="M 1 29 Q 7 39 13 29"
+          d="M 7 20 L 1.5 30 M 7 20 L 14.5 30"
+          fill="none"
+          stroke="#9C7322"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 57 20 L 49.5 30 M 57 20 L 62.5 30"
+          fill="none"
+          stroke="#9C7322"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 1.5 30 Q 8 39.5 14.5 30"
           fill="none"
           stroke="#9C7322"
           strokeWidth="2.4"
@@ -66,7 +81,7 @@ export function Logomark({ size = 26, hideTagline = false }: LogomarkProps) {
           strokeLinejoin="round"
         />
         <path
-          d="M 51 29 Q 57 39 63 29"
+          d="M 49.5 30 Q 56 39.5 62.5 30"
           fill="none"
           stroke="#9C7322"
           strokeWidth="2.4"
