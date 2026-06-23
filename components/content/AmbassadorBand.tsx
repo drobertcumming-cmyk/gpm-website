@@ -135,13 +135,14 @@ export function AmbassadorBand() {
           </h2>
 
           <p style={bodyStyle}>
-            Marjorie Taylor Greene has been a longtime customer, and she argues that American
-            families deserve to be treated straight and to keep what they&rsquo;ve built. That&rsquo;s
-            the principle she found at Grace. We publish our price on the page before the first
-            phone call — an 11.1% all-in spread, no admin fee, and a buyback at spot that never
-            falls below. No commissioned sales force, no rare-coin upsell, no one we hire to chase
-            you. It&rsquo;s a plain way of doing business, built for families who are tired of being
-            sold to — and it&rsquo;s why she stands with us.
+            Marjorie Taylor Greene is a firm believer in exposing the ways Americans have been
+            ripped off and misled. She argues that American families deserve to be treated straight
+            and to keep what they&rsquo;ve built. That&rsquo;s the principle she found at Grace. We
+            publish our price on the page before the first phone call — an 11.1% all-in spread, no
+            admin fee, and no commission or spread when you go to sell your metals. No commissioned
+            sales force, no rare-coin upsell, no one we hire to chase you. It&rsquo;s a plain way of
+            doing business, built for families who are tired of being sold to — and it&rsquo;s why
+            she stands with us.
           </p>
 
           <Link
