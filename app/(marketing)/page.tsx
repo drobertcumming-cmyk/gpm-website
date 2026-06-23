@@ -7,7 +7,6 @@ import {
   BullionGrid,
   AmbassadorBand,
   WilliamPullQuote,
-  TestimonialsGrid,
   ComparisonBlock,
   BriefingSection,
   FindWhatFits,
@@ -24,8 +23,12 @@ import {
 //   §4  AmericasFirstBlock
 //   §5  FoundationalCommitments — four cards
 //   §6  BullionGrid
+//       AmbassadorBand   — MTG ambassador band (added 2026-06-05, off-brief)
 //   §7  WilliamPullQuote
-//   §8  TestimonialsGrid — 4 named placeholders, see LB-10
+//       §8 TestimonialsGrid removed from the homepage 2026-06-23 (component
+//       file retained in components/content but no longer rendered). The
+//       single SectionDivider after WilliamPullQuote now leads straight into
+//       ComparisonBlock, preserving the one-divider-per-transition rhythm.
 //   §9  ComparisonBlock
 //   §10 BriefingSection — cover artwork + WHAT'S INSIDE list + BriefingForm
 //   §11 FindWhatFits   — three path cards (Path 3 → Inheriting)
@@ -56,8 +59,6 @@ export default function HomePage() {
       <AmbassadorBand />
       <SectionDivider />
       <WilliamPullQuote />
-      <SectionDivider />
-      <TestimonialsGrid />
       <SectionDivider />
       <ComparisonBlock />
       <SectionDivider />
