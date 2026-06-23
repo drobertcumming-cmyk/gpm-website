@@ -319,6 +319,36 @@
 }
 
 /* ============================================================ */
+/* Homepage hero H1 — single-line desktop headline               */
+/* ============================================================ */
+/* Stepped sizing retains the mobile (28px) and tablet (36px) sizes
+   from the prior clamp(28px, 4.6vw, 48px) and switches to a single
+   line on true desktop. 39px is the largest size that holds
+   "A Gold IRA at 11.1% spread, all-in." on ONE line inside the
+   existing 644px left text-column (measured at 1440px; 40px
+   overflows). nowrap engages at 1200px — where the hero's 1200px
+   container is maxed and the left column reaches its full 644px;
+   below that the headline wraps rather than overflow the column.
+   Tailwind has no xl breakpoint in this project (sm/md/lg only), so
+   this lives here as an explicit media query, matching the
+   .gpm-pricing-commitment-grid pattern above. */
+.gpm-hero-h1 {
+  font-size: 28px;
+  white-space: normal;
+}
+@media (min-width: 768px) {
+  .gpm-hero-h1 {
+    font-size: 36px;
+  }
+}
+@media (min-width: 1200px) {
+  .gpm-hero-h1 {
+    font-size: 39px;
+    white-space: nowrap;
+  }
+}
+
+/* ============================================================ */
 /* /pricing FAQ — native <details>/<summary> styling             */
 /* ============================================================ */
 .gpm-pricing-faq-item summary {

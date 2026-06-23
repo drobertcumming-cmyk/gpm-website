@@ -91,25 +91,36 @@ export function Hero() {
               PROVERBS 11:1 — A JUST WEIGHT IS HIS DELIGHT.
             </p>
             {/*
-              Hero H1 sizing follows production brief discrete steps:
-                28px mobile (<768), 36px tablet (768-1023), 48px desktop (1024+).
-              clamp(28px, 4.6vw, 48px) approximates this with a smooth curve and
-              keeps the protected non-breaking-space phrases inside the container
-              at every viewport.
+              Hero H1 sizing (2026-06-07 single-line-desktop revision):
+                base <768  → 28px, wraps (mobile floor retained from prior clamp)
+                md   768+  → 36px, wraps (tablet step retained from prior clamp)
+                lg   1024+ → 36px, wraps (narrow desktop: the 1200px container is
+                             not yet maxed, so the left column is < 644px and the
+                             line wraps to two lines rather than overflow)
+                xl   1280+ → 39px + white-space:nowrap → single line. 39px is the
+                             largest size that keeps "A Gold IRA at 11.1% spread,
+                             all-in." on ONE line inside the existing 644px left
+                             text-column (measured at 1440px; 40px overflows).
+                             The column max-width is unchanged.
+              Font-size and white-space live in the .gpm-hero-h1 class in
+              globals.css (explicit media queries) because this project's Tailwind
+              has no xl breakpoint and the nowrap switch must key off 1200px, not
+              lg's 1024px. The rest of the type stays inline as before.
             */}
             <h1
+              className="gpm-hero-h1"
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontWeight: 600,
-                fontSize: 'clamp(28px, 4.6vw, 48px)',
                 lineHeight: 1.18,
                 letterSpacing: '-0.005em',
                 color: '#FFFFFF',
                 margin: 0,
               }}
             >
-              {/* Non-breaking spaces lock "11.1% spread, all-in." and "Buyback at spot." per v3.6 §2 */}
-              A Gold IRA at 11.1%&nbsp;spread,&nbsp;all-in. Buyback&nbsp;at&nbsp;spot.
+              {/* Non-breaking spaces lock "11.1% spread, all-in." against a mid-phrase
+                  break when the headline wraps (mobile / tablet / narrow desktop). Per v3.6 §2. */}
+              A Gold IRA at 11.1%&nbsp;spread,&nbsp;all-in.
             </h1>
             <p
               style={{
