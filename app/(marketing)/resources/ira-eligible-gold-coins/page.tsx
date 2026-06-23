@@ -865,7 +865,7 @@ export default function Page() {
         <div className="related-reading">
           <p className="related-heading">Two more reads from the Resources library.</p>
           <div className="related-grid">
-            <Link href="/pricing/understanding-dealer-spread" className="related-card">
+            <Link href="/resources/understanding-dealer-spread" className="related-card">
               <span className="related-card-eyebrow">Pricing &amp; costs</span>
               <p className="related-card-title">Demystifying the Gold IRA Spread: Markups and Real Costs</p>
               <span className="related-card-meta">8 min read</span>

@@ -1,20 +1,19 @@
 import Link from 'next/link'
-import { SiteHeader, SiteFooter } from '@/components/nav'
 import { withBase } from '@/lib/basepath'
 
-// /pricing/fees-explained
+// /resources/understanding-dealer-spread (moved from /pricing/ 2026-06-23)
 //
-// Fourth long-form article: a category-by-category walkthrough of Gold IRA
-// fees. TSX port of article3.html. Styled to mirror the IRA-eligible-gold-coins
-// layout (commit a03d181) — single-digit TOC, font-weight 500 hero H1,
-// sharp-corner buttons, 880px reading column. Lives under /pricing/
-// (outside the (marketing) group), so wraps SiteHeader + main + SiteFooter
-// inline, matching pricing/gold-ira-cost-analysis/page.tsx.
+// Fifth long-form article: the dealer spread mechanic — entry markup,
+// buyback discount, round-trip math. TSX port of article4.html. Mirrors
+// the IRA-eligible-gold-coins layout (commit a03d181) — font-weight 500
+// hero H1, single-digit TOC, sharp 2px button corners, 880px reading
+// column. Lives in the (marketing) route group, so SiteHeader / <main> /
+// SiteFooter are inherited from app/(marketing)/layout.tsx.
 
 export const metadata = {
-  title: 'Gold IRA Fees Explained: Removing the Industry Smoke and Mirrors',
+  title: 'Demystifying the Gold IRA Spread: Markups and Real Costs',
   description:
-    "The Gold IRA industry has perfected the art of making fees invisible. This article names every fee category, explains what each pays for, and shows you what to ask before you sign.",
+    "The dealer spread is the single largest cost in a Gold IRA — and the one you will never see on a fee schedule. This article explains how spreads work, what ranges are normal, what ranges are predatory, and how to calculate the true round-trip cost.",
 }
 
 const PAGE_CSS = `
@@ -235,7 +234,7 @@ const PAGE_CSS = `
   margin-bottom: 48px;
 }
 
-/* ===== FEE TABLE ===== */
+/* ===== SPREAD TABLE ===== */
 .gpm-article-page .cost-table-wrap {
   background: var(--canvas-deep);
   border-top: 0.5px solid var(--line-soft);
@@ -273,13 +272,15 @@ const PAGE_CSS = `
   padding: 14px 16px;
   vertical-align: top;
   line-height: 1.5;
+  font-variant-numeric: tabular-nums;
 }
-.gpm-article-page .cost-table tbody td.fee-name {
+.gpm-article-page .cost-table tbody td.category-name {
   font-family: var(--font-serif), Georgia, serif;
   font-size: 15px;
   font-weight: 500;
+  font-variant-numeric: normal;
 }
-.gpm-article-page .cost-table tbody td.ask-col {
+.gpm-article-page .cost-table tbody td.illustrative {
   font-style: italic;
   color: var(--walnut-mid);
 }
@@ -527,25 +528,21 @@ const PAGE_CSS = `
 `
 
 const TOC = [
-  { n: 1, id: 'section-1', label: 'The fee categories you should expect to see' },
-  { n: 2, id: 'section-2', label: 'Setup fees and "no setup fee" claims' },
-  { n: 3, id: 'section-3', label: 'Annual custodian fees' },
-  { n: 4, id: 'section-4', label: 'Storage fees: flat versus percentage-based' },
-  { n: 5, id: 'section-5', label: 'Transaction, wire, and exit fees' },
-  { n: 6, id: 'section-6', label: 'How "free fees" promotions actually work' },
-  { n: 7, id: 'section-7', label: 'What Grace charges' },
+  { n: 1, id: 'section-1', label: 'What a spread is, in plain English' },
+  { n: 2, id: 'section-2', label: 'Standard bullion spread ranges' },
+  { n: 3, id: 'section-3', label: 'Premium and numismatic coin spread ranges' },
+  { n: 4, id: 'section-4', label: 'The buyback side of the spread' },
+  { n: 5, id: 'section-5', label: 'Round-trip cost: a worked example' },
+  { n: 6, id: 'section-6', label: 'How to ask about the spread' },
+  { n: 7, id: 'section-7', label: "What Grace's spread is" },
 ]
 
-const IMG_BASE = '/images/pricing/fees-explained'
+const IMG_BASE = '/images/pricing/understanding-dealer-spread'
 
 export default function Page() {
   return (
-    <>
-      <a href="#main" className="gpm-skip-link">Skip to main content</a>
-      <SiteHeader />
-      <main id="main" tabIndex={-1}>
-        <div className="gpm-article-page">
-          <style dangerouslySetInnerHTML={{ __html: PAGE_CSS }} />
+    <div className="gpm-article-page">
+      <style dangerouslySetInnerHTML={{ __html: PAGE_CSS }} />
 
           {/* BREADCRUMB */}
           <div className="reading-column">
@@ -555,7 +552,7 @@ export default function Page() {
                 <span className="sep">›</span>
                 <Link href="/resources#pricing-costs">Pricing &amp; costs</Link>
                 <span className="sep">›</span>
-                <span>Gold IRA Fees Explained: Removing the Industry Smoke and Mirrors</span>
+                <span>Demystifying the Gold IRA Spread: Markups and Real Costs</span>
               </nav>
               <div className="breadcrumb-rule" />
             </div>
@@ -565,9 +562,9 @@ export default function Page() {
           <div className="reading-column">
             <div className="article-hero">
               <span className="article-eyebrow">Pricing &amp; costs</span>
-              <h1 className="article-h1">Gold IRA Fees Explained: Removing the Industry Smoke and Mirrors</h1>
+              <h1 className="article-h1">Demystifying the Gold IRA Spread: Markups and Real Costs</h1>
               <p className="article-lede">
-                The Gold IRA industry has perfected the art of making fees invisible. Setup fees disappear into &ldquo;free&rdquo; promotions. Custodian fees hide inside bundled packages. Storage fees shift between flat rates and percentage models depending on which number looks smaller. This article names every fee category, explains what each one actually pays for, and shows you what to ask before you sign.
+                The dealer spread is the single largest cost in a Gold IRA — and the one you will never see on a fee schedule. It is the difference between what gold costs the dealer and what you pay for it. This article explains how spreads work, what ranges are normal, what ranges are predatory, and how to calculate the true round-trip cost of buying and eventually selling gold inside your IRA.
               </p>
             </div>
           </div>
@@ -578,8 +575,8 @@ export default function Page() {
           <div className="reading-column">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={withBase(`${IMG_BASE}/hero-retiree-fee-schedule.jpg`)}
-              alt="Retiree at desk carefully reading a printed fee schedule"
+              src={withBase(`${IMG_BASE}/hero-comparing-quotes.jpg`)}
+              alt="Retiree comparing two written quotes side by side at his desk"
               className="article-img hero-img"
             />
           </div>
@@ -591,7 +588,7 @@ export default function Page() {
                 <div className="inline-toc">
                   <span className="toc-eyebrow">On this page</span>
                   <div className="toc-meta">
-                    <span className="toc-meta-label">Read time:</span> 9 min read
+                    <span className="toc-meta-label">Read time:</span> 8 min read
                   </div>
                   <div className="toc-rule" />
                   <div className="toc-grid">
@@ -609,181 +606,63 @@ export default function Page() {
                 <div className="article-body">
 
               {/* SECTION 1 */}
-              <h2 id="section-1">The fee categories you should expect to see</h2>
-              <h3>What fees does a Gold IRA actually carry?</h3>
+              <h2 id="section-1">What a spread is, in plain English</h2>
+              <h3>What does &ldquo;the spread&rdquo; actually mean?</h3>
               <p>
-                A Gold IRA carries fees in five distinct categories. Some are disclosed upfront. Some appear only in the fine print of custodian agreements. Some are never disclosed at all — they&rsquo;re embedded in the price you pay for metal. Understanding all five categories is the prerequisite to evaluating any Gold IRA offer honestly.
+                The spread is the difference between the wholesale price of gold (what the dealer pays) and the retail price (what you pay). If gold&rsquo;s wholesale price — the spot price — is $2,384 per ounce, and the dealer sells you a one-ounce American Gold Eagle for $2,515, the spread is $131, or 5.5% over spot. That $131 is the dealer&rsquo;s gross revenue on the transaction. It is not a &ldquo;fee&rdquo; in the traditional sense — it will never appear as a line item on your statement — but it functions identically to a fee: it is a cost you bear, it reduces your effective investment, and it benefits the dealer.
               </p>
               <p>
-                The five categories are: <strong>setup fees</strong> (one-time, paid at account opening), <strong>annual custodian fees</strong> (recurring, paid to the trust company that holds your IRA), <strong>storage fees</strong> (recurring, paid to the depository that vaults your metal), <strong>transaction fees</strong> (per-event, paid when you buy, sell, or move metal), and <strong>the dealer spread</strong> (embedded in the metal price, never itemized on your statement). The first four are explicit. The fifth is implicit — and it is typically the largest cost of all.
-              </p>
-
-              <h3>Why do most fee schedules feel incomplete?</h3>
-              <p>
-                Because they are. The fee schedule you receive from a Gold IRA company typically covers categories one through four — the explicit fees. It does not disclose the dealer spread because the spread is not technically a &ldquo;fee.&rdquo; It is the difference between the wholesale price of gold and the retail price you pay. This distinction is legally accurate and practically misleading. The spread functions exactly like a fee: it is a cost you bear, it reduces your returns, and it benefits the dealer. But because it is not labeled as a fee, it does not appear on fee schedules, comparison charts, or &ldquo;low fee&rdquo; marketing claims.
-              </p>
-
-              {/* SECTION 2 */}
-              <h2 id="section-2">Setup fees and &ldquo;no setup fee&rdquo; claims</h2>
-              <h3>What is a setup fee?</h3>
-              <p>
-                A setup fee is a one-time charge paid when your self-directed IRA is established with the custodian. It covers the administrative cost of opening the account, generating your IRS documentation, and establishing your depository allocation. Typical range: $50–$150. Some custodians charge $0 and recover the cost through higher annual fees or through revenue-sharing arrangements with the dealer who referred you.
-              </p>
-
-              <h3>What does &ldquo;no setup fee&rdquo; actually mean?</h3>
-              <p>
-                It means the dealer is absorbing the setup fee — or more precisely, the dealer has negotiated with the custodian to waive it in exchange for a referral relationship. The custodian still incurs the cost of opening your account. That cost is recovered somewhere. In most cases, it&rsquo;s recovered through a higher annual custodian fee, a revenue-sharing percentage on your storage fees, or simply through the dealer&rsquo;s spread on your first metal purchase. The setup fee has not been eliminated. It has been moved.
-              </p>
-              <p>
-                This is not inherently dishonest — fee bundling is standard practice across financial services. But it becomes misleading when &ldquo;no setup fee&rdquo; is presented as a savings rather than a reallocation. The question to ask is not &ldquo;Do you charge a setup fee?&rdquo; but rather &ldquo;What is the total first-year cost of this account, including all fees and the spread on my initial metal purchase?&rdquo;
+                Every gold dealer charges a spread. There is no such thing as buying gold &ldquo;at spot&rdquo; in a retail transaction. The spread covers the dealer&rsquo;s cost of acquiring inventory, operating the business, paying staff, and generating profit. The question is never whether a spread exists — it always does — but whether the spread is disclosed, reasonable, and consistent with the product you&rsquo;re buying.
               </p>
 
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={withBase(`${IMG_BASE}/setup-fee-closeup.jpg`)}
-                alt="Close-up of printed fee disclosure showing the Account Setup Fee line item with pencil mark"
+                src={withBase(`${IMG_BASE}/coin-on-scale.jpg`)}
+                alt="Gold coin on antique balance scale with spot price tag beside it"
+                className="article-img"
+              />
+
+              {/* SECTION 2 */}
+              <h2 id="section-2">Standard bullion spread ranges</h2>
+              <h3>What is a normal spread on standard bullion?</h3>
+              <p>
+                For standard IRA-eligible bullion coins — American Gold Eagles, Canadian Maple Leafs, Austrian Philharmonics, American Buffalos — the competitive retail spread ranges from 3% to 8% over spot for single-coin purchases. Volume purchases (10+ ounces) can bring the spread down to 2%–5%. These are the coins that constitute the overwhelming majority of Gold IRA holdings because they meet IRS fineness requirements and trade in deep, liquid markets.
+              </p>
+              <p>
+                A spread of 5%–6% on a single American Gold Eagle is standard at a reputable dealer. A spread of 8%–10% is high but not uncommon at dealers who bundle services or offer &ldquo;free&rdquo; account setup. A spread above 10% on standard bullion is a warning sign. A spread above 15% on standard bullion is predatory — it means the dealer is extracting margin that will take years of gold appreciation to overcome.
+              </p>
+
+              <h3>Why do spreads vary between dealers?</h3>
+              <p>
+                Spreads vary because dealers have different cost structures, margin targets, and business models. A high-volume online dealer with minimal sales staff can operate on thin margins (3%–5%). A dealer with a large commissioned sales force, television advertising, and celebrity endorsements needs wider margins (10%–20%) to cover those costs. The spread is not just the dealer&rsquo;s profit — it is the dealer&rsquo;s entire revenue model compressed into a single number. When you see a wide spread, you are paying for the dealer&rsquo;s marketing budget, sales commissions, and overhead — not for better gold.
+              </p>
+
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={withBase(`${IMG_BASE}/bullion-coin-closeup.jpg`)}
+                alt="American Gold Eagle bullion coin on neutral linen surface, documentary close-up"
                 className="article-img"
               />
 
               {/* SECTION 3 */}
-              <h2 id="section-3">Annual custodian fees</h2>
-              <h3>What does the custodian fee pay for?</h3>
+              <h2 id="section-3">Premium and numismatic coin spread ranges</h2>
+              <h3>What happens to the spread on premium coins?</h3>
               <p>
-                The annual custodian fee pays the trust company that holds your IRA for its ongoing administrative services: IRS reporting (Form 5498, Form 1099-R when you take distributions), quarterly or annual account statements, compliance oversight, and the legal structure that makes your gold holdings tax-advantaged. Without a qualified custodian, your gold is not in an IRA — it&rsquo;s just gold you own, with no tax deferral.
-              </p>
-              <p>
-                Typical range: $75–$300 per year, depending on the custodian and account size. Some custodians charge a flat fee regardless of account value. Others charge a tiered or percentage-based fee that scales with your holdings. A flat fee favors larger accounts. A percentage-based fee favors smaller accounts initially but becomes expensive as your holdings grow.
+                Premium coins — proof editions, limited mintages, graded coins, and coins marketed as &ldquo;rare&rdquo; or &ldquo;collectible&rdquo; — carry spreads that are dramatically wider than standard bullion. A proof American Gold Eagle might carry a 20%–40% spread over its melt value. A graded pre-1933 coin marketed as &ldquo;numismatic&rdquo; can carry a spread of 50%–300% over its gold content value. These spreads are legal, but they are rarely disclosed in percentage terms. The dealer quotes a dollar price; the buyer does not know (or is not told) what percentage of that price is gold value versus dealer margin.
               </p>
 
-              <h3>What should you ask about custodian fees?</h3>
+              <h3>Why are numismatic spreads so much wider?</h3>
               <p>
-                Ask whether the fee is flat or scaled. Ask whether it increases if your account value grows (because gold appreciates or because you add funds). Ask whether the custodian charges separately for distributions, transfers, or account closures — or whether those are included in the annual fee. Some custodians quote a low annual fee but charge $50–$150 per transaction for distributions, wire transfers, or account termination. The annual fee alone does not tell you the annual cost.
-              </p>
-
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={withBase(`${IMG_BASE}/custodian-statement.jpg`)}
-                alt="Annual custodian account statement showing fees summary on walnut desk"
-                className="article-img"
-              />
-
-              {/* SECTION 4 */}
-              <h2 id="section-4">Storage fees: flat versus percentage-based</h2>
-              <h3>What does the storage fee pay for?</h3>
-              <p>
-                The storage fee pays the depository — a bonded, insured vault facility — for the physical safekeeping of your gold. The depository provides segregated or commingled storage, insurance coverage, regular audits, and the security infrastructure that protects your metal. This is a real service with real costs: vault space, insurance premiums, armed security, and regulatory compliance.
+                Because numismatic coins trade in illiquid markets with subjective pricing. A standard American Gold Eagle has a clear wholesale price tied to the spot market — any dealer can verify it in seconds. A graded 1908 Saint-Gaudens $20 in MS-64 has a &ldquo;value&rdquo; that depends on recent auction results, dealer inventory levels, collector demand, and the specific grading service. This subjectivity creates room for wider margins because the buyer cannot easily verify whether the price is fair.
               </p>
               <p>
-                Storage fees come in two models. <strong>Flat-rate storage</strong> charges a fixed annual amount regardless of how much metal you hold — typically $100–$200 per year for accounts under $100,000. <strong>Percentage-based storage</strong> charges a fraction of your account value — typically 0.5% to 1.0% annually. On a $50,000 account, 0.5% is $250 per year. On a $200,000 account, it&rsquo;s $1,000 per year.
-              </p>
-
-              <h3>Which model is better?</h3>
-              <p>
-                Flat-rate storage favors larger accounts and longer hold periods. If you hold $200,000 in gold and pay $150/year in flat storage, your effective storage cost is 0.075% annually. Under a percentage model at 0.5%, you&rsquo;d pay $1,000/year — nearly seven times more for the same vault space and insurance coverage. The physical cost of storing ten ounces of gold versus fifty ounces is negligible to the depository. The percentage model captures value from account growth that has nothing to do with the depository&rsquo;s actual costs.
-              </p>
-              <p>
-                For retirement-horizon investors who expect their gold to appreciate over 10–20 years, flat-rate storage is almost always more economical. The percentage model is more common because it generates more revenue for the depository and the dealers who have revenue-sharing arrangements with them.
+                The Gold IRA industry exploits this dynamic systematically. Dealers steer customers toward premium and numismatic coins not because those coins perform better in an IRA (they don&rsquo;t — their premium erodes over time), but because the wider spread generates more revenue per transaction. A dealer selling $50,000 of standard bullion at 5% earns $2,500. The same dealer selling $50,000 of &ldquo;rare&rdquo; coins at 40% earns $20,000. The incentive structure is transparent once you see it.
               </p>
 
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={withBase(`${IMG_BASE}/depository-vault.jpg`)}
-                alt="Worker weighing gold bullion on precision scale in commercial depository with vault shelving"
-                className="article-img"
-              />
-
-              {/* SECTION 5 */}
-              <h2 id="section-5">Transaction, wire, and exit fees</h2>
-              <h3>What are transaction fees?</h3>
-              <p>
-                Transaction fees are per-event charges applied when you buy metal, sell metal, transfer metal between depositories, take a distribution, or close your account. They are distinct from the dealer spread — the spread is embedded in the metal price, while transaction fees are explicit line items on your custodian statement.
-              </p>
-              <p>
-                Common transaction fees include: <strong>wire transfer fees</strong> ($25–$50 per wire, charged when funds move between your bank and the custodian), <strong>trade confirmation fees</strong> ($25–$40 per buy or sell order), <strong>distribution fees</strong> ($50–$150 when you take metal or cash out of the IRA), and <strong>account termination fees</strong> ($75–$250 when you close the account entirely).
-              </p>
-
-              <h3>Why do exit fees matter?</h3>
-              <p>
-                Exit fees create friction that discourages you from leaving. A $250 account termination fee is not a large number in absolute terms — but combined with the sell-side spread, it adds to the total cost of exiting a Gold IRA. Some investors stay with underperforming or overcharging dealers because the perceived cost of switching (exit fees + sell spread + buy spread at the new dealer) feels prohibitive. This is by design. The exit fee is not primarily a cost-recovery mechanism for the custodian. It is a retention mechanism for the dealer.
-              </p>
-
-              {/* FEE TABLE */}
-              <div className="cost-table-wrap">
-                <table className="cost-table">
-                  <thead>
-                    <tr>
-                      <th>Fee Category</th>
-                      <th>Typical Range</th>
-                      <th>What to Ask</th>
-                      <th>Grace</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="fee-name">Setup fee</td>
-                      <td>$0–$150</td>
-                      <td className="ask-col">Is the waived fee recovered elsewhere?</td>
-                      <td>$0; not recovered via spread</td>
-                    </tr>
-                    <tr>
-                      <td className="fee-name">Annual custodian fee</td>
-                      <td>$75–$300/yr</td>
-                      <td className="ask-col">Flat or scaled? Includes distributions?</td>
-                      <td>Third-party, passed through at cost</td>
-                    </tr>
-                    <tr>
-                      <td className="fee-name">Annual storage fee</td>
-                      <td>$100–$300/yr or 0.5–1.0%</td>
-                      <td className="ask-col">Flat or percentage? Segregated?</td>
-                      <td>Third-party, flat-rate, segregated</td>
-                    </tr>
-                    <tr>
-                      <td className="fee-name">Wire transfer fee</td>
-                      <td>$25–$50/wire</td>
-                      <td className="ask-col">How many wires per transaction?</td>
-                      <td>Third-party, passed through at cost</td>
-                    </tr>
-                    <tr>
-                      <td className="fee-name">Trade confirmation fee</td>
-                      <td>$25–$40/trade</td>
-                      <td className="ask-col">Charged on both buy and sell?</td>
-                      <td>$0</td>
-                    </tr>
-                    <tr>
-                      <td className="fee-name">Account termination fee</td>
-                      <td>$75–$250</td>
-                      <td className="ask-col">Is there a minimum hold period?</td>
-                      <td>$0</td>
-                    </tr>
-                    <tr>
-                      <td className="fee-name">Dealer spread (round-trip)</td>
-                      <td>7%–40%+ undisclosed</td>
-                      <td className="ask-col">What is the published all-in spread?</td>
-                      <td>11.1% all-in, published</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              {/* SECTION 6 */}
-              <h2 id="section-6">How &ldquo;free fees&rdquo; promotions actually work</h2>
-              <h3>What does &ldquo;free storage for the first year&rdquo; mean?</h3>
-              <p>
-                It means the dealer is paying the depository&rsquo;s storage fee for your first year — typically $100–$200 — as a customer acquisition cost. The dealer recovers this cost through the spread on your initial metal purchase. If the dealer&rsquo;s spread is 15% on a $50,000 purchase, the dealer earns $7,500 in margin. Absorbing a $150 storage fee from that margin is trivial. The promotion costs the dealer less than 2% of their profit on your transaction.
-              </p>
-              <p>
-                The same logic applies to &ldquo;free setup,&rdquo; &ldquo;no annual fees for the first year,&rdquo; and &ldquo;we cover your transfer fees.&rdquo; Each of these promotions has a real cost — typically $100–$300 total — that is easily absorbed by a dealer earning thousands of dollars in spread on the initial purchase. The promotions are not savings. They are marketing costs funded by the spread you&rsquo;re already paying.
-              </p>
-
-              <h3>How do you evaluate a &ldquo;free fees&rdquo; offer honestly?</h3>
-              <p>
-                Ignore the promotions entirely. Calculate the total first-year cost including the spread. A dealer offering &ldquo;free setup, free storage, free first year&rdquo; with a 20% spread on a $50,000 purchase costs you $10,000 in spread alone. A dealer charging $150 setup + $175 custodian + $150 storage with a 5% spread costs you $2,500 + $475 = $2,975. The &ldquo;free fees&rdquo; dealer costs more than three times as much. The fees that were &ldquo;free&rdquo; were worth $475 combined. The spread difference was worth $7,500.
-              </p>
-
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={withBase(`${IMG_BASE}/fine-print-magnifying.jpg`)}
-                alt="Magnifying glass revealing fine print about promotional periods and standard rates"
+                src={withBase(`${IMG_BASE}/graded-slabbed-coin.jpg`)}
+                alt="NGC-graded 1907 Saint-Gaudens $20 gold coin in plastic slab, MS-65"
                 className="article-img"
               />
 
@@ -793,29 +672,113 @@ export default function Page() {
                 <span className="pullquote-citation">Proverbs 11:1</span>
               </div>
 
-              {/* SECTION 7 */}
-              <h2 id="section-7">What Grace charges</h2>
-              <h3>What is Grace&rsquo;s fee position?</h3>
+              {/* SECTION 4 */}
+              <h2 id="section-4">The buyback side of the spread</h2>
+              <h3>What is the buyback spread?</h3>
               <p>
-                Grace Precious Metals charges no setup fee, no trade confirmation fee, and no account termination fee. The recurring custodian and depository fees are third-party costs — set by the custodian and the depository, not by Grace — and Grace passes them through at cost without revenue-sharing or markup. Storage is flat-rate and segregated.
+                The buyback spread is the discount below spot that the dealer applies when you sell gold back to them. If spot is $2,384 and the dealer buys your coin at $2,336, the buyback spread is $48, or 2% below spot. This is the second half of the round-trip cost — you paid above spot to buy, and you receive below spot to sell. The total cost of owning gold through a dealer is the entry spread plus the buyback spread.
+              </p>
+
+              <h3>Why do buyback spreads matter as much as entry spreads?</h3>
+              <p>
+                Because every ounce of gold in your IRA will eventually be sold — either by you during retirement, by your estate, or by the custodian at account termination. The buyback spread is not a hypothetical future cost. It is a guaranteed future cost. A dealer offering a &ldquo;low&rdquo; entry spread of 5% but a buyback discount of 10% below spot has a round-trip cost of 15%. A dealer with a 5% entry spread and a 1% buyback discount has a round-trip cost of 6%. The second dealer is less than half the total cost despite charging the same entry price.
               </p>
               <p>
-                Grace&rsquo;s revenue comes from the dealer spread, which is published at <strong>11.1% all-in</strong>. That figure is the complete round-trip cost of a Grace transaction: it covers the buy-side margin and is bounded on the sell side by Grace&rsquo;s commitment to buy back at spot price, never below. The published spread is the standing price available to every client. It is not a promotional rate. It is the rate. It is published because a cost you can see is a cost you can evaluate. A cost you cannot see is a cost you cannot compare.
+                Many dealers do not publish their buyback prices. Some quote buyback &ldquo;at spot&rdquo; but define &ldquo;spot&rdquo; using a delayed or off-market price. Some quote buyback only when you call to sell — meaning you cannot evaluate the total cost until you&rsquo;re already committed. The buyback spread is where the most significant cost asymmetries hide.
+              </p>
+
+              {/* SPREAD TABLE */}
+              <div className="cost-table-wrap">
+                <table className="cost-table">
+                  <thead>
+                    <tr>
+                      <th>Product Category</th>
+                      <th>Typical Entry Markup</th>
+                      <th>Typical Buyback Discount</th>
+                      <th>Round-Trip Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="category-name">Standard bullion (Eagle, Maple, Buffalo)</td>
+                      <td>3%–8% over spot</td>
+                      <td>1%–4% below spot</td>
+                      <td className="illustrative">4%–12%</td>
+                    </tr>
+                    <tr>
+                      <td className="category-name">Premium bullion (proof editions)</td>
+                      <td>15%–40% over melt</td>
+                      <td>5%–15% below melt</td>
+                      <td className="illustrative">20%–55%</td>
+                    </tr>
+                    <tr>
+                      <td className="category-name">Numismatic / &ldquo;rare&rdquo; coins</td>
+                      <td>40%–300% over melt</td>
+                      <td>20%–60% below purchase</td>
+                      <td className="illustrative">60%–360%</td>
+                    </tr>
+                    <tr>
+                      <td className="category-name">Grace (standard bullion only)</td>
+                      <td>11.1% all-in, published</td>
+                      <td>0% (buyback at spot, never below)</td>
+                      <td>11.1%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* SECTION 5 */}
+              <h2 id="section-5">Round-trip cost: a worked example</h2>
+              <h3>How do you calculate the actual cost?</h3>
+              <p>
+                Assume spot gold is $2,384 per ounce. You purchase one American Gold Eagle from a low-cost dealer at a 6% entry spread: $2,384 × 1.06 = $2,527. You hold the coin for ten years. When you sell, spot is still $2,384 (for simplicity — in reality gold may have appreciated, but the spread percentage remains the same). The dealer buys back at 3% below spot: $2,384 × 0.97 = $2,313. Your round-trip cost is $2,527 − $2,313 = $214, or 9% of the spot value at time of sale.
+              </p>
+              <p>
+                Now compare: same scenario, but the dealer charges 16% entry and 8% buyback. Entry: $2,384 × 1.16 = $2,765. Buyback: $2,384 × 0.92 = $2,193. Round-trip cost: $2,765 − $2,193 = $572, or 24% of spot. The second dealer costs more than two-and-a-half times as much for the identical coin held for the identical period. The gold is the same. The IRA is the same. The custodian may even be the same. The only difference is the spread.
+              </p>
+
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={withBase(`${IMG_BASE}/arithmetic-notepad.jpg`)}
+                alt="Hands writing round-trip cost calculation on notepad with calculator beside"
+                className="article-img"
+              />
+
+              {/* SECTION 6 */}
+              <h2 id="section-6">How to ask about the spread</h2>
+              <h3>What questions should you ask before buying?</h3>
+              <p>
+                Ask three questions, in this order. First: &ldquo;What is your published spread on a one-ounce American Gold Eagle, expressed as a percentage over spot?&rdquo; If the dealer cannot or will not answer this question with a specific number, that is your answer. Second: &ldquo;What is your buyback price on the same coin, expressed as a percentage relative to spot?&rdquo; Again — a specific number, not &ldquo;competitive&rdquo; or &ldquo;fair market value.&rdquo; Third: &ldquo;Is the spread the same for all customers, or does it vary by account size, purchase volume, or sales representative?&rdquo;
+              </p>
+              <p>
+                These three questions eliminate 90% of the ambiguity in Gold IRA pricing. A dealer who publishes a specific entry spread, a specific buyback spread, and confirms those numbers are consistent across all customers is operating transparently. A dealer who deflects, quotes in dollars rather than percentages, or says &ldquo;it depends&rdquo; is operating in the margin of opacity that benefits the dealer at the buyer&rsquo;s expense.
+              </p>
+
+              <h3>What if the dealer quotes in dollars instead of percentages?</h3>
+              <p>
+                Convert it yourself. If the dealer says &ldquo;We sell the one-ounce Eagle for $2,750&rdquo; and spot is $2,384, the spread is ($2,750 − $2,384) ÷ $2,384 = 15.4%. If the dealer says &ldquo;We buy back at $2,200&rdquo; the buyback discount is ($2,384 − $2,200) ÷ $2,384 = 7.7%. Round-trip: 23.1%. The dealer quoted in dollars because 23.1% sounds worse than &ldquo;$550 per coin.&rdquo; The math is the same. The cost is the same. The framing is different.
+              </p>
+
+              {/* SECTION 7 */}
+              <h2 id="section-7">What Grace&rsquo;s spread is</h2>
+              <h3>What does Grace charge?</h3>
+              <p>
+                Grace Precious Metals publishes an <strong>11.1% all-in spread</strong> on American Gold Eagles — the standard IRA-eligible bullion coin that constitutes the majority of client holdings. The buyback commitment is at spot, never below. The all-in figure is exactly that: the complete round-trip cost of a Grace transaction, disclosed before any phone call. It is not a promotional rate, not an introductory offer, not volume-dependent. It is the standing published price available to every client regardless of account size.
+              </p>
+              <p>
+                Grace does not sell premium coins, numismatic coins, graded coins, or &ldquo;rare&rdquo; coins into IRAs. This is a deliberate business decision: those products carry wider margins that benefit the dealer but not the client. By restricting the product set to standard bullion, Grace eliminates the incentive structure that drives most Gold IRA sales toward high-spread products. The spread is what it is because the product is simpler, the market is more liquid, and the pricing is more verifiable.
               </p>
 
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={withBase(`${IMG_BASE}/grace-fee-sheet.jpg`)}
-                alt="Clean fee summary sheet showing $0 setup, $0 admin, buyback at spot between advisor and client"
+                alt="Clean pricing disclosure sheet showing the published all-in spread and at-spot buyback commitment"
                 className="article-img"
               />
 
-              <h3>Why does Grace not charge setup or termination fees?</h3>
+              <h3>Why does Grace publish the spread?</h3>
               <p>
-                Because those fees function as acquisition and retention mechanisms — they make it expensive to start and expensive to leave. Grace&rsquo;s model depends on long-term client relationships, not on trapping clients through switching costs. If a client wants to leave, the absence of termination fees means the only cost of departure is the sell-side spread — which is bounded by the at-spot buyback commitment, predictable, and the same whether you leave after one year or twenty.
-              </p>
-              <p>
-                The honest answer to &ldquo;what does Grace charge&rdquo; is: the published 11.1% all-in spread, the third-party custodian and depository fees at cost, and nothing else. The total is lower than most competitors not because Grace has found a way to eliminate costs, but because Grace has chosen a margin structure that prioritizes retention over extraction.
+                Because a cost you can see is a cost you can evaluate. A cost you cannot see is a cost you cannot compare. The Gold IRA industry&rsquo;s standard practice of quoting in dollars, varying prices by customer, and not publishing buyback rates creates an information asymmetry that benefits dealers at the expense of buyers. Publishing the spread as a single all-in figure, applying it uniformly, and committing to at-spot buyback eliminates that asymmetry. It also makes Grace directly comparable to every other dealer — which is the point. Transparency is only risky if your numbers don&rsquo;t hold up to comparison.
               </p>
 
                 </div>{/* end article-body */}
@@ -836,7 +799,7 @@ export default function Page() {
               <span className="end-cta-eyebrow">When you&rsquo;re ready</span>
               <h2 className="end-cta-headline">A conversation, on your own timeline.</h2>
               <p className="end-cta-subhead">
-                If you have questions about Gold IRA fees, our salaried advisors will walk you through your specific situation. No commission, no pressure, no urgency.
+                If you have questions about the dealer spread, our salaried advisors will walk you through your specific situation. No commission, no pressure, no urgency.
               </p>
               <div className="end-cta-buttons">
                 <Link href="/briefing" className="btn-outline">Get the Briefing</Link>
@@ -848,15 +811,15 @@ export default function Page() {
             <div className="related-reading">
               <p className="related-heading">Two more reads from the Resources library.</p>
               <div className="related-grid">
-                <Link href="/pricing/gold-ira-cost-analysis" className="related-card">
+                <Link href="/resources/fees-explained" className="related-card">
                   <span className="related-card-eyebrow">Pricing &amp; costs</span>
-                  <p className="related-card-title">What Does a Gold IRA Cost? An Honest Cost Arithmetic</p>
-                  <span className="related-card-meta">8 min read</span>
+                  <p className="related-card-title">Gold IRA Fees Explained: Removing the Industry Smoke and Mirrors</p>
+                  <span className="related-card-meta">9 min read</span>
                 </Link>
-                <Link href="/pricing/understanding-dealer-spread" className="related-card">
-                  <span className="related-card-eyebrow">Pricing &amp; costs</span>
-                  <p className="related-card-title">Demystifying the Gold IRA Spread: Markups and Real Costs</p>
-                  <span className="related-card-meta">8 min read</span>
+                <Link href="/resources/ira-eligible-gold-coins" className="related-card">
+                  <span className="related-card-eyebrow">What you can hold</span>
+                  <p className="related-card-title">IRA-Eligible Gold Coins: The Strict Regulatory Reality</p>
+                  <span className="related-card-meta">10 min read</span>
                 </Link>
               </div>
               <Link href="/resources" className="back-to-resources">← Back to Resources</Link>
@@ -874,9 +837,6 @@ export default function Page() {
             </div>
           </div>
 
-        </div>{/* end gpm-article-page */}
-      </main>
-      <SiteFooter />
-    </>
+    </div>
   )
 }

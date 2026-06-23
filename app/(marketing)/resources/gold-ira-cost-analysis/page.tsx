@@ -1,17 +1,14 @@
 import Link from 'next/link'
-import { SiteHeader, SiteFooter } from '@/components/nav'
 import { withBase } from '@/lib/basepath'
 
-// /pricing/gold-ira-cost-analysis
+// /resources/gold-ira-cost-analysis (moved from /pricing/ 2026-06-23)
 //
 // Third long-form article: cost arithmetic deep-dive. TSX port of the
 // article2.html boilerplate, styled to mirror the IRA-eligible-gold-coins
 // layout (a03d181) — same reading-column geometry, single-digit TOC,
-// font-weight 500 hero H1, sharp-corner buttons. The route lives under
-// /pricing/ rather than /resources/ per the Resources hub IA (0f4e089).
-// Because /pricing/ sits OUTSIDE the (marketing) route group, this
-// page wraps SiteHeader / <main> / SiteFooter itself, matching the
-// pattern in app/pricing/page.tsx and app/pricing/buyback/page.tsx.
+// font-weight 500 hero H1, sharp-corner buttons. Lives in the (marketing)
+// route group, so SiteHeader / <main> / SiteFooter are inherited from
+// app/(marketing)/layout.tsx (same as the other resources articles).
 
 export const metadata = {
   title: 'What Does a Gold IRA Cost? An Honest Cost Arithmetic',
@@ -536,12 +533,8 @@ const IMG_BASE = '/images/pricing/gold-ira-cost-analysis'
 
 export default function Page() {
   return (
-    <>
-      <a href="#main" className="gpm-skip-link">Skip to main content</a>
-      <SiteHeader />
-      <main id="main" tabIndex={-1}>
-        <div className="gpm-article-page">
-          <style dangerouslySetInnerHTML={{ __html: PAGE_CSS }} />
+    <div className="gpm-article-page">
+      <style dangerouslySetInnerHTML={{ __html: PAGE_CSS }} />
 
           {/* BREADCRUMB */}
           <div className="reading-column">
@@ -812,12 +805,12 @@ export default function Page() {
             <div className="related-reading">
               <p className="related-heading">Two more reads from the Resources library.</p>
               <div className="related-grid">
-                <Link href="/pricing/fees-explained" className="related-card">
+                <Link href="/resources/fees-explained" className="related-card">
                   <span className="related-card-eyebrow">Pricing &amp; costs</span>
                   <p className="related-card-title">Gold IRA Fees Explained: Removing the Industry Smoke and Mirrors</p>
                   <span className="related-card-meta">9 min read</span>
                 </Link>
-                <Link href="/pricing/understanding-dealer-spread" className="related-card">
+                <Link href="/resources/understanding-dealer-spread" className="related-card">
                   <span className="related-card-eyebrow">Pricing &amp; costs</span>
                   <p className="related-card-title">Demystifying the Gold IRA Spread: Markups and Real Costs</p>
                   <span className="related-card-meta">8 min read</span>
@@ -836,9 +829,6 @@ export default function Page() {
               <div className="disclaimer-divider" />
             </div>
           </section>
-        </div>
-      </main>
-      <SiteFooter />
-    </>
+    </div>
   )
 }

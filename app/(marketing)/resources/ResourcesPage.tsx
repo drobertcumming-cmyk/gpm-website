@@ -78,21 +78,21 @@ const TOPICS: Topic[] = [
         title: 'What Does a Gold IRA Cost? An Honest Cost Arithmetic',
         summary:
           'The legitimate costs of holding physical gold in a retirement account, separated from the dealer-imposed surcharges that some firms add on top. Where the numbers usually land, and what to ask before funding any account.',
-        href: '/pricing/gold-ira-cost-analysis',
+        href: '/resources/gold-ira-cost-analysis',
         readTime: '8 min read',
       },
       {
         title: 'Gold IRA Fees Explained: Removing the Industry Smoke and Mirrors',
         summary:
           'A three-tier breakdown of who charges what in a Gold IRA. The difference between flat-rate and percentage-scaled fees, the mathematics behind "free silver" promotions, and the compounding effect of fee structure across a twenty-year horizon.',
-        href: '/pricing/fees-explained',
+        href: '/resources/fees-explained',
         readTime: '9 min read',
       },
       {
         title: 'Demystifying the Gold IRA Spread: Markups and Real Costs',
         summary:
           'The single most consequential number in any Gold IRA transaction, and the one most rarely disclosed. What the spread is, why it is typically concealed, the mathematical impact on liquidation, and the specific markup pattern applied to numismatic coins.',
-        href: '/pricing/understanding-dealer-spread',
+        href: '/resources/understanding-dealer-spread',
         readTime: '8 min read',
       },
     ],
