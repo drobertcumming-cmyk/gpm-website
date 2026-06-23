@@ -85,7 +85,7 @@ export function WilliamPullQuote() {
             }}
           >
             <span aria-hidden="true" style={{ color: 'var(--gpm-gold-secondary)' }}>&ldquo;</span>
-            I left the Gold IRA industry because I couldn&rsquo;t reconcile what I was selling with what I preached. This is the company I built to change that.
+            I left because when I learned what was really going on I could no longer be a part of it. I knew there had to be a better way. This is the company I built to change that.
             <span aria-hidden="true" style={{ color: 'var(--gpm-gold-secondary)' }}>&rdquo;</span>
           </blockquote>
 
