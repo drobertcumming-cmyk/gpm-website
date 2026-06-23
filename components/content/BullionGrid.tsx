@@ -136,8 +136,8 @@ export function BullionGrid() {
       >
         We do not sell numismatic, &ldquo;rare,&rdquo; &ldquo;exclusive,&rdquo; &ldquo;premium,&rdquo; or proof coins. The
         markup on those products is how this industry hides its real margin — sometimes thirty
-        percent, sometimes fifty, sometimes more. We will not sell them. And if another company
-        has sold them to you, we will tell you what they actually cost.
+        percent, sometimes fifty, sometimes more. We will not sell them. We believe they have no
+        place in a wealth preservation strategy.
       </p>
       <p style={{ marginTop: 16 }}>
         <Link
