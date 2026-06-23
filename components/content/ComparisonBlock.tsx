@@ -61,7 +61,10 @@ export function ComparisonBlock() {
               marginTop: 16,
             }}
           >
-            Bring us the quote. We will tell you what it actually costs.
+            Bring us the quote, or just ask us what we would charge. We&rsquo;ll give you a
+            no-pressure, no-sales second opinion. We don&rsquo;t need to know how much you&rsquo;re
+            putting into metals or anything, just simply ask what we would charge on a particular
+            item.
           </p>
           <p
             style={{
@@ -74,8 +77,10 @@ export function ComparisonBlock() {
             }}
           >
             Most companies in this industry will not show you a number until you are on a call
-            with a commissioned salesperson. If you have already had that call, you know the
-            pattern &mdash; heavy on urgency, light on math.
+            with a commissioned salesperson, or likely worse until you&rsquo;ve already sent them
+            your money. Even if they do give you a number it&rsquo;s often not what you end up being
+            sold as they are conveniently out of that product or some other reason. If you have
+            already had that call, you know the pattern &mdash; heavy on urgency, light on math.
           </p>
           <p
             style={{
@@ -87,7 +92,7 @@ export function ComparisonBlock() {
               marginTop: 16,
             }}
           >
-            We do the math with you. Ours is published. Theirs we can work out together.
+            We do the math with you. Ours is published. Theirs is not.
           </p>
           <p
             style={{
