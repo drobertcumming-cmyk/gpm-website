@@ -132,105 +132,16 @@ const PAGE_CSS = `
 }
 .gpm-briefing-page .pdf-cover-wrapper {
   margin-bottom: 16px;
-  filter: drop-shadow(4px 6px 18px rgba(45, 38, 32, 0.28));
 }
-.gpm-briefing-page .pdf-cover {
+/* 2026-06-23: live-text composed cover retired. Single approved Direction 1
+   flat render. Footprint preserved at the old 300x400 box; object-fit:
+   contain prevents distortion. The render carries its own perspective and
+   shadow, so no CSS transform/drop-shadow is applied. */
+.gpm-briefing-page .pdf-cover-image {
   width: 300px;
   height: 400px;
-  background: var(--burgundy);
-  border-radius: 2px;
-  transform: rotate(-1.5deg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 28px 24px 0;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset -6px 0 12px -4px rgba(0, 0, 0, 0.25);
-}
-.gpm-briefing-page .pdf-cover::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 8px;
-  height: 100%;
-  background: linear-gradient(to left, rgba(0,0,0,0.18), transparent);
-  pointer-events: none;
-}
-.gpm-briefing-page .cover-wordmark {
-  font-family: var(--font-serif);
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #F5EFE3;
-  margin-bottom: 2px;
-  align-self: flex-start;
-}
-.gpm-briefing-page .cover-tagline {
-  font-family: var(--font-sans);
-  font-size: 9px;
-  font-weight: 600;
-  color: rgba(245, 239, 227, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  margin-bottom: 28px;
-  align-self: flex-start;
-}
-.gpm-briefing-page .cover-title {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 600;
-  color: #F5EFE3;
-  text-align: center;
-  line-height: 1.2;
-  margin-bottom: 10px;
-}
-.gpm-briefing-page .cover-subtitle {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(245, 239, 227, 0.72);
-  text-align: center;
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-.gpm-briefing-page .cover-photo {
-  width: calc(100% + 48px);
-  margin-left: -24px;
-  height: 130px;
-  object-fit: cover;
-  margin-top: auto;
+  object-fit: contain;
   display: block;
-}
-.gpm-briefing-page .cover-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(40, 12, 12, 0.75);
-  padding: 10px 12px;
-  text-align: center;
-}
-.gpm-briefing-page .cover-verse {
-  display: block;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 9px;
-  font-weight: 400;
-  color: rgba(245, 239, 227, 0.65);
-  letter-spacing: 0.03em;
-  margin-bottom: 3px;
-}
-.gpm-briefing-page .cover-edition {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: 8px;
-  font-weight: 600;
-  color: rgba(245, 239, 227, 0.55);
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
 }
 .gpm-briefing-page .pdf-meta {
   font-family: var(--font-sans);
@@ -366,10 +277,7 @@ const PAGE_CSS = `
   .gpm-briefing-page .col-12 { grid-column: 1 / -1; }
   .gpm-briefing-page .briefing-h1 { font-size: 30px; margin-bottom: 32px; }
   .gpm-briefing-page .briefing-list li { font-size: 16px; }
-  .gpm-briefing-page .pdf-cover { width: 240px; height: 320px; padding: 24px 20px 0; }
-  .gpm-briefing-page .cover-title { font-size: 20px; }
-  .gpm-briefing-page .cover-subtitle { font-size: 11px; }
-  .gpm-briefing-page .cover-photo { height: 100px; }
+  .gpm-briefing-page .pdf-cover-image { width: 240px; height: 320px; }
   .gpm-briefing-page .briefing-form { max-width: 100%; }
   .gpm-briefing-page .briefing-form input[type="text"],
   .gpm-briefing-page .briefing-form input[type="email"],
@@ -423,31 +331,13 @@ export default function Page() {
 
             {/* RIGHT 5 — Lead Capture Console */}
             <div className="col-5 briefing-right">
-              <div className="pdf-cover-wrapper" aria-hidden="true">
-                <div className="pdf-cover">
-                  <span className="cover-wordmark">Grace</span>
-                  <span className="cover-tagline">Precious Metals</span>
-                  <span className="cover-title">
-                    The Secret<br />Gold Briefing
-                  </span>
-                  <span className="cover-subtitle">
-                    What the Other IRA Companies Hide From You.
-                  </span>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className="cover-photo"
-                    src={withBase('/images/homepage/briefing-cover-photo.jpg')}
-                    alt=""
-                  />
-                  <div className="cover-footer">
-                    <span className="cover-verse">
-                      Proverbs 11:1 · A just weight is His delight.
-                    </span>
-                    <span className="cover-edition">
-                      Grace Precious Metals · First Edition · 2026
-                    </span>
-                  </div>
-                </div>
+              <div className="pdf-cover-wrapper">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="pdf-cover-image"
+                  src={withBase('/images/briefing/secret-gold-briefing-cover.png')}
+                  alt="The Secret Gold Briefing — Grace Precious Metals guide cover."
+                />
               </div>
 
               <span className="pdf-meta">12 pages · PDF</span>

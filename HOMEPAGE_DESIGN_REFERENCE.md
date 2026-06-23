@@ -209,6 +209,15 @@ The earlier "deliberate 60% Pullquote rule" exception was rescinded 2026-04-30 i
 §9  Already Spoken to Another — 60/40 split, italic provocation + bullets + Tier 1 CTA
        ───
 §10 The Secret Gold Briefing — 58/42 split, WHAT'S INSIDE list + cover artwork + form
+       Cover artwork (2026-06-23): single approved **Direction 1 flat render**
+       at `public/images/briefing/secret-gold-briefing-cover.png` (all cover
+       text baked in). Used as a flat image in both `components/content/
+       CoverArtwork.tsx` (homepage §10) and `app/(marketing)/briefing/page.tsx`
+       (/briefing). The prior live-text 3D composed cover (oxblood face +
+       layered wordmark/title/subtitle/photo over `briefing-cover-photo.jpg`)
+       is retired; the old photo asset was removed. object-fit: contain,
+       container footprints preserved (homepage 320/414 box; /briefing 300×400,
+       240×320 mobile).
        ───
 §11 Find What Fits — 3 cards: New / Already hold / Inheriting
        ───
