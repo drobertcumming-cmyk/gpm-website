@@ -15,7 +15,7 @@ const CARDS: Card[] = [
     tag: 'PRICING / BUYBACK AT SPOT',
     headline:
       'How buyback works — and why the exit number matters more than the entry number.',
-    body: 'The documented industry pattern of marking buybacks below spot, and Grace’s structural commitment to buy back at spot price with no markdown.',
+    body: 'The documented industry pattern of marking buybacks below spot, and Grace’s structural commitment to buy back at cost with no markdown.',
     href: '/pricing/buyback',
   },
   {

@@ -343,7 +343,7 @@ export default function NumismaticCoinsPage() {
                     marginBottom: 12,
                   }}
                 >
-                  40&ndash;100%+
+                  35&ndash;50%+
                 </div>
                 <div
                   style={{
@@ -461,7 +461,7 @@ export default function NumismaticCoinsPage() {
                   Grace does not sell numismatic, &ldquo;premium,&rdquo;
                   &ldquo;exclusive,&rdquo; &ldquo;rare,&rdquo; or
                   &ldquo;proof&rdquo; coins. The catalogue contains only
-                  IRS-eligible standard bullion &mdash; American Gold Eagles,
+                  IRS-eligible standard bullion such as &mdash; American Gold Eagles,
                   Canadian Gold Maple Leafs, Austrian Philharmonics, American
                   Silver Eagles, and LBMA-approved gold bars. Every product on
                   the catalogue has a transparent, globally quoted spot price
@@ -603,7 +603,7 @@ export default function NumismaticCoinsPage() {
                   >
                     buyback
                   </Link>{' '}
-                  shows the exit side. Together, they are the round-trip.
+                  shows the exit side. Together, they are the entire round-trip.
                 </p>
               </div>
               <div
@@ -611,7 +611,7 @@ export default function NumismaticCoinsPage() {
                 style={{ gap: 20, marginTop: 36 }}
               >
                 <CTAButton href="/advisor" tier={1}>
-                  Talk to a salaried advisor
+                  Talk to a salaried expert
                 </CTAButton>
                 <CTAButton href="/briefing" tier={3}>
                   Get the Briefing
@@ -633,10 +633,11 @@ export default function NumismaticCoinsPage() {
             not guarantee future results.
           </p>
           <p style={preFooterDisclaimerParagraphStyle}>
-            The markup ranges cited on this page (3&ndash;15%, 15&ndash;30%+,
+            The markup ranges cited on this page (6&ndash;15%, 15&ndash;30%+,
             50&ndash;100%+) are derived from published research, regulatory
-            enforcement records, and industry pricing data. They represent
-            category-level patterns, not claims about any specific competitor.
+            enforcement records, and industry pricing data and are illustrative in
+            nature. These are not exact and will fluctuate based on market pricing.
+            Grace Precious Metals cannot guarantee these ranges.
           </p>
           <p style={preFooterDisclaimerParagraphStyle}>
             The term &ldquo;premium&rdquo; as used on this page refers to the

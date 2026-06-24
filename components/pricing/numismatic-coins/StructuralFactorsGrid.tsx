@@ -19,7 +19,7 @@ const FACTORS: Factor[] = [
     headline: 'Commission compensation',
     body: (
       <>
-        When advisors are compensated on commission rather than salary, the incentive
+        When metals experts are compensated on commission rather than salary, the incentive
         is to sell the product with the highest margin &mdash; not the product most
         appropriate for the customer. Numismatic and &ldquo;premium&rdquo; coins carry
         the highest margins in the Gold IRA channel. The compensation structure and

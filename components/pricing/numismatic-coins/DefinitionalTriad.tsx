@@ -23,7 +23,7 @@ interface TriadCard {
 const CARDS: TriadCard[] = [
   {
     tier: 'Tier 1',
-    range: '3–15%',
+    range: '6–15%',
     rangeColor: 'gold',
     title: 'Standard bullion',
     body: (
@@ -34,7 +34,6 @@ const CARDS: TriadCard[] = [
         margin &mdash; bounded, transparent, and the market value is the metal weight.
       </>
     ),
-    note: 'Grace’s catalogue is here.',
   },
   {
     tier: 'Tier 2',
