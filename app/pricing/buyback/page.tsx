@@ -89,8 +89,8 @@ export default function BuybackPage() {
                   Most Gold IRA customers focus, at the point of purchase, on
                   the entry price. The exit price &mdash; what you receive
                   when you sell back &mdash; is typically not part of the
-                  buying decision at all. It is also, for most customers, the
-                  more financially consequential of the two.
+                  buying decision at all. It is also, for most customers,
+                  equally financially consequential.
                 </p>
               </div>
 
@@ -339,7 +339,7 @@ export default function BuybackPage() {
 
               <StatCallout
                 className="lg:col-span-4"
-                figure="35–50%"
+                figure="50–100%"
                 label="Round-trip extraction in documented cases"
                 body="Combining inflated entry markup, premium-coin substitution, and exit markdown — the gold must appreciate by that percentage before the customer breaks even."
               />
