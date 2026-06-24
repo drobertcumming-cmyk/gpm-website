@@ -21,7 +21,7 @@ interface QA {
 
 const FAQ: QA[] = [
   {
-    q: 'Why is your spread higher than the spot premium on a single coin?',
+    q: 'Why is your cost on a product higher than the spot price of gold or silver?',
     a: (
       <>
         The 11.1% spread is the complete cost of doing business with Grace &mdash; no

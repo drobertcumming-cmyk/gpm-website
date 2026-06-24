@@ -33,12 +33,12 @@ export function TwoCostsCallout() {
         TWO COSTS THAT ARE NOT OURS
       </span>
       <p style={rowStyle}>
-        <strong style={labelStyle}>Custodian annual fee:</strong> approximately $175 per
+        <strong style={labelStyle}>Custodian annual fee:</strong> approximately $250 per
         year (varies by custodian; billed directly to your IRA).
       </p>
       <p style={{ ...rowStyle, marginBottom: 0 }}>
-        <strong style={labelStyle}>Depository storage fee:</strong> approximately 0.75% of
-        stored value per year (varies by depository; billed directly to your IRA).
+        <strong style={labelStyle}>Depository storage fee:</strong> approximately $100 flat
+        rate for storage and insurance (varies by depository; billed directly to your IRA).
       </p>
       <p
         style={{

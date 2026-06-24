@@ -30,12 +30,12 @@ const COMMITMENTS: Commitment[] = [
   },
   {
     number: '02',
-    headline: 'Buyback at spot, never below',
+    headline: 'Buyback at wholesale, never below',
     body: (
       <>
-        When you decide to sell, Grace buys back your bullion at the live spot price.
-        There is no exit spread, no liquidation fee, and no markdown. Your gold is worth
-        what the market says it is worth.
+        When you decide to sell, Grace buys back your bullion at our wholesale acquisition
+        price. There is no exit spread, no liquidation fee, and no markdown. Your gold is
+        worth what the market says it is worth.
       </>
     ),
   },
