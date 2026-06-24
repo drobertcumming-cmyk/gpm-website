@@ -19,13 +19,13 @@ const CARDS: Card[] = [
     tag: 'PRICING / NUMISMATIC COINS',
     headline:
       'Why the catalogue does not include numismatic, “premium,” or proof coins.',
-    body: 'The markup structure on numismatic coins makes round-trip cost transparency impossible. Grace sells only IRS-eligible bullion.',
+    body: 'People looking to safeguard their savings are rarely if ever looking to become coin collectors. It is only through the shrewd sales tactics by big gold brokers salespeople that Americans are pushed into these. Numismatics also make it much harder for the consumer to tell if they are being charged fairly or not. Grace sells only IRS-eligible bullion.',
     href: '/pricing/numismatic-coins',
   },
   {
     tag: 'PRICING',
-    headline: 'Our spread on gold is 11.1%, all-in.',
-    body: 'Published on the page, not quoted on the phone. No admin fee, no setup fee, no annual account fee.',
+    headline: 'Our spread on gold and silver is 11.1%, all-in.',
+    body: 'Published on the page, not quoted on the phone. GPM charges no admin fee, no setup fee, no annual account fee.',
     href: '/pricing',
   },
 ]

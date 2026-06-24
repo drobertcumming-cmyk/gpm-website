@@ -49,7 +49,7 @@ export function BuybackBreadcrumb() {
             color: 'var(--gpm-ink-body)',
           }}
         >
-          Buyback at Spot
+          Buyback at cost
         </span>
       </div>
     </nav>

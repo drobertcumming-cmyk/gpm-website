@@ -21,12 +21,12 @@ const FACTORS: Factor[] = [
     headline: 'Commission compensation',
     body: (
       <>
-        Most Gold IRA salespeople are paid on commission, typically 3&ndash;8% of the
-        transaction value. This creates a direct financial incentive to sell
-        higher-markup products &mdash; numismatic coins, &ldquo;premium&rdquo; coins,
-        proof sets &mdash; regardless of whether those products serve the
-        customer&rsquo;s interest. The salesperson&rsquo;s income is a function of the
-        markup, not the outcome.
+        Most Gold IRA salespeople are paid on commission, typically 10&ndash;25% of the
+        total revenue generated. This creates a direct financial incentive to sell
+        higher-markup (higher revenue) products &mdash; numismatic coins,
+        &ldquo;premium&rdquo; coins, proof sets &mdash; regardless of whether those
+        products serve the customer&rsquo;s interest. The salesperson&rsquo;s income is
+        a function of the markup.
       </>
     ),
   },
@@ -39,7 +39,9 @@ const FACTORS: Factor[] = [
         Gold Eagle and a $4,200 &ldquo;certified MS-70 Gold Eagle&rdquo; is not obvious
         to someone who has never purchased bullion before. Dealers exploit this gap by
         steering customers toward products whose markups are difficult to verify
-        independently.
+        independently. In some cases they even create the market themselves owning the
+        exclusive rights to a particular coin or product so that no consumer can shop
+        their pricing.
       </>
     ),
   },

@@ -44,28 +44,6 @@ const ITEMS: Item[] = [
       </>
     ),
   },
-  {
-    num: '03',
-    question: '“Are there liquidation fees, wire fees, or processing charges on exit?”',
-    answer: (
-      <>
-        These are exit costs by another name. A dealer who buys back &ldquo;at
-        spot&rdquo; but charges a $250 liquidation fee and a $50 wire fee has not, in
-        practice, bought back at spot.
-      </>
-    ),
-  },
-  {
-    num: '04',
-    question: '“Will you put the buyback commitment in writing before I fund?”',
-    answer: (
-      <>
-        A verbal commitment is not a commitment. If the dealer will not document the
-        buyback terms in a signed agreement before you transfer funds, the terms are
-        not binding and can change at the dealer&rsquo;s discretion.
-      </>
-    ),
-  },
 ]
 
 export function EvaluationChecklist() {

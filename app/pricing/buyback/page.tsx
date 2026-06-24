@@ -29,9 +29,9 @@ import {
 // Reference: buyback.html template + 2026-05-08 brief.
 
 export const metadata = {
-  title: 'Buyback at Spot',
+  title: 'Buyback at cost',
   description:
-    'How buyback works — and why the exit number matters more than the entry number. Grace buys back IRS-eligible bullion at the prevailing spot price; no exit markdown, no liquidation fee.',
+    'How buyback works — and why the exit number matters as much as the entry number. Grace buys back IRS-eligible bullion at the prevailing wholesale price (spot or higher); no exit markdown, no liquidation fee.',
 }
 
 export default function BuybackPage() {
@@ -74,7 +74,7 @@ export default function BuybackPage() {
                   }}
                 >
                   How buyback works &mdash; and why the exit number matters
-                  more than the entry number.
+                  as much as the entry number.
                 </h1>
                 <p
                   style={{
@@ -172,9 +172,10 @@ export default function BuybackPage() {
                 <p style={proseStyle}>
                   When you purchase gold inside a self-directed IRA, the entry price
                   is the number on the confirmation. It is the spot price of the
-                  metal plus the dealer&rsquo;s markup &mdash; and because it appears
-                  on a document, it feels concrete. You paid a price; you received an
-                  asset. The transaction is legible.
+                  metal, the wholesale or mints mark-up, plus the dealer&rsquo;s
+                  markup &mdash; and because it appears on a document, it feels
+                  concrete. You paid a price; you received an asset. The transaction
+                  is legible.
                 </p>
                 <p style={proseStyle}>
                   The exit price is different. It exists only in the future, at a
@@ -182,7 +183,11 @@ export default function BuybackPage() {
                   see. Most customers do not ask about it at the point of purchase
                   &mdash; and most dealers do not volunteer it. The result is that
                   the exit price is, for the majority of Gold IRA holders, an unknown
-                  variable in what they believe is a known equation.
+                  variable in what they believe is a known equation. Dealer will
+                  promise to give you the &ldquo;best&rdquo; buyback. Not in writing,
+                  but they promise clients are always happy with the buyback. When in
+                  reality BBB pages are littered with unhappy clients who found out
+                  they were gouged on the way in and on the way out.
                 </p>
                 <p style={proseStyle}>
                   This asymmetry is not accidental. It is the structural foundation
@@ -249,19 +254,20 @@ export default function BuybackPage() {
                   part or all of their holdings. In a self-directed IRA, you cannot
                   simply sell your gold on the open market &mdash; the metal is held
                   in a qualified depository, and the transaction must flow through
-                  the dealer or a qualified third party.
+                  a dealer or a qualified third party.
                 </p>
                 <p style={proseStyle}>
                   The buyback price is the price the dealer offers you for the metal
                   at the time of liquidation. In a fair market, this price would be
-                  the prevailing spot price &mdash; the same price at which the metal
-                  trades on global commodity exchanges. In practice, many dealers
-                  offer a buyback price that is below spot, sometimes significantly
-                  so.
+                  the prevailing spot price and any additional mint/market premium
+                  &mdash; the same price at which mints or wholesalers would sell the
+                  metals. In practice, many dealers offer a buyback price that is
+                  below that and even spot, sometimes significantly so.
                 </p>
                 <p style={proseStyle}>
-                  The difference between spot and the dealer&rsquo;s buyback offer is
-                  the &ldquo;exit markdown&rdquo; or &ldquo;buyback spread.&rdquo; It
+                  The difference between the wholesale cost of the metal and the
+                  dealer&rsquo;s buyback offer is the &ldquo;exit markdown&rdquo; or
+                  &ldquo;buyback spread.&rdquo; It
                   is a cost to you, and it is a cost that was not visible at the time
                   of purchase. Combined with the entry markup, it constitutes the
                   dealer&rsquo;s total round-trip revenue on your account.
@@ -277,7 +283,7 @@ export default function BuybackPage() {
                   },
                   {
                     term: 'Exit markdown',
-                    def: 'The gap between spot and what the dealer offers when you sell back.',
+                    def: 'The gap between wholesale and what the dealer offers when you sell back.',
                   },
                   {
                     term: 'Round-trip cost',
@@ -320,7 +326,7 @@ export default function BuybackPage() {
                 <p style={proseStyle}>
                   The entry markup is the visible cost. The exit markdown is the
                   invisible cost. Together, they can represent a round-trip
-                  extraction of 50&ndash;100% of the customer&rsquo;s original
+                  extraction of 35&ndash;50% of the customer&rsquo;s original
                   investment &mdash; meaning the gold must appreciate by that
                   percentage before the customer breaks even.
                 </p>
@@ -333,7 +339,7 @@ export default function BuybackPage() {
 
               <StatCallout
                 className="lg:col-span-4"
-                figure="50–100%"
+                figure="35–50%"
                 label="Round-trip extraction in documented cases"
                 body="Combining inflated entry markup, premium-coin substitution, and exit markdown — the gold must appreciate by that percentage before the customer breaks even."
               />
@@ -404,7 +410,7 @@ export default function BuybackPage() {
             style={{ maxWidth: 1200, paddingLeft: 32, paddingRight: 32 }}
           >
             <span style={eyebrowStyle}>GRACE&rsquo;S RESPONSE</span>
-            <h2 style={sectionHeadlineStyle}>Buyback at spot, never below.</h2>
+            <h2 style={sectionHeadlineStyle}>Buyback at wholesale, never below.</h2>
             <div
               className="grid grid-cols-1 lg:grid-cols-12"
               style={{ rowGap: 32, columnGap: 48 }}
@@ -419,10 +425,10 @@ export default function BuybackPage() {
               >
                 <p style={proseStyle}>
                   Grace buys back all IRS-eligible bullion at the prevailing spot
-                  price at the time of transaction. There is no exit markdown, no
-                  liquidation fee, no processing charge, and no minimum holding
-                  period. The price you receive on exit is the same price the metal
-                  trades at on the global commodity exchange.
+                  price or higher (the wholesale price) at the time of transaction.
+                  There is no exit markdown, no liquidation fee, no processing charge,
+                  and no minimum holding period. The price you receive on exit is the
+                  same price GPM would acquire it from a mint or wholesaler.
                 </p>
                 <p style={proseStyle}>
                   This is not a promotional offer. It is a structural commitment
@@ -439,11 +445,18 @@ export default function BuybackPage() {
                   cost equal to the entry spread is to set the exit markdown to
                   zero.
                 </p>
+                <p style={{ ...proseStyle, fontSize: 15, color: 'var(--gpm-walnut-mid)' }}>
+                  DISCLAIMER &mdash; Grace cannot GUARANTEE buybacks in accordance with
+                  state and federal laws. Grace commits to making every effort to
+                  buyback client metals, however if due to unforeseen circumstances
+                  Grace will assist with finding an alternative source for the
+                  liquidation that is quick and profitable for the client.
+                </p>
               </div>
 
               <KeyTakeawayCallout
                 className="lg:col-span-5"
-                heading="Buyback at spot, never below."
+                heading="Buyback at wholesale, never below."
                 bullets={[
                   'No exit markdown. No liquidation fee. No processing charge.',
                   'No minimum holding period — sell back the day you choose.',
@@ -481,7 +494,7 @@ export default function BuybackPage() {
               <div className="lg:col-span-8" style={proseGroupStyle}>
                 <p style={proseStyle}>
                   If you are evaluating a Gold IRA company &mdash; whether Grace or
-                  anyone else &mdash; these are the four questions that reveal the
+                  anyone else &mdash; these are the two questions that reveal the
                   exit-side economics. Ask them before you fund. If the answers are
                   vague, conditional, or unavailable in writing, that is itself an
                   answer.
@@ -533,7 +546,7 @@ export default function BuybackPage() {
                 style={{ gap: 20, marginTop: 36 }}
               >
                 <CTAButton href="/advisor" tier={1}>
-                  Talk to a salaried advisor
+                  Talk to a salaried expert
                 </CTAButton>
                 <CTAButton href="/briefing" tier={3}>
                   Get the Briefing
@@ -560,9 +573,16 @@ export default function BuybackPage() {
             patterns, not claims about any specific competitor.
           </p>
           <p style={preFooterDisclaimerParagraphStyle}>
-            &ldquo;Buyback at spot&rdquo; means Grace will purchase back IRS-eligible
-            bullion at the prevailing spot price at time of transaction. No exit
+            &ldquo;Buyback at cost&rdquo; means Grace will purchase back IRS-eligible
+            bullion at the prevailing wholesale price at time of transaction. No exit
             spread, no liquidation fee, no markdown.
+          </p>
+          <p style={preFooterDisclaimerParagraphStyle}>
+            Grace cannot GUARANTEE buybacks in accordance with state and federal laws.
+            Grace commits to making every effort to buyback client metals, however if
+            due to unforeseen circumstances Grace will assist with finding an
+            alternative source for the liquidation that is quick and profitable for
+            the client.
           </p>
         </PreFooterDisclaimer>
       </main>
