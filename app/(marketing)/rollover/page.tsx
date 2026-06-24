@@ -565,7 +565,7 @@ export default function Page() {
               <div className="prose-group">
                 <p className="body-prose">You fund a Gold IRA by transferring or rolling over money from an existing retirement account. The four common sources are a 401(k) from a current or former employer, a traditional IRA at a bank or brokerage, a Roth IRA, or a SEP IRA — common for self-employed people.</p>
                 <p className="body-prose">The mechanics are the same in each case. The funds move directly from your existing account to your new IRA&rsquo;s custodian. You never receive the money. There is no tax event. There is no penalty.</p>
-                <p className="body-prose">Two situations work slightly differently. An inherited IRA is subject to the SECURE Act&rsquo;s distribution rules. A transfer from another Gold IRA company can move metal in kind, rather than converting to cash and back. Both are explained in their own pages: see <a href="/rollover/inherited-ira">Inherited IRA</a> and <a href="/rollover/transfer">Transfer Guide</a>.</p>
+                <p className="body-prose">Two situations work slightly differently. An inherited IRA is subject to the SECURE Act&rsquo;s distribution rules. A transfer from another Gold IRA company can move metal in kind, rather than converting to cash and back.</p>
               </div>
             </div>
             <aside className="col-4">
@@ -683,7 +683,7 @@ export default function Page() {
         <div className="wrap">
           <div className="closing-ctas">
             <a href="/pricing" className="cta-tier3">See our pricing</a>
-            <a href="/advisor" className="cta-tier4">Talk to an advisor →</a>
+            <a href="/advisor" className="cta-tier4">Talk to an expert →</a>
           </div>
         </div>
       </div>
