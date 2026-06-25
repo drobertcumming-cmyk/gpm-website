@@ -28,7 +28,7 @@ const SIGNAL_SPREAD: Signal = {
 
 const SIGNAL_BUYBACK: Signal = {
   Icon: RefreshCcw,
-  line1: 'BUYBACK AT SPOT',
+  line1: 'BUYBACK AT WHOLESALE',
   line2: 'NEVER BELOW',
 }
 

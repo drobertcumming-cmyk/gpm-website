@@ -24,8 +24,8 @@ const CARDS: ReadonlyArray<Card> = [
   },
   {
     numeral: '02',
-    title: 'Buyback at spot, never below',
-    body: 'When you sell back to us, we pay the spot price on the day. We do not mark the buyback down to build a second margin on exit.',
+    title: 'Buyback at wholesale, never below',
+    body: 'When you decide to sell, Grace buys back your bullion at our wholesale acquisition price. There is no exit spread, no liquidation fee, and no markdown.',
     linkLabel: 'How buyback works',
     linkHref: '/resources/buyback',
   },
