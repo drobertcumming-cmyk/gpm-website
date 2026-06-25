@@ -20,7 +20,7 @@ interface Path {
 
 const PATHS: ReadonlyArray<Path> = [
   {
-    pathLabel: 'PATH 1',
+    pathLabel: 'NEW TO GOLD',
     headline: 'New to Gold IRAs',
     description:
       'Start with how a rollover works. What you can roll over, how the timing works, what the tax treatment looks like.',
@@ -30,24 +30,24 @@ const PATHS: ReadonlyArray<Path> = [
     imageAlt: 'An older man reading documents at a desk in warm natural light',
   },
   {
-    pathLabel: 'PATH 2',
-    headline: 'Already hold a Gold IRA',
+    pathLabel: 'WHAT QUALIFIES',
+    headline: 'Which gold the IRS allows',
     description:
-      'Start by requesting your current provider’s buyback quote. That number tells you what you actually paid on entry.',
-    linkLabel: 'The transfer guide',
-    linkHref: '/rollover/transfer',
-    imageSrc: '/images/homepage/card-already-hold-gold-ira.jpg',
-    imageAlt: 'A couple reviewing documents together at a kitchen table',
+      'The rules on IRA-eligible coins are stricter than most dealers let on. Here’s exactly what qualifies — and what gets sold as “eligible” when it isn’t.',
+    linkLabel: 'IRA-eligible gold coins',
+    linkHref: '/resources/ira-eligible-gold-coins',
+    imageSrc: '/images/homepage/card-ira-eligible-coins.jpg',
+    imageAlt: 'Four IRS-eligible gold bullion coins on a neutral surface',
   },
   {
-    pathLabel: 'PATH 3',
-    headline: 'Inheriting a Gold IRA',
+    pathLabel: 'WHAT YOU PAY',
+    headline: 'What you actually pay',
     description:
-      'An inherited Gold IRA follows different rules than a rollover. The decisions you make in the first year shape tax treatment for years afterward. Start with the timeline.',
-    linkLabel: 'How inherited IRAs work',
-    linkHref: '/rollover/inherited-ira',
-    imageSrc: '/images/homepage/card-inheriting-gold-ira.jpg',
-    imageAlt: 'A woman alone reading a document in a home study',
+      'Spread, markups, and the exit costs that rarely make it into a brochure. See how Gold IRA pricing really works before you commit.',
+    linkLabel: 'Gold IRA fees explained',
+    linkHref: '/resources/fees-explained',
+    imageSrc: '/images/homepage/card-what-you-pay.jpg',
+    imageAlt: 'An older man at a desk reading a printed fee schedule',
   },
 ]
 
@@ -143,7 +143,7 @@ export function FindWhatFits() {
           marginBottom: 16,
         }}
       >
-        YOUR STARTING POINT
+        PLAIN ANSWERS
       </p>
       <h2
         id="find-what-fits-heading"
@@ -156,7 +156,7 @@ export function FindWhatFits() {
           margin: 0,
         }}
       >
-        Find what fits where you are
+        Three things worth understanding first
       </h2>
 
       <div
