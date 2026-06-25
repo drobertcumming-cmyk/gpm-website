@@ -27,7 +27,6 @@ const COL_PAGES: ReadonlyArray<FooterLink> = [
 const COL_RESOURCES: ReadonlyArray<FooterLink> = [
   { label: 'Resources Library', href: '/resources' },
   { label: 'Buyback', href: '/resources/buyback' },
-  { label: 'Round-trip Cost', href: '/resources/round-trip-cost' },
   { label: 'Numismatic Coins', href: '/resources/numismatic-coins' },
   { label: 'FAQ', href: '/faq' },
 ]
