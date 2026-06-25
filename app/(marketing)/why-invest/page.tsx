@@ -444,7 +444,6 @@ export default function Page() {
                 <li><a href="#diversification">Diversification, plainly stated</a></li>
                 <li><a href="#dollar-question">The dollar question</a></li>
                 <li><a href="#what-gold-does">What gold does</a></li>
-                <li><a href="#what-gold-does-not">What gold does not do</a></li>
               </ul>
             </aside>
           </div>
@@ -493,16 +492,15 @@ export default function Page() {
               <div className="prose-group">
                 <p className="body-prose">The standard argument for holding gold is diversification. Different assets behave differently in different economic conditions. Stocks tend to perform in periods of growth. Bonds tend to perform when rates fall. Real estate tends to track inflation over long periods.</p>
                 <p className="body-prose">Gold sits outside all three. It generates no income. It pays no dividends. It does not respond to interest rates the way bonds do, or to growth the way stocks do. What it tends to do — historically — is hold purchasing power through periods when other assets struggle.</p>
-                <p className="body-prose">If you are working with a financial planner, ask what allocation to gold they recommend. Most planners suggest a single-digit percentage in a diversified portfolio. Some suggest more. Some suggest none. The disagreement is informed and real. Grace&rsquo;s position is that gold has a legitimate role for the right person, and that the conversation about whether and how much belongs between you and a fiduciary advisor who knows your full picture — not us.</p>
+                <p className="body-prose">If you are working with a financial planner, ask what allocation to gold they recommend. Most planners suggest a single-digit percentage in a diversified portfolio. Some suggest more. Some suggest none. The disagreement is informed and real. Grace&rsquo;s position is that gold has a legitimate role for the right person.</p>
               </div>
             </div>
             <aside className="col-4">
               <div className="annotation">
-                <span className="annotation-eyebrow">Typical allocation</span>
-                <p className="annotation-figure">5–10%</p>
-                <p className="annotation-label">What most planners suggest for a diversified portfolio.</p>
-                <p className="annotation-body">Some suggest more. Some suggest none. The disagreement is informed, and your fiduciary advisor — not us — is the right party to weigh it.</p>
-                <span className="annotation-source">Source: planner survey ranges</span>
+                <span className="annotation-eyebrow">How much to hold</span>
+                <p className="annotation-figure">Your call</p>
+                <p className="annotation-label">There&rsquo;s no single right number.</p>
+                <p className="annotation-body">How much of your savings belongs in gold depends on your situation — your age, your goals, and what else you hold. Some people hold a little, others a great deal. We don&rsquo;t set that figure for you.</p>
               </div>
             </aside>
           </div>
@@ -516,7 +514,7 @@ export default function Page() {
               <h2 id="s3-title" className="section-h2">The dollar question</h2>
               <div className="prose-group">
                 <p className="body-prose">A separate reason people give for holding gold is concern about the long-term purchasing power of the U.S. dollar. The Federal Reserve targets 2% annual inflation. Compounded over thirty years, 2% reduces purchasing power by roughly 45%. Compounded over forty years, by roughly 55%. This is not a prediction. It is arithmetic against the Fed&rsquo;s stated target.</p>
-                <p className="body-prose">People who hold gold for this reason are not betting on a collapse. They are noting that a portfolio entirely denominated in dollars carries a particular kind of risk — the risk that the unit of measurement itself loses value over the holding period. Gold, priced in dollars, has historically risen as the dollar has weakened. Whether it continues to do so is unknown.</p>
+                <p className="body-prose">People who hold gold for this reason are not betting on a collapse. They are noting that a portfolio entirely denominated in dollars carries a particular kind of risk — the risk that the unit of measurement itself loses value over the holding period. Gold, priced in dollars, has historically risen as the dollar has weakened.</p>
               </div>
             </div>
             <aside className="col-4">
@@ -539,12 +537,6 @@ export default function Page() {
               <span className="callout-band-eyebrow">The balance of the page</span>
               <p className="callout-band-copy">What gold does, and what gold does not do. Both sides matter, and most pages give you only one.</p>
             </div>
-            <aside className="col-4">
-              <div className="pullquote">
-                <p className="pullquote-body">&ldquo;Anyone who tells you gold only goes one way is selling you something.&rdquo;</p>
-                <p className="pullquote-attr">— Grace house position</p>
-              </div>
-            </aside>
           </div>
         </div>
       </aside>
@@ -566,7 +558,7 @@ export default function Page() {
             <li className="does-card">
               <span className="does-card-number" aria-hidden="true">02</span>
               <h3 className="does-card-title">No issuer to fail</h3>
-              <p className="does-card-body">A bond can default. A bank can fail. A stock can go to zero. Gold has no issuer. The only counterparty is the depository.</p>
+              <p className="does-card-body">A bond can default. A bank can fail. A stock can go to zero. Gold has no issuer. No singular point of failure.</p>
             </li>
             <li className="does-card">
               <span className="does-card-number" aria-hidden="true">03</span>
@@ -576,55 +568,20 @@ export default function Page() {
             <li className="does-card">
               <span className="does-card-number" aria-hidden="true">04</span>
               <h3 className="does-card-title">Fungible</h3>
-              <p className="does-card-body">An American Eagle in your IRA is mechanically identical to one in any other IRA. No grade to dispute, no condition to argue.</p>
+              <p className="does-card-body">Standard bullion in your IRA is mechanically identical to any in any other IRA. No grade to dispute, no condition to argue.</p>
             </li>
           </ul>
         </div>
       </section>
 
-      <section className="body-section" id="what-gold-does-not" aria-labelledby="s5-title">
+      <section className="body-section" aria-label="How Grace is paid">
         <div className="wrap">
           <div className="grid-12">
-            <div className="col-8">
-              <h2 id="s5-title" className="section-h2">What gold does not do</h2>
-              <p className="body-prose">Three properties Grace will not let an advisor obscure on a call.</p>
-            </div>
-          </div>
-          <ul className="does-grid-3" role="list">
-            <li className="does-card">
-              <span className="does-card-number" aria-hidden="true">01</span>
-              <h3 className="does-card-title">Does not pay you</h3>
-              <p className="does-card-body">There are no dividends, no interest, no rental income. The only return is the change in its price between when you buy and when you sell.</p>
-            </li>
-            <li className="does-card">
-              <span className="does-card-number" aria-hidden="true">02</span>
-              <h3 className="does-card-title">Does not always go up</h3>
-              <p className="does-card-body">Gold has had decade-long stretches of flat or negative real returns. The 1980s and 1990s were difficult periods for gold holders. Anyone who tells you gold only goes one way is selling you something.</p>
-            </li>
-            <li className="does-card">
-              <span className="does-card-number" aria-hidden="true">03</span>
-              <h3 className="does-card-title">Is not insurance</h3>
-              <p className="does-card-body">It is an asset that has historically performed differently from other assets. That is useful in a diversified portfolio. It is not a guarantee against any specific economic outcome.</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="body-section" aria-labelledby="s6-title">
-        <div className="wrap">
-          <div className="grid-12">
-            <div className="col-8">
-              <h2 id="s6-title" className="section-h2">Where Grace sits in this</h2>
-              <div className="prose-group">
-                <p className="body-prose">Our advisors at Grace will not push you toward gold. They will explain the mechanics, the pricing, and the IRS rules clearly. They are salaried; their compensation does not change based on what you decide.</p>
-                <p className="body-prose">Whether gold belongs in your retirement, and at what allocation, is a conversation that belongs between you and a fiduciary advisor who knows your full picture. We are the place to execute that decision once you&rsquo;ve made it. We are not the place to make it for you.</p>
-              </div>
-            </div>
             <aside className="col-4">
               <div className="annotation">
                 <span className="annotation-eyebrow">How Grace is paid</span>
                 <p className="annotation-label">Salary, not commission.</p>
-                <p className="annotation-body">A Grace advisor&rsquo;s paycheck does not move based on what you decide. That is a structural commitment, not a marketing line.</p>
+                <p className="annotation-body">At Grace a metals expert&rsquo;s paycheck does not move based on what you decide. Whether you buy gold or silver, how much, or if you even buy at all. That is a structural commitment, not a marketing line.</p>
                 <span className="annotation-source"><a href="/pricing">See our pricing →</a></span>
               </div>
             </aside>
@@ -636,7 +593,7 @@ export default function Page() {
         <div className="wrap">
           <div className="closing-ctas">
             <a href="/pricing" className="cta-tier3">See our pricing</a>
-            <a href="/advisor" className="cta-tier4">Talk to an advisor →</a>
+            <a href="/advisor" className="cta-tier4">Talk to an expert →</a>
           </div>
         </div>
       </div>
